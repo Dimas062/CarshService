@@ -159,6 +159,11 @@ android {
     #contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
         ANDROID_PACKAGE_SOURCE_DIR = \
             $$PWD/android
+
+    #Магия про версию из интернета не работает
+    # androidmanifestupdate.commands =  sed -i \'\' -E -e \'s/(versionName=)(\"([0-9]\.?)+\")/\\1\"$$VERSION\"/g\' $$ANDROID_PACKAGE_SOURCE_DIR/AndroidManifest.xml
+    # QMAKE_EXTRA_TARGETS += androidmanifestupdate
+    # PRE_TARGETDEPS += androidmanifestupdate
     }
 }
 
