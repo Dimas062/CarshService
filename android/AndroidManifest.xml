@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.zlo.CarshService" android:installLocation="auto" android:versionCode="33" android:versionName="5">
+
+    <supports-screens android:anyDensity="true" android:xlargeScreens="true" android:largeScreens="true" android:normalScreens="false" android:smallScreens="false"/>
+    <application android:name="org.qtproject.qt.android.bindings.QtApplication" android:extractNativeLibs="true" android:hardwareAccelerated="true" android:label="Злобин каршеринг сервис" android:allowNativeHeapPointerTagging="false" android:icon="@drawable/icon" android:requestLegacyExternalStorage="true" android:allowBackup="true" android:fullBackupOnly="false">
+        <activity android:name="org.zlo.CarshService.QtAdMobActivity" android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density" android:label="Злобин каршеринг сервис" android:launchMode="singleTask" android:screenOrientation="portrait" android:exported="true" android:windowSoftInputMode="stateUnchanged | adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <meta-data android:name="android.app.lib_name" android:value="-- %%INSERT_APP_LIB_NAME%% --"/>
+            <meta-data android:name="android.app.arguments" android:value="-- %%INSERT_APP_ARGUMENTS%% --"/>
+            <meta-data android:name="android.app.extract_android_style" android:value="minimal"/>
+        </activity>
+
+    <provider android:name="androidx.core.content.FileProvider" android:authorities="org.zlo.CarshService.fileprovider" android:exported="false" android:grantUriPermissions="true">
+        <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"/>
+    </provider>
+
+        <receiver android:name=".AlarmReceiver"/>
+
+    </application>
+
+
+
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- For apps targeting Android 13 or higher & Yandex Mobile Ads SDK versions lower than 4.5.0 -->
+
+
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+
+
+<uses-permission android:name="android.permission.CAMERA"/>
+</manifest>
