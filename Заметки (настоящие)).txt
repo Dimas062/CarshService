@@ -1,0 +1,36 @@
+
+Ширина 1080
+
+Высота должна быть 1920
+
+Изображение до 3 MB, разрешением до 3840×2160px
+Соотношение сторон: 16:9, другие размеры будут обрезаться
+Горизонтальная ориентация по умолчанию
+
+
+Пароль на VPN: dimaroot581
+
+ЛК: https://sbi.sberbank.ru:9443/ic/ufs/login.html
+логин: dimasemail@yandex.ru
+пароль: Vthctltc200
+
+
+
+
+
+Мердж Александр.
+
+
+
+
+https://www.kdab.com/qt-android-episode-7/   -  хорошие статьи, работают только через впн
+https://stackoverflow.com/questions/4315611/android-get-all-pendingintents-set-with-alarmmanager - установка и отмена того же будильника
+https://startandroid.ru/ru/uroki/vse-uroki-spiskom/67-urok-28-extras-peredaem-dannye-s-pomoschju-intent.html  -  старые на русском статьи по андроиду
+https://medium.com/android-news/using-alarmmanager-like-a-pro-20f89f4ca720 - используйте как профессионал, через VPN
+
+
+Сделать по программе:
+- запрос разрешения на уведомления
+- обновление будильников после перезагрузки и изменения времени
+- задание времни и даты сработки (потоки и отмены окон)
+- удалить старый (если правда не нужен) диалог выбора даты/времени

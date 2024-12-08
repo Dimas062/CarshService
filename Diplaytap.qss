@@ -1,0 +1,161 @@
+
+
+/*-----QWidget-----*/
+QWidget
+{
+        background-color: #fdfefe;
+	color: #000000;
+	border-color: #000000;
+}
+
+
+/*-----QLabel-----*/
+QLabel
+{
+        font-size: 15px;
+}
+
+/*-----QPushButton-----*/
+QPushButton
+{
+        background-color: #f2f4f4;
+        color: #1b2631;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        border-color: #4d5656;
+        margin: 2px;
+        icon-size: 38px;
+
+        font-size: 20px;
+        /*font-weight: bold;*/
+        text-align:center;
+}
+
+QPushButton:pressed {
+        background-color: #cfcfbf;
+        color: #000000;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 15px;
+        border-color: #dfdfc0;
+        margin: 2px;
+        icon-size: 26px;
+}
+
+QPushButton:disabled {
+        background-color:#b2b8b8;
+        color:#f2f4f4;
+}
+
+QPushButton:checked {
+    background-color: #59adfd;
+    color: #1b2631;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+    border-color: #4d5656;
+    margin: 2px;
+    text-align:center;
+}
+
+
+QScrollBar:vertical {
+        border: 2px solid #999999;
+        border-radius: 10px;
+        background:DodgerBlue;
+        width:20px;
+        padding 2px;
+    }
+
+QScrollBar::handle:vertical {
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop: 0 rgb(135, 173, 139), stop: 0.5 rgb(135, 213, 139), stop:1 rgb(135, 173, 139));
+        min-height: 0px;
+        border-radius: 7px;
+    }
+
+QScrollBar::add-line:vertical {
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop: 0 rgb(0, 255, 0), stop: 0.5 rgb(135, 213, 139),  stop:1 rgb(135, 173, 139));
+        height: 0px;
+        subcontrol-position: bottom;
+        subcontrol-origin: margin;
+    }
+
+QScrollBar::sub-line:vertical {
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:0,stop: 0  rgb(0, 0, 255), stop: 0.5 rgb(135, 213, 139),  stop:1 rgb(135, 173, 139));
+        height: 0 px;
+        subcontrol-position: top;
+        subcontrol-origin: margin;
+    }
+
+
+/*------QCalendarWidget-----------*/
+QCalendarWidget QToolButton {
+        height: 30px;
+        width: 60px;
+        color: white;
+        font-size: 16px;
+        icon-size: 30px;
+        background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
+  }
+
+
+/*-----QGroupBox-----*/
+QGroupBox
+{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: #000000;
+}
+
+/*-----QLineEdit-----*/
+QLineEdit
+{
+	background-color: #a6d072;
+	color: #000000;
+	border-style: solid;
+	border-width: 1px;
+        border-radius: 10px;
+	border-color: #000000;
+        font-size: 24px;
+        margin: 2px;
+}
+
+/*-----QLineEdit-----*/
+QTextEdit
+{
+        background-color: #a6d072;
+        color: #000000;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        border-color: #000000;
+        font-size: 24px;
+        margin: 0px 2px 0px 2px;
+        padding: 3px;
+}
+
+
+/*-----QLineEdit-----*/
+QPlainTextEdit
+{
+        background-color: #a6d072;
+        color: #000000;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        border-color: #000000;
+        font-size: 24px;
+}
+
+/*------QCalendarWidget-----------*/
+
+
+
+
+/*------QTabWidget------ни работает отсюда-----*/
+QTabBar::tab
+{
+    height: 60px;
+}
