@@ -86,35 +86,40 @@ QString PictureFileToBase64(QString strPath)
     // else     qDebug() <<" width"<< reader.size().width() << "height" << reader.size().height() << "format"<<reader.format() << reader.subType();
 
 
-    // QFile CurrentFile(strPath);
-    // if(!CurrentFile.open(QIODevice::ReadOnly))
-    // {
-    //     qDebug()<<"!CurrentFile.open strPath="<<strPath<<" error="<<CurrentFile.errorString()<<" error code="<<CurrentFile.error();
-    //     return QString();
-    // }
-    // QByteArray imageData = CurrentFile.readAll();
+    QFile CurrentFile(strPath);
+    if(!CurrentFile.open(QIODevice::ReadOnly))
+    {
+        qDebug()<<"!CurrentFile.open strPath="<<strPath<<" error="<<CurrentFile.errorString()<<" error code="<<CurrentFile.error();
+        return QString();
+    }
+    QByteArray imageData = CurrentFile.readAll();
+
+    QBuffer buffer;
+    buffer.setData(imageData);
+    QImageReader imageReader(&buffer);
+    qDebug() <<"imageData size="<< imageData.size()<< " width"<< imageReader.size().width() << "height" << imageReader.size().height() << "format"<<imageReader.format() << imageReader.subType();
+    // ^^Qt auto detects the "heic" format
+    QImage resizeImage = imageReader.read();
+    QByteArray outBa;
+    QBuffer outBuffer(&outBa);
+    outBuffer.open(QIODevice::WriteOnly);
+    resizeImage.save(&outBuffer, "JPEG");
+
+
+   return outBuffer.data().toBase64();
+
+
+
+
 
     // QBuffer buffer;
-    // buffer.setData(imageData);
-    // QImageReader imageReader(&buffer);
-    // qDebug() <<"imageData size="<< imageData.size()<< " width"<< imageReader.size().width() << "height" << imageReader.size().height() << "format"<<imageReader.format() << imageReader.subType();
-    // // ^^Qt auto detects the "heic" format
-    // QImage resizeImage = imageReader.read();
-    // QByteArray outBa;
-    // QBuffer outBuffer(&outBa);
-    // outBuffer.open(QIODevice::WriteOnly);
-    // resizeImage.save(&outBuffer, "JPEG");
+    // buffer.open(QIODevice::WriteOnly);
 
+    // QImage qp(strPath);
 
-   // return outBuffer.data().toBase64();
-    QBuffer buffer;
-    buffer.open(QIODevice::WriteOnly);
+    // qp.save(&buffer, "JPG");
 
-    QImage qp(strPath);
-
-    qp.save(&buffer, "JPG");
-
-    return buffer.data().toBase64();
+    // return buffer.data().toBase64();
 }
 
 QString ImageToBase64(const QImage & img)

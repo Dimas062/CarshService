@@ -176,7 +176,7 @@ void QLoadDocLineWidget::OnOpenPressed()
     dialog.setMimeTypeFilters(mimeTypeFilters);
     dialog.selectMimeTypeFilter("image/jpeg");
 
-    dialog.setFileMode(QFileDialog::ExistingFile);
+    dialog.setFileMode(QFileDialog::ExistingFiles);
     //dialog.setViewMode()
 
     if (acceptMode == QFileDialog::AcceptSave)

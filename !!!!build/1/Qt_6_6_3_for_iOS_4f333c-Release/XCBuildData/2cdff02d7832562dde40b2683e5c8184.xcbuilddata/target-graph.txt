@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'CarshService' in project 'CarshService'
+➜ Explicit dependency on target 'Qt Preprocess' in project 'CarshService'
+Target 'Qt Preprocess' in project 'CarshService' (no dependencies)

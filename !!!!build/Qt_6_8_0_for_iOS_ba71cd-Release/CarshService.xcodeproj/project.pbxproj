@@ -1,0 +1,1527 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		AC91CD4B044060AD4ADEBBCD /* Qt Preprocess */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "CarshService" */;
+			buildPhases = (
+				5E618435888B9D49F8540165 /* Qt Qmake */,
+				7EF0942E79C014DCEC8976BC /* Qt Preprocessors */,
+			);
+			dependencies = (
+			);
+			name = "Qt Preprocess";
+			productName = "Qt Preprocess";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		03E5F09B173FF97FBD73C6F7 /* qcspaybasedialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = F92ED735751BD15811AB638F /* qcspaybasedialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		04F10ED0143ABF6E02F8663B /* qemplcostsdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 66A4233D06BD647732A444A0 /* qemplcostsdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		0B0DF1F8D54CDA0535E455A1 /* moc_qlinetext.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 519D3FC297B5F40C5BFDBEC0 /* moc_qlinetext.cpp */; settings = {ATTRIBUTES = (); }; };
+		0CE02722F00CAD43741297B5 /* CoreGraphics.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 6AE3EC31EE5BB1FCEE84137C /* CoreGraphics.framework */; };
+		0F7AC772FEDCC7A63AF1E735 /* moc_qselprovidercarshwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 09DC8224A60505F9D166FA74 /* moc_qselprovidercarshwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		12044AF6507E3E76A2055FF0 /* qpdf in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 938E2B9C6E6F65666334B6F2 /* qpdf */; };
+		12D5889CC96AC77BBB227344 /* qsettingsdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 7D858C27CCD7EC4D02ADC047 /* qsettingsdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		137AA45DC0C71C249CD19A1D /* qico in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 5540C9B023B33556EFEF1D4A /* qico */; };
+		147CEFF20FA0CFE8B5C65952 /* libQt6BundledPcre2.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 63E3A15F4EA53FF1C28B5FAC /* libQt6BundledPcre2.a */; };
+		15306FAE5648F6E38884E186 /* qrc_qtmultimedia_shaders_gl_macos_init.cpp.o in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 9B5DBEE08E71246FEE5B44C4 /* qrc_qtmultimedia_shaders_gl_macos_init.cpp.o */; };
+		15364689D2AB5A30E87A689F /* Security.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 205259EEEE2BADA5E64741E3 /* Security.framework */; };
+		172EFD706F1F28FBD4AB7D92 /* qjpeg in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 5D598925B2C5294B272C17E3 /* qjpeg */; };
+		19512E36EB16D93A17685001 /* qrc_qpdf_init.cpp.o in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 4270F9E87259ADEA16AAEEFF /* qrc_qpdf_init.cpp.o */; };
+		1963F50B32D6958EDF2EAB2A /* moc_qcsbasedlgscrollwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2CCA78142C8D81ED7E57970A /* moc_qcsbasedlgscrollwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		1C4DD8FD2D677E6BCFD835C1 /* VideoToolbox.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = B2859E6C35A17C24BC387B1B /* VideoToolbox.framework */; };
+		1DD071D098AA0EDC51CE3BFC /* moc_qfullscreenpicdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 74953B6325D9F5612F960F59 /* moc_qfullscreenpicdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		1FC257BE63640803437EF380 /* moc_QEmploeeTasksDlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 4D6B3B73708A01F12DCD7B7B /* moc_QEmploeeTasksDlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		2102A86976A6B6EBD4E4DD0A /* qcsscrollarea.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 307905D6C4996009BC7859BF /* qcsscrollarea.cpp */; settings = {ATTRIBUTES = (); }; };
+		23A90170A1697B7A52A2A20B /* moc_qregisterdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = B9466667ACA19992890B986E /* moc_qregisterdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		250E7F6357A9BF3791A38513 /* moc_qloaddoclinewidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 4481792677AC899B648A542C /* moc_qloaddoclinewidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		2B02D9DC58A01E45248DDBCE /* CoreText.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7D7B02101166B76FD2D4F8B4 /* CoreText.framework */; };
+		2BE44A93EF6A2CE3B1C49133 /* moc_qcsselectdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 84DFEEF4FD11554798522DEE /* moc_qcsselectdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		2CEB57BBFE87C46FC2F2DBB8 /* moc_qcolorselectdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 632A5A21CF8FABF41DABA2E9 /* moc_qcolorselectdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		2DEE14818EEE04967B445E32 /* moc_qsocketbdnetclient.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 7755286DFF231034D98601EB /* moc_qsocketbdnetclient.cpp */; settings = {ATTRIBUTES = (); }; };
+		329DC1496D589E4349E11823 /* moc_qcspaybasedialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 33CE0316C4C4CEC35DB5ED56 /* moc_qcspaybasedialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		32EDDB3F5ECC93D60F1A0D70 /* imagewidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 5BD13116173219601BC96E78 /* imagewidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		3323CF35ECA37AB38EAAAB14 /* moc_qcarshservicebasewidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = CD86FA074A836A4211A12839 /* moc_qcarshservicebasewidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		35A1A39F8EAB37889EB3D397 /* CoreAudio.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = BEF9DFDA6822604126A7E233 /* CoreAudio.framework */; };
+		38A934B08C1D6938D29CF122 /* qicns in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1E8472565873CF81B5291EC0 /* qicns */; };
+		393301D47C0E9AB24ED3DACC /* qselprovidercarshwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 4537E1E4A246C6017D58FA27 /* qselprovidercarshwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		3D0FEF9AEAED2E60ED0568D0 /* qcostsdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 1CA6C9C1670C5D112BB3A4D7 /* qcostsdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		3E02EF7D4515A50BFA0960F2 /* QtCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 3970279D28D704531455F8F5 /* QtCore.framework */; };
+		3EB08E82107BAF05B9A063F9 /* qfullscreenpicdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9992DAF09DD1ABA355307F05 /* qfullscreenpicdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		4013A27D664A6B4EF3A0FDCA /* moc_imagewidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = EE3D03B8E8C9BFA491C080B5 /* moc_imagewidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		40CCDE0172DF1EA6E7901B71 /* qwebp in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 154F86DE8BF5DB76E50B1FCA /* qwebp */; };
+		41834A291783585A559BBDE5 /* qregisterdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2236AF3AD293B23B344887EA /* qregisterdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		436BA178919E3A94E40D845A /* moc_qtimeselectdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = C178DAEA5AFB13BA93664C84 /* moc_qtimeselectdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		45DDC8D437D21336C6F6E23E /* qrc_qtmultimedia_shaders_gl_macos_linear_init.cpp.o in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = FC93C8B3E50743C693CBA330 /* qrc_qtmultimedia_shaders_gl_macos_linear_init.cpp.o */; };
+		47E2B66F9B4B6BBEF2EC1DCF /* QtMultimedia.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 8DC4646CB4245F92195355C0 /* QtMultimedia.framework */; };
+		4AAB3C55C16B326011349F3E /* qrettozonedialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = ED1119BCC101E69F26D5B2AD /* qrettozonedialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		4B0E79925130681A64620D0A /* qsqlite in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 03FABD7838FCC2A8BCBE1B1A /* qsqlite */; };
+		4CF8A8CA2525A4F7D06A30AA /* libQt6BundledHarfbuzz.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = D6918E660FFD6126EC0D1FCD /* libQt6BundledHarfbuzz.a */; };
+		4EB68D0C8182BCE33529C421 /* AudioToolbox.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */; };
+		539BCCE9B037821479289DDD /* qcarshserviceapplication.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A3D5F44A81E0CA0AE38D1A29 /* qcarshserviceapplication.cpp */; settings = {ATTRIBUTES = (); }; };
+		53BE00F2BB355CC7DC6F378C /* moc_qcsbasedialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = C437D5F4C481189F8CADC293 /* moc_qcsbasedialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		53C82879334D1A82288C5C20 /* moc_qclicablelabel.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A343378BA4F50FB9C3C20468 /* moc_qclicablelabel.cpp */; settings = {ATTRIBUTES = (); }; };
+		53FEB7E3D05D6DE06811DCCC /* moc_qcsmultiselectdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 6C871AC1D471BFAEE2695264 /* moc_qcsmultiselectdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		549DE9DD23D32CBCEEE2A45C /* imagepickerandroid.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 691A93DEE320BE7EE28A8FDA /* imagepickerandroid.cpp */; settings = {ATTRIBUTES = (); }; };
+		555BF871C96DF80C3A0F2D6C /* QtOpenGL.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = C00C1FD26E7C587DF42B3FB6 /* QtOpenGL.framework */; };
+		5713E9B352C3FB2CF29C6D15 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 274AB867F269752C534E123F /* QtGui.framework */; };
+		58E6CB4D83E70632C7A30925 /* qcarshserviceusersdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = DD519AA9F012E30207DD15DF /* qcarshserviceusersdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		5DD2DEA373511D13F0ACD605 /* carshservice_plugin_import.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = D81D87A3CAE6E98807312570 /* carshservice_plugin_import.cpp */; settings = {ATTRIBUTES = (); }; };
+		608694C2F85C903B08FF61AE /* Photos.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = BD5FCA7D802D96BED4D98BB2 /* Photos.framework */; };
+		60883A0F4C90BA7B0F1D47CB /* qtiff in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = E1016D9B2F00A11BD6DAB16D /* qtiff */; };
+		60E14BD232956D6AC486C0CC /* moc_qpictureswidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 54CFAB52C0B59A7D429E4506 /* moc_qpictureswidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		611BAEC12B6F3C819729C27E /* moc_qemploeemaindlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = EE49A30F9DA83D52368733C9 /* moc_qemploeemaindlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		61BBC92A8D6F954704B2A8AF /* libQt6BundledLibpng.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 5C35F4D72A7EC1D364ED0D59 /* libQt6BundledLibpng.a */; };
+		61EEC397DC8556BF8C4E36A7 /* ImageIO.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 3A8EF9C62A8D4790CBB89CEA /* ImageIO.framework */; };
+		621A70395FDD8F6043FCA2FE /* moc_qcostsdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A086597ED3EF0B319440F88F /* moc_qcostsdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		6602E41D28CF886E694AD752 /* CoreVideo.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = F923F38E989CF0F61A164DD8 /* CoreVideo.framework */; };
+		67B4FA1075A4E2ED491928F0 /* QtCore5Compat.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 17330C4684C8716526D1EA15 /* QtCore5Compat.framework */; };
+		68627F91D322318138766ED4 /* qsvg in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A6DA73B16BC7917B77CF86F0 /* qsvg */; };
+		68C45827830235BC0185607C /* qclicablelabel.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = B0C536BDA9AED98FDA0C1776 /* qclicablelabel.cpp */; settings = {ATTRIBUTES = (); }; };
+		6901BE8FE3ACE7C63E72774F /* moc_qcarshserviceemploeecarddlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 58C62051FCDDF3793774715B /* moc_qcarshserviceemploeecarddlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		691F362229E8DF231EDC3B48 /* moc_qcarshservicemaindlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2ECD34E781796A82553ED992 /* moc_qcarshservicemaindlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		6A6F75D86D1F8092179FD377 /* moc_qcarshserviceusersdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = C13143A2D1C3D5B92B81B022 /* moc_qcarshserviceusersdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		6BABC5CED54C078A7EA03347 /* moc_qcarshcarddlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 8D82AB6ACE9F33261AF99BB2 /* moc_qcarshcarddlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		6BD8F1A65C4F28F473B274FB /* moc_qsettingsdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = CD9053B6A2DD9C265012B288 /* moc_qsettingsdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		6C929782B405FDD65D7719A3 /* moc_qcsselectdlgbuttonswidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 30E682671799C913ED520135 /* moc_qcsselectdlgbuttonswidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		6F610CED2FFB8E4C19F7B4A4 /* qrc_qtmultimedia_shaders_init.cpp.o in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 146F60BDAC437766EF7D299D /* qrc_qtmultimedia_shaders_init.cpp.o */; };
+		6FE37F5928473A39F9CE35CB /* moc_qparkingtaskdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 22A77B292E265177F180B3B0 /* moc_qparkingtaskdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		72A48142134511F1BFA047B5 /* QCSButton.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = CED3C8945DECAF2C8FEA2CD2 /* QCSButton.cpp */; settings = {ATTRIBUTES = (); }; };
+		73221B2D8781DB690AAEB1E9 /* LaunchScreen.storyboard in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 294726205A1E54D2D9B94E27 /* LaunchScreen.storyboard */; };
+		751C9F00A16DBB10631BFF95 /* qregisterpartnerPlatedlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = F2A93C086BE16E3721EB1302 /* qregisterpartnerPlatedlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		7644B7DE0E019C30DEFA6523 /* darwinmediaplugin in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = E7FE9AD334C67EA03B3C0494 /* darwinmediaplugin */; };
+		7788FF5C32CD221CE0F15AD2 /* qregisteremploeedlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 13BCED72DEC471007EEFBFAE /* qregisteremploeedlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		788DDD4092D87408931A9CC6 /* qrc_qtmultimedia_shaders_linear_init.cpp.o in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 07D8DDB2AAAB76AE6A090E60 /* qrc_qtmultimedia_shaders_linear_init.cpp.o */; };
+		79E781B793AC479054C30C7E /* qcolumntext.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 24612911726B387D28CFB1BD /* qcolumntext.cpp */; settings = {ATTRIBUTES = (); }; };
+		7AB84970E51A73F863A7599F /* qcarshservicemaindlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = B361D0F865E394D6E3FCD736 /* qcarshservicemaindlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		7BBC482A5D3C07CFBFE0EF68 /* moc_qregisteremploeedlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = BFCB4B913D25BB2CA1D3E993 /* moc_qregisteremploeedlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		828399A0FC64560E4EE76B41 /* BDPatterns.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 77DDBCAFE64F1CCBEB90D265 /* BDPatterns.cpp */; settings = {ATTRIBUTES = (); }; };
+		82B5DBB218C1094CD32145E5 /* libQt6BundledLibjpeg.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = B3DEA354BCF8F59EA681BBA5 /* libQt6BundledLibjpeg.a */; };
+		84C72FBEC46C7DA12CD8E0D7 /* ffmpegmediaplugin in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 85B0B7F490470B663982A523 /* ffmpegmediaplugin */; };
+		85924CD2CD95C88144DAD236 /* qscnetworkreachability in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 9329D63F77C171FC4D3539EF /* qscnetworkreachability */; };
+		8B73678A96FB35F21FBF1405 /* moc_qpenaltyparkingdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = AF616B9CB2EBEB5C25487350 /* moc_qpenaltyparkingdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		8BF3D590325B57BF9C722679 /* qgif in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = AD3B4E0B0547966850E288DA /* qgif */; };
+		8D267F2E4776F0ECA2F49DC8 /* IOKit.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A1A67BEAA744704B29168D39 /* IOKit.framework */; };
+		8D7DBB0AE077775C496D6E67 /* qlinetext.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 6B5B19C8FB4B2A45C02DC5D5 /* qlinetext.cpp */; settings = {ATTRIBUTES = (); }; };
+		8D97B364A1B6211BAA0A1C30 /* moc_qyesnodlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = C9BCEA9E5B14EF66B8C12776 /* moc_qyesnodlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		8DB1EC8C670ECD26A91A8265 /* QtNetwork.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 937B07CBBCC571DD96B55E8B /* QtNetwork.framework */; };
+		8E078723CC61EFE87FD2B3F1 /* qcalendardataselectdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A46ACFF6F4B25DB23C585930 /* qcalendardataselectdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		8E85176CA93D0A4033D278B1 /* qloaddocsdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 4F9AE165FC509BE4CF1D9123 /* qloaddocsdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		906A4077863DBAC669417D34 /* qemploeemaindlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2AEC3644751BEB8A45ACCAA3 /* qemploeemaindlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		91631B1E8CB61FC30755C802 /* qcarshservicebasewidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 928E3077717C048B1849CD2A /* qcarshservicebasewidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		964B9314A2EEB11A76D038DA /* qdarwincamerapermission in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 99F48A2ECB2404BFEB45FB0F /* qdarwincamerapermission */; };
+		9809EDEB50ED1F70B0679E58 /* qpictureswidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 48858575E12975260C821539 /* qpictureswidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		9C847CB11903AA937D867F7E /* moc_qcsscrollarea.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 8B27EDBB2D3B073CBE468FC3 /* moc_qcsscrollarea.cpp */; settings = {ATTRIBUTES = (); }; };
+		9E7ADDEF87B09D0F6B60BA46 /* moc_qloaddocsdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 714717BCA0176ED04876834C /* moc_qloaddocsdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		9F2F8DBEB471880E6C4DD930 /* QtSvg.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 30C2DCF789669455B6A4473E /* QtSvg.framework */; };
+		A0898AB751F595A58A61FCBB /* qios in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = DDF875B05CBFCEAD4FF5BFC4 /* qios */; };
+		A167FD17C2476D8E4853F595 /* moc_qcalendardataselectdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 70CD9B32A8D2BECFB8567B53 /* moc_qcalendardataselectdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		A251A725DDE179D9D26391C1 /* native.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 82525D10E1718B6CEFAFC964 /* native.cpp */; settings = {ATTRIBUTES = (); }; };
+		A32BDEEFDE1F6AF24A48ADC0 /* qsecuretransportbackend in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 6BE20B399C68D0AC44EB9671 /* qsecuretransportbackend */; };
+		A4D3F3FC6505C7B9E3424E57 /* Assets.xcassets in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 3E54CDFBDA3F70137B2D75B8 /* Assets.xcassets */; };
+		AAD9E298B3A41C3B85B08572 /* qcolorselectdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 174EDFE6E4F234F313D2A5B1 /* qcolorselectdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		AB01CBAF8CDDF28EB5C68F48 /* qcsselectdlgbuttonswidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 77A1982EAD5A060C1175250D /* qcsselectdlgbuttonswidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		AD833C5A563C3DDDBB82F4F7 /* qtga in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 0E703886FBA59EEC98E0F583 /* qtga */; };
+		ADF9A7F92302C4521A9BA410 /* qcsbasedlgscrollwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = C6A2398A478DF6B7BED8D6AB /* qcsbasedlgscrollwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		AFE07CC80D61D7E22585B89F /* moc_QCSButton.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 3D7F85522E05B315C1D366D2 /* moc_QCSButton.cpp */; settings = {ATTRIBUTES = (); }; };
+		AFF975DFE96ABAA5D7DD9C77 /* CFNetwork.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = C6809A40D11D8DEFCE1ED742 /* CFNetwork.framework */; };
+		B05C25432D21527EF3974DF4 /* qsvgicon in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = F4E8A03EC838371C210FBB7F /* qsvgicon */; };
+		B38A84C02FDFCC840C98CDA2 /* qpiclabel.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = D46ED2A1F1BA760EB16679BA /* qpiclabel.cpp */; settings = {ATTRIBUTES = (); }; };
+		B3B4D232702123BFB964FD60 /* moc_qnotecalendarwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = CB4F2D0F2EA335C47147D502 /* moc_qnotecalendarwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		B3FE8FAC746D3D5BB24FA398 /* Metal.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1B2543FCC48E9436F21C4F63 /* Metal.framework */; };
+		B460F624007324313696BE86 /* QuartzCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */; };
+		B55A2D60FEE9B20FC78E3323 /* moc_imagepickerandroid.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 7E20C41228427EF9F2A91DA8 /* moc_imagepickerandroid.cpp */; settings = {ATTRIBUTES = (); }; };
+		B6DD899F42710BEB79BE3A4F /* qwbmp in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 930FCB390B7669983CE091F1 /* qwbmp */; };
+		B78304F135DEF1F7A68393A6 /* CoreMedia.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 547CCADBD1CC5050167EF948 /* CoreMedia.framework */; };
+		B9A14E8879558F57BFC8DECD /* qrc_gui_shaders_init.cpp.o in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = E40DBA463E8FB821AA21E368 /* qrc_gui_shaders_init.cpp.o */; };
+		B9B5A21D82797639E3705E2A /* moc_qplatetaskdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 126747A7826727244986503E /* moc_qplatetaskdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		BB15E747337353CB741893DB /* qsocketbdnetclient.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 7011C4EBD834A557FCEDD040 /* qsocketbdnetclient.cpp */; settings = {ATTRIBUTES = (); }; };
+		BCE50653F968781C3E0B09A4 /* moc_qcsbaselistitemdelegate.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = E65203365426DC62CF382581 /* moc_qcsbaselistitemdelegate.cpp */; settings = {ATTRIBUTES = (); }; };
+		C53BD15E83F93E242685E48F /* QtWidgets.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 499A4E1D07D2AE0FE2CA3C1C /* QtWidgets.framework */; };
+		C5E13D664BF85BA9C7B63E02 /* qcarshcarddlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 05F49497106E329BCA127494 /* qcarshcarddlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		C73CB94C8012EEDCCCE6B39B /* qyesnodlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 0A270B5117841B04B76ACC9F /* qyesnodlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		C79CEFCA97B4908437607242 /* moc_qregisterpartnerPlatedlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2EE9389041E5ED08D004CE25 /* moc_qregisterpartnerPlatedlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		C933D115940BFE6E3AD40C74 /* qmacjp2 in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 4BA71BBF2911F30FAD412C57 /* qmacjp2 */; };
+		C93897BC5B7C73735841A2D9 /* qcsbaselistitemdelegate.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 45F529F86271738E66208EEC /* qcsbaselistitemdelegate.cpp */; settings = {ATTRIBUTES = (); }; };
+		CA942363EEDF0615694FC715 /* QEmploeeTasksDlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 63CA6FF45E70B890ADA84940 /* QEmploeeTasksDlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		CCA737EE379CDB10CC9A0F23 /* AVFoundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21F907AB8D19BD779147A085 /* AVFoundation.framework */; };
+		CD8A2368E735EE01DD8A90AE /* common.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = C89770F3B90D8EFE5CEB08E3 /* common.cpp */; settings = {ATTRIBUTES = (); }; };
+		D15F29DA306034B22E17F588 /* qtimeselectdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 4B101F6AB774B053ACDA49B8 /* qtimeselectdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		D35873E98D79C6C1E1D4D272 /* qcsselectdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 6163463EFF95391CAF225730 /* qcsselectdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		D4639595C3BCF2A39D88DF6E /* SystemConfiguration.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = FF5BDAB0076F3391B219EA52 /* SystemConfiguration.framework */; };
+		D85060E4A9775F897BB789BC /* moc_qcolumntext.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 35AC61024B93A82A712ACD37 /* moc_qcolumntext.cpp */; settings = {ATTRIBUTES = (); }; };
+		D87578AE08E3BED38FA55046 /* libQt6BundledFreetype.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 70245464F6141FAD40A1CE11 /* libQt6BundledFreetype.a */; };
+		DBA63F3EF038DFE20D11CB2B /* qcsmultiselectdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = FA2CB41215175D8D023279B6 /* qcsmultiselectdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		DC8FB331A5F59B7C253A6468 /* qcsbasedialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = E9D197ECCA87D54F78279AA4 /* qcsbasedialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		DCF866AA430B850FCCAB4E4A /* qsettingslistwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 24ACC10F56BEBE5D308BF689 /* qsettingslistwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		DD3ACD94D5877E19E77F6870 /* qnotecalendarwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 50AA853EC5D11DED718C8F59 /* qnotecalendarwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		DD841C6F5CE679F2497C961D /* qpenaltyparkingdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = DC6DC1AA7D9C5A9169F7DE8B /* qpenaltyparkingdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		E0436B7BB7795A34EDE8B110 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = D19ECE87FBC3F2B52144093B /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		E14A9047F17EF50F644386C5 /* qiosnsphotolibrarysupport in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 716063DB7C9D134A4C690E8F /* qiosnsphotolibrarysupport */; };
+		E15911DC3493F583C6C868D7 /* qplatetaskdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = DB848F29ACC4240CF6A59E9D /* qplatetaskdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		E1F565A69652C18DCA938C85 /* qcsbaselistwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 85C237AA4FF77F45EB319A8B /* qcsbaselistwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		E36564E68D0210AEBEFAB6E1 /* qsocketbd.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = F33E4350FF0D7456A926DF24 /* qsocketbd.cpp */; settings = {ATTRIBUTES = (); }; };
+		E4064F97220DDB0EA464BE20 /* moc_qrettozonedialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A91F28E26E3EBC2C199779C6 /* moc_qrettozonedialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		E4299331173BB6BFAADB39BC /* qloaddoclinewidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 19FB670217D4A18664A76979 /* qloaddoclinewidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		E820599C41786D55F3ED21B8 /* qparkingtaskdialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 5D7111A0E564C65F87EB6F9B /* qparkingtaskdialog.cpp */; settings = {ATTRIBUTES = (); }; };
+		ECA9C8DC9A073EF29FE1147D /* moc_qcarshserviceapplication.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2B71B3E193BC269640CD4D3C /* moc_qcarshserviceapplication.cpp */; settings = {ATTRIBUTES = (); }; };
+		EE58DAB3DCA5C10DD980A112 /* QtPdf.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2F64115C321D1D74DB07DFC1 /* QtPdf.framework */; };
+		EEFE65802B956F2258EB230E /* qmacheif in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = F59BE389F2306B68188EFACF /* qmacheif */; };
+		EFA8879604800E4C9394AEB2 /* moc_qemplcostsdlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 9A303BE3726F1BAAE343985B /* moc_qemplcostsdlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		F0D0D36B214C6C27ED416BDD /* qcarshserviceemploeecarddlg.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 2B5D97ACD84C682CE5E1119A /* qcarshserviceemploeecarddlg.cpp */; settings = {ATTRIBUTES = (); }; };
+		F26454630C80841CBDCFE1CA /* Foundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = FCC237CA5AD60B9BA4447615 /* Foundation.framework */; };
+		F30795E5207D73289814C47C /* UniformTypeIdentifiers.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 5F9A4B2B3FF5EC87C57CF6B4 /* UniformTypeIdentifiers.framework */; };
+		F4EC7EFBEB0A6EF598592C75 /* moc_qsettingslistwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 4E0A48C549C70A47BC1D36F5 /* moc_qsettingslistwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		F51FBB1C2B2B5F00242E0F01 /* moc_qcsbaselistwidget.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 0F849C2F97EB4FB6DAD947FE /* moc_qcsbaselistwidget.cpp */; settings = {ATTRIBUTES = (); }; };
+		F8B465CE34D8DF87AAE95913 /* CoreFoundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */; };
+		FACE49CDE1D80CBE544BF957 /* moc_qsocketbd.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = D87FDB1D5FD11FF12E6D7819 /* moc_qsocketbd.cpp */; settings = {ATTRIBUTES = (); }; };
+		FD7302B9A6D78A780517947D /* QtSql.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 95E075EEC5AA777C54827B05 /* QtSql.framework */; };
+		FF5098F2789645BB19D7C0D9 /* moc_qpiclabel.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 74320C40FE365453639C4978 /* moc_qpiclabel.cpp */; settings = {ATTRIBUTES = (); }; };
+		FF64DB881386EEE8097D4E18 /* qrc_resources.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 8FD9C698E836F1CDF496891E /* qrc_resources.cpp */; settings = {ATTRIBUTES = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		135D54862D0743E80001678A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DB9C3763D02B1415CD9D565 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC91CD4B044060AD4ADEBBCD;
+			remoteInfo = "Qt Preprocess";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		99542592E9780B9225F24AA8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		03FABD7838FCC2A8BCBE1B1A /* qsqlite */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qsqlite; path = "/Users/dimas/Qt/6.8.0/ios/plugins/sqldrivers/libqsqlite$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		04FC93CD28D1195BD3B83D15 /* qparkingtaskdialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qparkingtaskdialog.h; path = /Users/dimas/CarshService/CarshService/tasks/qparkingtaskdialog.h; sourceTree = "<absolute>"; };
+		05F49497106E329BCA127494 /* qcarshcarddlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcarshcarddlg.cpp; path = /Users/dimas/CarshService/CarshService/carsh_service_widgets/qcarshcarddlg.cpp; sourceTree = "<absolute>"; };
+		07D8DDB2AAAB76AE6A090E60 /* qrc_qtmultimedia_shaders_linear_init.cpp.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = qrc_qtmultimedia_shaders_linear_init.cpp.o; path = "/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_2/.qt/rcc/qrc_qtmultimedia_shaders_linear_init.cpp.o"; sourceTree = "<absolute>"; };
+		08B51BFAB474F0617489B34A /* qcarshcarddlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcarshcarddlg.h; path = /Users/dimas/CarshService/CarshService/carsh_service_widgets/qcarshcarddlg.h; sourceTree = "<absolute>"; };
+		097EEDAD2B69E00C7271840C /* qcarshservicemaindlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcarshservicemaindlg.h; path = /Users/dimas/CarshService/CarshService/carsh_service_widgets/qcarshservicemaindlg.h; sourceTree = "<absolute>"; };
+		099777D017073674FC1A927D /* qloaddocsdlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qloaddocsdlg.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qloaddocsdlg.h; sourceTree = "<absolute>"; };
+		09DC8224A60505F9D166FA74 /* moc_qselprovidercarshwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qselprovidercarshwidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qselprovidercarshwidget.cpp"; sourceTree = "<absolute>"; };
+		0A270B5117841B04B76ACC9F /* qyesnodlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qyesnodlg.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qyesnodlg.cpp; sourceTree = "<absolute>"; };
+		0E23CCF14E9D328D58E0CB16 /* qregisterdlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qregisterdlg.h; path = /Users/dimas/CarshService/CarshService/qregisterdlg.h; sourceTree = "<absolute>"; };
+		0E703886FBA59EEC98E0F583 /* qtga */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtga; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqtga$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		0F849C2F97EB4FB6DAD947FE /* moc_qcsbaselistwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcsbaselistwidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcsbaselistwidget.cpp"; sourceTree = "<absolute>"; };
+		10BC2C4A412F36DA15323FF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = /Users/dimas/CarshService/CarshService/ios/Info.plist; sourceTree = "<absolute>"; };
+		126747A7826727244986503E /* moc_qplatetaskdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qplatetaskdialog.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qplatetaskdialog.cpp"; sourceTree = "<absolute>"; };
+		13BCED72DEC471007EEFBFAE /* qregisteremploeedlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qregisteremploeedlg.cpp; path = /Users/dimas/CarshService/CarshService/qregisteremploeedlg.cpp; sourceTree = "<absolute>"; };
+		146F60BDAC437766EF7D299D /* qrc_qtmultimedia_shaders_init.cpp.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = qrc_qtmultimedia_shaders_init.cpp.o; path = "/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_1/.qt/rcc/qrc_qtmultimedia_shaders_init.cpp.o"; sourceTree = "<absolute>"; };
+		154F86DE8BF5DB76E50B1FCA /* qwebp */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qwebp; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqwebp$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		17330C4684C8716526D1EA15 /* QtCore5Compat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore5Compat.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtCore5Compat.framework; sourceTree = "<absolute>"; };
+		174EDFE6E4F234F313D2A5B1 /* qcolorselectdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcolorselectdlg.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcolorselectdlg.cpp; sourceTree = "<absolute>"; };
+		197831BFB100ACB83DB193E1 /* CarshService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarshService.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		19FB670217D4A18664A76979 /* qloaddoclinewidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qloaddoclinewidget.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qloaddoclinewidget.cpp; sourceTree = "<absolute>"; };
+		1B2543FCC48E9436F21C4F63 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = /System/Library/Frameworks/Metal.framework; sourceTree = "<absolute>"; };
+		1CA6C9C1670C5D112BB3A4D7 /* qcostsdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcostsdialog.cpp; path = /Users/dimas/CarshService/CarshService/tasks/qcostsdialog.cpp; sourceTree = "<absolute>"; };
+		1E8472565873CF81B5291EC0 /* qicns */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qicns; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqicns$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		200EF5E60483764BB0A67C65 /* qclicablelabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qclicablelabel.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qclicablelabel.h; sourceTree = "<absolute>"; };
+		205259EEEE2BADA5E64741E3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		21046D1F1A240773C9086DD6 /* qcsselectdialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcsselectdialog.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsselectdialog.h; sourceTree = "<absolute>"; };
+		21F907AB8D19BD779147A085 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = /System/Library/Frameworks/AVFoundation.framework; sourceTree = "<absolute>"; };
+		2236AF3AD293B23B344887EA /* qregisterdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qregisterdlg.cpp; path = /Users/dimas/CarshService/CarshService/qregisterdlg.cpp; sourceTree = "<absolute>"; };
+		22A77B292E265177F180B3B0 /* moc_qparkingtaskdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qparkingtaskdialog.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qparkingtaskdialog.cpp"; sourceTree = "<absolute>"; };
+		24612911726B387D28CFB1BD /* qcolumntext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcolumntext.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcolumntext.cpp; sourceTree = "<absolute>"; };
+		24ACC10F56BEBE5D308BF689 /* qsettingslistwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qsettingslistwidget.cpp; path = /Users/dimas/CarshService/CarshService/settings_widgets/qsettingslistwidget.cpp; sourceTree = "<absolute>"; };
+		274AB867F269752C534E123F /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtGui.framework; sourceTree = "<absolute>"; };
+		294726205A1E54D2D9B94E27 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/CarshService.xcodeproj/LaunchScreen.storyboard"; sourceTree = "<absolute>"; };
+		2AEC3644751BEB8A45ACCAA3 /* qemploeemaindlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qemploeemaindlg.cpp; path = /Users/dimas/CarshService/CarshService/emploee_widgets/qemploeemaindlg.cpp; sourceTree = "<absolute>"; };
+		2B5D97ACD84C682CE5E1119A /* qcarshserviceemploeecarddlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcarshserviceemploeecarddlg.cpp; path = /Users/dimas/CarshService/CarshService/carsh_service_widgets/qcarshserviceemploeecarddlg.cpp; sourceTree = "<absolute>"; };
+		2B71B3E193BC269640CD4D3C /* moc_qcarshserviceapplication.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcarshserviceapplication.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcarshserviceapplication.cpp"; sourceTree = "<absolute>"; };
+		2CCA78142C8D81ED7E57970A /* moc_qcsbasedlgscrollwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcsbasedlgscrollwidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcsbasedlgscrollwidget.cpp"; sourceTree = "<absolute>"; };
+		2EAF2D896C977170704AC91B /* qpiclabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qpiclabel.h; path = /Users/dimas/CarshService/CarshService/pictures/qpiclabel.h; sourceTree = "<absolute>"; };
+		2ECD34E781796A82553ED992 /* moc_qcarshservicemaindlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcarshservicemaindlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcarshservicemaindlg.cpp"; sourceTree = "<absolute>"; };
+		2EE9389041E5ED08D004CE25 /* moc_qregisterpartnerPlatedlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qregisterpartnerPlatedlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qregisterpartnerPlatedlg.cpp"; sourceTree = "<absolute>"; };
+		2F64115C321D1D74DB07DFC1 /* QtPdf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtPdf.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtPdf.framework; sourceTree = "<absolute>"; };
+		307905D6C4996009BC7859BF /* qcsscrollarea.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcsscrollarea.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsscrollarea.cpp; sourceTree = "<absolute>"; };
+		30C2DCF789669455B6A4473E /* QtSvg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtSvg.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtSvg.framework; sourceTree = "<absolute>"; };
+		30E682671799C913ED520135 /* moc_qcsselectdlgbuttonswidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcsselectdlgbuttonswidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcsselectdlgbuttonswidget.cpp"; sourceTree = "<absolute>"; };
+		31178584147D87925FAE4288 /* qcarshserviceemploeecarddlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcarshserviceemploeecarddlg.h; path = /Users/dimas/CarshService/CarshService/carsh_service_widgets/qcarshserviceemploeecarddlg.h; sourceTree = "<absolute>"; };
+		33CE0316C4C4CEC35DB5ED56 /* moc_qcspaybasedialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcspaybasedialog.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcspaybasedialog.cpp"; sourceTree = "<absolute>"; };
+		35AC61024B93A82A712ACD37 /* moc_qcolumntext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcolumntext.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcolumntext.cpp"; sourceTree = "<absolute>"; };
+		3970279D28D704531455F8F5 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtCore.framework; sourceTree = "<absolute>"; };
+		3A8EF9C62A8D4790CBB89CEA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = /System/Library/Frameworks/ImageIO.framework; sourceTree = "<absolute>"; };
+		3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
+		3D7F85522E05B315C1D366D2 /* moc_QCSButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_QCSButton.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_QCSButton.cpp"; sourceTree = "<absolute>"; };
+		3E54CDFBDA3F70137B2D75B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = /Users/dimas/CarshService/CarshService/ios/Assets.xcassets; sourceTree = "<absolute>"; };
+		4270F9E87259ADEA16AAEEFF /* qrc_qpdf_init.cpp.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = qrc_qpdf_init.cpp.o; path = "/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Gui_resources_1/.qt/rcc/qrc_qpdf_init.cpp.o"; sourceTree = "<absolute>"; };
+		4481792677AC899B648A542C /* moc_qloaddoclinewidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qloaddoclinewidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qloaddoclinewidget.cpp"; sourceTree = "<absolute>"; };
+		4537E1E4A246C6017D58FA27 /* qselprovidercarshwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qselprovidercarshwidget.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qselprovidercarshwidget.cpp; sourceTree = "<absolute>"; };
+		45F529F86271738E66208EEC /* qcsbaselistitemdelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcsbaselistitemdelegate.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsbaselistitemdelegate.cpp; sourceTree = "<absolute>"; };
+		462CD40D701D9E4DBEAFC817 /* qcolorselectdlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcolorselectdlg.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcolorselectdlg.h; sourceTree = "<absolute>"; };
+		48858575E12975260C821539 /* qpictureswidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qpictureswidget.cpp; path = /Users/dimas/CarshService/CarshService/pictures/qpictureswidget.cpp; sourceTree = "<absolute>"; };
+		499A4E1D07D2AE0FE2CA3C1C /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtWidgets.framework; sourceTree = "<absolute>"; };
+		49DF9FF7990727A84A5BA79C /* qemplcostsdlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qemplcostsdlg.h; path = /Users/dimas/CarshService/CarshService/emploee_widgets/qemplcostsdlg.h; sourceTree = "<absolute>"; };
+		4B101F6AB774B053ACDA49B8 /* qtimeselectdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qtimeselectdlg.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qtimeselectdlg.cpp; sourceTree = "<absolute>"; };
+		4BA71BBF2911F30FAD412C57 /* qmacjp2 */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qmacjp2; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqmacjp2$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		4C007DF64314F300613CCA60 /* qrettozonedialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qrettozonedialog.h; path = /Users/dimas/CarshService/CarshService/tasks/qrettozonedialog.h; sourceTree = "<absolute>"; };
+		4D6B3B73708A01F12DCD7B7B /* moc_QEmploeeTasksDlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_QEmploeeTasksDlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_QEmploeeTasksDlg.cpp"; sourceTree = "<absolute>"; };
+		4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		4E0A48C549C70A47BC1D36F5 /* moc_qsettingslistwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qsettingslistwidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qsettingslistwidget.cpp"; sourceTree = "<absolute>"; };
+		4F9AE165FC509BE4CF1D9123 /* qloaddocsdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qloaddocsdlg.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qloaddocsdlg.cpp; sourceTree = "<absolute>"; };
+		50AA853EC5D11DED718C8F59 /* qnotecalendarwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qnotecalendarwidget.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qnotecalendarwidget.cpp; sourceTree = "<absolute>"; };
+		519D3FC297B5F40C5BFDBEC0 /* moc_qlinetext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qlinetext.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qlinetext.cpp"; sourceTree = "<absolute>"; };
+		547CCADBD1CC5050167EF948 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = /System/Library/Frameworks/CoreMedia.framework; sourceTree = "<absolute>"; };
+		54CFAB52C0B59A7D429E4506 /* moc_qpictureswidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qpictureswidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qpictureswidget.cpp"; sourceTree = "<absolute>"; };
+		5540C9B023B33556EFEF1D4A /* qico */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qico; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqico$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		5603AC822F1D99301361082E /* qcsmultiselectdlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcsmultiselectdlg.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsmultiselectdlg.h; sourceTree = "<absolute>"; };
+		58C62051FCDDF3793774715B /* moc_qcarshserviceemploeecarddlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcarshserviceemploeecarddlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcarshserviceemploeecarddlg.cpp"; sourceTree = "<absolute>"; };
+		5B96147255BFA90185582BAA /* qcostsdialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcostsdialog.h; path = /Users/dimas/CarshService/CarshService/tasks/qcostsdialog.h; sourceTree = "<absolute>"; };
+		5BD13116173219601BC96E78 /* imagewidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imagewidget.cpp; path = /Users/dimas/CarshService/CarshService/pictures/imagewidget.cpp; sourceTree = "<absolute>"; };
+		5C35F4D72A7EC1D364ED0D59 /* libQt6BundledLibpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQt6BundledLibpng.a; path = /Users/dimas/Qt/6.8.0/ios/lib/libQt6BundledLibpng.a; sourceTree = "<absolute>"; };
+		5D598925B2C5294B272C17E3 /* qjpeg */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qjpeg; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqjpeg$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		5D7111A0E564C65F87EB6F9B /* qparkingtaskdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qparkingtaskdialog.cpp; path = /Users/dimas/CarshService/CarshService/tasks/qparkingtaskdialog.cpp; sourceTree = "<absolute>"; };
+		5E179453E90CC341B52157FA /* qcolumntext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcolumntext.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcolumntext.h; sourceTree = "<absolute>"; };
+		5F9A4B2B3FF5EC87C57CF6B4 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = /System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = "<absolute>"; };
+		6163463EFF95391CAF225730 /* qcsselectdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcsselectdialog.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsselectdialog.cpp; sourceTree = "<absolute>"; };
+		632A5A21CF8FABF41DABA2E9 /* moc_qcolorselectdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcolorselectdlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcolorselectdlg.cpp"; sourceTree = "<absolute>"; };
+		63CA6FF45E70B890ADA84940 /* QEmploeeTasksDlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = QEmploeeTasksDlg.cpp; path = /Users/dimas/CarshService/CarshService/emploee_widgets/QEmploeeTasksDlg.cpp; sourceTree = "<absolute>"; };
+		63E3A15F4EA53FF1C28B5FAC /* libQt6BundledPcre2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQt6BundledPcre2.a; path = /Users/dimas/Qt/6.8.0/ios/lib/libQt6BundledPcre2.a; sourceTree = "<absolute>"; };
+		660FE5992E564871A96F0A74 /* imagewidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imagewidget.h; path = /Users/dimas/CarshService/CarshService/pictures/imagewidget.h; sourceTree = "<absolute>"; };
+		6670EFBA676177731392AD01 /* qfullscreenpicdialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qfullscreenpicdialog.h; path = /Users/dimas/CarshService/CarshService/pictures/qfullscreenpicdialog.h; sourceTree = "<absolute>"; };
+		66A4233D06BD647732A444A0 /* qemplcostsdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qemplcostsdlg.cpp; path = /Users/dimas/CarshService/CarshService/emploee_widgets/qemplcostsdlg.cpp; sourceTree = "<absolute>"; };
+		67DA12219B76E71BEBC45FD0 /* qregisteremploeedlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qregisteremploeedlg.h; path = /Users/dimas/CarshService/CarshService/qregisteremploeedlg.h; sourceTree = "<absolute>"; };
+		691A93DEE320BE7EE28A8FDA /* imagepickerandroid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imagepickerandroid.cpp; path = /Users/dimas/CarshService/CarshService/pictures/imagepickerandroid.cpp; sourceTree = "<absolute>"; };
+		6A857A56DEFBC345E1D742D9 /* qsettingsdlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qsettingsdlg.h; path = /Users/dimas/CarshService/CarshService/qsettingsdlg.h; sourceTree = "<absolute>"; };
+		6AE3EC31EE5BB1FCEE84137C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = /System/Library/Frameworks/CoreGraphics.framework; sourceTree = "<absolute>"; };
+		6B5B19C8FB4B2A45C02DC5D5 /* qlinetext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qlinetext.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qlinetext.cpp; sourceTree = "<absolute>"; };
+		6BE20B399C68D0AC44EB9671 /* qsecuretransportbackend */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qsecuretransportbackend; path = "/Users/dimas/Qt/6.8.0/ios/plugins/tls/libqsecuretransportbackend$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		6C871AC1D471BFAEE2695264 /* moc_qcsmultiselectdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcsmultiselectdlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcsmultiselectdlg.cpp"; sourceTree = "<absolute>"; };
+		7011C4EBD834A557FCEDD040 /* qsocketbdnetclient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qsocketbdnetclient.cpp; path = /Users/dimas/CarshService/CarshService/qsocketbdnetclient.cpp; sourceTree = "<absolute>"; };
+		70245464F6141FAD40A1CE11 /* libQt6BundledFreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQt6BundledFreetype.a; path = /Users/dimas/Qt/6.8.0/ios/lib/libQt6BundledFreetype.a; sourceTree = "<absolute>"; };
+		70CD9B32A8D2BECFB8567B53 /* moc_qcalendardataselectdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcalendardataselectdlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcalendardataselectdlg.cpp"; sourceTree = "<absolute>"; };
+		714717BCA0176ED04876834C /* moc_qloaddocsdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qloaddocsdlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qloaddocsdlg.cpp"; sourceTree = "<absolute>"; };
+		716063DB7C9D134A4C690E8F /* qiosnsphotolibrarysupport */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qiosnsphotolibrarysupport; path = "/Users/dimas/Qt/6.8.0/ios/plugins/platforms/darwin/libqiosnsphotolibrarysupport$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		71E1CA20C60AAD1CABC6CCC2 /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = common.h; path = /Users/dimas/CarshService/CarshService/common.h; sourceTree = "<absolute>"; };
+		74320C40FE365453639C4978 /* moc_qpiclabel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qpiclabel.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qpiclabel.cpp"; sourceTree = "<absolute>"; };
+		74953B6325D9F5612F960F59 /* moc_qfullscreenpicdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qfullscreenpicdialog.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qfullscreenpicdialog.cpp"; sourceTree = "<absolute>"; };
+		75BF09532CCEC6C331F3761C /* QCSButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QCSButton.h; path = /Users/dimas/CarshService/CarshService/service_widgets/QCSButton.h; sourceTree = "<absolute>"; };
+		7755286DFF231034D98601EB /* moc_qsocketbdnetclient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qsocketbdnetclient.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qsocketbdnetclient.cpp"; sourceTree = "<absolute>"; };
+		77A1982EAD5A060C1175250D /* qcsselectdlgbuttonswidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcsselectdlgbuttonswidget.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsselectdlgbuttonswidget.cpp; sourceTree = "<absolute>"; };
+		77DDBCAFE64F1CCBEB90D265 /* BDPatterns.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BDPatterns.cpp; path = /Users/dimas/CarshService/CarshService/BDPatterns.cpp; sourceTree = "<absolute>"; };
+		782ADAE0F753A5BAFA621C2A /* CarshService.pro */ = {isa = PBXFileReference; lastKnownFileType = text; name = CarshService.pro; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/CarshService.pro"; sourceTree = "<absolute>"; };
+		785370F8B90E38FC0F6A3D53 /* qtimeselectdlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qtimeselectdlg.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qtimeselectdlg.h; sourceTree = "<absolute>"; };
+		79AA057C91B82F8E480D8B3A /* qregisterpartnerPlatedlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qregisterpartnerPlatedlg.h; path = /Users/dimas/CarshService/CarshService/qregisterpartnerPlatedlg.h; sourceTree = "<absolute>"; };
+		7AE4E09CB52E53C094BF2F4A /* qsocketbd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qsocketbd.h; path = /Users/dimas/CarshService/CarshService/qsocketbd.h; sourceTree = "<absolute>"; };
+		7BB8FF5E1FFAEE9F9C41AA2C /* qpenaltyparkingdialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qpenaltyparkingdialog.h; path = /Users/dimas/CarshService/CarshService/tasks/qpenaltyparkingdialog.h; sourceTree = "<absolute>"; };
+		7D7B02101166B76FD2D4F8B4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = /System/Library/Frameworks/CoreText.framework; sourceTree = "<absolute>"; };
+		7D858C27CCD7EC4D02ADC047 /* qsettingsdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qsettingsdlg.cpp; path = /Users/dimas/CarshService/CarshService/qsettingsdlg.cpp; sourceTree = "<absolute>"; };
+		7E20C41228427EF9F2A91DA8 /* moc_imagepickerandroid.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_imagepickerandroid.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_imagepickerandroid.cpp"; sourceTree = "<absolute>"; };
+		7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		820C313760166BD225955B60 /* qcalendardataselectdlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcalendardataselectdlg.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcalendardataselectdlg.h; sourceTree = "<absolute>"; };
+		82525D10E1718B6CEFAFC964 /* native.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = native.cpp; path = /Users/dimas/CarshService/CarshService/native.cpp; sourceTree = "<absolute>"; };
+		84DFEEF4FD11554798522DEE /* moc_qcsselectdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcsselectdialog.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcsselectdialog.cpp"; sourceTree = "<absolute>"; };
+		85B0B7F490470B663982A523 /* ffmpegmediaplugin */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = ffmpegmediaplugin; path = "/Users/dimas/Qt/6.8.0/ios/plugins/multimedia/libffmpegmediaplugin$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		85C237AA4FF77F45EB319A8B /* qcsbaselistwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcsbaselistwidget.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsbaselistwidget.cpp; sourceTree = "<absolute>"; };
+		8971CF6EE243F403693A7EC1 /* qyesnodlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qyesnodlg.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qyesnodlg.h; sourceTree = "<absolute>"; };
+		8B27EDBB2D3B073CBE468FC3 /* moc_qcsscrollarea.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcsscrollarea.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcsscrollarea.cpp"; sourceTree = "<absolute>"; };
+		8CD4F20CBC8BF7B9E414D18A /* qnotecalendarwidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qnotecalendarwidget.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qnotecalendarwidget.h; sourceTree = "<absolute>"; };
+		8D82AB6ACE9F33261AF99BB2 /* moc_qcarshcarddlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcarshcarddlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcarshcarddlg.cpp"; sourceTree = "<absolute>"; };
+		8DC4646CB4245F92195355C0 /* QtMultimedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtMultimedia.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtMultimedia.framework; sourceTree = "<absolute>"; };
+		8FD9C698E836F1CDF496891E /* qrc_resources.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qrc_resources.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/qrc_resources.cpp"; sourceTree = "<absolute>"; };
+		90342E585C93CDCF7E007E99 /* QEmploeeTasksDlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QEmploeeTasksDlg.h; path = /Users/dimas/CarshService/CarshService/emploee_widgets/QEmploeeTasksDlg.h; sourceTree = "<absolute>"; };
+		928E3077717C048B1849CD2A /* qcarshservicebasewidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcarshservicebasewidget.cpp; path = /Users/dimas/CarshService/CarshService/qcarshservicebasewidget.cpp; sourceTree = "<absolute>"; };
+		930FCB390B7669983CE091F1 /* qwbmp */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qwbmp; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqwbmp$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		9329D63F77C171FC4D3539EF /* qscnetworkreachability */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qscnetworkreachability; path = "/Users/dimas/Qt/6.8.0/ios/plugins/networkinformation/libqscnetworkreachability$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		9366E21DEDA771916199377F /* qcsbaselistwidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcsbaselistwidget.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsbaselistwidget.h; sourceTree = "<absolute>"; };
+		937B07CBBCC571DD96B55E8B /* QtNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtNetwork.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtNetwork.framework; sourceTree = "<absolute>"; };
+		938E2B9C6E6F65666334B6F2 /* qpdf */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qpdf; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqpdf$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		9453EF474E10C85138D6F6B1 /* native.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = native.h; path = /Users/dimas/CarshService/CarshService/native.h; sourceTree = "<absolute>"; };
+		959E6832D4D0F9E4524B15B4 /* qplatetaskdialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qplatetaskdialog.h; path = /Users/dimas/CarshService/CarshService/tasks/qplatetaskdialog.h; sourceTree = "<absolute>"; };
+		95E075EEC5AA777C54827B05 /* QtSql.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtSql.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtSql.framework; sourceTree = "<absolute>"; };
+		9992DAF09DD1ABA355307F05 /* qfullscreenpicdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qfullscreenpicdialog.cpp; path = /Users/dimas/CarshService/CarshService/pictures/qfullscreenpicdialog.cpp; sourceTree = "<absolute>"; };
+		99F48A2ECB2404BFEB45FB0F /* qdarwincamerapermission */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qdarwincamerapermission; path = "/Users/dimas/Qt/6.8.0/ios/plugins/permissions/libqdarwincamerapermission$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		9A303BE3726F1BAAE343985B /* moc_qemplcostsdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qemplcostsdlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qemplcostsdlg.cpp"; sourceTree = "<absolute>"; };
+		9B5DBEE08E71246FEE5B44C4 /* qrc_qtmultimedia_shaders_gl_macos_init.cpp.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = qrc_qtmultimedia_shaders_gl_macos_init.cpp.o; path = "/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_3/.qt/rcc/qrc_qtmultimedia_shaders_gl_macos_init.cpp.o"; sourceTree = "<absolute>"; };
+		A086597ED3EF0B319440F88F /* moc_qcostsdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcostsdialog.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcostsdialog.cpp"; sourceTree = "<absolute>"; };
+		A1A67BEAA744704B29168D39 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		A343378BA4F50FB9C3C20468 /* moc_qclicablelabel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qclicablelabel.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qclicablelabel.cpp"; sourceTree = "<absolute>"; };
+		A3D5F44A81E0CA0AE38D1A29 /* qcarshserviceapplication.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcarshserviceapplication.cpp; path = /Users/dimas/CarshService/CarshService/qcarshserviceapplication.cpp; sourceTree = "<absolute>"; };
+		A46ACFF6F4B25DB23C585930 /* qcalendardataselectdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcalendardataselectdlg.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcalendardataselectdlg.cpp; sourceTree = "<absolute>"; };
+		A6DA73B16BC7917B77CF86F0 /* qsvg */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qsvg; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqsvg$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		A729A7E62F87D5CF8240ED25 /* qcarshserviceapplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcarshserviceapplication.h; path = /Users/dimas/CarshService/CarshService/qcarshserviceapplication.h; sourceTree = "<absolute>"; };
+		A91F28E26E3EBC2C199779C6 /* moc_qrettozonedialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qrettozonedialog.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qrettozonedialog.cpp"; sourceTree = "<absolute>"; };
+		A9ACE3B330BB9A02AB04EB83 /* qcsscrollarea.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcsscrollarea.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsscrollarea.h; sourceTree = "<absolute>"; };
+		AD3B4E0B0547966850E288DA /* qgif */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qgif; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqgif$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		AF616B9CB2EBEB5C25487350 /* moc_qpenaltyparkingdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qpenaltyparkingdialog.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qpenaltyparkingdialog.cpp"; sourceTree = "<absolute>"; };
+		B0C536BDA9AED98FDA0C1776 /* qclicablelabel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qclicablelabel.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qclicablelabel.cpp; sourceTree = "<absolute>"; };
+		B2859E6C35A17C24BC387B1B /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = /System/Library/Frameworks/VideoToolbox.framework; sourceTree = "<absolute>"; };
+		B361D0F865E394D6E3FCD736 /* qcarshservicemaindlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcarshservicemaindlg.cpp; path = /Users/dimas/CarshService/CarshService/carsh_service_widgets/qcarshservicemaindlg.cpp; sourceTree = "<absolute>"; };
+		B3DEA354BCF8F59EA681BBA5 /* libQt6BundledLibjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQt6BundledLibjpeg.a; path = /Users/dimas/Qt/6.8.0/ios/lib/libQt6BundledLibjpeg.a; sourceTree = "<absolute>"; };
+		B57B340A813B779DD272143F /* qselprovidercarshwidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qselprovidercarshwidget.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qselprovidercarshwidget.h; sourceTree = "<absolute>"; };
+		B673349CD6DDBEC0A1A9240B /* qemploeemaindlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qemploeemaindlg.h; path = /Users/dimas/CarshService/CarshService/emploee_widgets/qemploeemaindlg.h; sourceTree = "<absolute>"; };
+		B7105BC6F70389E7E9412F5D /* qpictureswidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qpictureswidget.h; path = /Users/dimas/CarshService/CarshService/pictures/qpictureswidget.h; sourceTree = "<absolute>"; };
+		B7A0DFDBF8AB500EBD4C2EC5 /* qloaddoclinewidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qloaddoclinewidget.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qloaddoclinewidget.h; sourceTree = "<absolute>"; };
+		B8B38AEE3A77922940F49307 /* qcsselectdlgbuttonswidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcsselectdlgbuttonswidget.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsselectdlgbuttonswidget.h; sourceTree = "<absolute>"; };
+		B9466667ACA19992890B986E /* moc_qregisterdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qregisterdlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qregisterdlg.cpp"; sourceTree = "<absolute>"; };
+		BD5FCA7D802D96BED4D98BB2 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = /System/Library/Frameworks/Photos.framework; sourceTree = "<absolute>"; };
+		BEF9DFDA6822604126A7E233 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
+		BFCB4B913D25BB2CA1D3E993 /* moc_qregisteremploeedlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qregisteremploeedlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qregisteremploeedlg.cpp"; sourceTree = "<absolute>"; };
+		C00C1FD26E7C587DF42B3FB6 /* QtOpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtOpenGL.framework; path = /Users/dimas/Qt/6.8.0/ios/lib/QtOpenGL.framework; sourceTree = "<absolute>"; };
+		C13143A2D1C3D5B92B81B022 /* moc_qcarshserviceusersdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcarshserviceusersdlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcarshserviceusersdlg.cpp"; sourceTree = "<absolute>"; };
+		C178DAEA5AFB13BA93664C84 /* moc_qtimeselectdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qtimeselectdlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qtimeselectdlg.cpp"; sourceTree = "<absolute>"; };
+		C437D5F4C481189F8CADC293 /* moc_qcsbasedialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcsbasedialog.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcsbasedialog.cpp"; sourceTree = "<absolute>"; };
+		C6243D4CCAE254609701E645 /* .qmake.stash */ = {isa = PBXFileReference; lastKnownFileType = text; name = .qmake.stash; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/.qmake.stash"; sourceTree = "<absolute>"; };
+		C6809A40D11D8DEFCE1ED742 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = /System/Library/Frameworks/CFNetwork.framework; sourceTree = "<absolute>"; };
+		C6A2398A478DF6B7BED8D6AB /* qcsbasedlgscrollwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcsbasedlgscrollwidget.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsbasedlgscrollwidget.cpp; sourceTree = "<absolute>"; };
+		C7B1A1C10874784C40E91ACC /* qcarshserviceusersdlg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcarshserviceusersdlg.h; path = /Users/dimas/CarshService/CarshService/carsh_service_widgets/qcarshserviceusersdlg.h; sourceTree = "<absolute>"; };
+		C89770F3B90D8EFE5CEB08E3 /* common.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = common.cpp; path = /Users/dimas/CarshService/CarshService/common.cpp; sourceTree = "<absolute>"; };
+		C9BCEA9E5B14EF66B8C12776 /* moc_qyesnodlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qyesnodlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qyesnodlg.cpp"; sourceTree = "<absolute>"; };
+		CB4F2D0F2EA335C47147D502 /* moc_qnotecalendarwidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qnotecalendarwidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qnotecalendarwidget.cpp"; sourceTree = "<absolute>"; };
+		CCC52FEB2AF95B54F40C8C9C /* resources.qrc */ = {isa = PBXFileReference; lastKnownFileType = text; name = resources.qrc; path = /Users/dimas/CarshService/CarshService/resources.qrc; sourceTree = "<absolute>"; };
+		CD86FA074A836A4211A12839 /* moc_qcarshservicebasewidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcarshservicebasewidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcarshservicebasewidget.cpp"; sourceTree = "<absolute>"; };
+		CD9053B6A2DD9C265012B288 /* moc_qsettingsdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qsettingsdlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qsettingsdlg.cpp"; sourceTree = "<absolute>"; };
+		CED3C8945DECAF2C8FEA2CD2 /* QCSButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = QCSButton.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/QCSButton.cpp; sourceTree = "<absolute>"; };
+		D04670A4013D11552DE6BC5A /* qcsbasedialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcsbasedialog.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsbasedialog.h; sourceTree = "<absolute>"; };
+		D19ECE87FBC3F2B52144093B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = /Users/dimas/CarshService/CarshService/main.cpp; sourceTree = "<absolute>"; };
+		D456ACF6B61F5B257EB0DC4C /* qcsbaselistitemdelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcsbaselistitemdelegate.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsbaselistitemdelegate.h; sourceTree = "<absolute>"; };
+		D46ED2A1F1BA760EB16679BA /* qpiclabel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qpiclabel.cpp; path = /Users/dimas/CarshService/CarshService/pictures/qpiclabel.cpp; sourceTree = "<absolute>"; };
+		D6918E660FFD6126EC0D1FCD /* libQt6BundledHarfbuzz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libQt6BundledHarfbuzz.a; path = /Users/dimas/Qt/6.8.0/ios/lib/libQt6BundledHarfbuzz.a; sourceTree = "<absolute>"; };
+		D81D87A3CAE6E98807312570 /* carshservice_plugin_import.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = carshservice_plugin_import.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/carshservice_plugin_import.cpp"; sourceTree = "<absolute>"; };
+		D87FDB1D5FD11FF12E6D7819 /* moc_qsocketbd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qsocketbd.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qsocketbd.cpp"; sourceTree = "<absolute>"; };
+		DB848F29ACC4240CF6A59E9D /* qplatetaskdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qplatetaskdialog.cpp; path = /Users/dimas/CarshService/CarshService/tasks/qplatetaskdialog.cpp; sourceTree = "<absolute>"; };
+		DC51C65D937E3389105874B4 /* qsocketbdnetclient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qsocketbdnetclient.h; path = /Users/dimas/CarshService/CarshService/qsocketbdnetclient.h; sourceTree = "<absolute>"; };
+		DC6DC1AA7D9C5A9169F7DE8B /* qpenaltyparkingdialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qpenaltyparkingdialog.cpp; path = /Users/dimas/CarshService/CarshService/tasks/qpenaltyparkingdialog.cpp; sourceTree = "<absolute>"; };
+		DD519AA9F012E30207DD15DF /* qcarshserviceusersdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcarshserviceusersdlg.cpp; path = /Users/dimas/CarshService/CarshService/carsh_service_widgets/qcarshserviceusersdlg.cpp; sourceTree = "<absolute>"; };
+		DDF875B05CBFCEAD4FF5BFC4 /* qios */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qios; path = "/Users/dimas/Qt/6.8.0/ios/plugins/platforms/libqios$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		E02769CEE7583C8A07ED46DF /* qcsbasedlgscrollwidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcsbasedlgscrollwidget.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsbasedlgscrollwidget.h; sourceTree = "<absolute>"; };
+		E1016D9B2F00A11BD6DAB16D /* qtiff */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtiff; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqtiff$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		E40DBA463E8FB821AA21E368 /* qrc_gui_shaders_init.cpp.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = qrc_gui_shaders_init.cpp.o; path = "/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Gui_resources_2/.qt/rcc/qrc_gui_shaders_init.cpp.o"; sourceTree = "<absolute>"; };
+		E41268A3056FC0CA06A9E72D /* qlinetext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qlinetext.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qlinetext.h; sourceTree = "<absolute>"; };
+		E65203365426DC62CF382581 /* moc_qcsbaselistitemdelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qcsbaselistitemdelegate.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qcsbaselistitemdelegate.cpp"; sourceTree = "<absolute>"; };
+		E7FE9AD334C67EA03B3C0494 /* darwinmediaplugin */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = darwinmediaplugin; path = "/Users/dimas/Qt/6.8.0/ios/plugins/multimedia/libdarwinmediaplugin$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		E9D197ECCA87D54F78279AA4 /* qcsbasedialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcsbasedialog.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsbasedialog.cpp; sourceTree = "<absolute>"; };
+		EB28D9CE9FEF24949B62B1E6 /* qsettingslistwidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qsettingslistwidget.h; path = /Users/dimas/CarshService/CarshService/settings_widgets/qsettingslistwidget.h; sourceTree = "<absolute>"; };
+		ED1119BCC101E69F26D5B2AD /* qrettozonedialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qrettozonedialog.cpp; path = /Users/dimas/CarshService/CarshService/tasks/qrettozonedialog.cpp; sourceTree = "<absolute>"; };
+		EE3D03B8E8C9BFA491C080B5 /* moc_imagewidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_imagewidget.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_imagewidget.cpp"; sourceTree = "<absolute>"; };
+		EE49A30F9DA83D52368733C9 /* moc_qemploeemaindlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = moc_qemploeemaindlg.cpp; path = "/Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release/moc_qemploeemaindlg.cpp"; sourceTree = "<absolute>"; };
+		EF5890D3A6C701B0423258B4 /* qcarshservicebasewidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcarshservicebasewidget.h; path = /Users/dimas/CarshService/CarshService/qcarshservicebasewidget.h; sourceTree = "<absolute>"; };
+		F2A93C086BE16E3721EB1302 /* qregisterpartnerPlatedlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qregisterpartnerPlatedlg.cpp; path = /Users/dimas/CarshService/CarshService/qregisterpartnerPlatedlg.cpp; sourceTree = "<absolute>"; };
+		F33E4350FF0D7456A926DF24 /* qsocketbd.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qsocketbd.cpp; path = /Users/dimas/CarshService/CarshService/qsocketbd.cpp; sourceTree = "<absolute>"; };
+		F4E8A03EC838371C210FBB7F /* qsvgicon */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qsvgicon; path = "/Users/dimas/Qt/6.8.0/ios/plugins/iconengines/libqsvgicon$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		F59BE389F2306B68188EFACF /* qmacheif */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qmacheif; path = "/Users/dimas/Qt/6.8.0/ios/plugins/imageformats/libqmacheif$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		F5C169919AA1398EAD8E4332 /* qcspaybasedialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qcspaybasedialog.h; path = /Users/dimas/CarshService/CarshService/service_widgets/qcspaybasedialog.h; sourceTree = "<absolute>"; };
+		F8A6DE312DAEA21080F3E7CF /* imagepickerandroid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imagepickerandroid.h; path = /Users/dimas/CarshService/CarshService/pictures/imagepickerandroid.h; sourceTree = "<absolute>"; };
+		F923F38E989CF0F61A164DD8 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
+		F92ED735751BD15811AB638F /* qcspaybasedialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcspaybasedialog.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcspaybasedialog.cpp; sourceTree = "<absolute>"; };
+		FA2CB41215175D8D023279B6 /* qcsmultiselectdlg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = qcsmultiselectdlg.cpp; path = /Users/dimas/CarshService/CarshService/service_widgets/qcsmultiselectdlg.cpp; sourceTree = "<absolute>"; };
+		FC93C8B3E50743C693CBA330 /* qrc_qtmultimedia_shaders_gl_macos_linear_init.cpp.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = qrc_qtmultimedia_shaders_gl_macos_linear_init.cpp.o; path = "/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_4/.qt/rcc/qrc_qtmultimedia_shaders_gl_macos_linear_init.cpp.o"; sourceTree = "<absolute>"; };
+		FCC237CA5AD60B9BA4447615 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		FE95E748B069B4EC62AD11F0 /* BDPatterns.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BDPatterns.h; path = /Users/dimas/CarshService/CarshService/BDPatterns.h; sourceTree = "<absolute>"; };
+		FF5BDAB0076F3391B219EA52 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
+		FFBE4DAD6DFDFDD449D87969 /* CarshService.pro */ = {isa = PBXFileReference; lastKnownFileType = text; name = CarshService.pro; path = /Users/dimas/CarshService/CarshService/CarshService.pro; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D1C883685E82D5676953459A /* Link Binary With Libraries */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19512E36EB16D93A17685001 /* qrc_qpdf_init.cpp.o in Link Binary With Libraries */,
+				B9A14E8879558F57BFC8DECD /* qrc_gui_shaders_init.cpp.o in Link Binary With Libraries */,
+				E14A9047F17EF50F644386C5 /* qiosnsphotolibrarysupport in Link Binary With Libraries */,
+				964B9314A2EEB11A76D038DA /* qdarwincamerapermission in Link Binary With Libraries */,
+				6F610CED2FFB8E4C19F7B4A4 /* qrc_qtmultimedia_shaders_init.cpp.o in Link Binary With Libraries */,
+				788DDD4092D87408931A9CC6 /* qrc_qtmultimedia_shaders_linear_init.cpp.o in Link Binary With Libraries */,
+				15306FAE5648F6E38884E186 /* qrc_qtmultimedia_shaders_gl_macos_init.cpp.o in Link Binary With Libraries */,
+				45DDC8D437D21336C6F6E23E /* qrc_qtmultimedia_shaders_gl_macos_linear_init.cpp.o in Link Binary With Libraries */,
+				7644B7DE0E019C30DEFA6523 /* darwinmediaplugin in Link Binary With Libraries */,
+				84C72FBEC46C7DA12CD8E0D7 /* ffmpegmediaplugin in Link Binary With Libraries */,
+				35A1A39F8EAB37889EB3D397 /* CoreAudio.framework in Link Binary With Libraries */,
+				B78304F135DEF1F7A68393A6 /* CoreMedia.framework in Link Binary With Libraries */,
+				6602E41D28CF886E694AD752 /* CoreVideo.framework in Link Binary With Libraries */,
+				1C4DD8FD2D677E6BCFD835C1 /* VideoToolbox.framework in Link Binary With Libraries */,
+				CCA737EE379CDB10CC9A0F23 /* AVFoundation.framework in Link Binary With Libraries */,
+				A0898AB751F595A58A61FCBB /* qios in Link Binary With Libraries */,
+				4EB68D0C8182BCE33529C421 /* AudioToolbox.framework in Link Binary With Libraries */,
+				555BF871C96DF80C3A0F2D6C /* QtOpenGL.framework in Link Binary With Libraries */,
+				608694C2F85C903B08FF61AE /* Photos.framework in Link Binary With Libraries */,
+				B05C25432D21527EF3974DF4 /* qsvgicon in Link Binary With Libraries */,
+				8BF3D590325B57BF9C722679 /* qgif in Link Binary With Libraries */,
+				38A934B08C1D6938D29CF122 /* qicns in Link Binary With Libraries */,
+				137AA45DC0C71C249CD19A1D /* qico in Link Binary With Libraries */,
+				172EFD706F1F28FBD4AB7D92 /* qjpeg in Link Binary With Libraries */,
+				82B5DBB218C1094CD32145E5 /* libQt6BundledLibjpeg.a in Link Binary With Libraries */,
+				EEFE65802B956F2258EB230E /* qmacheif in Link Binary With Libraries */,
+				C933D115940BFE6E3AD40C74 /* qmacjp2 in Link Binary With Libraries */,
+				12044AF6507E3E76A2055FF0 /* qpdf in Link Binary With Libraries */,
+				EE58DAB3DCA5C10DD980A112 /* QtPdf.framework in Link Binary With Libraries */,
+				68627F91D322318138766ED4 /* qsvg in Link Binary With Libraries */,
+				9F2F8DBEB471880E6C4DD930 /* QtSvg.framework in Link Binary With Libraries */,
+				AD833C5A563C3DDDBB82F4F7 /* qtga in Link Binary With Libraries */,
+				60883A0F4C90BA7B0F1D47CB /* qtiff in Link Binary With Libraries */,
+				B6DD899F42710BEB79BE3A4F /* qwbmp in Link Binary With Libraries */,
+				40CCDE0172DF1EA6E7901B71 /* qwebp in Link Binary With Libraries */,
+				61EEC397DC8556BF8C4E36A7 /* ImageIO.framework in Link Binary With Libraries */,
+				0CE02722F00CAD43741297B5 /* CoreGraphics.framework in Link Binary With Libraries */,
+				B460F624007324313696BE86 /* QuartzCore.framework in Link Binary With Libraries */,
+				4CF8A8CA2525A4F7D06A30AA /* libQt6BundledHarfbuzz.a in Link Binary With Libraries */,
+				2B02D9DC58A01E45248DDBCE /* CoreText.framework in Link Binary With Libraries */,
+				D87578AE08E3BED38FA55046 /* libQt6BundledFreetype.a in Link Binary With Libraries */,
+				61BBC92A8D6F954704B2A8AF /* libQt6BundledLibpng.a in Link Binary With Libraries */,
+				B3FE8FAC746D3D5BB24FA398 /* Metal.framework in Link Binary With Libraries */,
+				4B0E79925130681A64620D0A /* qsqlite in Link Binary With Libraries */,
+				85924CD2CD95C88144DAD236 /* qscnetworkreachability in Link Binary With Libraries */,
+				A32BDEEFDE1F6AF24A48ADC0 /* qsecuretransportbackend in Link Binary With Libraries */,
+				AFF975DFE96ABAA5D7DD9C77 /* CFNetwork.framework in Link Binary With Libraries */,
+				D4639595C3BCF2A39D88DF6E /* SystemConfiguration.framework in Link Binary With Libraries */,
+				8D267F2E4776F0ECA2F49DC8 /* IOKit.framework in Link Binary With Libraries */,
+				F26454630C80841CBDCFE1CA /* Foundation.framework in Link Binary With Libraries */,
+				F30795E5207D73289814C47C /* UniformTypeIdentifiers.framework in Link Binary With Libraries */,
+				147CEFF20FA0CFE8B5C65952 /* libQt6BundledPcre2.a in Link Binary With Libraries */,
+				F8B465CE34D8DF87AAE95913 /* CoreFoundation.framework in Link Binary With Libraries */,
+				15364689D2AB5A30E87A689F /* Security.framework in Link Binary With Libraries */,
+				47E2B66F9B4B6BBEF2EC1DCF /* QtMultimedia.framework in Link Binary With Libraries */,
+				C53BD15E83F93E242685E48F /* QtWidgets.framework in Link Binary With Libraries */,
+				5713E9B352C3FB2CF29C6D15 /* QtGui.framework in Link Binary With Libraries */,
+				FD7302B9A6D78A780517947D /* QtSql.framework in Link Binary With Libraries */,
+				8DB1EC8C670ECD26A91A8265 /* QtNetwork.framework in Link Binary With Libraries */,
+				67B4FA1075A4E2ED491928F0 /* QtCore5Compat.framework in Link Binary With Libraries */,
+				3E02EF7D4515A50BFA0960F2 /* QtCore.framework in Link Binary With Libraries */,
+			);
+			name = "Link Binary With Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		25B08E2869634E9BCBA333A2 /* Generated Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C5C31264768DCC05446CDDCF /* build */,
+			);
+			name = "Generated Sources";
+			sourceTree = "<group>";
+		};
+		2AEFCBFDC749428E00421979 /* pictures */ = {
+			isa = PBXGroup;
+			children = (
+				48858575E12975260C821539 /* qpictureswidget.cpp */,
+				691A93DEE320BE7EE28A8FDA /* imagepickerandroid.cpp */,
+				5BD13116173219601BC96E78 /* imagewidget.cpp */,
+				9992DAF09DD1ABA355307F05 /* qfullscreenpicdialog.cpp */,
+				D46ED2A1F1BA760EB16679BA /* qpiclabel.cpp */,
+				B7105BC6F70389E7E9412F5D /* qpictureswidget.h */,
+				F8A6DE312DAEA21080F3E7CF /* imagepickerandroid.h */,
+				660FE5992E564871A96F0A74 /* imagewidget.h */,
+				6670EFBA676177731392AD01 /* qfullscreenpicdialog.h */,
+				2EAF2D896C977170704AC91B /* qpiclabel.h */,
+			);
+			name = pictures;
+			sourceTree = "<group>";
+		};
+		2B3F2A9BDC4158CDFAA41511 /* carsh_service_widgets */ = {
+			isa = PBXGroup;
+			children = (
+				05F49497106E329BCA127494 /* qcarshcarddlg.cpp */,
+				2B5D97ACD84C682CE5E1119A /* qcarshserviceemploeecarddlg.cpp */,
+				B361D0F865E394D6E3FCD736 /* qcarshservicemaindlg.cpp */,
+				DD519AA9F012E30207DD15DF /* qcarshserviceusersdlg.cpp */,
+				08B51BFAB474F0617489B34A /* qcarshcarddlg.h */,
+				31178584147D87925FAE4288 /* qcarshserviceemploeecarddlg.h */,
+				097EEDAD2B69E00C7271840C /* qcarshservicemaindlg.h */,
+				C7B1A1C10874784C40E91ACC /* qcarshserviceusersdlg.h */,
+			);
+			name = carsh_service_widgets;
+			sourceTree = "<group>";
+		};
+		2EB56BE3C2D93CDAB0C52E67 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				77DDBCAFE64F1CCBEB90D265 /* BDPatterns.cpp */,
+				2B3F2A9BDC4158CDFAA41511 /* carsh_service_widgets */,
+				C89770F3B90D8EFE5CEB08E3 /* common.cpp */,
+				BC5E8D4E851F99E51EDEB11E /* emploee_widgets */,
+				D19ECE87FBC3F2B52144093B /* main.cpp */,
+				82525D10E1718B6CEFAFC964 /* native.cpp */,
+				2AEFCBFDC749428E00421979 /* pictures */,
+				F33E4350FF0D7456A926DF24 /* qsocketbd.cpp */,
+				7011C4EBD834A557FCEDD040 /* qsocketbdnetclient.cpp */,
+				C035C47EA8A0F870392F1168 /* service_widgets */,
+				2236AF3AD293B23B344887EA /* qregisterdlg.cpp */,
+				13BCED72DEC471007EEFBFAE /* qregisteremploeedlg.cpp */,
+				F2A93C086BE16E3721EB1302 /* qregisterpartnerPlatedlg.cpp */,
+				7D858C27CCD7EC4D02ADC047 /* qsettingsdlg.cpp */,
+				928E3077717C048B1849CD2A /* qcarshservicebasewidget.cpp */,
+				A3D5F44A81E0CA0AE38D1A29 /* qcarshserviceapplication.cpp */,
+				C825882C00853E46748DD682 /* settings_widgets */,
+				AAAE64BBE27392B3DEEB94A9 /* tasks */,
+				FE95E748B069B4EC62AD11F0 /* BDPatterns.h */,
+				71E1CA20C60AAD1CABC6CCC2 /* common.h */,
+				9453EF474E10C85138D6F6B1 /* native.h */,
+				7AE4E09CB52E53C094BF2F4A /* qsocketbd.h */,
+				DC51C65D937E3389105874B4 /* qsocketbdnetclient.h */,
+				0E23CCF14E9D328D58E0CB16 /* qregisterdlg.h */,
+				67DA12219B76E71BEBC45FD0 /* qregisteremploeedlg.h */,
+				79AA057C91B82F8E480D8B3A /* qregisterpartnerPlatedlg.h */,
+				6A857A56DEFBC345E1D742D9 /* qsettingsdlg.h */,
+				EF5890D3A6C701B0423258B4 /* qcarshservicebasewidget.h */,
+				A729A7E62F87D5CF8240ED25 /* qcarshserviceapplication.h */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		6E06E24A6F13D9566FB61FF9 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				10BC2C4A412F36DA15323FF9 /* Info.plist */,
+			);
+			name = ios;
+			sourceTree = "<group>";
+		};
+		74B182DB50CB5611B5C1C297 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				848FDE7AF9516BAF92CAEB93 /* build */,
+				6E06E24A6F13D9566FB61FF9 /* ios */,
+				FFBE4DAD6DFDFDD449D87969 /* CarshService.pro */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		848FDE7AF9516BAF92CAEB93 /* build */ = {
+			isa = PBXGroup;
+			children = (
+				EB7F3F1E1DE047A69290072E /* Qt_6_8_0_for_iOS_ba71cd-Release */,
+			);
+			name = build;
+			sourceTree = "<group>";
+		};
+		858FCAB0EB1F29CF8B07677C /* Bundle Data */ = {
+			isa = PBXGroup;
+			children = (
+				294726205A1E54D2D9B94E27 /* LaunchScreen.storyboard */,
+				3E54CDFBDA3F70137B2D75B8 /* Assets.xcassets */,
+			);
+			name = "Bundle Data";
+			sourceTree = "<group>";
+		};
+		87DF60DE337FB58864343E39 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CCC52FEB2AF95B54F40C8C9C /* resources.qrc */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		89580D6050611078E440307E /* Qt_6_8_0_for_iOS_ba71cd-Release */ = {
+			isa = PBXGroup;
+			children = (
+				D81D87A3CAE6E98807312570 /* carshservice_plugin_import.cpp */,
+				8FD9C698E836F1CDF496891E /* qrc_resources.cpp */,
+				8D82AB6ACE9F33261AF99BB2 /* moc_qcarshcarddlg.cpp */,
+				58C62051FCDDF3793774715B /* moc_qcarshserviceemploeecarddlg.cpp */,
+				2ECD34E781796A82553ED992 /* moc_qcarshservicemaindlg.cpp */,
+				C13143A2D1C3D5B92B81B022 /* moc_qcarshserviceusersdlg.cpp */,
+				4D6B3B73708A01F12DCD7B7B /* moc_QEmploeeTasksDlg.cpp */,
+				9A303BE3726F1BAAE343985B /* moc_qemplcostsdlg.cpp */,
+				EE49A30F9DA83D52368733C9 /* moc_qemploeemaindlg.cpp */,
+				54CFAB52C0B59A7D429E4506 /* moc_qpictureswidget.cpp */,
+				D87FDB1D5FD11FF12E6D7819 /* moc_qsocketbd.cpp */,
+				7755286DFF231034D98601EB /* moc_qsocketbdnetclient.cpp */,
+				A343378BA4F50FB9C3C20468 /* moc_qclicablelabel.cpp */,
+				35AC61024B93A82A712ACD37 /* moc_qcolumntext.cpp */,
+				C437D5F4C481189F8CADC293 /* moc_qcsbasedialog.cpp */,
+				2CCA78142C8D81ED7E57970A /* moc_qcsbasedlgscrollwidget.cpp */,
+				E65203365426DC62CF382581 /* moc_qcsbaselistitemdelegate.cpp */,
+				0F849C2F97EB4FB6DAD947FE /* moc_qcsbaselistwidget.cpp */,
+				6C871AC1D471BFAEE2695264 /* moc_qcsmultiselectdlg.cpp */,
+				33CE0316C4C4CEC35DB5ED56 /* moc_qcspaybasedialog.cpp */,
+				8B27EDBB2D3B073CBE468FC3 /* moc_qcsscrollarea.cpp */,
+				84DFEEF4FD11554798522DEE /* moc_qcsselectdialog.cpp */,
+				30E682671799C913ED520135 /* moc_qcsselectdlgbuttonswidget.cpp */,
+				519D3FC297B5F40C5BFDBEC0 /* moc_qlinetext.cpp */,
+				4481792677AC899B648A542C /* moc_qloaddoclinewidget.cpp */,
+				B9466667ACA19992890B986E /* moc_qregisterdlg.cpp */,
+				BFCB4B913D25BB2CA1D3E993 /* moc_qregisteremploeedlg.cpp */,
+				2EE9389041E5ED08D004CE25 /* moc_qregisterpartnerPlatedlg.cpp */,
+				70CD9B32A8D2BECFB8567B53 /* moc_qcalendardataselectdlg.cpp */,
+				714717BCA0176ED04876834C /* moc_qloaddocsdlg.cpp */,
+				CB4F2D0F2EA335C47147D502 /* moc_qnotecalendarwidget.cpp */,
+				CD9053B6A2DD9C265012B288 /* moc_qsettingsdlg.cpp */,
+				3D7F85522E05B315C1D366D2 /* moc_QCSButton.cpp */,
+				09DC8224A60505F9D166FA74 /* moc_qselprovidercarshwidget.cpp */,
+				C178DAEA5AFB13BA93664C84 /* moc_qtimeselectdlg.cpp */,
+				CD86FA074A836A4211A12839 /* moc_qcarshservicebasewidget.cpp */,
+				7E20C41228427EF9F2A91DA8 /* moc_imagepickerandroid.cpp */,
+				EE3D03B8E8C9BFA491C080B5 /* moc_imagewidget.cpp */,
+				74953B6325D9F5612F960F59 /* moc_qfullscreenpicdialog.cpp */,
+				74320C40FE365453639C4978 /* moc_qpiclabel.cpp */,
+				632A5A21CF8FABF41DABA2E9 /* moc_qcolorselectdlg.cpp */,
+				2B71B3E193BC269640CD4D3C /* moc_qcarshserviceapplication.cpp */,
+				C9BCEA9E5B14EF66B8C12776 /* moc_qyesnodlg.cpp */,
+				4E0A48C549C70A47BC1D36F5 /* moc_qsettingslistwidget.cpp */,
+				A086597ED3EF0B319440F88F /* moc_qcostsdialog.cpp */,
+				22A77B292E265177F180B3B0 /* moc_qparkingtaskdialog.cpp */,
+				AF616B9CB2EBEB5C25487350 /* moc_qpenaltyparkingdialog.cpp */,
+				126747A7826727244986503E /* moc_qplatetaskdialog.cpp */,
+				A91F28E26E3EBC2C199779C6 /* moc_qrettozonedialog.cpp */,
+			);
+			name = "Qt_6_8_0_for_iOS_ba71cd-Release";
+			sourceTree = "<group>";
+		};
+		AAAE64BBE27392B3DEEB94A9 /* tasks */ = {
+			isa = PBXGroup;
+			children = (
+				1CA6C9C1670C5D112BB3A4D7 /* qcostsdialog.cpp */,
+				5D7111A0E564C65F87EB6F9B /* qparkingtaskdialog.cpp */,
+				DC6DC1AA7D9C5A9169F7DE8B /* qpenaltyparkingdialog.cpp */,
+				DB848F29ACC4240CF6A59E9D /* qplatetaskdialog.cpp */,
+				ED1119BCC101E69F26D5B2AD /* qrettozonedialog.cpp */,
+				5B96147255BFA90185582BAA /* qcostsdialog.h */,
+				04FC93CD28D1195BD3B83D15 /* qparkingtaskdialog.h */,
+				7BB8FF5E1FFAEE9F9C41AA2C /* qpenaltyparkingdialog.h */,
+				959E6832D4D0F9E4524B15B4 /* qplatetaskdialog.h */,
+				4C007DF64314F300613CCA60 /* qrettozonedialog.h */,
+			);
+			name = tasks;
+			sourceTree = "<group>";
+		};
+		AF39DD055C3EF8226FBE929D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4270F9E87259ADEA16AAEEFF /* qrc_qpdf_init.cpp.o */,
+				E40DBA463E8FB821AA21E368 /* qrc_gui_shaders_init.cpp.o */,
+				716063DB7C9D134A4C690E8F /* qiosnsphotolibrarysupport */,
+				99F48A2ECB2404BFEB45FB0F /* qdarwincamerapermission */,
+				146F60BDAC437766EF7D299D /* qrc_qtmultimedia_shaders_init.cpp.o */,
+				07D8DDB2AAAB76AE6A090E60 /* qrc_qtmultimedia_shaders_linear_init.cpp.o */,
+				9B5DBEE08E71246FEE5B44C4 /* qrc_qtmultimedia_shaders_gl_macos_init.cpp.o */,
+				FC93C8B3E50743C693CBA330 /* qrc_qtmultimedia_shaders_gl_macos_linear_init.cpp.o */,
+				E7FE9AD334C67EA03B3C0494 /* darwinmediaplugin */,
+				85B0B7F490470B663982A523 /* ffmpegmediaplugin */,
+				BEF9DFDA6822604126A7E233 /* CoreAudio.framework */,
+				547CCADBD1CC5050167EF948 /* CoreMedia.framework */,
+				F923F38E989CF0F61A164DD8 /* CoreVideo.framework */,
+				B2859E6C35A17C24BC387B1B /* VideoToolbox.framework */,
+				21F907AB8D19BD779147A085 /* AVFoundation.framework */,
+				DDF875B05CBFCEAD4FF5BFC4 /* qios */,
+				3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */,
+				C00C1FD26E7C587DF42B3FB6 /* QtOpenGL.framework */,
+				BD5FCA7D802D96BED4D98BB2 /* Photos.framework */,
+				F4E8A03EC838371C210FBB7F /* qsvgicon */,
+				AD3B4E0B0547966850E288DA /* qgif */,
+				1E8472565873CF81B5291EC0 /* qicns */,
+				5540C9B023B33556EFEF1D4A /* qico */,
+				5D598925B2C5294B272C17E3 /* qjpeg */,
+				B3DEA354BCF8F59EA681BBA5 /* libQt6BundledLibjpeg.a */,
+				F59BE389F2306B68188EFACF /* qmacheif */,
+				4BA71BBF2911F30FAD412C57 /* qmacjp2 */,
+				938E2B9C6E6F65666334B6F2 /* qpdf */,
+				2F64115C321D1D74DB07DFC1 /* QtPdf.framework */,
+				A6DA73B16BC7917B77CF86F0 /* qsvg */,
+				30C2DCF789669455B6A4473E /* QtSvg.framework */,
+				0E703886FBA59EEC98E0F583 /* qtga */,
+				E1016D9B2F00A11BD6DAB16D /* qtiff */,
+				930FCB390B7669983CE091F1 /* qwbmp */,
+				154F86DE8BF5DB76E50B1FCA /* qwebp */,
+				3A8EF9C62A8D4790CBB89CEA /* ImageIO.framework */,
+				6AE3EC31EE5BB1FCEE84137C /* CoreGraphics.framework */,
+				7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */,
+				D6918E660FFD6126EC0D1FCD /* libQt6BundledHarfbuzz.a */,
+				7D7B02101166B76FD2D4F8B4 /* CoreText.framework */,
+				70245464F6141FAD40A1CE11 /* libQt6BundledFreetype.a */,
+				5C35F4D72A7EC1D364ED0D59 /* libQt6BundledLibpng.a */,
+				1B2543FCC48E9436F21C4F63 /* Metal.framework */,
+				03FABD7838FCC2A8BCBE1B1A /* qsqlite */,
+				9329D63F77C171FC4D3539EF /* qscnetworkreachability */,
+				6BE20B399C68D0AC44EB9671 /* qsecuretransportbackend */,
+				C6809A40D11D8DEFCE1ED742 /* CFNetwork.framework */,
+				FF5BDAB0076F3391B219EA52 /* SystemConfiguration.framework */,
+				A1A67BEAA744704B29168D39 /* IOKit.framework */,
+				FCC237CA5AD60B9BA4447615 /* Foundation.framework */,
+				5F9A4B2B3FF5EC87C57CF6B4 /* UniformTypeIdentifiers.framework */,
+				63E3A15F4EA53FF1C28B5FAC /* libQt6BundledPcre2.a */,
+				4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */,
+				205259EEEE2BADA5E64741E3 /* Security.framework */,
+				8DC4646CB4245F92195355C0 /* QtMultimedia.framework */,
+				499A4E1D07D2AE0FE2CA3C1C /* QtWidgets.framework */,
+				274AB867F269752C534E123F /* QtGui.framework */,
+				95E075EEC5AA777C54827B05 /* QtSql.framework */,
+				937B07CBBCC571DD96B55E8B /* QtNetwork.framework */,
+				17330C4684C8716526D1EA15 /* QtCore5Compat.framework */,
+				3970279D28D704531455F8F5 /* QtCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BC5E8D4E851F99E51EDEB11E /* emploee_widgets */ = {
+			isa = PBXGroup;
+			children = (
+				63CA6FF45E70B890ADA84940 /* QEmploeeTasksDlg.cpp */,
+				66A4233D06BD647732A444A0 /* qemplcostsdlg.cpp */,
+				2AEC3644751BEB8A45ACCAA3 /* qemploeemaindlg.cpp */,
+				90342E585C93CDCF7E007E99 /* QEmploeeTasksDlg.h */,
+				49DF9FF7990727A84A5BA79C /* qemplcostsdlg.h */,
+				B673349CD6DDBEC0A1A9240B /* qemploeemaindlg.h */,
+			);
+			name = emploee_widgets;
+			sourceTree = "<group>";
+		};
+		C035C47EA8A0F870392F1168 /* service_widgets */ = {
+			isa = PBXGroup;
+			children = (
+				B0C536BDA9AED98FDA0C1776 /* qclicablelabel.cpp */,
+				24612911726B387D28CFB1BD /* qcolumntext.cpp */,
+				E9D197ECCA87D54F78279AA4 /* qcsbasedialog.cpp */,
+				C6A2398A478DF6B7BED8D6AB /* qcsbasedlgscrollwidget.cpp */,
+				45F529F86271738E66208EEC /* qcsbaselistitemdelegate.cpp */,
+				85C237AA4FF77F45EB319A8B /* qcsbaselistwidget.cpp */,
+				FA2CB41215175D8D023279B6 /* qcsmultiselectdlg.cpp */,
+				F92ED735751BD15811AB638F /* qcspaybasedialog.cpp */,
+				307905D6C4996009BC7859BF /* qcsscrollarea.cpp */,
+				6163463EFF95391CAF225730 /* qcsselectdialog.cpp */,
+				77A1982EAD5A060C1175250D /* qcsselectdlgbuttonswidget.cpp */,
+				6B5B19C8FB4B2A45C02DC5D5 /* qlinetext.cpp */,
+				19FB670217D4A18664A76979 /* qloaddoclinewidget.cpp */,
+				A46ACFF6F4B25DB23C585930 /* qcalendardataselectdlg.cpp */,
+				4F9AE165FC509BE4CF1D9123 /* qloaddocsdlg.cpp */,
+				50AA853EC5D11DED718C8F59 /* qnotecalendarwidget.cpp */,
+				CED3C8945DECAF2C8FEA2CD2 /* QCSButton.cpp */,
+				4537E1E4A246C6017D58FA27 /* qselprovidercarshwidget.cpp */,
+				4B101F6AB774B053ACDA49B8 /* qtimeselectdlg.cpp */,
+				174EDFE6E4F234F313D2A5B1 /* qcolorselectdlg.cpp */,
+				0A270B5117841B04B76ACC9F /* qyesnodlg.cpp */,
+				200EF5E60483764BB0A67C65 /* qclicablelabel.h */,
+				5E179453E90CC341B52157FA /* qcolumntext.h */,
+				D04670A4013D11552DE6BC5A /* qcsbasedialog.h */,
+				E02769CEE7583C8A07ED46DF /* qcsbasedlgscrollwidget.h */,
+				D456ACF6B61F5B257EB0DC4C /* qcsbaselistitemdelegate.h */,
+				9366E21DEDA771916199377F /* qcsbaselistwidget.h */,
+				5603AC822F1D99301361082E /* qcsmultiselectdlg.h */,
+				F5C169919AA1398EAD8E4332 /* qcspaybasedialog.h */,
+				A9ACE3B330BB9A02AB04EB83 /* qcsscrollarea.h */,
+				21046D1F1A240773C9086DD6 /* qcsselectdialog.h */,
+				B8B38AEE3A77922940F49307 /* qcsselectdlgbuttonswidget.h */,
+				E41268A3056FC0CA06A9E72D /* qlinetext.h */,
+				B7A0DFDBF8AB500EBD4C2EC5 /* qloaddoclinewidget.h */,
+				820C313760166BD225955B60 /* qcalendardataselectdlg.h */,
+				099777D017073674FC1A927D /* qloaddocsdlg.h */,
+				8CD4F20CBC8BF7B9E414D18A /* qnotecalendarwidget.h */,
+				75BF09532CCEC6C331F3761C /* QCSButton.h */,
+				B57B340A813B779DD272143F /* qselprovidercarshwidget.h */,
+				785370F8B90E38FC0F6A3D53 /* qtimeselectdlg.h */,
+				462CD40D701D9E4DBEAFC817 /* qcolorselectdlg.h */,
+				8971CF6EE243F403693A7EC1 /* qyesnodlg.h */,
+			);
+			name = service_widgets;
+			sourceTree = "<group>";
+		};
+		C5C31264768DCC05446CDDCF /* build */ = {
+			isa = PBXGroup;
+			children = (
+				89580D6050611078E440307E /* Qt_6_8_0_for_iOS_ba71cd-Release */,
+			);
+			name = build;
+			sourceTree = "<group>";
+		};
+		C825882C00853E46748DD682 /* settings_widgets */ = {
+			isa = PBXGroup;
+			children = (
+				24ACC10F56BEBE5D308BF689 /* qsettingslistwidget.cpp */,
+				EB28D9CE9FEF24949B62B1E6 /* qsettingslistwidget.h */,
+			);
+			name = settings_widgets;
+			sourceTree = "<group>";
+		};
+		E8C543AB96796ECAA2E65C57 /* CarshService */ = {
+			isa = PBXGroup;
+			children = (
+				2EB56BE3C2D93CDAB0C52E67 /* Sources */,
+				25B08E2869634E9BCBA333A2 /* Generated Sources */,
+				87DF60DE337FB58864343E39 /* Resources */,
+				74B182DB50CB5611B5C1C297 /* Supporting Files */,
+				AF39DD055C3EF8226FBE929D /* Frameworks */,
+				858FCAB0EB1F29CF8B07677C /* Bundle Data */,
+				FE0A091FDBFB3E9C31B7A1BD /* Products */,
+			);
+			name = CarshService;
+			sourceTree = "<group>";
+		};
+		EB7F3F1E1DE047A69290072E /* Qt_6_8_0_for_iOS_ba71cd-Release */ = {
+			isa = PBXGroup;
+			children = (
+				782ADAE0F753A5BAFA621C2A /* CarshService.pro */,
+				C6243D4CCAE254609701E645 /* .qmake.stash */,
+			);
+			name = "Qt_6_8_0_for_iOS_ba71cd-Release";
+			sourceTree = "<group>";
+		};
+		FE0A091FDBFB3E9C31B7A1BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				197831BFB100ACB83DB193E1 /* CarshService.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1397313073DF707BA8A655FC /* CarshService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "CarshService" */;
+			buildPhases = (
+				F7E50F631C51CD5B5DC0BC43 /* Compile Sources */,
+				D1C883685E82D5676953459A /* Link Binary With Libraries */,
+				30414803F31797EB689AE508 /* Copy Bundle Resources */,
+				99542592E9780B9225F24AA8 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				122B8E55ECC4C98A7A2ED928 /* PBXTargetDependency */,
+			);
+			name = CarshService;
+			productName = CarshService;
+			productReference = 197831BFB100ACB83DB193E1 /* CarshService.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6DB9C3763D02B1415CD9D565 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = DAC4C1AA5EDEA1C85E9CA5E6 /* Build configuration list for PBXProject "CarshService" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E8C543AB96796ECAA2E65C57 /* CarshService */;
+			productRefGroup = FE0A091FDBFB3E9C31B7A1BD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1397313073DF707BA8A655FC /* CarshService */,
+				AC91CD4B044060AD4ADEBBCD /* Qt Preprocess */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30414803F31797EB689AE508 /* Copy Bundle Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73221B2D8781DB690AAEB1E9 /* LaunchScreen.storyboard in Copy Bundle Resources */,
+				A4D3F3FC6505C7B9E3424E57 /* Assets.xcassets in Copy Bundle Resources */,
+			);
+			name = "Copy Bundle Resources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5E618435888B9D49F8540165 /* Qt Qmake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Qmake";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release -f CarshService.xcodeproj/qt_makeqmake.mak";
+			showEnvVarsInLog = 0;
+		};
+		7EF0942E79C014DCEC8976BC /* Qt Preprocessors */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				../../resources.qrc,
+				../../carsh_service_widgets/qcarshcarddlg.h,
+				../../carsh_service_widgets/qcarshserviceemploeecarddlg.h,
+				../../carsh_service_widgets/qcarshservicemaindlg.h,
+				../../carsh_service_widgets/qcarshserviceusersdlg.h,
+				../../emploee_widgets/QEmploeeTasksDlg.h,
+				../../emploee_widgets/qemplcostsdlg.h,
+				../../emploee_widgets/qemploeemaindlg.h,
+				../../pictures/qpictureswidget.h,
+				../../qsocketbd.h,
+				../../qsocketbdnetclient.h,
+				../../service_widgets/qclicablelabel.h,
+				../../service_widgets/qcolumntext.h,
+				../../service_widgets/qcsbasedialog.h,
+				../../service_widgets/qcsbasedlgscrollwidget.h,
+				../../service_widgets/qcsbaselistitemdelegate.h,
+				../../service_widgets/qcsbaselistwidget.h,
+				../../service_widgets/qcsmultiselectdlg.h,
+				../../service_widgets/qcspaybasedialog.h,
+				../../service_widgets/qcsscrollarea.h,
+				../../service_widgets/qcsselectdialog.h,
+				../../service_widgets/qcsselectdlgbuttonswidget.h,
+				../../service_widgets/qlinetext.h,
+				../../service_widgets/qloaddoclinewidget.h,
+				../../qregisterdlg.h,
+				../../qregisteremploeedlg.h,
+				../../qregisterpartnerPlatedlg.h,
+				../../service_widgets/qcalendardataselectdlg.h,
+				../../service_widgets/qloaddocsdlg.h,
+				../../service_widgets/qnotecalendarwidget.h,
+				../../qsettingsdlg.h,
+				../../service_widgets/QCSButton.h,
+				../../service_widgets/qselprovidercarshwidget.h,
+				../../service_widgets/qtimeselectdlg.h,
+				../../qcarshservicebasewidget.h,
+				../../pictures/imagepickerandroid.h,
+				../../pictures/imagewidget.h,
+				../../pictures/qfullscreenpicdialog.h,
+				../../pictures/qpiclabel.h,
+				../../service_widgets/qcolorselectdlg.h,
+				../../qcarshserviceapplication.h,
+				../../service_widgets/qyesnodlg.h,
+				../../settings_widgets/qsettingslistwidget.h,
+				../../tasks/qcostsdialog.h,
+				../../tasks/qparkingtaskdialog.h,
+				../../tasks/qpenaltyparkingdialog.h,
+				../../tasks/qplatetaskdialog.h,
+				../../tasks/qrettozonedialog.h,
+			);
+			name = "Qt Preprocessors";
+			outputPaths = (
+				qrc_resources.cpp,
+				moc_qcarshcarddlg.cpp,
+				moc_qcarshserviceemploeecarddlg.cpp,
+				moc_qcarshservicemaindlg.cpp,
+				moc_qcarshserviceusersdlg.cpp,
+				moc_QEmploeeTasksDlg.cpp,
+				moc_qemplcostsdlg.cpp,
+				moc_qemploeemaindlg.cpp,
+				moc_qpictureswidget.cpp,
+				moc_qsocketbd.cpp,
+				moc_qsocketbdnetclient.cpp,
+				moc_qclicablelabel.cpp,
+				moc_qcolumntext.cpp,
+				moc_qcsbasedialog.cpp,
+				moc_qcsbasedlgscrollwidget.cpp,
+				moc_qcsbaselistitemdelegate.cpp,
+				moc_qcsbaselistwidget.cpp,
+				moc_qcsmultiselectdlg.cpp,
+				moc_qcspaybasedialog.cpp,
+				moc_qcsscrollarea.cpp,
+				moc_qcsselectdialog.cpp,
+				moc_qcsselectdlgbuttonswidget.cpp,
+				moc_qlinetext.cpp,
+				moc_qloaddoclinewidget.cpp,
+				moc_qregisterdlg.cpp,
+				moc_qregisteremploeedlg.cpp,
+				moc_qregisterpartnerPlatedlg.cpp,
+				moc_qcalendardataselectdlg.cpp,
+				moc_qloaddocsdlg.cpp,
+				moc_qnotecalendarwidget.cpp,
+				moc_qsettingsdlg.cpp,
+				moc_QCSButton.cpp,
+				moc_qselprovidercarshwidget.cpp,
+				moc_qtimeselectdlg.cpp,
+				moc_qcarshservicebasewidget.cpp,
+				moc_imagepickerandroid.cpp,
+				moc_imagewidget.cpp,
+				moc_qfullscreenpicdialog.cpp,
+				moc_qpiclabel.cpp,
+				moc_qcolorselectdlg.cpp,
+				moc_qcarshserviceapplication.cpp,
+				moc_qyesnodlg.cpp,
+				moc_qsettingslistwidget.cpp,
+				moc_qcostsdialog.cpp,
+				moc_qparkingtaskdialog.cpp,
+				moc_qpenaltyparkingdialog.cpp,
+				moc_qplatetaskdialog.cpp,
+				moc_qrettozonedialog.cpp,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/dimas/CarshService/CarshService/build/Qt_6_8_0_for_iOS_ba71cd-Release -f CarshService.xcodeproj/qt_preprocess.mak";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F7E50F631C51CD5B5DC0BC43 /* Compile Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				828399A0FC64560E4EE76B41 /* BDPatterns.cpp in Compile Sources */,
+				C5E13D664BF85BA9C7B63E02 /* qcarshcarddlg.cpp in Compile Sources */,
+				F0D0D36B214C6C27ED416BDD /* qcarshserviceemploeecarddlg.cpp in Compile Sources */,
+				7AB84970E51A73F863A7599F /* qcarshservicemaindlg.cpp in Compile Sources */,
+				58E6CB4D83E70632C7A30925 /* qcarshserviceusersdlg.cpp in Compile Sources */,
+				CD8A2368E735EE01DD8A90AE /* common.cpp in Compile Sources */,
+				CA942363EEDF0615694FC715 /* QEmploeeTasksDlg.cpp in Compile Sources */,
+				04F10ED0143ABF6E02F8663B /* qemplcostsdlg.cpp in Compile Sources */,
+				906A4077863DBAC669417D34 /* qemploeemaindlg.cpp in Compile Sources */,
+				E0436B7BB7795A34EDE8B110 /* main.cpp in Compile Sources */,
+				A251A725DDE179D9D26391C1 /* native.cpp in Compile Sources */,
+				9809EDEB50ED1F70B0679E58 /* qpictureswidget.cpp in Compile Sources */,
+				E36564E68D0210AEBEFAB6E1 /* qsocketbd.cpp in Compile Sources */,
+				BB15E747337353CB741893DB /* qsocketbdnetclient.cpp in Compile Sources */,
+				68C45827830235BC0185607C /* qclicablelabel.cpp in Compile Sources */,
+				79E781B793AC479054C30C7E /* qcolumntext.cpp in Compile Sources */,
+				DC8FB331A5F59B7C253A6468 /* qcsbasedialog.cpp in Compile Sources */,
+				ADF9A7F92302C4521A9BA410 /* qcsbasedlgscrollwidget.cpp in Compile Sources */,
+				C93897BC5B7C73735841A2D9 /* qcsbaselistitemdelegate.cpp in Compile Sources */,
+				E1F565A69652C18DCA938C85 /* qcsbaselistwidget.cpp in Compile Sources */,
+				DBA63F3EF038DFE20D11CB2B /* qcsmultiselectdlg.cpp in Compile Sources */,
+				03E5F09B173FF97FBD73C6F7 /* qcspaybasedialog.cpp in Compile Sources */,
+				2102A86976A6B6EBD4E4DD0A /* qcsscrollarea.cpp in Compile Sources */,
+				D35873E98D79C6C1E1D4D272 /* qcsselectdialog.cpp in Compile Sources */,
+				AB01CBAF8CDDF28EB5C68F48 /* qcsselectdlgbuttonswidget.cpp in Compile Sources */,
+				8D7DBB0AE077775C496D6E67 /* qlinetext.cpp in Compile Sources */,
+				E4299331173BB6BFAADB39BC /* qloaddoclinewidget.cpp in Compile Sources */,
+				41834A291783585A559BBDE5 /* qregisterdlg.cpp in Compile Sources */,
+				7788FF5C32CD221CE0F15AD2 /* qregisteremploeedlg.cpp in Compile Sources */,
+				751C9F00A16DBB10631BFF95 /* qregisterpartnerPlatedlg.cpp in Compile Sources */,
+				8E078723CC61EFE87FD2B3F1 /* qcalendardataselectdlg.cpp in Compile Sources */,
+				8E85176CA93D0A4033D278B1 /* qloaddocsdlg.cpp in Compile Sources */,
+				DD3ACD94D5877E19E77F6870 /* qnotecalendarwidget.cpp in Compile Sources */,
+				12D5889CC96AC77BBB227344 /* qsettingsdlg.cpp in Compile Sources */,
+				72A48142134511F1BFA047B5 /* QCSButton.cpp in Compile Sources */,
+				393301D47C0E9AB24ED3DACC /* qselprovidercarshwidget.cpp in Compile Sources */,
+				D15F29DA306034B22E17F588 /* qtimeselectdlg.cpp in Compile Sources */,
+				91631B1E8CB61FC30755C802 /* qcarshservicebasewidget.cpp in Compile Sources */,
+				549DE9DD23D32CBCEEE2A45C /* imagepickerandroid.cpp in Compile Sources */,
+				32EDDB3F5ECC93D60F1A0D70 /* imagewidget.cpp in Compile Sources */,
+				3EB08E82107BAF05B9A063F9 /* qfullscreenpicdialog.cpp in Compile Sources */,
+				B38A84C02FDFCC840C98CDA2 /* qpiclabel.cpp in Compile Sources */,
+				AAD9E298B3A41C3B85B08572 /* qcolorselectdlg.cpp in Compile Sources */,
+				539BCCE9B037821479289DDD /* qcarshserviceapplication.cpp in Compile Sources */,
+				C73CB94C8012EEDCCCE6B39B /* qyesnodlg.cpp in Compile Sources */,
+				DCF866AA430B850FCCAB4E4A /* qsettingslistwidget.cpp in Compile Sources */,
+				3D0FEF9AEAED2E60ED0568D0 /* qcostsdialog.cpp in Compile Sources */,
+				E820599C41786D55F3ED21B8 /* qparkingtaskdialog.cpp in Compile Sources */,
+				DD841C6F5CE679F2497C961D /* qpenaltyparkingdialog.cpp in Compile Sources */,
+				E15911DC3493F583C6C868D7 /* qplatetaskdialog.cpp in Compile Sources */,
+				4AAB3C55C16B326011349F3E /* qrettozonedialog.cpp in Compile Sources */,
+				5DD2DEA373511D13F0ACD605 /* carshservice_plugin_import.cpp in Compile Sources */,
+				FF64DB881386EEE8097D4E18 /* qrc_resources.cpp in Compile Sources */,
+				6BABC5CED54C078A7EA03347 /* moc_qcarshcarddlg.cpp in Compile Sources */,
+				6901BE8FE3ACE7C63E72774F /* moc_qcarshserviceemploeecarddlg.cpp in Compile Sources */,
+				691F362229E8DF231EDC3B48 /* moc_qcarshservicemaindlg.cpp in Compile Sources */,
+				6A6F75D86D1F8092179FD377 /* moc_qcarshserviceusersdlg.cpp in Compile Sources */,
+				1FC257BE63640803437EF380 /* moc_QEmploeeTasksDlg.cpp in Compile Sources */,
+				EFA8879604800E4C9394AEB2 /* moc_qemplcostsdlg.cpp in Compile Sources */,
+				611BAEC12B6F3C819729C27E /* moc_qemploeemaindlg.cpp in Compile Sources */,
+				60E14BD232956D6AC486C0CC /* moc_qpictureswidget.cpp in Compile Sources */,
+				FACE49CDE1D80CBE544BF957 /* moc_qsocketbd.cpp in Compile Sources */,
+				2DEE14818EEE04967B445E32 /* moc_qsocketbdnetclient.cpp in Compile Sources */,
+				53C82879334D1A82288C5C20 /* moc_qclicablelabel.cpp in Compile Sources */,
+				D85060E4A9775F897BB789BC /* moc_qcolumntext.cpp in Compile Sources */,
+				53BE00F2BB355CC7DC6F378C /* moc_qcsbasedialog.cpp in Compile Sources */,
+				1963F50B32D6958EDF2EAB2A /* moc_qcsbasedlgscrollwidget.cpp in Compile Sources */,
+				BCE50653F968781C3E0B09A4 /* moc_qcsbaselistitemdelegate.cpp in Compile Sources */,
+				F51FBB1C2B2B5F00242E0F01 /* moc_qcsbaselistwidget.cpp in Compile Sources */,
+				53FEB7E3D05D6DE06811DCCC /* moc_qcsmultiselectdlg.cpp in Compile Sources */,
+				329DC1496D589E4349E11823 /* moc_qcspaybasedialog.cpp in Compile Sources */,
+				9C847CB11903AA937D867F7E /* moc_qcsscrollarea.cpp in Compile Sources */,
+				2BE44A93EF6A2CE3B1C49133 /* moc_qcsselectdialog.cpp in Compile Sources */,
+				6C929782B405FDD65D7719A3 /* moc_qcsselectdlgbuttonswidget.cpp in Compile Sources */,
+				0B0DF1F8D54CDA0535E455A1 /* moc_qlinetext.cpp in Compile Sources */,
+				250E7F6357A9BF3791A38513 /* moc_qloaddoclinewidget.cpp in Compile Sources */,
+				23A90170A1697B7A52A2A20B /* moc_qregisterdlg.cpp in Compile Sources */,
+				7BBC482A5D3C07CFBFE0EF68 /* moc_qregisteremploeedlg.cpp in Compile Sources */,
+				C79CEFCA97B4908437607242 /* moc_qregisterpartnerPlatedlg.cpp in Compile Sources */,
+				A167FD17C2476D8E4853F595 /* moc_qcalendardataselectdlg.cpp in Compile Sources */,
+				9E7ADDEF87B09D0F6B60BA46 /* moc_qloaddocsdlg.cpp in Compile Sources */,
+				B3B4D232702123BFB964FD60 /* moc_qnotecalendarwidget.cpp in Compile Sources */,
+				6BD8F1A65C4F28F473B274FB /* moc_qsettingsdlg.cpp in Compile Sources */,
+				AFE07CC80D61D7E22585B89F /* moc_QCSButton.cpp in Compile Sources */,
+				0F7AC772FEDCC7A63AF1E735 /* moc_qselprovidercarshwidget.cpp in Compile Sources */,
+				436BA178919E3A94E40D845A /* moc_qtimeselectdlg.cpp in Compile Sources */,
+				3323CF35ECA37AB38EAAAB14 /* moc_qcarshservicebasewidget.cpp in Compile Sources */,
+				B55A2D60FEE9B20FC78E3323 /* moc_imagepickerandroid.cpp in Compile Sources */,
+				4013A27D664A6B4EF3A0FDCA /* moc_imagewidget.cpp in Compile Sources */,
+				1DD071D098AA0EDC51CE3BFC /* moc_qfullscreenpicdialog.cpp in Compile Sources */,
+				FF5098F2789645BB19D7C0D9 /* moc_qpiclabel.cpp in Compile Sources */,
+				2CEB57BBFE87C46FC2F2DBB8 /* moc_qcolorselectdlg.cpp in Compile Sources */,
+				ECA9C8DC9A073EF29FE1147D /* moc_qcarshserviceapplication.cpp in Compile Sources */,
+				8D97B364A1B6211BAA0A1C30 /* moc_qyesnodlg.cpp in Compile Sources */,
+				F4EC7EFBEB0A6EF598592C75 /* moc_qsettingslistwidget.cpp in Compile Sources */,
+				621A70395FDD8F6043FCA2FE /* moc_qcostsdialog.cpp in Compile Sources */,
+				6FE37F5928473A39F9CE35CB /* moc_qparkingtaskdialog.cpp in Compile Sources */,
+				8B73678A96FB35F21FBF1405 /* moc_qpenaltyparkingdialog.cpp in Compile Sources */,
+				B9B5A21D82797639E3705E2A /* moc_qplatetaskdialog.cpp in Compile Sources */,
+				E4064F97220DDB0EA464BE20 /* moc_qrettozonedialog.cpp in Compile Sources */,
+			);
+			name = "Compile Sources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		122B8E55ECC4C98A7A2ED928 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC91CD4B044060AD4ADEBBCD /* Qt Preprocess */;
+			targetProxy = 135D54862D0743E80001678A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		339EE1B2CC4FC24589A0EA95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
+				"ARCHS[sdk=iphoneos*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 3DS8WFFMU5;
+				DYLIB_COMPATIBILITY_VERSION = 0.1;
+				DYLIB_CURRENT_VERSION = 0.1.4;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/dimas/Qt/6.8.0/ios/lib,
+					/Users/dimas/Qt/6.8.0/ios/lib,
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					../../../CarshService,
+					.,
+					../../../../Qt/6.8.0/ios/mkspecs/common/uikit,
+					../../../../Qt/6.8.0/ios/lib/QtGui.framework/Headers/6.8.0,
+					../../../../Qt/6.8.0/ios/lib/QtGui.framework/Headers/6.8.0/QtGui,
+					../../../../Qt/6.8.0/ios/lib/QtMultimedia.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtWidgets.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtGui.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtSql.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtNetwork.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtCore.framework/Headers/6.8.0,
+					../../../../Qt/6.8.0/ios/lib/QtCore.framework/Headers/6.8.0/QtCore,
+					../../../../Qt/6.8.0/ios/lib/QtCore5Compat.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtCore.framework/Headers,
+					.,
+					"../../../../Qt/6.8.0/ios/mkspecs/macx-ios-clang",
+				);
+				INFOPLIST_FILE = ../../ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Gui_resources_1/.qt/rcc",
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Gui_resources_2/.qt/rcc",
+					/Users/dimas/Qt/6.8.0/ios/plugins/platforms/darwin,
+					/Users/dimas/Qt/6.8.0/ios/plugins/permissions,
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_1/.qt/rcc",
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_2/.qt/rcc",
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_3/.qt/rcc",
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_4/.qt/rcc",
+					/Users/dimas/Qt/6.8.0/ios/plugins/multimedia,
+					/System/Library/Frameworks/,
+					/Users/dimas/Qt/6.8.0/ios/plugins/platforms,
+					/Users/dimas/Qt/6.8.0/ios/lib,
+					/Users/dimas/Qt/6.8.0/ios/plugins/iconengines,
+					/Users/dimas/Qt/6.8.0/ios/plugins/imageformats,
+					/Users/dimas/Qt/6.8.0/ios/plugins/sqldrivers,
+					/Users/dimas/Qt/6.8.0/ios/plugins/networkinformation,
+					/Users/dimas/Qt/6.8.0/ios/plugins/tls,
+				);
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-O2",
+					"-Wall",
+					"-Wextra",
+					"-DQT_NO_DEBUG",
+					"-DQT_MULTIMEDIA_LIB",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_SQL_LIB",
+					"-DQT_NETWORK_LIB",
+					"-DQT_CORE5COMPAT_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-stdlib=libc++",
+					"-O2",
+					"-std=gnu++1z",
+					"-Wall",
+					"-Wextra",
+					"-DQT_NO_DEBUG",
+					"-DQT_MULTIMEDIA_LIB",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_SQL_LIB",
+					"-DQT_NETWORK_LIB",
+					"-DQT_CORE5COMPAT_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-stdlib=libc++",
+					"-headerpad_max_install_names",
+					"-Wl,-u,_QDarwinCameraPermissionRequest",
+					"-Wl,-rpath,@executable_path/Frameworks",
+					"-F/Users/dimas/Qt/6.8.0/ios/lib",
+					"-framework",
+					AssetsLibrary,
+					"-lz",
+					"-lm",
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					UIKit,
+					"-framework",
+					OpenGLES,
+					"-Wl,-e,_qt_main_wrapper",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.dimas062.CarshService;
+				PRODUCT_NAME = CarshService;
+				QMAKE_FULL_VERSION = 0.1.4;
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.2.sdk;
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator17.2.sdk;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform;
+				QMAKE_PKGINFO_TYPEINFO = "????";
+				QMAKE_SHORT_VERSION = 0.1;
+				QT_LIBRARY_SUFFIX = "";
+				SDKROOT = iphoneos;
+				SYMROOT = "$(PROJECT_DIR)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3AA6C32AC930069E80220CF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
+				"ARCHS[sdk=iphoneos*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3DS8WFFMU5;
+				DYLIB_COMPATIBILITY_VERSION = 0.1;
+				DYLIB_CURRENT_VERSION = 0.1.4;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Users/dimas/Qt/6.8.0/ios/lib,
+					/Users/dimas/Qt/6.8.0/ios/lib,
+				);
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					../../../CarshService,
+					.,
+					../../../../Qt/6.8.0/ios/mkspecs/common/uikit,
+					../../../../Qt/6.8.0/ios/lib/QtGui.framework/Headers/6.8.0,
+					../../../../Qt/6.8.0/ios/lib/QtGui.framework/Headers/6.8.0/QtGui,
+					../../../../Qt/6.8.0/ios/lib/QtMultimedia.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtWidgets.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtGui.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtSql.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtNetwork.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtCore.framework/Headers/6.8.0,
+					../../../../Qt/6.8.0/ios/lib/QtCore.framework/Headers/6.8.0/QtCore,
+					../../../../Qt/6.8.0/ios/lib/QtCore5Compat.framework/Headers,
+					../../../../Qt/6.8.0/ios/lib/QtCore.framework/Headers,
+					.,
+					"../../../../Qt/6.8.0/ios/mkspecs/macx-ios-clang",
+				);
+				INFOPLIST_FILE = ../../ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Gui_resources_1/.qt/rcc",
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Gui_resources_2/.qt/rcc",
+					/Users/dimas/Qt/6.8.0/ios/plugins/platforms/darwin,
+					/Users/dimas/Qt/6.8.0/ios/plugins/permissions,
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_1/.qt/rcc",
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_2/.qt/rcc",
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_3/.qt/rcc",
+					"/Users/dimas/Qt/6.8.0/ios/lib/objects-Release/Multimedia_resources_4/.qt/rcc",
+					/Users/dimas/Qt/6.8.0/ios/plugins/multimedia,
+					/System/Library/Frameworks/,
+					/Users/dimas/Qt/6.8.0/ios/plugins/platforms,
+					/Users/dimas/Qt/6.8.0/ios/lib,
+					/Users/dimas/Qt/6.8.0/ios/plugins/iconengines,
+					/Users/dimas/Qt/6.8.0/ios/plugins/imageformats,
+					/Users/dimas/Qt/6.8.0/ios/plugins/sqldrivers,
+					/Users/dimas/Qt/6.8.0/ios/plugins/networkinformation,
+					/Users/dimas/Qt/6.8.0/ios/plugins/tls,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-O2",
+					"-Wall",
+					"-Wextra",
+					"-DQT_NO_DEBUG",
+					"-DQT_MULTIMEDIA_LIB",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_SQL_LIB",
+					"-DQT_NETWORK_LIB",
+					"-DQT_CORE5COMPAT_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-stdlib=libc++",
+					"-O2",
+					"-std=gnu++1z",
+					"-Wall",
+					"-Wextra",
+					"-DQT_NO_DEBUG",
+					"-DQT_MULTIMEDIA_LIB",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_SQL_LIB",
+					"-DQT_NETWORK_LIB",
+					"-DQT_CORE5COMPAT_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-stdlib=libc++",
+					"-headerpad_max_install_names",
+					"-Wl,-u,_QDarwinCameraPermissionRequest",
+					"-Wl,-rpath,@executable_path/Frameworks",
+					"-F/Users/dimas/Qt/6.8.0/ios/lib",
+					"-framework",
+					AssetsLibrary,
+					"-lz",
+					"-lm",
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					UIKit,
+					"-framework",
+					OpenGLES,
+					"-Wl,-e,_qt_main_wrapper",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.dimas062.CarshService;
+				PRODUCT_NAME = CarshService;
+				QMAKE_FULL_VERSION = 0.1.4;
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.2.sdk;
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator17.2.sdk;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform;
+				QMAKE_PKGINFO_TYPEINFO = "????";
+				QMAKE_SHORT_VERSION = 0.1;
+				QT_LIBRARY_SUFFIX = _debug;
+				SDKROOT = iphoneos;
+				SYMROOT = "$(PROJECT_DIR)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6666AA5E688052234F6758D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				"ARCHS[sdk=iphoneos*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 3DS8WFFMU5;
+				ENABLE_BITCODE = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.dimas062.CarshService;
+				PRODUCT_NAME = CarshService;
+				QMAKE_FULL_VERSION = 0.1.4;
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.2.sdk;
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator17.2.sdk;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform;
+				QMAKE_PKGINFO_TYPEINFO = "????";
+				QMAKE_SHORT_VERSION = 0.1;
+				QT_LIBRARY_SUFFIX = "";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		77418F46922677BB04ED38DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				"ARCHS[sdk=iphoneos*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3DS8WFFMU5;
+				ENABLE_BITCODE = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.dimas062.CarshService;
+				PRODUCT_NAME = CarshService;
+				QMAKE_FULL_VERSION = 0.1.4;
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.2.sdk;
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator17.2.sdk;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform;
+				QMAKE_PKGINFO_TYPEINFO = "????";
+				QMAKE_SHORT_VERSION = 0.1;
+				QT_LIBRARY_SUFFIX = _debug;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "CarshService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				77418F46922677BB04ED38DD /* Debug */,
+				6666AA5E688052234F6758D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAC4C1AA5EDEA1C85E9CA5E6 /* Build configuration list for PBXProject "CarshService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AA6C32AC930069E80220CF1 /* Debug */,
+				339EE1B2CC4FC24589A0EA95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6DB9C3763D02B1415CD9D565 /* Project object */;
+}
