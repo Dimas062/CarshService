@@ -8,7 +8,7 @@
 
 QFullScreenPicDialog::QFullScreenPicDialog(QImage * pImage,QWidget *parent, Qt::WindowFlags f ):QDialog(parent , f)
 {
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
     QVBoxLayout * pMainVLayout = new QVBoxLayout(this);
     QHBoxLayout * pHBackButtonLayout = new QHBoxLayout(this);
 

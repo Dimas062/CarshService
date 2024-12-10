@@ -27,9 +27,10 @@ extern QSqlDatabase ClientDb;
 #ifdef Q_OS_ANDROID
 extern QJniObject* pActivity;
 #endif
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
 QSocketBD * serverBD;
 #endif
+
 extern VSMobileSettings settings;//Сейчас шарится между двух потоков (интерекшнклиент и главный)
 
 QIcon IconByNumber(int iNumb)
@@ -157,7 +158,7 @@ bool OpenServerBD()
 
     result = pActivity->callMethod<jint>("OpenServerBD" , "(Ljava/lang/String;)I" , jTextHost.object());
 #endif
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
 
     serverBD = new QSocketBD;
 
@@ -168,7 +169,7 @@ bool OpenServerBD()
 int execMainBDQueryUpdate(QString query)
 {
     int res = 0;
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
     res = serverBD->execMainBDQueryUpdate(query);
 #endif
 #ifdef Q_OS_ANDROID
@@ -183,7 +184,7 @@ QList<QStringList> execMainBDQuery(QString query)
 {
     QList<QStringList> retVal;
 
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
 
     retVal = serverBD->execMainBDQuery(query);
 

@@ -23,7 +23,17 @@ QCSBaseListWidget::QCSBaseListWidget(QWidget *parent):QListWidget(parent)
     this->setIconSize(QSize(45,45));
 
     setItemDelegate(new QCSBaseListItemDelegate(this));
+#ifdef Q_OS_WINDOWS
+    connect(this , SIGNAL(itemDoubleClicked(QListWidgetItem*)) , this , SLOT(itemDoubleClickedSlot(QListWidgetItem*)));
+#endif
 }
+
+#ifdef Q_OS_WINDOWS
+void QCSBaseListWidget::itemDoubleClickedSlot(QListWidgetItem*)
+{
+    emit OnTapGesture();
+}
+#endif
 
 bool QCSBaseListWidget::gestureEvent(QGestureEvent *event)
 {

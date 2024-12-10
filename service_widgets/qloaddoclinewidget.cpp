@@ -147,7 +147,7 @@ void QLoadDocLineWidget::OnOpenPressed()
     m_pImagePickerAndroid->getImage();
 #endif
 
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
 
     // QStringList files = QFileDialog::getOpenFileNames(
     //     this,
