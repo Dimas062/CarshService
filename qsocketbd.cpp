@@ -17,7 +17,11 @@ QSocketBD::QSocketBD(QObject *parent)
 QList<QStringList> QSocketBD::execMainBDQuery(QString query)
 {
 
+#ifdef Q_OS_WINDOWS
+    QByteArray data = QString(query).toUtf8();
+#else
     QByteArray data = QString(query).toLocal8Bit();
+#endif
 
     //pServSocket->writeData(data);
     QTimer timer;
@@ -45,9 +49,13 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
         qDebug("timeout");
         return retVal;
     }
-
-
+#ifdef Q_OS_WINDOWS
+    QString ResultData = QString::fromUtf8(QSocketBDNetClient::getInstance().m_LastData);
+#else
     QString ResultData = QString::fromLocal8Bit(QSocketBDNetClient::getInstance().m_LastData);
+#endif
+
+
 
     //qDebug()<<"ResultData="<<ResultData;
 

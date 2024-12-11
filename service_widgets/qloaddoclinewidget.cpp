@@ -131,7 +131,6 @@ void QLoadDocLineWidget::OnPhotoPressed()
         camera->start();
 
         pImageCapture->captureToFile();
-       // pImageCapture->
     }
 
 #endif
@@ -147,7 +146,7 @@ void QLoadDocLineWidget::OnOpenPressed()
     m_pImagePickerAndroid->getImage();
 #endif
 
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
 
     // QStringList files = QFileDialog::getOpenFileNames(
     //     this,
@@ -249,7 +248,6 @@ void QLoadDocLineWidget::OnViewPressed()
 
 void QLoadDocLineWidget::imageRecivedSlot(QString str)
 {
-    qDebug()<<"QLoadDocLineWidget::imageRecivedSlot str="<<str;
     m_strFileName = str;
 
     if(m_strFileName.length() > 5)

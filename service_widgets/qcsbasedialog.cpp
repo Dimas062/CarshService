@@ -50,7 +50,7 @@ QCSBaseDialog::QCSBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bScrollab
     QDialog::setLayout(pCSMainLayout);
 
     //макось оказалась ... - закрытие диалога обычной кнопкой, системной кнопки назад нет
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
     QHBoxLayout * pHBackButtonLayout = new QHBoxLayout(this);
 
     QPushButton * pBackButton = new QPushButton("<< Назад");

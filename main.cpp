@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
     sStandartStoragePath = QStandardPaths::writableLocation(QStandardPaths::StandardLocation::AppDataLocation);
 #endif
 
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
     sStandartStoragePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
 #endif
  //   checkPermission();

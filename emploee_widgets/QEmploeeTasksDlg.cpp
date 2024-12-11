@@ -90,7 +90,7 @@ QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget 
 #ifdef Q_OS_ANDRIOD
     m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
 #endif
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
     m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
 #endif
     m_pTasksListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pTasksListWidget));

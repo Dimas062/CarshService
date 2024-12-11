@@ -59,7 +59,7 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
 
     //screenGeometry.adjust(0 , 0, 0 , -iGetNaviPanelHegith);
 
-#ifdef Q_OS_IOS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS
 
     int iUnderButtonSpace = 4;
 
@@ -67,7 +67,6 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
 #endif
 
 #ifdef Q_OS_ANDROID
-
     int iUnderButtonSpace = 10;
 
     iButtonHeight = (int)((screenGeometry.height()*0.7)/14)-iUnderButtonSpace;

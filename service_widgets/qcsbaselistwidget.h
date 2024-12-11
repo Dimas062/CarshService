@@ -15,6 +15,11 @@ public:
     bool event(QEvent *event);
     void showEvent( QShowEvent* event );
 
+public slots:
+#ifdef Q_OS_WINDOWS
+    void itemDoubleClickedSlot(QListWidgetItem*);
+#endif
+
 signals:
     void OnTapHoldGesture();
     void OnTapGesture();
