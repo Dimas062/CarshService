@@ -13,6 +13,8 @@
 #include <tasks/qpenaltyparkingdialog.h>
 #include <tasks/qplatetaskdialog.h>
 #include "tasks/qrettozonedialog.h"
+#include "tasks/qsmenadlg.h"
+#include "tasks/qdocstaskdlg.h"
 #include <QSplashScreen>
 
 extern QRect screenGeometry;
@@ -264,6 +266,20 @@ void QEmploeeTasksDlg::OnTapGesture()
         {
 
             QRetToZoneDialog dlg(this);
+            dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
+            dlg.exec();
+        }
+        if(item->data(Qt::UserRole+1).toUuid()  == QUuid("78850df8-814b-41c8-8977-945c085f3021"))
+        {
+
+            QSmenaDlg dlg(this);
+            dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
+            dlg.exec();
+        }
+        if(item->data(Qt::UserRole+1).toUuid()  == QUuid("25695573-f5fe-43fd-93dc-76ee09e461fa"))
+        {
+
+            QDocsTaskDlg dlg(this);
             dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
             dlg.exec();
         }

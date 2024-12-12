@@ -22,7 +22,7 @@ QLineText::QLineText(QString strLabel,QWidget *parent): QWidget{parent}
 
 bool QLineText::CheckColorLenght()
 {
-    if(m_pLineEdit->text().size()<2)
+    if(m_pLineEdit->text().size() < 1)
     {
         m_pLabel->setStyleSheet("QLabel { color : red; }");
         return false;

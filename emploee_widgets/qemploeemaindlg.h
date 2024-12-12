@@ -25,6 +25,7 @@ protected:
     QPushButton * m_pWorkdayButton;
     QPushButton * m_pReturnToZoneButton;
     QPushButton * m_pCostsButton;
+    QPushButton * m_pSmenaButton;
 
 public slots:
     void OnCurrentTaskPressed();
@@ -36,6 +37,7 @@ public slots:
     void OnReturnToZoneTaskPressed();
     void OnCostPressed();
     void OnCostsPressed();
+    void OnSmenaTaskPressed();
 
 };
 

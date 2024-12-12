@@ -3,7 +3,7 @@
 
 #include "service_widgets/qcsbasedialog.h"
 #include <QObject>
-#include "service_widgets/qcsbasedialog.h"
+
 #include "service_widgets/qlinetext.h"
 #include "service_widgets/qloaddocsdlg.h"
 #include "service_widgets/qselprovidercarshwidget.h"

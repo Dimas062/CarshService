@@ -59,10 +59,12 @@ SOURCES += \
     service_widgets/qyesnodlg.cpp \
     settings_widgets/qsettingslistwidget.cpp \
     tasks/qcostsdialog.cpp \
+    tasks/qdocstaskdlg.cpp \
     tasks/qparkingtaskdialog.cpp \
     tasks/qpenaltyparkingdialog.cpp \
     tasks/qplatetaskdialog.cpp \
-    tasks/qrettozonedialog.cpp
+    tasks/qrettozonedialog.cpp \
+    tasks/qsmenadlg.cpp
 
 HEADERS += \
     BDPatterns.h \
@@ -111,10 +113,12 @@ HEADERS += \
     service_widgets/qyesnodlg.h \
     settings_widgets/qsettingslistwidget.h \
     tasks/qcostsdialog.h \
+    tasks/qdocstaskdlg.h \
     tasks/qparkingtaskdialog.h \
     tasks/qpenaltyparkingdialog.h \
     tasks/qplatetaskdialog.h \
-    tasks/qrettozonedialog.h
+    tasks/qrettozonedialog.h \
+    tasks/qsmenadlg.h
 
 
 

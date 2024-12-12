@@ -386,31 +386,31 @@ void QPenaltyParkingDialog::SaveDataToBD()
     }
     else//Апдейтим загруженную задачу
     {
-        qDebug()<<"QPenaltyParkingDialog 1";
+
         QString strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
- qDebug()<<"QPenaltyParkingDialog 1";
+
         strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
- qDebug()<<"QPenaltyParkingDialog 2";
+
         strExec = QString("update \"Задачи\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
- qDebug()<<"QPenaltyParkingDialog 3";
+
         strExec = QString("update \"Задачи\" set Комментарий = '%1' , \"Время выполнения\"='%2' where id='%3'").arg(m_pLineTextComment->getText()).arg(iReadyTime).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
- qDebug()<<"QPenaltyParkingDialog 4";
-        strExec = QString("update \"Расширение задачи ШС\" set\"Госномер\" = '%1' where id='%2'").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
+
+        strExec = QString("update \"Расширение задачи ШС\" set \"Госномер\" = '%1' where id='%2'").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
- qDebug()<<"QPenaltyParkingDialog 5";
+
         strExec = QString("update \"Расширение задачи ШС\" set \"Отдел ГАИ\"='%1' where id='%2'").arg(m_strGaiId).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
- qDebug()<<"QPenaltyParkingDialog 6";
+
         strExec = QString("update \"Расширение задачи ШС\" set \"Причина задержания\"='%1' where id='%2'").arg(m_strReasonId).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
- qDebug()<<"QPenaltyParkingDialog 7";
+
         strExec = QString("update \"Расширение задачи ШС\" set \"Штрафстоянка\"='%1' where id='%2'").arg(m_strPinaltiParkingId).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
- qDebug()<<"QPenaltyParkingDialog 8";
+
         if((m_pReturnToZoneButton->isChecked())&&(m_uuidReturnToZoneSource==QUuid())) //Если не было, но появилось, то создаём (если было и сейчас выбрано, то ничего не делае)
         {
             uuidReturnToZone = QUuid::createUuid();
@@ -424,7 +424,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
             strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id , \"Госномер\",\"Количество\") values ('%1','%2','%3')").arg(uuidExtensionReturnToZone.toString()).arg(m_pPlateLineText->getText()).arg(1);
             execMainBDQueryUpdate(strExec);
         }
- qDebug()<<"QPenaltyParkingDialog 9";
+
         if((!m_pReturnToZoneButton->isChecked())&&(m_uuidReturnToZoneSource!=QUuid())) //Снято, но до этого было - удаляем (еслти не было и нет, то ничего не делаем)
             {
                 strExec = QString("update \"Расширение задачи ШС\" set \"Возврат в зону\"='%1' where id='%2'").arg(QUuid().toString()).arg(m_uuidSourseExtention.toString());
@@ -436,46 +436,46 @@ void QPenaltyParkingDialog::SaveDataToBD()
                 strExec = QString("delete from \"Расширение задачи Возврат в зону\" where id='%1'").arg(m_uuidReturnToZoneExtensionSource.toString());
                 execMainBDQueryUpdate(strExec);
             }
- qDebug()<<"QPenaltyParkingDialog 10";
+
         /*Получим id оплаты*/
         strExec = QString("select \"Оплата парковки\" from \"Расширение задачи ШС\" where id ='%1'").arg(m_uuidSourseExtention.toString());
- qDebug()<<"pay query="<<strExec;
+
         QList<QStringList> strPayResult = execMainBDQuery(strExec);
-qDebug()<<"strPayResult="<<strPayResult;
+
         if(strPayResult.size()<1) return;
 
         QUuid uuidPay = QUuid::fromString(strPayResult.at(0).at(0));
 
 
         UpdatePayRecord(uuidPay , m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
- qDebug()<<"QPenaltyParkingDialog 11";
+
         /*Удалим чеки*/
         RemovePayDocs(uuidPay);
- qDebug()<<"QPenaltyParkingDialog 12";
+
         /*Загрузим новые чеки*/
         for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
         {
             CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
         }
- qDebug()<<"QPenaltyParkingDialog 13";
+
         /*Фото/документы*/
         /*Сначала удалим все старые (включая акт-протокол)*/
         RemoveTaskDocs(m_uuidSourseRecord);
 
-  qDebug()<<"QPenaltyParkingDialog 14";       /*Затем перебрать и записать картинки*/
+        /*Затем перебрать и записать картинки*/
         for (int iPicCounter = 0; iPicCounter < m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
         {
             CreateTaskDocRecord(m_uuidSourseRecord , ImageToBase64(m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.at(iPicCounter)));
         }
- qDebug()<<"QPenaltyParkingDialog 15";
+
         /*Акт, протокол*/
         QString tmpStr;
         m_pLoadActWidget->getImgStr(tmpStr);
         CreateTaskDocRecord(m_uuidSourseRecord , tmpStr , QUuid("0078e19e-dfab-4a81-a5a2-569e0e683c2f"));
- qDebug()<<"QPenaltyParkingDialog 16";
+
         m_pLoadProtocolWidget->getImgStr(tmpStr);
         CreateTaskDocRecord(m_uuidSourseRecord , tmpStr , QUuid("14ae95dc-4b0a-4528-9892-732ec08c7fe6"));
- qDebug()<<"QPenaltyParkingDialog 17";
+
     }
 
 }

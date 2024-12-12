@@ -6,6 +6,8 @@
 #include "tasks/qplatetaskdialog.h"
 #include "tasks/qcostsdialog.h"
 #include "tasks/qrettozonedialog.h"
+#include "tasks/qsmenadlg.h"
+#include "tasks/qdocstaskdlg.h"
 #include "qemplcostsdlg.h"
 #include <QGuiApplication>
 #include <QHBoxLayout>
@@ -57,48 +59,54 @@ QEmploeeMainDlg::QEmploeeMainDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDia
 
     m_pCostButton = new QPushButton("Расход");
     connect(m_pCostButton,SIGNAL(pressed()),this,SLOT(OnCostPressed()));
-    m_pCostButton->setMaximumHeight(iButtonHeight*1.3);
-    m_pCostButton->setMinimumHeight(iButtonHeight*1.3);
+    m_pCostButton->setMaximumHeight(iButtonHeight*1.2);
+    m_pCostButton->setMinimumHeight(iButtonHeight*1.2);
     //m_pCostButton->setIcon(IconByNumber(resTaskCounts.at(0).at(0).toInt()));
     pVTaskButtonsLayout->addWidget(m_pCostButton);
 
     m_pNumberPlateButton = new QPushButton("Номер");
     connect(m_pNumberPlateButton,SIGNAL(pressed()),this,SLOT(OnNumberPlateTaskPressed()));
-    m_pNumberPlateButton->setMaximumHeight(iButtonHeight*1.3);
-    m_pNumberPlateButton->setMinimumHeight(iButtonHeight*1.3);
+    m_pNumberPlateButton->setMaximumHeight(iButtonHeight*1.2);
+    m_pNumberPlateButton->setMinimumHeight(iButtonHeight*1.2);
     m_pNumberPlateButton->setIcon(IconByNumber(resTaskCounts.at(0).at(5).toInt()));
     pVTaskButtonsLayout->addWidget(m_pNumberPlateButton);
 
 
     m_pParkingButton = new QPushButton("Закрытая территория");
     connect(m_pParkingButton,SIGNAL(pressed()),this,SLOT(OnParkingTaskPressed()));
-    m_pParkingButton->setMaximumHeight(iButtonHeight*1.3);
-    m_pParkingButton->setMinimumHeight(iButtonHeight*1.3);
+    m_pParkingButton->setMaximumHeight(iButtonHeight*1.2);
+    m_pParkingButton->setMinimumHeight(iButtonHeight*1.2);
     m_pParkingButton->setIcon(IconByNumber(resTaskCounts.at(0).at(0).toInt()));
     pVTaskButtonsLayout->addWidget(m_pParkingButton);
 
 
     m_pPenaltyParkingButton = new QPushButton("Штраф.стоянка");
     connect(m_pPenaltyParkingButton,SIGNAL(pressed()),this,SLOT(OnPenaltyParkingTaskPressed()));
-    m_pPenaltyParkingButton->setMaximumHeight(iButtonHeight*1.3);
-    m_pPenaltyParkingButton->setMinimumHeight(iButtonHeight*1.3);
+    m_pPenaltyParkingButton->setMaximumHeight(iButtonHeight*1.2);
+    m_pPenaltyParkingButton->setMinimumHeight(iButtonHeight*1.2);
     m_pPenaltyParkingButton->setIcon(IconByNumber(resTaskCounts.at(0).at(4).toInt()));
     pVTaskButtonsLayout->addWidget(m_pPenaltyParkingButton);
 
 
     m_pDocsButton = new QPushButton("Документы");
     connect(m_pDocsButton,SIGNAL(pressed()),this,SLOT(OnDocsTaskPressed()));
-    m_pDocsButton->setMaximumHeight(iButtonHeight*1.3);
-    m_pDocsButton->setMinimumHeight(iButtonHeight*1.3);
+    m_pDocsButton->setMaximumHeight(iButtonHeight*1.2);
+    m_pDocsButton->setMinimumHeight(iButtonHeight*1.2);
     m_pDocsButton->setIcon(IconByNumber(resTaskCounts.at(0).at(1).toInt()));
-    m_pDocsButton->setEnabled(false);
     pVTaskButtonsLayout->addWidget(m_pDocsButton);
+
+    m_pSmenaButton = new QPushButton("Смена");
+    connect(m_pSmenaButton,SIGNAL(pressed()),this,SLOT(OnSmenaTaskPressed()));
+    m_pSmenaButton->setMaximumHeight(iButtonHeight*1.2);
+    m_pSmenaButton->setMinimumHeight(iButtonHeight*1.2);
+    m_pSmenaButton->setIcon(IconByNumber(resTaskCounts.at(0).at(3).toInt()));
+    pVTaskButtonsLayout->addWidget(m_pSmenaButton);
 
 
     m_pReturnToZoneButton = new QPushButton("Возврат в зону");
     connect(m_pReturnToZoneButton,SIGNAL(pressed()),this,SLOT(OnReturnToZoneTaskPressed()));
-    m_pReturnToZoneButton->setMaximumHeight(iButtonHeight*1.3);
-    m_pReturnToZoneButton->setMinimumHeight(iButtonHeight*1.3);
+    m_pReturnToZoneButton->setMaximumHeight(iButtonHeight*1.2);
+    m_pReturnToZoneButton->setMinimumHeight(iButtonHeight*1.2);
     m_pReturnToZoneButton->setIcon(IconByNumber(resTaskCounts.at(0).at(6).toInt()));
     pVTaskButtonsLayout->addWidget(m_pReturnToZoneButton);
 
@@ -114,14 +122,14 @@ QEmploeeMainDlg::QEmploeeMainDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDia
 
     m_pCurrentTasksButton = new QPushButton("Текущие задачи");
     connect(m_pCurrentTasksButton,SIGNAL(pressed()),this,SLOT(OnCurrentTaskPressed()));
-    m_pCurrentTasksButton->setMaximumHeight(iButtonHeight*1.35);
-    m_pCurrentTasksButton->setMinimumHeight(iButtonHeight*1.35);
+    m_pCurrentTasksButton->setMaximumHeight(iButtonHeight*1.30);
+    m_pCurrentTasksButton->setMinimumHeight(iButtonHeight*1.30);
     pVReadyButtonsLayout->addWidget(m_pCurrentTasksButton);
 
     m_pCostsButton = new QPushButton("Прошлые расходы");
     connect(m_pCostsButton,SIGNAL(pressed()),this,SLOT(OnCostsPressed()));
-    m_pCostsButton->setMaximumHeight(iButtonHeight*1.35);
-    m_pCostsButton->setMinimumHeight(iButtonHeight*1.35);
+    m_pCostsButton->setMaximumHeight(iButtonHeight*1.30);
+    m_pCostsButton->setMinimumHeight(iButtonHeight*1.30);
     pVReadyButtonsLayout->addWidget(m_pCostsButton);
 
     pReadyButtonsGroupBox->setLayout(pVReadyButtonsLayout);
@@ -177,9 +185,18 @@ void QEmploeeMainDlg::OnCostsPressed()
     dlg.exec();
 }
 
+void QEmploeeMainDlg::OnSmenaTaskPressed()
+{
+    qDebug()<<"QEmploeeMainDlg::QSmenaDlg()";
+    QSmenaDlg dlg;
+    dlg.exec();
+}
+
 void QEmploeeMainDlg::OnDocsTaskPressed()
 {
-
+    qDebug()<<"QEmploeeMainDlg::QDocsTask()";
+    QDocsTaskDlg dlg;
+    dlg.exec();
 }
 
 void QEmploeeMainDlg::OnWorkdayTaskPressed()
