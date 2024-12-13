@@ -55,12 +55,12 @@ bool QSelProviderCarshWidget::isReadyColored()
 void QSelProviderCarshWidget::OnProviderPressedSlot()
 {
     QCSSelectDialog dlg("Поставщики");
-    qDebug()<<"QSelProviderCarshWidget::OnProviderPressedSlot() m_uuidProvider="<<m_uuidProvider;
+
     dlg.SelectId(m_uuidProvider);
     if(dlg.exec()==QDialog::Accepted)
     {
         m_uuidProvider = dlg.getCurIdUUid();
-        qDebug()<<"QSelProviderCarshWidget::OnProviderPressedSlot() emit ProviderChanged()";
+
         emit ProviderChanged();
     }
 }
@@ -68,12 +68,12 @@ void QSelProviderCarshWidget::OnProviderPressedSlot()
 void QSelProviderCarshWidget::OnCarshPressedSlot()
 {
     QCSSelectDialog dlg("Заказчики");
-    qDebug()<<"QSelProviderCarshWidget::OnCarshPressedSlot() m_uuidCarsh="<<m_uuidCarsh;
+
     dlg.SelectId(m_uuidCarsh);
     if(dlg.exec()==QDialog::Accepted)
     {
         m_uuidCarsh = dlg.getCurIdUUid();
-        qDebug()<<"QSelProviderCarshWidget::OnProviderPressedSlot() emit OnCarshPressedSlot()";
+
         emit CarshChanged();
     }
 }

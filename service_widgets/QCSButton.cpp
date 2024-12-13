@@ -22,6 +22,5 @@ QCSButton::QCSButton(const QIcon &icon, const QString &text, QWidget *parent ):Q
 
 void QCSButton::mouseDoubleClickEvent()
 {
-    qDebug()<<"mouseDoubleClickEvent";
     emit doubleClicked();
 }

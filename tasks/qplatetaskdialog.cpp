@@ -117,7 +117,6 @@ void QPlateTaskDialog::OnLoadAutoFotoButtonPressed()
 
 void QPlateTaskDialog::OnCarshChanged()
 {
-    qDebug()<<"QPlateTaskDialog::OnCarshChanged()";
     QString strExecColor = QString("select Цвет from Заказчики where id='%1'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
 
     QList<QStringList> colorRes = execMainBDQuery(strExecColor);
@@ -158,8 +157,6 @@ void QPlateTaskDialog::SaveDataToBD()
 
         QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель , \"Время выполнения\", Поставщик , Заказчик , Цена) values ('%1','%2','99b4e860-5a7b-42a4-9136-f96252ef4192','%3','%4','%5','%6','%7','%8',%9)").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(strSumm);
         execMainBDQueryUpdate(strExec);
-
-        //qDebug()<<"QString strExec = "<<strExec;
 
         /*Расширение (номер, количество рамок)*/
         int iPlateCount = 0;

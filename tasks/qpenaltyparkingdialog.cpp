@@ -124,7 +124,6 @@ void QPenaltyParkingDialog::OnProviderChanged()
 
 void QPenaltyParkingDialog::OnCarshChanged()
 {
-    qDebug()<<"QPenaltyParkingDialog::OnCarshChanged()";
     QString strExecColor = QString("select Цвет from Заказчики where id='%1'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
 
     QList<QStringList> colorRes = execMainBDQuery(strExecColor);

@@ -94,6 +94,5 @@ void QCSSelectDialog::FioClicked()
 
 void QCSSelectDialog::OnApplyPressedSlot()
 {
-    qDebug()<<"QCSSelectDialog::OnApplyPressedSlot()";
     accept();
 }

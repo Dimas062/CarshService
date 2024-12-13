@@ -1,8 +1,6 @@
 #ifndef QREGISTEREMPLOEEDLG_H
 #define QREGISTEREMPLOEEDLG_H
 
-#include "pictures/imagepickerandroid.h"
-#include "pictures/qpictureswidget.h"
 #include "service_widgets/qcolumntext.h"
 #include "service_widgets/qcsbasedialog.h"
 #include "service_widgets/qlinetext.h"

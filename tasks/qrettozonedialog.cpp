@@ -107,7 +107,6 @@ void QRetToZoneDialog::OnLoadAutoFotoButtonPressed()
 
 void QRetToZoneDialog::OnCarshChanged()
 {
-    qDebug()<<"QPlateTaskDialog::OnCarshChanged()";
     QString strExecColor = QString("select Цвет from Заказчики where id='%1'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
 
     QList<QStringList> colorRes = execMainBDQuery(strExecColor);
@@ -167,33 +166,33 @@ void QRetToZoneDialog::SaveDataToBD()
     }
     else//Апдейтим загруженную задачу
     {
-        qDebug()<<"QRetToZoneDialog update 1";
+
         QString strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
-qDebug()<<"QRetToZoneDialog update 1";
+
         strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
-qDebug()<<"QRetToZoneDialog update 2";
+
         strExec = QString("update \"Задачи\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
-qDebug()<<"QRetToZoneDialog update 3";
+
         strExec = QString("update \"Задачи\" set Комментарий = '%1' , \"Время выполнения\"='%2' where id='%3'").arg(m_pLineTextComment->getText()).arg(iReadyTime).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
-qDebug()<<"QRetToZoneDialog update 4";
+
         strExec = QString("update \"Расширение задачи Возврат в зону\" set Госномер = '%1' where id='%2')").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
-qDebug()<<"QRetToZoneDialog update 5";
+
 
         /*Фото/документы*/
         /*Сначала удалим все старые*/
         RemoveTaskDocs(m_uuidSourseRecord);
-qDebug()<<"QRetToZoneDialog update 6";
+
         /*Затем перебрать и записать картинки*/
         for (int iPicCounter = 0; iPicCounter < m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
         {
             CreateTaskDocRecord(m_uuidSourseRecord , ImageToBase64(m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.at(iPicCounter)));
         }
-qDebug()<<"QRetToZoneDialog update 7";
+
     }
 
 }

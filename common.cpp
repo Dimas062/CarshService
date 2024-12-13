@@ -58,7 +58,6 @@ QByteArray fromHEICToJPEG(const QByteArray &imageData) {
     QBuffer buffer;
     buffer.setData(imageData);
     QImageReader imageReader(&buffer);
-    qDebug() << "width"<< imageReader.size().width() << "height" << imageReader.size().height() << "format"<<imageReader.format() << imageReader.subType();
     // ^^Qt auto detects the "heic" format
     QImage resizeImage = imageReader.read();
     QByteArray outBa;
@@ -171,6 +170,7 @@ bool OpenServerBD()
 
     return result;
 }
+
 int execMainBDQueryUpdate(QString query)
 {
     int res = 0;
@@ -185,6 +185,7 @@ int execMainBDQueryUpdate(QString query)
     return res;
 
 }
+
 QList<QStringList> execMainBDQuery(QString query)
 {
     QList<QStringList> retVal;

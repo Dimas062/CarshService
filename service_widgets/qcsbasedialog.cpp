@@ -97,7 +97,6 @@ bool QCSBaseDialog::eventFilter(QObject *obj, QEvent *event)
 
     if (event->type() == QEvent::MouseButtonPress)
     {
-        qDebug("MouseBottonPressed" );
         return true;
     }
     else
@@ -135,7 +134,6 @@ bool QCSBaseDialog::event(QEvent *event)
 
     if(event->type()==QEvent::MouseButtonPress)
     {
-        qDebug()<<"event->type()==QEvent::MouseButtonPress";
         emit OnMouseButtonPressedSignal();
         event->accept();
         return true;

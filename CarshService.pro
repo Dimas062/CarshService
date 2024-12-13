@@ -40,13 +40,15 @@ SOURCES += \
     service_widgets/qlinetext.cpp \
     service_widgets/qloaddoclinewidget.cpp \
     qregisterdlg.cpp \
-    qregisteremploeedlg.cpp \
-    qregisterpartnerPlatedlg.cpp \
+    register_dlgs/qregisteremploeedlg.cpp \
+    register_dlgs/qregisterpartnerPlatedlg.cpp \
     service_widgets/qcalendardataselectdlg.cpp \
     service_widgets/qloaddocsdlg.cpp \
     service_widgets/qnotecalendarwidget.cpp \
     qsettingsdlg.cpp \
     service_widgets/QCSButton.cpp \
+    service_widgets/qparnerpointdlg.cpp \
+    service_widgets/qpointlistdlg.cpp \
     service_widgets/qselprovidercarshwidget.cpp \
     service_widgets/qtimeselectdlg.cpp \
     qcarshservicebasewidget.cpp \
@@ -56,6 +58,7 @@ SOURCES += \
     pictures/qpiclabel.cpp \
     service_widgets/qcolorselectdlg.cpp \
     qcarshserviceapplication.cpp \
+    service_widgets/quldlg.cpp \
     service_widgets/qyesnodlg.cpp \
     settings_widgets/qsettingslistwidget.cpp \
     tasks/qcostsdialog.cpp \
@@ -94,13 +97,15 @@ HEADERS += \
     service_widgets/qlinetext.h \
     service_widgets/qloaddoclinewidget.h \
     qregisterdlg.h \
-    qregisteremploeedlg.h \
-    qregisterpartnerPlatedlg.h \
+    register_dlgs/qregisteremploeedlg.h \
+    register_dlgs/qregisterpartnerPlatedlg.h \
     service_widgets/qcalendardataselectdlg.h \
     service_widgets/qloaddocsdlg.h \
     service_widgets/qnotecalendarwidget.h \
     qsettingsdlg.h \
     service_widgets/QCSButton.h \
+    service_widgets/qparnerpointdlg.h \
+    service_widgets/qpointlistdlg.h \
     service_widgets/qselprovidercarshwidget.h \
     service_widgets/qtimeselectdlg.h \
     qcarshservicebasewidget.h \
@@ -110,6 +115,7 @@ HEADERS += \
     pictures/qpiclabel.h \
     service_widgets/qcolorselectdlg.h \
     qcarshserviceapplication.h \
+    service_widgets/quldlg.h \
     service_widgets/qyesnodlg.h \
     settings_widgets/qsettingslistwidget.h \
     tasks/qcostsdialog.h \

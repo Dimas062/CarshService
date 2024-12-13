@@ -36,7 +36,6 @@ QCSSelectDlgButtonsWidget::QCSSelectDlgButtonsWidget(QString strTableName, QStri
 
 void QCSSelectDlgButtonsWidget::SelectId(QString strId)
 {
-    qDebug()<<"QCSSelectDlgButtonsWidget::SelectId strId="<<strId;
     foreach (QPushButton * pAllButton, m_vpButtons) {
         if(QUuid::fromString((pAllButton->property("id")).value<QString>()) != QUuid::fromString(strId))
         {
@@ -44,7 +43,6 @@ void QCSSelectDlgButtonsWidget::SelectId(QString strId)
         }
         else
         {
-            qDebug()<<"QCSSelectDlgButtonsWidget::SelectId pAllButton->setChecked(true);";
             pAllButton->setChecked(true);
             m_strId = strId;
             m_strText = pAllButton->text();

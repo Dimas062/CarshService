@@ -145,7 +145,7 @@ void QEmploeeTasksDlg::UpdateTasks()
         if(QUuid::fromString(resTasks.at(iTaskCounter).at(3)) == QUuid::fromString("8078b7ce-e423-49ae-9ce6-17758b852b33")) //Тип Штрафстоянка
         {
             QString strNumExec = QString("SELECT \"Расширение задачи ШС\".Госномер From \"Расширение задачи ШС\" , Задачи where Задачи.Расширение=\"Расширение задачи ШС\".id and Задачи.id='%1'").arg(resTasks.at(iTaskCounter).at(0));
-            //qDebug()<<strNumExec;
+
             QList<QStringList> resNumber = execMainBDQuery(strNumExec);
 
             if(resNumber.size()>0) strNumber = resNumber.at(0).at(0);
@@ -154,7 +154,7 @@ void QEmploeeTasksDlg::UpdateTasks()
         if(QUuid::fromString(resTasks.at(iTaskCounter).at(3)) == QUuid::fromString("fe81daf9-a838-4bac-84aa-595e038d3a12")) //Тип возврат в зону
         {
             QString strNumExec = QString("SELECT \"Расширение задачи Возврат в зону\".Госномер From \"Расширение задачи Возврат в зону\" , Задачи where Задачи.Расширение=\"Расширение задачи Возврат в зону\".id and Задачи.id='%1'").arg(resTasks.at(iTaskCounter).at(0));
-            //qDebug()<<strNumExec;
+
             QList<QStringList> resNumber = execMainBDQuery(strNumExec);
 
             if(resNumber.size()>0) strNumber = resNumber.at(0).at(0);
@@ -163,7 +163,7 @@ void QEmploeeTasksDlg::UpdateTasks()
         if(QUuid::fromString(resTasks.at(iTaskCounter).at(3)) == QUuid::fromString("057b3b6f-2848-479b-a546-3f16cb531ffe")) //Закрытая территория
         {
             QString strNumExec = QString("SELECT \"Расширение задачи Парковка\".Госномер From \"Расширение задачи Парковка\" , Задачи where Задачи.Расширение=\"Расширение задачи Парковка\".id and Задачи.id='%1'").arg(resTasks.at(iTaskCounter).at(0));
-            //qDebug()<<strNumExec;
+
             QList<QStringList> resNumber = execMainBDQuery(strNumExec);
 
             if(resNumber.size()>0) strNumber = resNumber.at(0).at(0);

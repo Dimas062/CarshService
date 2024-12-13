@@ -292,6 +292,12 @@ void QDocsTaskDlg::LoadDataFromBD(QUuid uuidSourseRecord)
             m_pDocsCountText->setText(resExtTasks.at(iTasksCounter).at(0));
 
             m_strDocId = (resExtTasks.at(iTasksCounter).at(1));
+
+            if(need_pay)
+                m_pPayButton->setEnabled(true);
+            else
+                m_pPayButton->setEnabled(false);
+
         }
     }
     isReady();
@@ -353,7 +359,6 @@ void QDocsTaskDlg::OnProviderChanged()
 
 void QDocsTaskDlg::OnCarshChanged()
 {
-    qDebug()<<"QPenaltyParkingDialog::OnCarshChanged()";
     QString strExecColor = QString("select Цвет from Заказчики where id='%1'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
 
     QList<QStringList> colorRes = execMainBDQuery(strExecColor);

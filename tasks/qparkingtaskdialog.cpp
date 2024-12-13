@@ -148,7 +148,6 @@ void QParkingTaskDialog::OnLoadAutoFotoButtonPressed()
 
 void QParkingTaskDialog::OnCarshChanged()
 {
-    qDebug()<<"QPlateTaskDialog::OnCarshChanged()";
     QString strExecColor = QString("select Цвет from Заказчики where id='%1'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
 
     QList<QStringList> colorRes = execMainBDQuery(strExecColor);
@@ -218,42 +217,42 @@ void QParkingTaskDialog::SaveDataToBD()
     }
     else//Апдейтим загруженную задачу
     {
-        qDebug()<<"QParkingTaskDialog 1";
+
         QString strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
-        qDebug()<<"QParkingTaskDialog 2";
+
         strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
-        qDebug()<<"QParkingTaskDialog 3";
+
         strExec = QString("update \"Задачи\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
-        qDebug()<<"QParkingTaskDialog 4";
+
         strExec = QString("update \"Задачи\" set Комментарий = '%1' , \"Время выполнения\"='%2' where id='%3'").arg(m_pLineTextComment->getText()).arg(iReadyTime).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
-        qDebug()<<"QParkingTaskDialog 5";
+
         strExec = QString("update \"Расширение задачи Парковка\" set Госномер = '%1' where id='%2')").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
-        qDebug()<<"QParkingTaskDialog 6";
+
         /*Получим id оплаты*/
         strExec = QString("select \"Оплата парковки\" from \"Расширение задачи Парковка\" where id ='%1'").arg(m_uuidSourseExtention.toString());
         QList<QStringList> strPayResult = execMainBDQuery(strExec);
         QUuid uuidPay = QUuid::fromString(strPayResult.at(0).at(0));
-        qDebug()<<"QParkingTaskDialog 7";
+
         UpdatePayRecord(uuidPay , m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
-        qDebug()<<"QParkingTaskDialog 8";
+
         /*Удалим чеки*/
         RemovePayDocs(uuidPay);
-        qDebug()<<"QParkingTaskDialog 9";
+
         /*Загрузим новые чеки*/
         for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
         {
             CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
         }
-        qDebug()<<"QParkingTaskDialog 10";
+
         /*Фото/документы*/
         /*Сначала удалим все старые*/
         RemoveTaskDocs(m_uuidSourseRecord);
-        qDebug()<<"QParkingTaskDialog 11";
+
         /*Затем перебрать и записать картинки*/
         for (int iPicCounter = 0; iPicCounter < m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
         {

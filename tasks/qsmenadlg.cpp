@@ -137,7 +137,7 @@ void QSmenaDlg::SaveDataToBD()
         execMainBDQueryUpdate(strExec);
 
         strExec = QString("update \"Расширение задачи Смена\" set \"Количество часов\" = '%1' where id='%2'").arg(m_strClockId).arg(m_uuidSourseExtention.toString());
-        qDebug()<<"Smens exec="<<strExec;
+
         execMainBDQueryUpdate(strExec);
     }
 }
@@ -162,7 +162,7 @@ void QSmenaDlg::LoadDataFromBD(QUuid uuidSourseRecord)
         m_uuidSourseExtention = QUuid::fromString(resTasks.at(iTasksCounter).at(3));
 
         QString strExtenExec = QString("select \"Количество часов\" from \"Расширение задачи Смена\" where id='%1'").arg(m_uuidSourseExtention.toString());
-        qDebug()<<"strExtenExec = "<<strExtenExec;
+
         QList<QStringList> resExtTasks = execMainBDQuery(strExtenExec);
         for(int iExtTasksCounter = 0 ; iExtTasksCounter < resExtTasks.size() ; iExtTasksCounter++)
         {
@@ -218,7 +218,6 @@ void QSmenaDlg::OnProviderChanged()
 
 void QSmenaDlg::OnCarshChanged()
 {
-    qDebug()<<"QPlateTaskDialog::OnCarshChanged()";
     QString strExecColor = QString("select Цвет from Заказчики where id='%1'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
 
     QList<QStringList> colorRes = execMainBDQuery(strExecColor);

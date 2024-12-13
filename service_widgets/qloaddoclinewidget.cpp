@@ -157,9 +157,6 @@ void QLoadDocLineWidget::OnOpenPressed()
 
     // return;
 
-
-    qDebug()<<"QLoadDocLineWidget::OnOpenPressed()";
-
     QFileDialog dialog;
 
     QFileDialog::AcceptMode acceptMode = QFileDialog::AcceptOpen;

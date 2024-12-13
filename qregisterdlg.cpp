@@ -4,7 +4,8 @@
 #include <QGuiApplication>
 #include <QKeyEvent>
 #include <QPushButton>
-#include <qregisteremploeedlg.h>
+#include <register_dlgs/qregisteremploeedlg.h>
+#include <register_dlgs/qregisterpartnerplatedlg.h>
 
 extern QRect screenGeometry;
 extern int iButtonHeight;
@@ -39,32 +40,34 @@ QRegisterDlg::QRegisterDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
 
     QPushButton * m_pPartnerPlateRegisterButton = new QPushButton("Партнёр \"Номера\"");
     connect(m_pPartnerPlateRegisterButton,SIGNAL(pressed()),this,SLOT(OnPartnerPlateRegisterPressed()));
-    m_pPartnerPlateRegisterButton->setMaximumHeight(iButtonHeight);
-    m_pPartnerPlateRegisterButton->setMinimumHeight(iButtonHeight);
+    m_pPartnerPlateRegisterButton->setMaximumHeight(iButtonHeight*1.3);
+    m_pPartnerPlateRegisterButton->setMinimumHeight(iButtonHeight*1.3);
     pVMainLayout->addWidget(m_pPartnerPlateRegisterButton);
 
     QPushButton * m_pWashPlateRegisterButton = new QPushButton("Партнёр \"Мойка\"");
     connect(m_pWashPlateRegisterButton,SIGNAL(pressed()),this,SLOT(OnWashPlateRegisterPressed()));
-    m_pWashPlateRegisterButton->setMaximumHeight(iButtonHeight);
-    m_pWashPlateRegisterButton->setMinimumHeight(iButtonHeight);
+    m_pWashPlateRegisterButton->setMaximumHeight(iButtonHeight*1.3);
+    m_pWashPlateRegisterButton->setMinimumHeight(iButtonHeight*1.3);
+    m_pWashPlateRegisterButton->setEnabled(false);
     pVMainLayout->addWidget(m_pWashPlateRegisterButton);
 
     QPushButton * m_pStickPlateRegisterButton = new QPushButton("Партнёр \"Оклейка\"");
     connect(m_pStickPlateRegisterButton,SIGNAL(pressed()),this,SLOT(OnStickPlateRegisterPressed()));
-    m_pStickPlateRegisterButton->setMaximumHeight(iButtonHeight);
-    m_pStickPlateRegisterButton->setMinimumHeight(iButtonHeight);
+    m_pStickPlateRegisterButton->setMaximumHeight(iButtonHeight*1.3);
+    m_pStickPlateRegisterButton->setMinimumHeight(iButtonHeight*1.3);
+    m_pStickPlateRegisterButton->setEnabled(false);
     pVMainLayout->addWidget(m_pStickPlateRegisterButton);
 
-    QPushButton * m_pCustomerPlateRegisterButton = new QPushButton("Заказчик");
-    connect(m_pCustomerPlateRegisterButton,SIGNAL(pressed()),this,SLOT(OnCustomerPlateRegisterPressed()));
-    m_pCustomerPlateRegisterButton->setMaximumHeight(iButtonHeight);
-    m_pCustomerPlateRegisterButton->setMinimumHeight(iButtonHeight);
-    pVMainLayout->addWidget(m_pCustomerPlateRegisterButton);
+    // QPushButton * m_pCustomerPlateRegisterButton = new QPushButton("Заказчик");
+    // connect(m_pCustomerPlateRegisterButton,SIGNAL(pressed()),this,SLOT(OnCustomerPlateRegisterPressed()));
+    // m_pCustomerPlateRegisterButton->setMaximumHeight(iButtonHeight*1.3);
+    // m_pCustomerPlateRegisterButton->setMinimumHeight(iButtonHeight*1.3);
+    // pVMainLayout->addWidget(m_pCustomerPlateRegisterButton);
 
     QPushButton * m_pEmployeeRegisterButton = new QPushButton("Сотрудник");
     connect(m_pEmployeeRegisterButton,SIGNAL(pressed()),this,SLOT(OnEmployeeRegisterPressed()));
-    m_pEmployeeRegisterButton->setMaximumHeight(iButtonHeight);
-    m_pEmployeeRegisterButton->setMinimumHeight(iButtonHeight);
+    m_pEmployeeRegisterButton->setMaximumHeight(iButtonHeight*1.3);
+    m_pEmployeeRegisterButton->setMinimumHeight(iButtonHeight*1.3);
     pVMainLayout->addWidget(m_pEmployeeRegisterButton);
 
     pVMainLayout->addStretch();
@@ -73,7 +76,8 @@ QRegisterDlg::QRegisterDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
 
 void QRegisterDlg::OnPartnerPlateRegisterPressed()
 {
-
+    QRegisterPartnerPlateDlg dlg;
+    dlg.exec();
 }
 
 void QRegisterDlg::OnPartnerWashRegisterPressed()
@@ -86,20 +90,7 @@ void QRegisterDlg::OnPartnerStickRegisterPressed()
 
 }
 
-void QRegisterDlg::OnCustomerPlateRegisterPressed()
-{
 
-}
-
-void QRegisterDlg::OnWashPlateRegisterPressed()
-{
-
-}
-
-void QRegisterDlg::OnStickPlateRegisterPressed()
-{
-
-}
 
 void QRegisterDlg::OnEmployeeRegisterPressed()
 {

@@ -19,6 +19,5 @@ QCSBaseDlgScrollWidget::QCSBaseDlgScrollWidget(QWidget *parent)
 
 bool QCSBaseDlgScrollWidget::event(QEvent *event)
 {
-   // qDebug()<<"QCSBaseDlgScrollWidget event="<<event<< " type="<<event->type();
     return QWidget::event(event);
 }

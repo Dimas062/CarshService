@@ -180,21 +180,18 @@ void QEmploeeMainDlg::OnPenaltyParkingTaskPressed()
 
 void QEmploeeMainDlg::OnCostsPressed()
 {
-    qDebug()<<"QEmploeeMainDlg::OnCostsPressed()";
     QEmplCostsDlg dlg(uuidCurrentUser);
     dlg.exec();
 }
 
 void QEmploeeMainDlg::OnSmenaTaskPressed()
 {
-    qDebug()<<"QEmploeeMainDlg::QSmenaDlg()";
     QSmenaDlg dlg;
     dlg.exec();
 }
 
 void QEmploeeMainDlg::OnDocsTaskPressed()
 {
-    qDebug()<<"QEmploeeMainDlg::QDocsTask()";
     QDocsTaskDlg dlg;
     dlg.exec();
 }

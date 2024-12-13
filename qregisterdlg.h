@@ -23,10 +23,8 @@ public slots:
     void OnPartnerPlateRegisterPressed();
     void OnPartnerWashRegisterPressed();
     void OnPartnerStickRegisterPressed();
-    void OnCustomerPlateRegisterPressed();
     void OnEmployeeRegisterPressed();
-    void OnWashPlateRegisterPressed();
-    void OnStickPlateRegisterPressed();
+
 };
 
 #endif // QREGISTERDLG_H

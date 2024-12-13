@@ -32,7 +32,7 @@ void ActivityHandler::ShowAd()
 
 void ActivityHandler::showSecondActivity()
 {
-    qDebug()<<"showSecondActivity";
+  //  qDebug()<<"showSecondActivity";
     QAndroidIntent activityIntent(context(),"org/dimas062/ChronoPanel/CustomActivity");
 
     startActivity(
@@ -44,7 +44,7 @@ void ActivityHandler::showSecondActivity()
 
 void ActivityHandler::activityReceiver(int requestCode, int resultCode, const QJniObject &data)
 {
-    qDebug()<<"activityReceiver"<<data.toString();
+    //qDebug()<<"activityReceiver"<<data.toString();
     if (requestCode == REQUEST_CODE) {
         if (resultCode == RESULT_OK) {
             const QJniObject key = QJniObject::fromString("message");
