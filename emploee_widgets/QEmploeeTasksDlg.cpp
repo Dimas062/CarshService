@@ -28,7 +28,7 @@ QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget 
 
     m_userUuid = userUuid;
 
-    strDateFilter = CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);;
+    strDateFilter = CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
     strFilter = "";
 
     if(taskTypeUuid == QUuid())
@@ -112,8 +112,6 @@ QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget 
     connect(m_pTasksListWidget, SIGNAL(OnTapHoldGesture()), this, SLOT(OnTapHoldGesture()));
     connect(m_pTasksListWidget, SIGNAL(OnTapGesture()), this, SLOT(OnTapGesture()));
     UpdateTasks();
-
-    debug_TimeStamp("QEmploeeTasksDlg::QEmploeeTasksDlg; 2");
 
     this->setLayout(pVMainLayout);
 }

@@ -13,6 +13,7 @@ public:
     explicit QLineText(QString strLabel, QWidget *parent = nullptr);
 
     bool CheckColorLenght();
+    void SetEnabled(bool);
 
     QString getText() const;
     void setText(QString);

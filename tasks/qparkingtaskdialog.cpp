@@ -17,10 +17,6 @@ extern QColor currentWorkdayColor;
 
 QParkingTaskDialog::QParkingTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f)
 {
-    // int iUnderButtonSpace = 15;
-
-    // int iButtonHeight = (int)((screenGeometry.height()*0.7)/8)-iUnderButtonSpace;
-
     m_uuidSourseRecord = QUuid();
 
     QVBoxLayout * pVMainLayout = new QVBoxLayout;

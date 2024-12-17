@@ -25,10 +25,10 @@ QPointListDlg::QPointListDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(
 
     m_pPointsListWidget = new QCSBaseListWidget();
 #ifdef Q_OS_ANDRIOD
-    m_pPointsListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pPointsListWidget->setFixedHeight(screenGeometry.height() - 200 - iButtonHeight);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
-    m_pPointsListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pPointsListWidget->setFixedHeight(screenGeometry.height() - 200 - iButtonHeight);
 #endif
     m_pPointsListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pPointsListWidget));
 

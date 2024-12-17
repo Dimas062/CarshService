@@ -21,7 +21,9 @@
 #include <QUuid>
 #include "carsh_service_widgets/qcarshservicemaindlg.h"
 #include "emploee_widgets/qemploeemaindlg.h"
-#include <QUuid>
+#include "partners/plates/qplatepartnermaindlg.h"
+#include "partners/sticks/qstickpartnermaindlg.h"
+#include "partners/wash/qwashpartnermaindlg.h"
 
 
 QRect screenGeometry;
@@ -31,6 +33,7 @@ int iWindowedVideoHeigth = 0;
 int iButtonHeight;
 
 QUuid uuidCurrentUser;
+QUuid uuidCurrentPartner;
 UserTypes CurrentUserType;
 
 extern VSMobileSettings settings;
@@ -204,26 +207,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
             m_bChildBackRealeseProcessed = dlg.m_bBackProcessed;
             return;
         }
-        if(QUuid(resUsers.at(iUserCounter).at(1)) == QUuid("ec3f998f-f5f4-4f2d-83a7-588934c58ecf")) //Служба каршеринга
-        {
 
-            return;
-        }
-        if(QUuid(resUsers.at(iUserCounter).at(1)) == QUuid("512c50c1-c4a9-4542-932a-55280886715a")) //Партнер номера
-        {
-
-            return;
-        }
-        if(QUuid(resUsers.at(iUserCounter).at(1)) == QUuid("4c476883-76b5-4f28-823a-966d69f51d46")) //Партнер оклейка
-        {
-
-            return;
-        }
-        if(QUuid(resUsers.at(iUserCounter).at(1)) == QUuid("184f8f60-a865-4bcf-996e-b26ff21d1ee3")) //Партнер мойка
-        {
-
-            return;
-        }
         if(QUuid(resUsers.at(iUserCounter).at(1)) == QUuid("80066f83-c025-410b-b439-f3e9b2299461")) //Сотрудник
         {
             CurrentUserType = Emploee;
@@ -235,6 +219,56 @@ void QCarshServiceBaseWidget::OnLoginPressed()
             return;
         }
     }
+
+    /*Поиск партнера с заданным логином/паролем*/
+    QString strPartnerExec = QString("select id , \"Подтвержден\" , Тип from Партнеры where Логин='%1' and Пароль='%2'").arg(strLoginStr).arg(strPassStr);
+    QList<QStringList> resParners = execMainBDQuery(strPartnerExec);
+    for(int iPartnerCounter = 0 ; iPartnerCounter < resParners.size() ; iPartnerCounter++)
+    {
+        uuidCurrentPartner = QUuid(resParners.at(iPartnerCounter).at(0));
+
+        qDebug()<<"resParners.at(iPartnerCounter).at(1)" << resParners.at(iPartnerCounter).at(1);
+
+        if(resParners.at(iPartnerCounter).at(1) == "f")
+        {
+            m_pStatusLabel->setText("<font color=\"red\">Ваша учётная запись не подтверждена или заблокирована</font>");
+            return;
+        }
+        else m_pStatusLabel->setText(" ");
+
+        if(QUuid(resParners.at(iPartnerCounter).at(2)) == QUuid("9c671ee9-2749-4717-a343-b18825855c29")) //Номера
+        {
+            QPlatePartnerMainDlg dlg;
+
+            m_bChildBackRealeseProcessed = false;
+            dlg.exec();
+            m_bChildBackRealeseProcessed = dlg.m_bBackProcessed;
+            return;
+        }
+
+        if(QUuid(resParners.at(iPartnerCounter).at(2)) == QUuid("082cf73c-6f6f-4167-ae89-b87c347091b2")) //Оклейка
+        {
+            QStickPartnerMainDlg dlg;
+
+            m_bChildBackRealeseProcessed = false;
+            dlg.exec();
+            m_bChildBackRealeseProcessed = dlg.m_bBackProcessed;
+            return;
+        }
+
+        if(QUuid(resParners.at(iPartnerCounter).at(2)) == QUuid("932a4dc1-238b-478d-8911-3de46dd8da65")) //Мойка
+        {
+            QWashPartnerMainDlg dlg;
+
+            m_bChildBackRealeseProcessed = false;
+            dlg.exec();
+            m_bChildBackRealeseProcessed = dlg.m_bBackProcessed;
+            return;
+        }
+    }
+
+
+
     m_pStatusLabel->setText("<font color=\"red\">Пользователь с заданным логином и паролем не найден</font>");
     return;
 

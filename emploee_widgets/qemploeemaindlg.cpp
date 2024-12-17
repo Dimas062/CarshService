@@ -196,10 +196,6 @@ void QEmploeeMainDlg::OnDocsTaskPressed()
     dlg.exec();
 }
 
-void QEmploeeMainDlg::OnWorkdayTaskPressed()
-{
-
-}
 
 void QEmploeeMainDlg::OnReturnToZoneTaskPressed()
 {

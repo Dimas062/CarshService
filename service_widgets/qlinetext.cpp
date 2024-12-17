@@ -19,6 +19,12 @@ QLineText::QLineText(QString strLabel,QWidget *parent): QWidget{parent}
     pHBoxLayout->addWidget(m_pLineEdit);
 }
 
+void QLineText::SetEnabled(bool bEnabled)
+{
+    m_pLabel->setEnabled(bEnabled);
+    m_pLineEdit->setEnabled(bEnabled);
+}
+
 
 bool QLineText::CheckColorLenght()
 {

@@ -3,7 +3,6 @@
 
 #include "service_widgets/qcsbasedialog.h"
 #include "service_widgets/qlinetext.h"
-//#include "service_widgets/qloaddoclinewidget.h"
 #include "service_widgets/qloaddocsdlg.h"
 #include "service_widgets/qselprovidercarshwidget.h"
 #include "service_widgets/qcspaybasedialog.h"
@@ -21,7 +20,6 @@ public:
     void SaveDataToBD();
     void LoadDataFromBD(QUuid);
 
-    // QPicturesWidget * m_pPicturesWidget;
 
 protected:
     QLabel * m_pTopLabel;

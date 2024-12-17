@@ -23,9 +23,23 @@ SOURCES += \
     emploee_widgets/qemploeemaindlg.cpp \
     main.cpp \
     native.cpp \
+    partners/plates/qplatepartnermaindlg.cpp \
+    partners/plates/qplatepartnertask.cpp \
+    partners/plates/qplatepartnertaskslistdlg.cpp \
+    partners/sticks/qstickpartnermaindlg.cpp \
+    partners/sticks/qstickpartnertask.cpp \
+    partners/sticks/qstickpartnertaskslistdlg.cpp \
+    partners/wash/qcsselectwashtypesswidget.cpp \
+    partners/wash/qcswashtypedlg.cpp \
+    partners/wash/qcswashtypeselectdlg.cpp \
+    partners/wash/qwashpartnermaindlg.cpp \
+    partners/wash/qwashpartnertask.cpp \
+    partners/wash/qwashpartnertaskslistdlg.cpp \
     pictures/qpictureswidget.cpp \
     qsocketbd.cpp \
     qsocketbdnetclient.cpp \
+    register_dlgs/qregisterpartnerstickdlg.cpp \
+    register_dlgs/qregisterpartnerwashdlg.cpp \
     service_widgets/qclicablelabel.cpp \
     service_widgets/qcolumntext.cpp \
     service_widgets/qcsbasedialog.cpp \
@@ -80,9 +94,23 @@ HEADERS += \
     emploee_widgets/qemplcostsdlg.h \
     emploee_widgets/qemploeemaindlg.h \
     native.h \
+    partners/plates/qplatepartnermaindlg.h \
+    partners/plates/qplatepartnertask.h \
+    partners/plates/qplatepartnertaskslistdlg.h \
+    partners/sticks/qstickpartnermaindlg.h \
+    partners/sticks/qstickpartnertask.h \
+    partners/sticks/qstickpartnertaskslistdlg.h \
+    partners/wash/qcsselectwashtypesswidget.h \
+    partners/wash/qcswashtypedlg.h \
+    partners/wash/qcswashtypeselectdlg.h \
+    partners/wash/qwashpartnermaindlg.h \
+    partners/wash/qwashpartnertask.h \
+    partners/wash/qwashpartnertaskslistdlg.h \
     pictures/qpictureswidget.h \
     qsocketbd.h \
     qsocketbdnetclient.h \
+    register_dlgs/qregisterpartnerstickdlg.h \
+    register_dlgs/qregisterpartnerwashdlg.h \
     service_widgets/qclicablelabel.h \
     service_widgets/qcolumntext.h \
     service_widgets/qcsbasedialog.h \
@@ -132,6 +160,7 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
 
  ios {
      #QTPLUGIN += qiosnsphotolibrarysupport

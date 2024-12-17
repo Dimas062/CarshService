@@ -12,8 +12,8 @@ public:
     QEmploeeMainDlg(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
 
 protected:
-    QPushButton * m_pStartWorkDayButton;
-    QPushButton * m_pFinishWorkDayButton;
+    // QPushButton * m_pStartWorkDayButton;
+    // QPushButton * m_pFinishWorkDayButton;
 
 
     QPushButton * m_pCurrentTasksButton;
@@ -33,7 +33,7 @@ public slots:
     void OnParkingTaskPressed();
     void OnPenaltyParkingTaskPressed();
     void OnDocsTaskPressed();
-    void OnWorkdayTaskPressed();
+ //   void OnWorkdayTaskPressed();
     void OnReturnToZoneTaskPressed();
     void OnCostPressed();
     void OnCostsPressed();

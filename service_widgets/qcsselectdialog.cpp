@@ -16,12 +16,15 @@ extern QUuid uuidCurrentUser;
 extern int iButtonHeight;
 extern UserTypes CurrentUserType;
 
-QCSSelectDialog::QCSSelectDialog(QString strTableName ,QString strColName ,  bool bChecable , bool bAutoChecable , QUuid uuidEmpl , QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f , false),selectWidget(strTableName , strColName , bChecable)
+QCSSelectDialog::QCSSelectDialog(QString strTableName ,QString strColName ,  bool bChecable , bool bAutoChecable , QUuid uuidEmpl , QString strСondition , bool bMultiSelect ,QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f , false),selectWidget(strTableName , strColName , bChecable , strСondition , bMultiSelect)
 {
+    m_bMultiSelect = bMultiSelect;
+
     QVBoxLayout * pVMainLayout = new QVBoxLayout;
     this->setLayout(pVMainLayout);
 
     m_userUUid = uuidEmpl;
+
 
     if(m_userUUid != QUuid())
     {

@@ -109,6 +109,18 @@ QGroupBox
     border-color: #000000;
 }
 
+QLineEdit:disabled
+{
+        background-color: #C7C1C3;
+        color: #000000;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        border-color: #000000;
+        font-size: 24px;
+        margin: 2px;
+}
+
 /*-----QLineEdit-----*/
 QLineEdit
 {

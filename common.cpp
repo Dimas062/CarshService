@@ -20,6 +20,7 @@
 #include <QTcpSocket>
 #include "qsocketbd.h"
 #include <QImageReader>
+#include <QUuid>
 
 #include <pictures/qfullscreenpicdialog.h>
 
@@ -47,6 +48,15 @@ QIcon IconByNumber(int iNumb)
     if(iNumb == 9 ) return QIcon(":/icons/9.png");
 
     return QIcon(":/icons/more_icon.png");
+}
+
+bool IsUUidInVector(QVector<QUuid> vector, QUuid val)
+{
+    foreach(QUuid id , vector)
+    {
+        if(id == val) return true;
+    }
+    return false;
 }
 
 void debug_TimeStamp(QString pred)

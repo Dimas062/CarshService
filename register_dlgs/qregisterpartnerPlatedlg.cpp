@@ -34,6 +34,11 @@ QRegisterPartnerPlateDlg::QRegisterPartnerPlateDlg(QWidget *parent, Qt::WindowFl
     connect(m_pPostavshikButton,SIGNAL(pressed()),this,SLOT(OnPostavPressedSlot()));
     pVMainLayout->addWidget(m_pPostavshikButton);
 
+    m_pLoginLineText = new QLineText("Логин");
+    pVMainLayout->addWidget(m_pLoginLineText);
+
+    m_pPasswordLineText = new QLineText("Пароль");
+    pVMainLayout->addWidget(m_pPasswordLineText);
 
     pVMainLayout->addStretch();
 
@@ -74,6 +79,10 @@ bool QRegisterPartnerPlateDlg::isReady()
     }
     m_pULButton->setStyleSheet("QPushButton {color: black;}");
 
+    if(!m_pLoginLineText->CheckColorLenght()) retVal = false;
+    if(!m_pPasswordLineText->CheckColorLenght()) retVal = false;
+
+
     return retVal;
 }
 
@@ -91,7 +100,6 @@ void QRegisterPartnerPlateDlg::OnPostavPressedSlot()
 
 void QRegisterPartnerPlateDlg::OnApplyPressed()
 {
-
     if(isReady())
     {
         QUuid newParnerId = QUuid::createUuid();
@@ -100,10 +108,10 @@ void QRegisterPartnerPlateDlg::OnApplyPressed()
 
         m_PointListdlg.SaveUpdateToBD(newParnerId);
 
-        QString strInsExec = QString("insert into Партнеры (id , Тип , ЮЛ , Поставщик) values ('%1' , '9c671ee9-2749-4717-a343-b18825855c29' , '%2' , '%3')").arg(newParnerId.toString()).arg(idUl.toString()).arg(m_strPostavId);
+        QString strInsExec = QString("insert into Партнеры (id , Тип , ЮЛ , Поставщик , Логин, Пароль) values ('%1' , '9c671ee9-2749-4717-a343-b18825855c29' , '%2' , '%3' , '%4', '%5' )").arg(newParnerId.toString()).arg(idUl.toString()).arg(m_strPostavId).arg(m_pLoginLineText->getText()).arg(m_pPasswordLineText->getText());
 
         execMainBDQueryUpdate(strInsExec);
-    }
 
-    accept();
+        accept();
+    }
 }

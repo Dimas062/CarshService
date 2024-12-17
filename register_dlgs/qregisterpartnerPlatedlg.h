@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include "service_widgets/quldlg.h"
 #include "service_widgets/qpointlistdlg.h"
+#include "service_widgets/qlinetext.h"
 
 class QRegisterPartnerPlateDlg : public QCSBaseDialog
 {
@@ -17,6 +18,9 @@ public:
     QPushButton * m_pULButton;
     QPushButton * m_pPointsButton;
     QPushButton * m_pPostavshikButton;
+
+    QLineText * m_pPasswordLineText;
+    QLineText * m_pLoginLineText;
 
     QULDlg m_ULdlg;
     QPointListDlg m_PointListdlg;

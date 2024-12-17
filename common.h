@@ -50,6 +50,8 @@ struct VSMobileSettings
     bool isConnected;//Удалось подключиться
 };
 
+bool IsUUidInVector(QVector<QUuid> , QUuid);
+
 QIcon IconByNumber(int iNumb);
 
 bool CheckLineEditLenSetLabel(QLineEdit * pLineEdit , QLabel * pLabel);//Проверяет длинну текста в едите, если меньше 3х, то красит лейбл в красный и возвращает ложь
