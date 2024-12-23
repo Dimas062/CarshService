@@ -75,13 +75,13 @@ QUuid QULDlg::SaveOrCreateToBD(QUuid idUl)
         idUl = QUuid::createUuid();
 
         QString strExec = QString("insert into ЮЛ (id , Название , Адрес , ИНН , Банк , Счет) values ('%1' , '%2' , '%3' , '%4' , '%5' , '%6')").arg(idUl.toString()).arg(m_pNameLineText->getText()).arg(m_pAdressLineText->getText()).arg(m_pINNLineText->getText()).arg(m_pBankLineText->getText()).arg(m_pSchetLineText->getText());
-        qDebug()<<"QULDlg::SaveOrCreateToBD strExec="<<strExec;
+
         execMainBDQueryUpdate(strExec);
     }
     else
     {
         QString strExec = QString("update ЮЛ set Название = '%2' , Адрес = '%3' , ИНН = '%4' , Банк = '%5' , Счет = '%6' where id='%1'").arg(idUl.toString()).arg(m_pNameLineText->getText()).arg(m_pAdressLineText->getText()).arg(m_pINNLineText->getText()).arg(m_pBankLineText->getText()).arg(m_pSchetLineText->getText());
-        qDebug()<<"QULDlg::SaveOrCreateToBD strExec="<<strExec;
+
         execMainBDQueryUpdate(strExec);
     }
 

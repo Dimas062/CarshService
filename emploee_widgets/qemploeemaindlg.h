@@ -26,6 +26,7 @@ protected:
     QPushButton * m_pReturnToZoneButton;
     QPushButton * m_pCostsButton;
     QPushButton * m_pSmenaButton;
+    QPushButton * m_pFinButton;
 
 public slots:
     void OnCurrentTaskPressed();
@@ -38,6 +39,7 @@ public slots:
     void OnCostPressed();
     void OnCostsPressed();
     void OnSmenaTaskPressed();
+    void OnFinPressed();
 
 };
 

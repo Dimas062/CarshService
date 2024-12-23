@@ -28,9 +28,9 @@ extern QSqlDatabase ClientDb;
 #ifdef Q_OS_ANDROID
 extern QJniObject* pActivity;
 #endif
-#if defined Q_OS_IOS || defined Q_OS_WINDOWS
+//#if defined Q_OS_IOS || defined Q_OS_WINDOWS
 QSocketBD * serverBD;
-#endif
+//#endif
 
 extern VSMobileSettings settings;//Сейчас шарится между двух потоков (интерекшнклиент и главный)
 
@@ -85,7 +85,6 @@ QString PictureFileToBase64(QString strPath)
 
     // //strPath = "file:"+strPath.replace("?","%3F");
 
-    // qDebug()<<"PictureFileToBase64 after convert strPath = "<<strPath;
     // QImageReader reader(strPath);
     // QImage img;
     // if(!reader.read(&img))
@@ -166,17 +165,17 @@ bool OpenServerBD()
 
      int result = 0;
 
-#ifdef Q_OS_ANDROID
+#ifdef Q_OS_ANDROID__111
     /*Открытие серверной БД*/
     QJniObject jTextHost = QJniObject::fromString(settings.strServAdress);
 
     result = pActivity->callMethod<jint>("OpenServerBD" , "(Ljava/lang/String;)I" , jTextHost.object());
 #endif
-#if defined Q_OS_IOS || defined Q_OS_WINDOWS
+//#if defined Q_OS_IOS || defined Q_OS_WINDOWS
 
     serverBD = new QSocketBD;
 
-#endif
+//#endif
 
     return result;
 }
@@ -184,10 +183,10 @@ bool OpenServerBD()
 int execMainBDQueryUpdate(QString query)
 {
     int res = 0;
-#if defined Q_OS_IOS || defined Q_OS_WINDOWS
+//#if defined Q_OS_IOS || defined Q_OS_WINDOWS
     res = serverBD->execMainBDQueryUpdate(query);
-#endif
-#ifdef Q_OS_ANDROID
+//#endif
+#ifdef Q_OS_ANDROID___1111
     QJniObject jTextQuery = QJniObject::fromString(query);
     res = pActivity->callMethod<jint>("execQueryUpdate","(Ljava/lang/String;)I",jTextQuery.object());
 #endif
@@ -200,15 +199,15 @@ QList<QStringList> execMainBDQuery(QString query)
 {
     QList<QStringList> retVal;
 
-#if defined Q_OS_IOS || defined Q_OS_WINDOWS
+//#if defined Q_OS_IOS || defined Q_OS_WINDOWS
 
     retVal = serverBD->execMainBDQuery(query);
 
-#endif
+//#endif
 
 
 
-#ifdef Q_OS_ANDROID
+#ifdef Q_OS_ANDROID_111
     QJniObject jTextQuery = QJniObject::fromString(query);
     QJniObject QueryResult  =  pActivity->callObjectMethod("execQuery","(Ljava/lang/String;)[Ljava/lang/String;",jTextQuery.object());
 

@@ -17,7 +17,7 @@ QWashPartnerTasksListDlg::QWashPartnerTasksListDlg(QWidget *parent, Qt::WindowFl
 {
     int iButtonHeight = (int)((screenGeometry.height()*0.7)/10)-10;
 
-    strDateFilter = CreateDateBDPeriodFromNow("\"Задачи партнера Мойка\".\"ДатаВремя\"" , 2);
+    m_strDateFilter = CreateDateBDPeriodFromNow("\"Задачи партнера Мойка\".\"ДатаВремя\"" , 2);
 
     QVBoxLayout * pVMainLayout = new QVBoxLayout;
 
@@ -66,8 +66,8 @@ void QWashPartnerTasksListDlg::UpdateTasks()
 {
     m_pTasksListWidget->clear();
 
-    QString strExec= QString("select \"Задачи партнера Мойка\".id , \"Задачи партнера Мойка\".ДатаВремя, \"Точки Партнеров\".Название from \"Задачи партнера Мойка\", \"Точки Партнеров\"  where \"Точки Партнеров\".id = \"Задачи партнера Мойка\".Точка and \"Задачи партнера Мойка\".Партнер='%1'").arg(uuidCurrentPartner.toString());
-
+    //QString strExec= QString("select \"Задачи партнера Мойка\".id , \"Задачи партнера Мойка\".ДатаВремя, \"Точки Партнеров\".Название from \"Задачи партнера Мойка\", \"Точки Партнеров\"  where \"Точки Партнеров\".id = \"Задачи партнера Мойка\".Точка and \"Задачи партнера Мойка\".Партнер='%1' %2").arg(uuidCurrentPartner.toString()).arg(m_strDateFilter);
+    QString strExec= QString("select \"Задачи партнера Мойка\".id, \"Задачи партнера Мойка\".ДатаВремя, \"Точки Партнеров\".Название , (select SUM(\"Отмена Мойки\".Количество * \"Типы задач Мойка\".Цена) from \"Отмена Мойки\" , \"Типы задач Мойка\" where \"Отмена Мойки\".Задача=\"Задачи партнера Мойка\".id and \"Отмена Мойки\".Тип=\"Типы задач Мойка\".id and \"Отмена Мойки\".Удалено=false) as Штрафы , (select  SUM(\"Типы задач Мойка\".Цена * \"Задача Мойка - Типы\".Количество) from \"Задача Мойка - Типы\" , \"Типы задач Мойка\"  where \"Типы задач Мойка\".id = \"Задача Мойка - Типы\".Тип and  \"Задача Мойка - Типы\".Задача = \"Задачи партнера Мойка\".id) as summ  from  \"Задачи партнера Мойка\", \"Точки Партнеров\"  where \"Точки Партнеров\".id = \"Задачи партнера Мойка\".Точка and \"Задачи партнера Мойка\".Партнер='%1' %2").arg(uuidCurrentPartner.toString()).arg(m_strDateFilter);
     QList<QStringList> resTasks = execMainBDQuery(strExec);
 
 
@@ -76,7 +76,17 @@ void QWashPartnerTasksListDlg::UpdateTasks()
 
         QListWidgetItem * pItem = new QListWidgetItem();
 
-        QString strTask = QString("%1 - %2").arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTaskCounter).at(1).toInt()).toString("dd.MM.yyyy hh:mm")).arg(resTasks.at(iTaskCounter).at(2));
+        QString strTask;
+        if(resTasks.at(iTaskCounter).at(3).toInt() > 0)
+        {
+          strTask  = QString("%1 - %2\nСумма: %3 руб. \nАннуляция:%4").arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTaskCounter).at(1).toInt()).toString("dd.MM.yyyy hh:mm")).arg(resTasks.at(iTaskCounter).at(2)).arg(resTasks.at(iTaskCounter).at(4)).arg(resTasks.at(iTaskCounter).at(3));
+          pItem->setIcon(QIcon(":/icons/remove_icon.png"));
+        }
+        else
+        {
+            strTask  = QString("%1 - %2\nСумма: %3 руб.").arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTaskCounter).at(1).toInt()).toString("dd.MM.yyyy hh:mm")).arg(resTasks.at(iTaskCounter).at(2)).arg(resTasks.at(iTaskCounter).at(4));
+        }
+
         pItem->setText(strTask);
         pItem->setFlags(pItem->flags() & ~Qt::ItemIsSelectable);
         pItem->setData(Qt::UserRole , QUuid(resTasks.at(iTaskCounter).at(0)));//uuid задачи
@@ -110,15 +120,15 @@ void QWashPartnerTasksListDlg::OnToCalendatButtonTogled(bool bChecked)
         {
             qint64 timeFrom = QDateTime(calendarDlg.m_SelectedDate, QTime(0,0,0)).toSecsSinceEpoch();
             qint64 timeTo = timeFrom + 86400;
-            strDateFilter = QString(" and \"Задачи партнера Мойка\".ДатаВремя>%1 and \"Задачи партнера Мойка\".ДатаВремя<%2 ").arg(timeFrom).arg(timeTo);
+            m_strDateFilter = QString(" and \"Задачи партнера Мойка\".ДатаВремя>%1 and \"Задачи партнера Мойка\".ДатаВремя<%2 ").arg(timeFrom).arg(timeTo);
 
         }
         else
         {
-            strDateFilter=CreateDateBDPeriodFromNow("\"Задачи партнера Мойка\".Дата Время" , 2);;
+            m_strDateFilter=CreateDateBDPeriodFromNow("\"Задачи партнера Мойка\".Дата Время" , 2);;
             m_pToCalendarButton->setChecked(false);
         }
     }
-    else strDateFilter=CreateDateBDPeriodFromNow("\"Задачи партнера Мойка\".Дата Время" , 2);
+    else m_strDateFilter=CreateDateBDPeriodFromNow("\"Задачи партнера Мойка\".Дата Время" , 2);
     UpdateTasks();
 }

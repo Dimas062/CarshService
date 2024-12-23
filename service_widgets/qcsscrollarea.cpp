@@ -1,5 +1,4 @@
 #include "qcsscrollarea.h"
-#include<QDebug>
 #include <QKeyEvent>
 #include <QEvent>
 #include <QMouseEvent>

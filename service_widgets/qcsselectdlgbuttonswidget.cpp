@@ -20,8 +20,6 @@ QCSSelectDlgButtonsWidget::QCSSelectDlgButtonsWidget(QString strTableName, QStri
 
     QString strExec = QString("select id , \"%1\" from \"%2\" %3").arg(strColName).arg(strTableName).arg(strСondition);
 
-    qDebug()<<"QCSSelectDlgButtonsWidget strExec="<<strExec;
-
     QList<QStringList> resData = execMainBDQuery(strExec);
     for(int iResCounter = 0 ; iResCounter < resData.size() ; iResCounter++)
     {
@@ -77,7 +75,6 @@ void QCSSelectDlgButtonsWidget::SelectIds(QVector<QString> vstrId)
 
 void QCSSelectDlgButtonsWidget::OnButtonPress(bool)
 {
-    qDebug()<<"QCSSelectDlgButtonsWidget::OnButtonPress() ";
     QPushButton * pButton = (QPushButton *)sender();
     m_strId = (pButton->property("id")).value<QString>();
     m_strText = pButton->text();
@@ -96,7 +93,6 @@ void QCSSelectDlgButtonsWidget::OnButtonPress(bool)
         foreach (QPushButton * pAllButton, m_vpButtons) {
             if(pAllButton->isChecked())
             {
-                qDebug()<<"QCSSelectDlgButtonsWidget Button "<<pAllButton->text()<<" IS CHECKED. Add to output array.";
                 m_vstrId.push_back((pAllButton->property("id")).value<QString>());
                 m_vstrText.push_back(pAllButton->text());
             }

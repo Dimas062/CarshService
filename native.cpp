@@ -4,9 +4,6 @@
 #include <jni.h>
 #endif
 #include <QMetaObject>
-#include <QDebug>
-
-
 
 
 

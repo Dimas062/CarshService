@@ -108,7 +108,6 @@ bool QCSBaseDialog::eventFilter(QObject *obj, QEvent *event)
 
 bool QCSBaseDialog::event(QEvent *event)
 {
-    //qDebug()<<"QCSBaseDialog event="<<event;
     if(((QKeyEvent *)event)->key() == Qt::Key_Back)
     {
         if(event->type()==QEvent::KeyPress)

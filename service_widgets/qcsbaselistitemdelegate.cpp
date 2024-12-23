@@ -16,7 +16,7 @@ void QCSBaseListItemDelegate::paint( QPainter * painter, const QStyleOptionViewI
     newOption.font.setPixelSize(20);
 
     QRect currentRect = option.rect;
-    currentRect.adjust(4,4,-4,-4);
+
 
     painter->drawRect(currentRect);
 

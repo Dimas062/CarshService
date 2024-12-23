@@ -1,5 +1,4 @@
 #include "qcsbasedlgscrollwidget.h"
-#include <QDebug>
 #include <QEvent>
 #include <QKeyEvent>
 

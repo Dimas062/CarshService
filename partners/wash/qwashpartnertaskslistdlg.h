@@ -18,7 +18,7 @@ protected:
     QPushButton * m_pToCalendarButton;
     void UpdateTasks();
 
-    QString strDateFilter;
+    QString m_strDateFilter;
 
 public slots:
     void OnTapHoldGesture();

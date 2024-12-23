@@ -115,7 +115,7 @@ void QPointListDlg::SaveUpdateToBD(QUuid uuidPartner)
             QString strAddr = m_pPointsListWidget->item(iItemCounter)->data(Qt::UserRole+2).toString();
 
             QString strInsExec = QString("insert into \"Точки Партнеров\" (id , Название , Адрес, Партнер) values ('%1' , '%2' ,'%3' ,'%4')").arg(strId).arg(strName).arg(strAddr).arg(uuidPartner.toString());
-            qDebug()<<"QPointListDlg::SaveUpdateToBD strInsExec="<<strInsExec;
+
             execMainBDQueryUpdate(strInsExec);
         }
     }
@@ -127,7 +127,7 @@ void QPointListDlg::SaveUpdateToBD(QUuid uuidPartner)
         QString strDelExec = QString("update  \"Точки Партнеров\" set Удалено='true' where Партнер='%1' ").arg(uuidPartner.toString());
 
         execMainBDQueryUpdate(strDelExec);
-        qDebug()<<"QPointListDlg::SaveUpdateToBD strDelExec="<<strDelExec;
+
         for(int iItemCounter = 0 ; iItemCounter<iItemCount ; iItemCounter++)
         {
             QString strId = m_pPointsListWidget->item(iItemCounter)->data(Qt::UserRole).toString();
@@ -138,7 +138,7 @@ void QPointListDlg::SaveUpdateToBD(QUuid uuidPartner)
 
 
             QString strInsExec = QString("insert into \"Точки Партнеров\" (id , Название , Адрес, Партнер) values ('%1' , '%2' ,'%3' ,'%4') ON DUPLICATE KEY UPDATE Название='%2', Адрес='%3', Удалено = 'false' ").arg(strId).arg(strName).arg(strAddr).arg(uuidPartner.toString());
-            qDebug()<<"QPointListDlg::SaveUpdateToBD strInsExec="<<strInsExec;
+
             execMainBDQueryUpdate(strInsExec);
         }
     }

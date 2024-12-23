@@ -55,10 +55,6 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
     QString ResultData = QString::fromLocal8Bit(QSocketBDNetClient::getInstance().m_LastData);
 #endif
 
-
-
-    //qDebug()<<"ResultData="<<ResultData;
-
     /*Нулевой результат*/
     if(ResultData == "##**NULLRESULT**##")
     {

@@ -17,8 +17,6 @@ QCSSelectWashTypessWidget::QCSSelectWashTypessWidget(QWidget *parent)
 
     QString strExec = QString("select id , Тип from \"Типы задач Мойка\" where Удалено<>'true' ");
 
-    qDebug()<<"QCSSelectDlgButtonsWidget strExec="<<strExec;
-
     QList<QStringList> resData = execMainBDQuery(strExec);
     for(int iResCounter = 0 ; iResCounter < resData.size() ; iResCounter++)
     {
@@ -66,7 +64,9 @@ QVector<WashTypeDatas> QCSSelectWashTypessWidget::GetData()
         WashTypeDatas curData;
 
         curData.id = sWashDlg.m_pButton->property("id").toUuid();
+
         curData.isSelected = sWashDlg.m_pButton->isChecked();
+
         if(sWashDlg.m_pWashTypeDlg->m_pDayButton->isChecked())
             curData.iDay = sWashDlg.m_pWashTypeDlg->m_pDayNumberLineText->getText().toInt();
         else curData.iDay = 0;
@@ -88,8 +88,9 @@ void QCSSelectWashTypessWidget::SetData(QVector<WashTypeDatas> datas)
         foreach (sWashButtonsDlgs sWashDlg, m_vButtonsDlgs) {
             if(data.id == sWashDlg.m_pButton->property("id").toUuid())
             {
+                disconnect(sWashDlg.m_pButton,SIGNAL(toggled(bool)),this,SLOT(OnButtonPress(bool)));
                 sWashDlg.m_pButton->setChecked(data.isSelected);
-
+                connect(sWashDlg.m_pButton,SIGNAL(toggled(bool)),this,SLOT(OnButtonPress(bool)));
                 if(data.iDay == 0)
                 {
                     sWashDlg.m_pWashTypeDlg->m_pDayButton->setChecked(false);

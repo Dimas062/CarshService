@@ -32,6 +32,7 @@ protected:
     QCSWashTypeSelectDlg m_WashTypeSelectDlg;
 
     QPushButton * m_pPointButton;
+    QPushButton * m_pPenButton;
     QPushButton * m_pSubtaskButton;
     QPushButton * m_pToCalendarButton;
     QLabel * m_pCalendarLabel;
@@ -51,6 +52,7 @@ public slots:
     void OnSubtaskPressedSlot();
     void OnToCalendatButtonPressed();
     void OnLoadVedomostButtonPressed();
+    void OnPenPressedSlot();
 };
 
 #endif // QWashPARTNERTASK_H

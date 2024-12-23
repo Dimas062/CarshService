@@ -225,7 +225,6 @@ void QStickPartnerTask::LoadDataFromBD(QUuid taskUuid)
         /*Загрузка картинок задачи*/
         QString strPicExec=QString("select \"Документы\".\"Изображение\" , \"Документы\".Тип from \"Документы\", \"Задача-Документы задач\", \"Задачи партнера Оклейка\" where Документы.id = \"Задача-Документы задач\".Документ and \"Задачи партнера Оклейка\".id = \"Задача-Документы задач\".Задача and \"Задачи партнера Оклейка\".id ='%1'").arg(m_uuidSourseRecord.toString());
         QList<QStringList> resPicTasks = execMainBDQuery(strPicExec);
-        qDebug()<<"strPicExec = "<<strPicExec;
 
         for(int iPicTasksCounter = 0 ; iPicTasksCounter < resPicTasks.size() ; iPicTasksCounter++)
         {

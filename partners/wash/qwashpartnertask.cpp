@@ -7,6 +7,7 @@
 #include "service_widgets/qcsselectdialog.h"
 #include "common.h"
 #include "BDPatterns.h"
+#include "qwashpartnerpenlistdlg.h"
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentPartner;
@@ -34,8 +35,6 @@ QWashPartnerTask::QWashPartnerTask(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
     m_pCommentLineText = new QLineText("Комментарий:");
     pVMainLayout->addWidget(m_pCommentLineText);
 
-
-
     QHBoxLayout * pHCalendarLayout = new QHBoxLayout;
 
     m_pCalendarLabel = new QLabel(QString("Дата: %1").arg(m_selDate.toString("dd.MM.yyyy")));
@@ -62,6 +61,11 @@ QWashPartnerTask::QWashPartnerTask(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
     m_pLoadVedomostButton->setFixedHeight(iButtonHeight);
     pVMainLayout->addWidget(m_pLoadVedomostButton, 0 , Qt::AlignHCenter);
 
+    m_pPenButton = new QPushButton("Рекламации");
+    m_pPenButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    pVMainLayout->addWidget(m_pPenButton);
+    connect(m_pPenButton,SIGNAL(released()),this,SLOT(OnPenPressedSlot()));
+
     QPushButton * pApplyButton = new QPushButton("Внести");
     pApplyButton->setIcon(QIcon(":/icons/done_icon.png"));
     pApplyButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
@@ -84,7 +88,6 @@ void QWashPartnerTask::OnLoadVedomostButtonPressed()
     m_pLoadVedomostDlg->exec();
     isReady();
 }
-
 
 bool QWashPartnerTask::isReady()
 {
@@ -197,7 +200,7 @@ void QWashPartnerTask::SaveDataToBD()
                 if(data.iNigth>0)
                 {
                     QUuid uuidTaskType = QUuid::createUuid();
-                    QString strExecTypes = QString("insert into \"Задача Мойка - Типы\" (id, Задача, Тип , Ночь, Количество) values ('%1' , '%2' , '%3' , '%4' , '%5')").arg(uuidTaskType.toString()).arg(m_uuidSourseRecord.toString()).arg(data.id.toString()).arg("true").arg(data.iDay);
+                    QString strExecTypes = QString("insert into \"Задача Мойка - Типы\" (id, Задача, Тип , Ночь, Количество) values ('%1' , '%2' , '%3' , '%4' , '%5')").arg(uuidTaskType.toString()).arg(m_uuidSourseRecord.toString()).arg(data.id.toString()).arg("true").arg(data.iNigth);
                     execMainBDQueryUpdate(strExecTypes);
                 }
             }
@@ -224,7 +227,7 @@ void QWashPartnerTask::LoadDataFromBD(QUuid taskUuid)
     QList<QStringList> resTasks = execMainBDQuery(strExec);
     for(int iTasksCounter = 0 ; iTasksCounter < resTasks.size() ; iTasksCounter++)
     {
-        m_pTopLabel->setText(QString("<b>Оклейка. %1</b>").arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTasksCounter).at(0).toInt()).toString("dd.MM.yyyy hh:mm")));
+        m_pTopLabel->setText(QString("<b>Мойка. %1</b>").arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTasksCounter).at(0).toInt()).toString("dd.MM.yyyy hh:mm")));
 
         strIdPoint = resTasks.at(iTasksCounter).at(1);
 
@@ -254,7 +257,7 @@ void QWashPartnerTask::LoadDataFromBD(QUuid taskUuid)
                  if(m_vWashDatas[iDatasCounter].id == QUuid::fromString(res.at(0)))
                  {
                      m_vWashDatas[iDatasCounter].isSelected=true;
-                     if(res.at(1) == 't')
+                     if(res.at(1) == "true")
                          m_vWashDatas[iDatasCounter].iNigth = res.at(2).toInt();
                      else
                          m_vWashDatas[iDatasCounter].iDay = res.at(2).toInt();
@@ -266,7 +269,6 @@ void QWashPartnerTask::LoadDataFromBD(QUuid taskUuid)
         /*Загрузка картинок задачи*/
         QString strPicExec=QString("select \"Документы\".\"Изображение\" , \"Документы\".Тип from \"Документы\", \"Задача-Документы задач\", \"Задачи партнера Мойка\" where Документы.id = \"Задача-Документы задач\".Документ and \"Задачи партнера Мойка\".id = \"Задача-Документы задач\".Задача and \"Задачи партнера Мойка\".id ='%1'").arg(m_uuidSourseRecord.toString());
         QList<QStringList> resPicTasks = execMainBDQuery(strPicExec);
-        qDebug()<<"strPicExec = "<<strPicExec;
 
         for(int iPicTasksCounter = 0 ; iPicTasksCounter < resPicTasks.size() ; iPicTasksCounter++)
         {
@@ -277,9 +279,30 @@ void QWashPartnerTask::LoadDataFromBD(QUuid taskUuid)
                 m_pLoadVedomostDlg->m_pPicturesWidget->AddImage(tmpImg);
             }
         }
+
+        /*Проверка рекламаций*/
+        QString strPenSumExec=QString("select SUM(\"Отмена Мойки\".Количество * \"Типы задач Мойка\".Цена) from \"Отмена Мойки\" , \"Типы задач Мойка\" where \"Отмена Мойки\".Задача='%1' and \"Отмена Мойки\".Тип=\"Типы задач Мойка\".id and \"Отмена Мойки\".Удалено=false ").arg(m_uuidSourseRecord.toString());
+        QList<QStringList> resPenSumTasks = execMainBDQuery(strPenSumExec);
+        for(int iPenSumCounter = 0 ; iPenSumCounter < resPenSumTasks.size() ; iPenSumCounter++)
+        {
+            int iPenSumm = resPenSumTasks.at(iPenSumCounter).at(0).toInt();
+            if(iPenSumm > 0)
+            {
+                m_pPenButton->setVisible(true);
+                m_pPenButton->setText(QString("Рекламации (%1 руб.)").arg(iPenSumm));
+            }
+            else
+                m_pPenButton->setVisible(false);
+        }
     }
 
     isReady();
+}
+
+void QWashPartnerTask::OnPenPressedSlot()
+{
+    QWashPartnerPenListDlg dlg(m_uuidSourseRecord);
+    dlg.exec();
 }
 
 

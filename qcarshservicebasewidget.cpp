@@ -227,8 +227,6 @@ void QCarshServiceBaseWidget::OnLoginPressed()
     {
         uuidCurrentPartner = QUuid(resParners.at(iPartnerCounter).at(0));
 
-        qDebug()<<"resParners.at(iPartnerCounter).at(1)" << resParners.at(iPartnerCounter).at(1);
-
         if(resParners.at(iPartnerCounter).at(1) == "f")
         {
             m_pStatusLabel->setText("<font color=\"red\">Ваша учётная запись не подтверждена или заблокирована</font>");

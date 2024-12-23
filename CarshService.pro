@@ -33,6 +33,8 @@ SOURCES += \
     partners/wash/qcswashtypedlg.cpp \
     partners/wash/qcswashtypeselectdlg.cpp \
     partners/wash/qwashpartnermaindlg.cpp \
+    partners/wash/qwashpartnerpendlg.cpp \
+    partners/wash/qwashpartnerpenlistdlg.cpp \
     partners/wash/qwashpartnertask.cpp \
     partners/wash/qwashpartnertaskslistdlg.cpp \
     pictures/qpictureswidget.cpp \
@@ -104,6 +106,8 @@ HEADERS += \
     partners/wash/qcswashtypedlg.h \
     partners/wash/qcswashtypeselectdlg.h \
     partners/wash/qwashpartnermaindlg.h \
+    partners/wash/qwashpartnerpendlg.h \
+    partners/wash/qwashpartnerpenlistdlg.h \
     partners/wash/qwashpartnertask.h \
     partners/wash/qwashpartnertaskslistdlg.h \
     pictures/qpictureswidget.h \
