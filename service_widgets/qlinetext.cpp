@@ -25,6 +25,11 @@ void QLineText::SetEnabled(bool bEnabled)
     m_pLineEdit->setEnabled(bEnabled);
 }
 
+QString QLineText::getLabelText()
+{
+    return m_pLabel->text();
+}
+
 
 bool QLineText::CheckColorLenght()
 {

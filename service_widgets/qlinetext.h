@@ -18,6 +18,8 @@ public:
     QString getText() const;
     void setText(QString);
 
+    QString getLabelText();
+
 protected:
     QLabel * m_pLabel;
     QLineEdit * m_pLineEdit;
