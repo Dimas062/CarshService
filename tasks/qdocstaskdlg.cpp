@@ -5,6 +5,7 @@
 #include "common.h"
 #include "BDPatterns.h"
 
+
 #define need_pay QUuid::fromString(m_strDocId) == QUuid::fromString("d7e6ca81-d6fe-405e-8a39-961ceb9bd1f6")
 
 extern QRect screenGeometry;
@@ -71,9 +72,6 @@ QDocsTaskDlg::QDocsTaskDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
     }
 
     this->setLayout(pVMainLayout);
-
-
-
 }
 
 
@@ -276,7 +274,7 @@ void QDocsTaskDlg::LoadDataFromBD(QUuid uuidSourseRecord)
 
         m_pSelProviderCarshWidget->m_uuidProvider = QUuid::fromString(resTasks.at(iTasksCounter).at(4));
         m_pSelProviderCarshWidget->m_uuidCarsh = QUuid::fromString(resTasks.at(iTasksCounter).at(5));
-
+        OnCarshChanged();//Для раскраски при открытии задачи
         /*Загрузка расширения задачи*/
         m_uuidSourseExtention = QUuid::fromString(resTasks.at(iTasksCounter).at(3));
 

@@ -238,6 +238,7 @@ void QPlateTaskDialog::LoadDataFromBD(QUuid uuidSourseRecord)
 
         m_pSelProviderCarshWidget->m_uuidProvider = QUuid::fromString(resTasks.at(iTasksCounter).at(4));
         m_pSelProviderCarshWidget->m_uuidCarsh = QUuid::fromString(resTasks.at(iTasksCounter).at(5));
+        OnCarshChanged();//Для раскраски при открытии задачи
 
         /*Загрузка расширения задачи*/
         m_uuidSourseExtention = QUuid::fromString(resTasks.at(iTasksCounter).at(3));

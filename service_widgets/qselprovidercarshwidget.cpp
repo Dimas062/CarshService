@@ -1,8 +1,12 @@
 #include "qselprovidercarshwidget.h"
 #include "qcsselectdialog.h"
 #include <QHBoxLayout>
+#include "common.h"
 
 extern int iButtonHeight;
+extern QUuid uuidCurrentUser;
+extern QUuid uuidCurrentPartner;
+extern UserTypes CurrentUserType;
 
 QSelProviderCarshWidget::QSelProviderCarshWidget(QUuid uuidProvider , QUuid uuidCarsh  , QWidget *parent)
     : QWidget{parent}
@@ -15,10 +19,13 @@ QSelProviderCarshWidget::QSelProviderCarshWidget(QUuid uuidProvider , QUuid uuid
 
     pVMainLayout->addSpacing(5);
 
-    m_pProviderButton = new QPushButton("Поставщик");
-    m_pProviderButton->setFixedHeight((int)(iButtonHeight*1.5));
-    connect(m_pProviderButton,SIGNAL(pressed()),this,SLOT(OnProviderPressedSlot()));
-    pVMainLayout->addWidget(m_pProviderButton);
+    if(CurrentUserType == Emploee)
+    {
+        m_pProviderButton = new QPushButton("Поставщик");
+        m_pProviderButton->setFixedHeight((int)(iButtonHeight*1.5));
+        connect(m_pProviderButton,SIGNAL(pressed()),this,SLOT(OnProviderPressedSlot()));
+        pVMainLayout->addWidget(m_pProviderButton);
+    }
 
     pVMainLayout->addSpacing(5);
 
@@ -34,12 +41,15 @@ bool QSelProviderCarshWidget::isReadyColored()
 {
     bool retVal = true;
 
-    if(m_uuidProvider==QUuid())
+    if(CurrentUserType == Emploee)
     {
-        m_pProviderButton->setStyleSheet("QPushButton {color: red;}");
-        retVal = false;
+        if(m_uuidProvider==QUuid())
+        {
+            m_pProviderButton->setStyleSheet("QPushButton {color: red;}");
+            retVal = false;
+        }
+        else m_pProviderButton->setStyleSheet("QPushButton {color: black;}");
     }
-    else m_pProviderButton->setStyleSheet("QPushButton {color: black;}");
 
     if(m_uuidCarsh==QUuid())
     {
@@ -67,7 +77,19 @@ void QSelProviderCarshWidget::OnProviderPressedSlot()
 
 void QSelProviderCarshWidget::OnCarshPressedSlot()
 {
-    QCSSelectDialog dlg("Заказчики");
+    QString strAddCondition = QString(" where Удалено<>true");
+
+    if(CurrentUserType == Emploee)
+    {
+        strAddCondition = QString(" where Удалено<>true and id in (select Заказчик from ИсполнителиЗаказчики where ИсполнительПартнер = '%1')").arg(uuidCurrentUser.toString());
+    }
+
+    if(CurrentUserType == PartnerWasher || CurrentUserType == PartnerPlate || CurrentUserType == PartnerStick)
+    {
+        strAddCondition = QString(" where Удалено<>true and id in (select Заказчик from ИсполнителиЗаказчики where ИсполнительПартнер = '%1')").arg(uuidCurrentPartner.toString());
+    }
+
+    QCSSelectDialog dlg("Заказчики" , "Название", true , false , QUuid() , strAddCondition);
 
     dlg.SelectId(m_uuidCarsh);
     if(dlg.exec()==QDialog::Accepted)

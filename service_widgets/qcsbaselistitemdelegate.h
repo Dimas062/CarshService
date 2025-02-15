@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QStyledItemDelegate>
 
+enum CSListItemColors {noColor , redColor , greenColor};
+
 class QCSBaseListItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT

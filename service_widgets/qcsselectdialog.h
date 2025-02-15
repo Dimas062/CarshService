@@ -15,6 +15,13 @@ class QCSSelectDialog : public QCSBaseDialog
 {
     Q_OBJECT
 public:
+    //strTableName - таблица, из которой выбираем значения для выбора
+    //strColName - столбец, значения из которого выбираем
+    //bChecable - выделяемые кнопки в виджите или сразу генерит событие "нажата"(плохое название, в реальности генерит или нет дочерний виджит каждый раз сигнал нажата, на который уже реагирует bAutoChecable
+    //bAutoChecable - отображать кнопку Внести/выбрать или при выборе кнопки сразу закрвать с accept
+    //uuidEmpl - в шапке выведет информацию о пользователе
+    //bMultiSelect - можгно ли выбрать несколько кнопок или они будут как радиобаттоны
+    //strСondition - дополнительные условия в запросе выбора значений столбца strColName из таблицы strTableName
     QCSSelectDialog(QString strTableName , QString strColName = "Название", bool bChecable = true , bool bAutoChecable = false , QUuid uuidEmpl = QUuid(), QString strСondition =  " " , bool bMultiSelect = false , QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
     QCSSelectDlgButtonsWidget selectWidget;
     QLabel * m_pTopLabel;

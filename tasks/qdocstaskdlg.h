@@ -5,8 +5,7 @@
 #include "service_widgets/qcspaybasedialog.h"
 
 #include "service_widgets/qlinetext.h"
-#include "service_widgets/qloaddoclinewidget.h"
-#include "service_widgets/qloaddocsdlg.h"
+
 #include "service_widgets/qselprovidercarshwidget.h"
 #include <QLabel>
 #include <QObject>

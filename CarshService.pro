@@ -21,6 +21,7 @@ SOURCES += \
     emploee_widgets/QEmploeeTasksDlg.cpp \
     emploee_widgets/qemplcostsdlg.cpp \
     emploee_widgets/qemploeemaindlg.cpp \
+    emploee_widgets/qemplsalarydlg.cpp \
     main.cpp \
     native.cpp \
     partners/plates/qplatepartnermaindlg.cpp \
@@ -60,6 +61,7 @@ SOURCES += \
     register_dlgs/qregisterpartnerPlatedlg.cpp \
     service_widgets/qcalendardataselectdlg.cpp \
     service_widgets/qloaddocsdlg.cpp \
+    service_widgets/qmonthselectdlg.cpp \
     service_widgets/qnotecalendarwidget.cpp \
     qsettingsdlg.cpp \
     service_widgets/QCSButton.cpp \
@@ -95,6 +97,7 @@ HEADERS += \
     emploee_widgets/QEmploeeTasksDlg.h \
     emploee_widgets/qemplcostsdlg.h \
     emploee_widgets/qemploeemaindlg.h \
+    emploee_widgets/qemplsalarydlg.h \
     native.h \
     partners/plates/qplatepartnermaindlg.h \
     partners/plates/qplatepartnertask.h \
@@ -133,6 +136,7 @@ HEADERS += \
     register_dlgs/qregisterpartnerPlatedlg.h \
     service_widgets/qcalendardataselectdlg.h \
     service_widgets/qloaddocsdlg.h \
+    service_widgets/qmonthselectdlg.h \
     service_widgets/qnotecalendarwidget.h \
     qsettingsdlg.h \
     service_widgets/QCSButton.h \

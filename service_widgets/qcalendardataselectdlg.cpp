@@ -76,56 +76,6 @@ QCalendarDataSelectDlg::QCalendarDataSelectDlg(QDate startDate , QWidget *parent
     pMainVLayout->addWidget(m_pCalendarWidget);
 
 
-    // QColor redColor = QColor("PeachPuff");
-    // QColor greenColor = QColor("LightGreen");
-    // QBrush redBrush(redColor);
- //   QBrush greenBrush(greenColor);
-//    QLinearGradient gradient(1,6,1,6);
-//    gradient.setColorAt(0,redColor);
-//    //gradient.setColorAt(0.499,redColor);
-//    //gradient.setColorAt(0.5,greenColor);
-//    gradient.setColorAt(1,greenColor);
-//    QBrush red_greenBrush(gradient);
-//    QSet<QDate> setRedDates;
-
-    // if(type==CalendarTypes::DayTodos)
-    // {
-    //      QString queryString = QString("select DateTime,IsDone from DayTodos");
-
-    //      QSqlQuery query;
-
-    //      if(query.exec(queryString))
-    //      {
-    //          while(query.next())
-    //          {
-    //              QDate date = QDateTime::fromSecsSinceEpoch(query.value(0).toInt()).date();
-    //              if(setRedDates.find(date) == setRedDates.end()) //Если дата один раз помечена как красная(есть не выполненнные задания), то следующие разы её не рассматриваем
-    //              {
-    //                  QTextCharFormat format;
-    //                  if(query.value(1).toInt() == 0)
-    //                  {
-    //                      format.setBackground(redBrush);
-    //                      setRedDates.insert(date);
-    //                  }
-    //                  else format.setBackground(greenBrush);
-    //                  m_pCalendarWidget->setDateTextFormat(date , format);
-    //              }
-    //          }
-    //      }
-
-    //      queryString = QString("select DateTime from Notifications");
-    //      if(query.exec(queryString))
-    //      {
-    //          while(query.next())
-    //          {
-    //              QDate date = QDateTime::fromSecsSinceEpoch(query.value(0).toInt()).date();
-    //              m_pCalendarWidget->m_Props[date].bIsAlarmSeted = true;
-    //          }
-    //      }
-
-    // }
-
-    //m_pCalendarWidget->setFixedWidth(screenGeometry.width()*0.9);
     m_pCalendarWidget->setFixedHeight(screenGeometry.height()*0.5); //считаем, что по центру и по 150 сверху и снизу под рекламу
     m_pCalendarWidget->setGridVisible(true);
 

@@ -12,6 +12,7 @@
 #include <QDate>
 #include <QVector>
 #include "qcswashtypeselectdlg.h"
+#include "service_widgets/qselprovidercarshwidget.h"
 
 class QWashPartnerTask : public QCSBaseDialog
 {
@@ -39,6 +40,7 @@ protected:
 
     QLoadDocsDlg * m_pLoadVedomostDlg;
     QPushButton * m_pLoadVedomostButton;
+    QSelProviderCarshWidget * m_pSelProviderCarshWidget;
 
     QDate m_selDate;
 
@@ -53,6 +55,7 @@ public slots:
     void OnToCalendatButtonPressed();
     void OnLoadVedomostButtonPressed();
     void OnPenPressedSlot();
+    void OnCarshChanged();
 };
 
 #endif // QWashPARTNERTASK_H

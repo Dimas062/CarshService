@@ -11,6 +11,7 @@
 #include <QString>
 #include <QDate>
 #include <QVector>
+#include "service_widgets/qselprovidercarshwidget.h"
 
 class QStickPartnerTask : public QCSBaseDialog
 {
@@ -37,7 +38,7 @@ protected:
     QPushButton * m_pLoadAutoFotoButton;
 
     QDate m_selDate;
-
+    QSelProviderCarshWidget * m_pSelProviderCarshWidget;
 
     bool isReady();
     QUuid m_uuidSourseRecord;
@@ -48,6 +49,7 @@ public slots:
     void OnSubtaskPressedSlot();
     void OnToCalendatButtonPressed();
     void OnLoadAutoFotoButtonPressed();
+    void OnCarshChanged();
 };
 
 #endif // QStickPARTNERTASK_H

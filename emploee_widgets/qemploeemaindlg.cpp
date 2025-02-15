@@ -8,6 +8,7 @@
 #include "tasks/qrettozonedialog.h"
 #include "tasks/qsmenadlg.h"
 #include "tasks/qdocstaskdlg.h"
+#include "emploee_widgets/qemplsalarydlg.h"
 #include "qemplcostsdlg.h"
 #include <QGuiApplication>
 #include <QHBoxLayout>
@@ -156,7 +157,8 @@ void QEmploeeMainDlg::OnCostPressed()
 
 void QEmploeeMainDlg::OnFinPressed()
 {
-
+    QEmplSalaryDlg dlg;
+    dlg.exec();
 }
 
 

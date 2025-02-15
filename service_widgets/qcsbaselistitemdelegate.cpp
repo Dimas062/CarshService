@@ -20,6 +20,25 @@ void QCSBaseListItemDelegate::paint( QPainter * painter, const QStyleOptionViewI
 
     painter->drawRect(currentRect);
 
+    const QAbstractItemModel *model = index.model();
+    if (model)
+    {
+        QVariant varData = model->data(index,Qt::UserRole);
+        if(varData != QVariant())
+        {
+            int color = varData.toInt();
+            if(color == redColor)
+                painter->fillRect(currentRect , QColor(240 , 50 , 50));
+            if(color == greenColor)
+                painter->fillRect(currentRect , QColor(50 , 240 , 50));
+        }
+    }
+    // QBrush brushBackground;
+
+    // brushBackground.setColor(Qt::red);
+
+    // painter->fillRect(currentRect , brushBackground.color());
+
     //  newOption.decorationAlignment = Qt::AlignRight;
 
 

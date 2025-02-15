@@ -11,6 +11,7 @@
 extern QRect screenGeometry;
 extern QUuid uuidCurrentPartner;
 extern int iButtonHeight;
+extern QColor currentWorkdayColor;
 
 QStickPartnerTask::QStickPartnerTask(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f)
 {
@@ -63,6 +64,10 @@ QStickPartnerTask::QStickPartnerTask(QWidget *parent, Qt::WindowFlags f ):QCSBas
     m_pLoadAutoFotoButton->setFixedHeight(iButtonHeight);
     pVMainLayout->addWidget(m_pLoadAutoFotoButton, 0 , Qt::AlignHCenter);
 
+    m_pSelProviderCarshWidget = new QSelProviderCarshWidget();
+    pVMainLayout->addWidget(m_pSelProviderCarshWidget);
+    connect(m_pSelProviderCarshWidget , SIGNAL(CarshChanged()) , this , SLOT(OnCarshChanged()));
+
     QPushButton * pApplyButton = new QPushButton("Внести");
     pApplyButton->setIcon(QIcon(":/icons/done_icon.png"));
     pApplyButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
@@ -114,6 +119,11 @@ bool QStickPartnerTask::isReady()
     }
     else m_pLoadAutoFotoButton->setStyleSheet("QPushButton {color: black;}");
 
+    if(!m_pSelProviderCarshWidget->isReadyColored())
+    {
+        retVal = false;
+    }
+
     return retVal;
 }
 
@@ -135,7 +145,7 @@ void QStickPartnerTask::SaveDataToBD()
         /*Сама задача*/
         QUuid uuidTask = QUuid::createUuid();
 
-        QString strExec = QString("insert into \"Задачи партнера Оклейка\" (id, Партнер, ДатаВремя, Точка, \"Время выполнения\" , Комментарий , Номер) values ('%1','%2','%3','%4','%5','%6','%7')").arg(uuidTask.toString()).arg(uuidCurrentPartner.toString()).arg(QDateTime::currentDateTime().toSecsSinceEpoch()).arg(strIdPoint).arg(QDateTime(m_selDate, QTime(0,0,1)).toSecsSinceEpoch()).arg(m_pCommentLineText->getText()).arg(m_pNumberLineText->getText());
+        QString strExec = QString("insert into \"Задачи партнера Оклейка\" (id, Партнер, ДатаВремя, Точка, \"Время выполнения\" , Комментарий , Номер , Заказчик) values ('%1','%2','%3','%4','%5','%6','%7','%8')").arg(uuidTask.toString()).arg(uuidCurrentPartner.toString()).arg(QDateTime::currentDateTime().toSecsSinceEpoch()).arg(strIdPoint).arg(QDateTime(m_selDate, QTime(0,0,1)).toSecsSinceEpoch()).arg(m_pCommentLineText->getText()).arg(m_pNumberLineText->getText()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
         execMainBDQueryUpdate(strExec);
 
         /*Работы*/
@@ -170,6 +180,9 @@ void QStickPartnerTask::SaveDataToBD()
         strExec = QString("update \"Задачи партнера Оклейка\" set Партнер = '%1'  where id='%2'").arg(uuidCurrentPartner.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
+        strExec = QString("update \"Задачи партнера Оклейка\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidSourseRecord.toString());
+        execMainBDQueryUpdate(strExec);
+
         /*Работы*/
         /*Удалим старые работы*/
         strExec = QString("delete from \"Задача Оклейка - Типы\" where Задача= '%1'").arg(m_uuidSourseRecord.toString());
@@ -199,7 +212,7 @@ void QStickPartnerTask::LoadDataFromBD(QUuid taskUuid)
 {
     m_uuidSourseRecord=taskUuid;
 
-    QString strExec = QString("select ДатаВремя, Точка, Номер , \"Время выполнения\" , Комментарий , Партнер from \"Задачи партнера Оклейка\"  where id='%1'").arg(m_uuidSourseRecord.toString());
+    QString strExec = QString("select ДатаВремя, Точка, Номер , \"Время выполнения\" , Комментарий , Заказчик from \"Задачи партнера Оклейка\"  where id='%1'").arg(m_uuidSourseRecord.toString());
 
     QList<QStringList> resTasks = execMainBDQuery(strExec);
     for(int iTasksCounter = 0 ; iTasksCounter < resTasks.size() ; iTasksCounter++)
@@ -214,6 +227,9 @@ void QStickPartnerTask::LoadDataFromBD(QUuid taskUuid)
         m_pCalendarLabel->setText(QString("Дата: %1").arg(m_selDate.toString("dd.MM.yyyy")));
 
         m_pCommentLineText->setText(resTasks.at(iTasksCounter).at(4));
+
+        m_pSelProviderCarshWidget->m_uuidCarsh = QUuid::fromString(resTasks.at(iTasksCounter).at(5));
+        OnCarshChanged();//Для раскраски при открытии задачи
 
         /*Загружаем типы выполненных работ*/
         m_vstrIdSubtasks.clear();
@@ -240,6 +256,21 @@ void QStickPartnerTask::LoadDataFromBD(QUuid taskUuid)
     isReady();
 }
 
+//По изменению заказчика только раскраска, сам заказчик запишется при сохранении
+void QStickPartnerTask::OnCarshChanged()
+{
+    QString strExecColor = QString("select Цвет from Заказчики where id='%1'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
+
+    QList<QStringList> colorRes = execMainBDQuery(strExecColor);
+    if(colorRes.size()>0)
+    {
+        currentWorkdayColor = colorRes.at(0).at(0).toLongLong();
+        setStyleSheet(QString("QDialog , QScrollArea , QCSBaseDlgScrollWidget, QListWidget, QLabel , QCSSelectDlgButtonsWidget {background-color: rgb(%1,%2,%3)}").arg(currentWorkdayColor.red()).arg(currentWorkdayColor.green()).arg(currentWorkdayColor.blue()));
+        //m_PayDlg.setStyleSheet(QString("QDialog , QScrollArea , QCSBaseDlgScrollWidget, QListWidget, QLabel , QCSSelectDlgButtonsWidget {background-color: rgb(%1,%2,%3)}").arg(currentWorkdayColor.red()).arg(currentWorkdayColor.green()).arg(currentWorkdayColor.blue()));
+    }
+
+    isReady();
+}
 
 void QStickPartnerTask::OnPointPressedSlot()
 {

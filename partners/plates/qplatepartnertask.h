@@ -3,6 +3,7 @@
 
 #include "service_widgets/qcsbasedialog.h"
 #include "service_widgets/qlinetext.h"
+#include "service_widgets/qselprovidercarshwidget.h"
 
 #include <QObject>
 #include <QPushButton>
@@ -29,9 +30,9 @@ protected:
     QPushButton * m_pPointButton;
     QPushButton * m_pToCalendarButton;
     QLabel * m_pCalendarLabel;
+    QSelProviderCarshWidget * m_pSelProviderCarshWidget;
 
     QDate m_selDate;
-
 
     bool isReady();
     QUuid m_uuidSourseRecord;
@@ -40,7 +41,7 @@ public slots:
     void OnApplyPressedSlot();
     void OnPointPressedSlot();
     void OnToCalendatButtonPressed();
-
+    void OnCarshChanged();
 };
 
 #endif // QPLATEPARTNERTASK_H

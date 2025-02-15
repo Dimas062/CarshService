@@ -236,6 +236,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
 
         if(QUuid(resParners.at(iPartnerCounter).at(2)) == QUuid("9c671ee9-2749-4717-a343-b18825855c29")) //Номера
         {
+            CurrentUserType = PartnerPlate;
             QPlatePartnerMainDlg dlg;
 
             m_bChildBackRealeseProcessed = false;
@@ -246,6 +247,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
 
         if(QUuid(resParners.at(iPartnerCounter).at(2)) == QUuid("082cf73c-6f6f-4167-ae89-b87c347091b2")) //Оклейка
         {
+            CurrentUserType = PartnerStick;
             QStickPartnerMainDlg dlg;
 
             m_bChildBackRealeseProcessed = false;
@@ -256,6 +258,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
 
         if(QUuid(resParners.at(iPartnerCounter).at(2)) == QUuid("932a4dc1-238b-478d-8911-3de46dd8da65")) //Мойка
         {
+            CurrentUserType = PartnerWasher;
             QWashPartnerMainDlg dlg;
 
             m_bChildBackRealeseProcessed = false;

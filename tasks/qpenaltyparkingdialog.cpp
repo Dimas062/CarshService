@@ -497,6 +497,7 @@ void QPenaltyParkingDialog::LoadDataFromBD(QUuid uuidSourseRecord)
 
         /*Загрузка расширения задачи*/
         m_uuidSourseExtention = QUuid::fromString(resTasks.at(iTasksCounter).at(3));
+        OnCarshChanged();//Для раскраски при открытии задачи
 
         QString strExtenExec = QString("select \"Расширение задачи ШС\".\"Оплата парковки\" , \"Расширение задачи ШС\".Госномер,\"Расширение задачи ШС\".\"Отдел ГАИ\",\"Расширение задачи ШС\".\"Причина задержания\", \"Расширение задачи ШС\".Штрафстоянка , \"Расширение задачи ШС\".\"Возврат в зону\" from \"Расширение задачи ШС\" where  \"Расширение задачи ШС\".id='%1'").arg(m_uuidSourseExtention.toString());
 
