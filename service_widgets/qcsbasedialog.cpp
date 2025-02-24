@@ -9,8 +9,43 @@
 extern QRect screenGeometry;
 extern QColor currentWorkdayColor;
 
+void hideAllWidgetsInLayout(QLayout *layout)
+{
+    if (!layout) {
+        return;
+    }
+
+    for (int i = 0; i < layout->count(); ++i) {
+        QLayoutItem *item = layout->itemAt(i);
+        if (item->widget()) {
+            item->widget()->hide(); // Скрываем виджет
+        } else if (item->layout()) {
+            hideAllWidgetsInLayout(item->layout()); // Рекурсивно скрываем элементы вложенного лейаута
+        }
+    }
+
+}
+
+void showAllWidgetsInLayout(QLayout *layout)
+{
+    if (!layout) {
+        return;
+    }
+
+    for (int i = 0; i < layout->count(); ++i) {
+        QLayoutItem *item = layout->itemAt(i);
+        if (item->widget()) {
+            item->widget()->show(); // Скрываем виджет
+        } else if (item->layout()) {
+            showAllWidgetsInLayout(item->layout()); // Рекурсивно скрываем элементы вложенного лейаута
+        }
+    }
+}
+
 QCSBaseDialog::QCSBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bScrollable):QDialog(parent , f)
 {
+    m_iconWait = QPixmap(":/icons/clock.png");
+    m_bWaiting = false;
     pCSMainLayout = new QVBoxLayout(this);
 
     m_bScrollable = bScrollable;
@@ -66,6 +101,22 @@ QCSBaseDialog::QCSBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bScrollab
 
     pCSMainLayout->addLayout(pHBackButtonLayout);
 #endif
+}
+
+void QCSBaseDialog::showWait(bool bWait)
+{
+    m_bWaiting = bWait;
+    if(bWait)
+    {
+        hideAllWidgetsInLayout(pCSMainLayout);
+        QDialog::repaint();
+    }
+    else
+    {
+        showAllWidgetsInLayout(pCSMainLayout);
+    }
+
+
 }
 
 void QCSBaseDialog::setLayout(QLayout *layout)

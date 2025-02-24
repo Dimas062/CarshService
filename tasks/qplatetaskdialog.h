@@ -47,6 +47,8 @@ public slots:
     void OnCarshChanged();
     void OnProviderChanged();
     void OnLoadAutoFotoButtonPressed();
+    void OnNumberTextInput(const QString &text);
+    void OnCommentTextInput(const QString &text);
 };
 
 #endif // QPLATETASKDIALOG_H

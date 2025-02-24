@@ -12,11 +12,23 @@ QLineText::QLineText(QString strLabel,QWidget *parent): QWidget{parent}
     m_pLabel = new QLabel(strLabel);
     pHBoxLayout->addWidget(m_pLabel);
     m_pLineEdit = new QLineEdit;
+    connect(m_pLineEdit, &QLineEdit::textChanged, this, &QLineText::OnTextLineEditChanged);
 
     m_pLineEdit->setFixedWidth(screenGeometry.width()*0.6);
 
     pHBoxLayout->addStretch();
     pHBoxLayout->addWidget(m_pLineEdit);
+}
+
+void QLineText::OnTextLineEditChanged(const QString &text)
+{
+    emit textChanged(text);
+}
+
+void QLineText::SetToolTip(QString strToolTip)
+{
+    m_pLabel->setToolTip(strToolTip);
+    m_pLineEdit->setToolTip(strToolTip);
 }
 
 void QLineText::SetEnabled(bool bEnabled)

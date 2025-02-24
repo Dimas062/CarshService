@@ -36,7 +36,7 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
 
     QMetaObject::invokeMethod(&QSocketBDNetClient::getInstance() , "writeData" , Q_ARG(QByteArray , data));
 
-    timer.start(9000);
+    timer.start(12000);
 
     loop.exec(); //blocks untill either theSignalToWaitFor or timeout was fired
 
@@ -46,7 +46,7 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
         qDebug("dataReceived");
     else
     {
-        qDebug("timeout");
+        qDebug("timeout get data");
         return retVal;
     }
 #ifdef Q_OS_WINDOWS

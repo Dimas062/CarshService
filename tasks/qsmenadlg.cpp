@@ -6,7 +6,6 @@
 #include <QUuid>
 #include "common.h"
 #include "service_widgets/qyesnodlg.h"
-#include <QMessageBox>
 #include "service_widgets/qcsselectdialog.h"
 
 extern QRect screenGeometry;
@@ -32,6 +31,7 @@ QSmenaDlg::QSmenaDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent ,
 
     m_pLineTextComment = new QLineText("Комментарий");
     pVMainLayout->addWidget(m_pLineTextComment);
+    connect(m_pLineTextComment, &QLineText::textChanged, this, &QSmenaDlg::OnCommentTextInput);
 
     m_pClockButton = new QPushButton("Часов");
     connect(m_pClockButton,SIGNAL(released()),this,SLOT(OnClockPressed()));
@@ -83,6 +83,11 @@ bool QSmenaDlg::isReady()
 
 
     return retVal;
+}
+
+void QSmenaDlg::OnCommentTextInput(const QString &)
+{
+    isReady();
 }
 
 void QSmenaDlg::SaveDataToBD()
@@ -191,12 +196,13 @@ void QSmenaDlg::OnApplyPressedSlot()
 
     if((m_pSelProviderCarshWidget->m_uuidCarsh==QUuid()) or (m_pSelProviderCarshWidget->m_uuidProvider==QUuid()))
     {
-        QMessageBox::information(this , "КаршСервис" , "Укажите поставщика и заказчика");
-
-        return;
+        QYesNoDlg dlg("Не указан поставщик или заказчик.\n Задача не сохранится.\n Все равно выйти?");
+        if(dlg.exec() == QDialog::Accepted) reject();
+        else return;
     }
-
+    showWait(true);
     SaveDataToBD();
+    showWait(false);
     accept();
 }
 

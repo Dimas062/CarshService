@@ -80,8 +80,9 @@ QStickPartnerTask::QStickPartnerTask(QWidget *parent, Qt::WindowFlags f ):QCSBas
 void QStickPartnerTask::OnApplyPressedSlot()
 {
     if(!isReady()) return;
-
+    showWait(true);
     SaveDataToBD();
+    showWait(false);
     accept();
 }
 

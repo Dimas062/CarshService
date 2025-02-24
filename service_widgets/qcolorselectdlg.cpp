@@ -2,7 +2,6 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QVariant>
-#include <QMessageBox>
 
 #include <QGesture>
 

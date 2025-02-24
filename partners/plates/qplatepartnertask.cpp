@@ -67,8 +67,9 @@ QPlatePartnerTask::QPlatePartnerTask(QWidget *parent, Qt::WindowFlags f ):QCSBas
 void QPlatePartnerTask::OnApplyPressedSlot()
 {
     if(!isReady()) return;
-
+    showWait(true);
     SaveDataToBD();
+    showWait(false);
     accept();
 }
 

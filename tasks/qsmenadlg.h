@@ -38,6 +38,7 @@ public slots:
     void OnCarshChanged();
     void OnProviderChanged();
     void OnClockPressed();
+    void OnCommentTextInput(const QString &text);
 };
 
 #endif // QSMENADLG_H

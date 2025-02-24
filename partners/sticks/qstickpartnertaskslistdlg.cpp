@@ -95,8 +95,10 @@ void QStickPartnerTasksListDlg::OnTapGesture()
     if(QListWidgetItem* item = m_pTasksListWidget->currentItem())
     {
         QStickPartnerTask dlg;
+        showWait(true);
         dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
         dlg.exec();
+        showWait(false);
     }
     UpdateTasks();
 }

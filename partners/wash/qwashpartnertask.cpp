@@ -8,6 +8,7 @@
 #include "common.h"
 #include "BDPatterns.h"
 #include "qwashpartnerpenlistdlg.h"
+#include <QThread>
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentPartner;
@@ -83,8 +84,9 @@ QWashPartnerTask::QWashPartnerTask(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
 void QWashPartnerTask::OnApplyPressedSlot()
 {
     if(!isReady()) return;
-
+    showWait(true);
     SaveDataToBD();
+    showWait(false);
     accept();
 }
 
@@ -112,7 +114,7 @@ bool QWashPartnerTask::isReady()
     // }
    // else m_pSubtaskButton->setStyleSheet("QPushButton {color: black;}");
 
-    if(m_pLoadVedomostDlg->m_pPicturesWidget->m_Pictures.size()<2)
+    if(m_pLoadVedomostDlg->m_pPicturesWidget->m_Pictures.size()<1)
     {
         m_pLoadVedomostButton->setStyleSheet("QPushButton {color: red;}");
         retVal = false;
@@ -312,6 +314,7 @@ void QWashPartnerTask::LoadDataFromBD(QUuid taskUuid)
     }
 
     isReady();
+
 }
 
 void QWashPartnerTask::OnPenPressedSlot()

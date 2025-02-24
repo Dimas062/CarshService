@@ -4,9 +4,15 @@
 #include <QPushButton>
 #include <QLabel>
 
+extern QRect screenGeometry;
+
 QYesNoDlg::QYesNoDlg(QString text , QWidget *parent, Qt::WindowFlags f):QDialog(parent , f)
 
 {
+    QRect geometry(QPoint(0, 0), QSize(screenGeometry.width() , screenGeometry.height() ));
+    geometry.moveCenter(screenGeometry.center());
+    setGeometry(geometry);
+
     QVBoxLayout * mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
 

@@ -39,7 +39,6 @@ QWashPartnerPenDlg::QWashPartnerPenDlg(QUuid idPen , QWidget *parent, Qt::Window
     /*Загрузка картинок задачи*/
     QString strPicExec = QString("select Документы.Изображение from Документы, \"Задача-Документы задач\" where Документы.id=\"Задача-Документы задач\".Документ and \"Задача-Документы задач\".Задача='%1'").arg(idPen.toString());
 
-    qDebug()<<   strPicExec;
     QList<QStringList> resPicTasks = execMainBDQuery(strPicExec);
     for(int iPicTasksCounter = 0 ; iPicTasksCounter < resPicTasks.size() ; iPicTasksCounter++)
     {

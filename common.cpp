@@ -15,7 +15,6 @@
  #include <QSqlError>
 #include <QMetaEnum>
 #include <QBuffer>
-#include <QMessageBox>
 #include <QPixmap>
 #include <QTcpSocket>
 #include "qsocketbd.h"
@@ -98,7 +97,7 @@ QString PictureFileToBase64(QString strPath)
     QFile CurrentFile(strPath);
     if(!CurrentFile.open(QIODevice::ReadOnly))
     {
-        qDebug()<<"!CurrentFile.open strPath="<<strPath<<" error="<<CurrentFile.errorString()<<" error code="<<CurrentFile.error();
+        qDebug()<<"!CurrentFile.open error strPath="<<strPath<<" error="<<CurrentFile.errorString()<<" error code="<<CurrentFile.error();
         return QString();
     }
     QByteArray imageData = CurrentFile.readAll();

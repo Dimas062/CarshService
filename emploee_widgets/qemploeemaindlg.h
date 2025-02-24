@@ -15,7 +15,7 @@ protected:
     // QPushButton * m_pStartWorkDayButton;
     // QPushButton * m_pFinishWorkDayButton;
 
-
+    QPushButton * m_pInputTasksButton;
     QPushButton * m_pCurrentTasksButton;
     QPushButton * m_pCostButton;
     QPushButton * m_pNumberPlateButton;
@@ -27,6 +27,7 @@ protected:
     QPushButton * m_pCostsButton;
     QPushButton * m_pSmenaButton;
     QPushButton * m_pFinButton;
+    void UpdateCountersIcons();
 
 public slots:
     void OnCurrentTaskPressed();
@@ -40,6 +41,7 @@ public slots:
     void OnCostsPressed();
     void OnSmenaTaskPressed();
     void OnFinPressed();
+    void OnInputTasksPressed();
 
 };
 

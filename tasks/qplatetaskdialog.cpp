@@ -7,7 +7,6 @@
 #include "common.h"
 #include "BDPatterns.h"
 #include "service_widgets/qyesnodlg.h"
-#include <QMessageBox>
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
@@ -28,6 +27,7 @@ QPlateTaskDialog::QPlateTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
 
     m_pPlateLineText = new QLineText("Номер автомобиля");
     pVMainLayout->addWidget(m_pPlateLineText);
+    connect(m_pPlateLineText, &QLineText::textChanged, this, &QPlateTaskDialog::OnNumberTextInput);
 
     QHBoxLayout * pHPlateCountLayout = new QHBoxLayout();
 
@@ -50,6 +50,7 @@ QPlateTaskDialog::QPlateTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
 
     m_pLineTextComment = new QLineText("Комментарий");
     pVMainLayout->addWidget(m_pLineTextComment);
+    connect(m_pLineTextComment, &QLineText::textChanged, this, &QPlateTaskDialog::OnCommentTextInput);
 
     m_pLoadAutoFotoDlg = new QLoadDocsDlg;
     m_pLoadAutoFotoButton = new QPushButton("Фото автомобиля");
@@ -83,17 +84,32 @@ QPlateTaskDialog::QPlateTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
     this->setLayout(pVMainLayout);
 }
 
+void QPlateTaskDialog::OnNumberTextInput(const QString &)
+{
+    isReady();
+}
+
+void QPlateTaskDialog::OnCommentTextInput(const QString &)
+{
+    isReady();
+}
+
 bool QPlateTaskDialog::isReady()
 {
     bool retVal = true;
 
-
+    if(!(m_pPlateLineText->CheckColorLenght()))
+    {
+        retVal = false;
+    }
 
     if(m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.size()<4)
     {
-        //m_pLoadPhotoWidget->SetViewDone(false);
+        m_pLoadAutoFotoButton->setStyleSheet("QPushButton {color: red;}");
         retVal = false;
     }
+    else m_pLoadAutoFotoButton->setStyleSheet("QPushButton {color: black;}");
+
 
     if(!m_pSelProviderCarshWidget->isReadyColored())
     {
@@ -202,7 +218,10 @@ void QPlateTaskDialog::SaveDataToBD()
         strExec = QString("update \"Задачи\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
-        strExec = QString("update \"Задачи\" set Комментарий = '%1' , \"Время выполнения\"='%2' where id='%3'").arg(m_pLineTextComment->getText()).arg(iReadyTime).arg(m_uuidSourseRecord.toString());
+        strExec = QString("update \"Задачи\" set Комментарий = '%1'  where id='%2'").arg(m_pLineTextComment->getText()).arg(m_uuidSourseRecord.toString());
+        execMainBDQueryUpdate(strExec);
+
+        strExec = QString("update \"Задачи\" set  \"Время выполнения\"='%1' where id='%2'").arg(iReadyTime).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
         /*Расширение (номер, количество рамок)*/
@@ -210,7 +229,10 @@ void QPlateTaskDialog::SaveDataToBD()
         if (m_pOnePlateButton->isChecked()) iPlateCount = 1;
         if (m_pTwoPlateButton->isChecked()) iPlateCount = 2;
 
-        strExec = QString("update \"Расширение задачи Номера\" set \"Количество рамок\"='%1' , \"Госномер\"='%2' where id='%3'").arg(iPlateCount).arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
+        strExec = QString("update \"Расширение задачи Номера\" set \"Количество рамок\"='%1' where id='%2'").arg(iPlateCount).arg(m_uuidSourseExtention.toString());
+        execMainBDQueryUpdate(strExec);
+
+        strExec = QString("update \"Расширение задачи Номера\" set  \"Госномер\"='%1' where id='%2'").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
 
         /*Фото/документы*/
@@ -287,11 +309,13 @@ void QPlateTaskDialog::OnApplyPressedSlot()
 
     if((m_pSelProviderCarshWidget->m_uuidCarsh==QUuid()) or (m_pSelProviderCarshWidget->m_uuidProvider==QUuid()))
     {
-        QMessageBox::information(this , "КаршСервис" , "Укажите поставщика и заказчика");
-
-        return;
+        QYesNoDlg dlg("Не указан поставщик или заказчик.\n Задача не сохранится.\n Все равно выйти?");
+        if(dlg.exec() == QDialog::Accepted) reject();
+        else return;
     }
+    showWait(true);
     SaveDataToBD();
+    showWait(false);
     accept();
 }
 

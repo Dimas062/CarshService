@@ -28,7 +28,7 @@ QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget 
 
     m_userUuid = userUuid;
 
-    strDateFilter = CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+    strDateFilter = "";//CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
     strFilter = "";
 
     if(taskTypeUuid == QUuid())
@@ -111,19 +111,13 @@ QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget 
     pVMainLayout->addWidget(m_pTasksListWidget);
     connect(m_pTasksListWidget, SIGNAL(OnTapHoldGesture()), this, SLOT(OnTapHoldGesture()));
     connect(m_pTasksListWidget, SIGNAL(OnTapGesture()), this, SLOT(OnTapGesture()));
-    UpdateTasks();
-
+    //UpdateTasks();вместо обновления вызовем по умолчанию отметку невыполненых задач
+    m_pNotReadyButton->toggle();
     this->setLayout(pVMainLayout);
 }
 
 void QEmploeeTasksDlg::UpdateTasks()
 {
-    // QPixmap pixmap(":/icons/clock.png");
-    // QSplashScreen splash(pixmap);
-    // Qt::WindowFlags flags = splash.windowFlags();
-    // splash.setWindowFlags(flags | Qt::WindowStaysOnTopHint);
-    // splash.show();
-
     m_pTasksListWidget->clear();
 
     QString strExec= QString("SELECT Задачи.id, Задачи.\"Дата Время\", \"Типы задач\".\"Тип\" , \"Типы задач\".id , Задачи.\"Время выполнения\" , Заказчики.Название FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' %2 %3 %4 order by Задачи.\"Дата Время\" desc").arg(m_userUuid.toString()).arg(strFilter).arg(strDateFilter).arg(strTaskTypesFilter);
@@ -231,7 +225,7 @@ void QEmploeeTasksDlg::OnToCalendatButtonTogled(bool bChecked)
             m_pToCalendarButton->setChecked(false);
         }
     }
-    else strDateFilter=CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+    else strDateFilter="";//CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
     UpdateTasks();
 }
 
@@ -243,43 +237,51 @@ void QEmploeeTasksDlg::OnTapGesture()
         {
 
             QPlateTaskDialog dlg(this);
+            showWait(true);
             dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
             dlg.exec();
+            showWait(false);
         }
         if(item->data(Qt::UserRole+1).toUuid()  == QUuid("057b3b6f-2848-479b-a546-3f16cb531ffe"))
         {
 
             QParkingTaskDialog dlg(this);
+            showWait(true);
             dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
             dlg.exec();
+            showWait(false);
         }
         if(item->data(Qt::UserRole+1).toUuid()  == QUuid("8078b7ce-e423-49ae-9ce6-17758b852b33"))
         {
-
             QPenaltyParkingDialog dlg(this);
+            showWait(true);
             dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
             dlg.exec();
+            showWait(false);
         }
         if(item->data(Qt::UserRole+1).toUuid()  == QUuid("fe81daf9-a838-4bac-84aa-595e038d3a12"))
         {
-
             QRetToZoneDialog dlg(this);
+            showWait(true);
             dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
             dlg.exec();
+            showWait(false);
         }
         if(item->data(Qt::UserRole+1).toUuid()  == QUuid("78850df8-814b-41c8-8977-945c085f3021"))
         {
-
             QSmenaDlg dlg(this);
+            showWait(true);
             dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
             dlg.exec();
+            showWait(false);
         }
         if(item->data(Qt::UserRole+1).toUuid()  == QUuid("25695573-f5fe-43fd-93dc-76ee09e461fa"))
         {
-
             QDocsTaskDlg dlg(this);
+            showWait(true);
             dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
             dlg.exec();
+            showWait(false);
         }
     }
     qApp->inputMethod()->hide();

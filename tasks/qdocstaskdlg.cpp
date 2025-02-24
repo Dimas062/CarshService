@@ -1,7 +1,6 @@
 #include "qdocstaskdlg.h"
 #include "service_widgets/qyesnodlg.h"
 #include "service_widgets/qcsselectdialog.h"
-#include <QMessageBox>
 #include "common.h"
 #include "BDPatterns.h"
 
@@ -29,6 +28,7 @@ QDocsTaskDlg::QDocsTaskDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
 
     m_pDocsCountText = new QLineText("Количество");
     pVMainLayout->addWidget(m_pDocsCountText);
+    connect(m_pDocsCountText, &QLineText::textChanged, this, &QDocsTaskDlg::OnCountTextInput);
 
     m_pPayButton = new QCSButton("Оплата");
     m_pPayButton->grabGesture(Qt::TapGesture);
@@ -48,7 +48,7 @@ QDocsTaskDlg::QDocsTaskDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
 
     m_pLineTextComment = new QLineText("Комментарий");
     pVMainLayout->addWidget(m_pLineTextComment);
-
+    connect(m_pLineTextComment, &QLineText::textChanged, this, &QDocsTaskDlg::OnCommentTextInput);
 
     m_pSelProviderCarshWidget = new QSelProviderCarshWidget();
     pVMainLayout->addWidget(m_pSelProviderCarshWidget);
@@ -72,6 +72,16 @@ QDocsTaskDlg::QDocsTaskDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
     }
 
     this->setLayout(pVMainLayout);
+}
+
+void QDocsTaskDlg::OnCountTextInput(const QString &text)
+{
+    isReady();
+}
+
+void QDocsTaskDlg::OnCommentTextInput(const QString &text)
+{
+    isReady();
 }
 
 
@@ -123,7 +133,10 @@ bool QDocsTaskDlg::isReady()
         retVal = false;
     }
 
-
+    if(!(m_pDocsCountText->CheckColorLenght()))
+    {
+        retVal = false;
+    }
 
      if(m_PayDlg.getSumString().length()>1) m_pPayButton->setText(QString("Оплата: %1 р.").arg(m_PayDlg.getSumString()));
 
@@ -313,11 +326,13 @@ void QDocsTaskDlg::OnApplyPressedSlot()
 {
     if((m_pSelProviderCarshWidget->m_uuidCarsh==QUuid()) or (m_pSelProviderCarshWidget->m_uuidProvider==QUuid()))
     {
-        QMessageBox::information(this , "КаршСервис" , "Укажите поставщика и заказчика");
-
-        return;
+        QYesNoDlg dlg("Не указан поставщик или заказчик.\n Задача не сохранится.\n Все равно выйти?");
+        if(dlg.exec() == QDialog::Accepted) reject();
+        else return;
     }
+    showWait(true);
     SaveDataToBD();
+    showWait(false);
     accept();
 }
 

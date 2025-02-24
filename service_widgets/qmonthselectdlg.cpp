@@ -132,7 +132,7 @@ void QMonthSelectDlg::OnMonthClicked()
 {
     QPushButton * pButton = (QPushButton *)sender();
     int iMonth = (pButton->property("Month")).value<int>();
-    qDebug()<<"OnMonthClicked year="<<m_SelectedDate.year()<<" iMonth="<<iMonth;
+
     m_SelectedDate.setDate(m_SelectedDate.year() , iMonth , 15);
     accept();
 }

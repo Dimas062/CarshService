@@ -7,7 +7,6 @@
 #include "common.h"
 #include "service_widgets/qyesnodlg.h"
 #include "service_widgets/qcsselectdialog.h"
-#include <QMessageBox>
 #include "BDPatterns.h"
 
 
@@ -46,6 +45,7 @@ QCostsDialog::QCostsDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
 
     m_pLineTextCount = new QLineText("Количество");
     pVMainLayout->addWidget(m_pLineTextCount);
+    connect(m_pLineTextCount, &QLineText::textChanged, this, &QCostsDialog::OnCountTextInput);
 
     QPushButton * pApplyButton = new QPushButton("Внести");
     pApplyButton->setIcon(QIcon(":/icons/done_icon.png"));
@@ -64,6 +64,11 @@ QCostsDialog::QCostsDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
 
     this->setLayout(pVMainLayout);
 
+}
+
+void QCostsDialog::OnCountTextInput(const QString &)
+{
+    isReady();
 }
 
 bool QCostsDialog::isReady()
@@ -89,6 +94,11 @@ bool QCostsDialog::isReady()
     {
         retVal = false;
         bPayDone = false;
+    }
+
+    if(!(m_pLineTextCount->CheckColorLenght()))
+    {
+        retVal = false;
     }
 
     if(!bPayDone) m_pPayButton->setStyleSheet("QPushButton {color: red;}");
@@ -215,9 +225,9 @@ void QCostsDialog::OnApplyPressedSlot()
 {
     if(isReady())
     {
-
+        showWait(true);
         SaveDataToBD();
-
+        showWait(false);
         accept();
 
     }

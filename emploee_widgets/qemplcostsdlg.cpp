@@ -75,8 +75,10 @@ void QEmplCostsDlg::OnTapGesture()
     {
 
         QCostsDialog dlg(this);
+        showWait(true);
         dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
         dlg.exec();
+        showWait(false);
     }
     qApp->inputMethod()->hide();
     UpdateCosts();

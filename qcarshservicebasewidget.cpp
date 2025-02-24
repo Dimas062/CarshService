@@ -143,10 +143,6 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
     pSettingsModeButton->setMinimumHeight(iButtonHeight*2);
     pVMainLayout->addWidget(pSettingsModeButton);
 
-
-
-
-
     qApp->inputMethod()->hide();
 
     connect(this , SIGNAL(OnMouseButtonPressedSignal()) , this , SLOT(OnMouseButtonPressedSlot()));

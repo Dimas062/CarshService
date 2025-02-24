@@ -42,6 +42,7 @@ public slots:
     void OnItemButtonPressed();
     void OnApplyPressedSlot();
     void OnRemovePressedSlot();
+    void OnCountTextInput(const QString &text);
 };
 
 #endif // QCOSTSDIALOG_H

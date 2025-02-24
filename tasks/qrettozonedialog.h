@@ -46,6 +46,8 @@ public slots:
     void OnCarshChanged();
     void OnProviderChanged();
     void OnLoadAutoFotoButtonPressed();
+    void OnNumberTextInput(const QString &text);
+    void OnCommentTextInput(const QString &text);
 };
 
 #endif // QRETTOZONEDIALOG_H

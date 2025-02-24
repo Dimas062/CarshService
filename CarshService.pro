@@ -1,11 +1,11 @@
 QT +=core gui sql network core-private gui-private core5compat multimedia# multimediawidgets #quick
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets concurrent
 
 CONFIG += c++17
 
 
-VERSION = 0.1.5
+VERSION = 0.1.6
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -20,8 +20,10 @@ SOURCES += \
     common.cpp \
     emploee_widgets/QEmploeeTasksDlg.cpp \
     emploee_widgets/qemplcostsdlg.cpp \
+    emploee_widgets/qemploeeinputtasksdlg.cpp \
     emploee_widgets/qemploeemaindlg.cpp \
     emploee_widgets/qemplsalarydlg.cpp \
+    emploee_widgets/QSelectTaskEmploeer.cpp \
     main.cpp \
     native.cpp \
     partners/plates/qplatepartnermaindlg.cpp \
@@ -96,8 +98,10 @@ HEADERS += \
     common.h \
     emploee_widgets/QEmploeeTasksDlg.h \
     emploee_widgets/qemplcostsdlg.h \
+    emploee_widgets/qemploeeinputtasksdlg.h \
     emploee_widgets/qemploeemaindlg.h \
     emploee_widgets/qemplsalarydlg.h \
+    emploee_widgets/QSelectTaskEmploeer.h \
     native.h \
     partners/plates/qplatepartnermaindlg.h \
     partners/plates/qplatepartnertask.h \

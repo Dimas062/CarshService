@@ -9,6 +9,14 @@
 #include <QScroller>
 #include <QVBoxLayout>
 
+
+#include <QProgressDialog>
+#include <QFuture>
+#include <QThread>
+#include <QApplication>
+#include <QtConcurrent>
+#include <QSplashScreen>
+
 extern QUuid uuidCurrentPartner;
 extern QRect screenGeometry;
 
@@ -102,11 +110,19 @@ void QWashPartnerTasksListDlg::OnTapHoldGesture()
 
 void QWashPartnerTasksListDlg::OnTapGesture()
 {
+    debug_TimeStamp("QWashPartnerTasksListDlg::OnTapGesture()");
     if(QListWidgetItem* item = m_pTasksListWidget->currentItem())
     {
         QWashPartnerTask dlg;
+
+        showWait(true);
+
         dlg.LoadDataFromBD(item->data(Qt::UserRole).toUuid());
+
         dlg.exec();
+
+        showWait(false);
+
     }
     UpdateTasks();
 }

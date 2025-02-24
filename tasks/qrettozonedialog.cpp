@@ -7,7 +7,6 @@
 #include "common.h"
 #include "BDPatterns.h"
 #include "service_widgets/qyesnodlg.h"
-#include <QMessageBox>
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
@@ -29,6 +28,7 @@ QRetToZoneDialog::QRetToZoneDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
 
     m_pPlateLineText = new QLineText("Гос. номер");
     pVMainLayout->addWidget(m_pPlateLineText);
+    connect(m_pPlateLineText, &QLineText::textChanged, this, &QRetToZoneDialog::OnNumberTextInput);
 
     // m_pPicturesWidget = new QPicturesWidget(this);
     // m_pPicturesWidget->setMinimumHeight(screenGeometry.width()*0.5);
@@ -36,6 +36,8 @@ QRetToZoneDialog::QRetToZoneDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
 
     m_pLineTextComment = new QLineText("Комментарий");
     pVMainLayout->addWidget(m_pLineTextComment);
+    connect(m_pLineTextComment, &QLineText::textChanged, this, &QRetToZoneDialog::OnCommentTextInput);
+
 
     m_pLoadAutoFotoDlg = new QLoadDocsDlg;
     m_pLoadAutoFotoButton = new QPushButton("Фото автомобиля");
@@ -87,9 +89,17 @@ bool QRetToZoneDialog::isReady()
         retVal = false;
     }
 
-    retVal=m_pPlateLineText->CheckColorLenght();
-
     return retVal;
+}
+
+void QRetToZoneDialog::OnNumberTextInput(const QString &)
+{
+    isReady();
+}
+
+void QRetToZoneDialog::OnCommentTextInput(const QString &)
+{
+    isReady();
 }
 
 
@@ -244,12 +254,13 @@ void QRetToZoneDialog::OnApplyPressedSlot()
 
     if((m_pSelProviderCarshWidget->m_uuidCarsh==QUuid()) or (m_pSelProviderCarshWidget->m_uuidProvider==QUuid()))
     {
-        QMessageBox::information(this , "КаршСервис" , "Укажите поставщика и заказчика");
-
-        return;
+        QYesNoDlg dlg("Не указан поставщик или заказчик.\n Задача не сохранится.\n Все равно выйти?");
+        if(dlg.exec() == QDialog::Accepted) reject();
+        else return;
     }
-
+    showWait(true);
     SaveDataToBD();
+    showWait(false);
     accept();
 }
 

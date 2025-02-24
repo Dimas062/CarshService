@@ -46,6 +46,8 @@ public slots:
     void OnRemovePressedSlot();
     void OnCarshChanged();
     void OnProviderChanged();
+    void OnCountTextInput(const QString &text);
+    void OnCommentTextInput(const QString &text);
 };
 
 #endif // QDOCSTASKDLG_H

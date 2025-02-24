@@ -14,6 +14,7 @@ public:
 
     bool CheckColorLenght();
     void SetEnabled(bool);
+    void SetToolTip(QString);
 
     QString getText() const;
     void setText(QString);
@@ -23,7 +24,10 @@ public:
 protected:
     QLabel * m_pLabel;
     QLineEdit * m_pLineEdit;
+public slots:
+    void OnTextLineEditChanged(const QString &text);
 signals:
+    void textChanged(const QString &text);
 };
 
 #endif // QLINETEXT_H

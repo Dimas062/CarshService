@@ -32,3 +32,4 @@ void QLoadDocsDlg::OnFotoGetet(QString strFotoPath)
 {
     m_pPicturesWidget->AddPicturePath(strFotoPath);
 }
+

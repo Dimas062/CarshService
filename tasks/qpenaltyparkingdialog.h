@@ -38,6 +38,7 @@ protected:
     QPushButton * m_pReasonButton;
     QPushButton * m_pParkingButton;
     QPushButton * m_pReturnToZoneButton;
+    QPushButton * m_pZayavkiButton;
     QSelProviderCarshWidget * m_pSelProviderCarshWidget;
 
     QCSPayBaseDialog m_PayDlg;
@@ -70,6 +71,9 @@ public slots:
     void OnLoadAutoFotoButtonPressed();
     void OnCarshChanged();
     void OnProviderChanged();
+    void OnHandOverPressedSlot();
+    void OnNumberTextInput(const QString &text);
+    void OnCommentTextInput(const QString &text);
 };
 
 #endif // QPENALTYPARKINGDIALOG_H

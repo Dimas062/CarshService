@@ -95,7 +95,7 @@ void QEmplSalaryDlg::OnToCalendarButtonClicked()
     if(dlg.exec()==QDialog::Accepted)
     {
         m_currentDate = dlg.m_SelectedDate;
-        qDebug()<<"OnToCalendarButtonClicked m_currentDate="<<m_currentDate;
+
         UpdateSalarys();
     }
 }
@@ -107,14 +107,10 @@ void QEmplSalaryDlg::UpdateSalarys()
     qint64 timeFrom = dtFrom.toSecsSinceEpoch();
     qint64 timeTo = QDateTime::fromSecsSinceEpoch(timeFrom).addMonths(1).toSecsSinceEpoch();
 
-    qDebug()<<"UpdateSalarys dtFrom="<<dtFrom<<" dateFrom=" << dateFrom<< " m_currentDate="<< m_currentDate <<" timeFrom="<<timeFrom<<" timeTo="<<timeTo;
-
-
     m_pSalarysListWidget->clear();
 
     QVector<SalaryItemStruct> SalaryItems;
 
-    //QString strExec= QString("SELECT Задачи.id, Задачи.\"Дата Время\", \"Типы задач\".\"Тип\"  , Задачи.\"Время выполнения\" , Заказчики.Название FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1'  order by Задачи.\"Дата Время\" desc").arg(uuidCurrentUser.toString());
     QString strQuery =  QString("SELECT Задачи.id, Задачи.\"Дата Время\", \"Типы задач\".\"Тип\" , Заказчики.Название , Задачи.Цена , %2 FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' and Задачи.\"Дата Время\">%3 and Задачи.\"Дата Время\"<%4 order by Задачи.\"Дата Время\" desc").arg(uuidCurrentUser.toString()).arg(NUMBER_BY_TASK).arg(timeFrom).arg(timeTo);
 
     QList<QStringList> resSalarys = execMainBDQuery(strQuery);

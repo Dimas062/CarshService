@@ -20,9 +20,6 @@ QCSSelectDlgButtonsWidget::QCSSelectDlgButtonsWidget(QString strTableName, QStri
 
     QString strExec = QString("select id , \"%1\" from \"%2\" %3").arg(strColName).arg(strTableName).arg(strСondition);
 
-
-    qDebug()<<"QCSSelectDlgButtonsWidget strExec = "<<strExec;
-
     QList<QStringList> resData = execMainBDQuery(strExec);
     for(int iResCounter = 0 ; iResCounter < resData.size() ; iResCounter++)
     {

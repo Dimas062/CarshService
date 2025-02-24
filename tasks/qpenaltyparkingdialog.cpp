@@ -8,7 +8,7 @@
 #include "BDPatterns.h"
 #include "service_widgets/qyesnodlg.h"
 #include "service_widgets/qcsselectdialog.h"
-#include <QMessageBox>
+#include "emploee_widgets/QSelectTaskEmploeer.h"
 
 
 extern QRect screenGeometry;
@@ -35,6 +35,7 @@ QPenaltyParkingDialog::QPenaltyParkingDialog(QWidget *parent, Qt::WindowFlags f 
 
     m_pPlateLineText = new QLineText("Гос. номер");
     pVMainLayout->addWidget(m_pPlateLineText);
+    connect(m_pPlateLineText, &QLineText::textChanged, this, &QPenaltyParkingDialog::OnNumberTextInput);
 
     m_pPayButton = new QCSButton("Оплата");
     m_pPayButton->grabGesture(Qt::TapGesture);
@@ -91,7 +92,7 @@ QPenaltyParkingDialog::QPenaltyParkingDialog(QWidget *parent, Qt::WindowFlags f 
 
     m_pLineTextComment = new QLineText("Комментарий");
     pVMainLayout->addWidget(m_pLineTextComment);
-
+    connect(m_pLineTextComment, &QLineText::textChanged, this, &QPenaltyParkingDialog::OnCommentTextInput);
 
     m_pSelProviderCarshWidget = new QSelProviderCarshWidget();
     pVMainLayout->addWidget(m_pSelProviderCarshWidget);
@@ -105,6 +106,12 @@ QPenaltyParkingDialog::QPenaltyParkingDialog(QWidget *parent, Qt::WindowFlags f 
     pVMainLayout->addWidget(pApplyButton, 0 , Qt::AlignHCenter);
     connect(pApplyButton,SIGNAL(released()),this,SLOT(OnApplyPressedSlot()));
 
+    QPushButton * pHandOverButton = new QPushButton("Передать задачу");
+    //pHandOverButton->setIcon(QIcon(":/icons/done_icon.png"));
+    pHandOverButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    pVMainLayout->addWidget(pHandOverButton, 0 , Qt::AlignHCenter);
+    connect(pHandOverButton,SIGNAL(released()),this,SLOT(OnHandOverPressedSlot()));
+
     if(CurrentUserType == CarshService)
     {
         QPushButton * pRemoveButton = new QPushButton("Удалить");
@@ -117,9 +124,29 @@ QPenaltyParkingDialog::QPenaltyParkingDialog(QWidget *parent, Qt::WindowFlags f 
     this->setLayout(pVMainLayout);
 }
 
+void QPenaltyParkingDialog::OnNumberTextInput(const QString &)
+{
+    isReady();
+}
+
+void QPenaltyParkingDialog::OnCommentTextInput(const QString &)
+{
+    isReady();
+}
+
+void QPenaltyParkingDialog::OnHandOverPressedSlot()
+{
+    this->showWait(true);
+    SaveDataToBD();
+    this->showWait(false);
+    QSelectTaskEmploeer dlg(nullptr , Qt::WindowFlags() , m_uuidSourseRecord.toString());
+    if(dlg.exec() == QDialog::Accepted)
+        accept();
+}
+
 void QPenaltyParkingDialog::OnProviderChanged()
 {
-     isReady();
+    isReady();
 }
 
 void QPenaltyParkingDialog::OnCarshChanged()
@@ -152,9 +179,8 @@ void QPenaltyParkingDialog::OnReasonButtonPressed()
     {
         m_strReasonId = ReasonSelDlg.getCurId();
         m_strReasonText = ReasonSelDlg.getCurText();
-        isReady();
     }
-
+    isReady();
 }
 
 void QPenaltyParkingDialog::OnReturnToZoneButtonPressed()
@@ -186,8 +212,8 @@ void QPenaltyParkingDialog::OnGibddButtonPressed()
     {
         m_strGaiId = GaiSelDlg.getCurId();
         m_strGaiText = GaiSelDlg.getCurText();
-        isReady();
     }
+    isReady();
 }
 
 void QPenaltyParkingDialog::OnPayButtonPressed()
@@ -204,8 +230,8 @@ void QPenaltyParkingDialog::OnParkingButtonPressed()
     {
         m_strPinaltiParkingId = PinaltiParkingSelDlg.getCurId();
         m_strPinaltiParkingText = PinaltiParkingSelDlg.getCurText();
-        isReady();
     }
+    isReady();
 }
 
 bool QPenaltyParkingDialog::isReady()
@@ -220,9 +246,10 @@ bool QPenaltyParkingDialog::isReady()
     if(m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.size()<4)
     {
         //m_pLoadPhotoWidget->SetViewDone(false);
+        m_pLoadAutoFotoButton->setStyleSheet("QPushButton {color: red;}");
         retVal = false;
     }
-    //else m_pLoadPhotoWidget->SetViewDone(true);
+    else m_pLoadAutoFotoButton->setStyleSheet("QPushButton {color: black;}");
 
     if(!m_pLoadActWidget->CheckColorData())
     {
@@ -319,8 +346,9 @@ void QPenaltyParkingDialog::SaveDataToBD()
     {
         /*Сама задача*/
         QUuid uuidTask = QUuid::createUuid();
+        m_uuidSourseRecord = uuidTask;
         QUuid uuidExtention = QUuid::createUuid();
-
+        m_uuidSourseExtention = uuidExtention;
         QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель , \"Время выполнения\" , Цена , Поставщик , Заказчик) values ('%1','%2','8078b7ce-e423-49ae-9ce6-17758b852b33','%3','%4','%5','%6',%7,'%8','%9')").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(strSumm).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
         execMainBDQueryUpdate(strExec);
 
@@ -584,10 +612,22 @@ void QPenaltyParkingDialog::OnApplyPressedSlot()
 {
     if((m_pSelProviderCarshWidget->m_uuidCarsh==QUuid()) or (m_pSelProviderCarshWidget->m_uuidProvider==QUuid()))
     {
-        QMessageBox::information(this , "КаршСервис" , "Укажите поставщика и заказчика");
-
-        return;
+        qDebug()<<"before QYesNoDlg";
+        QYesNoDlg dlg("Не указан поставщик или заказчик.\n Задача не сохранится.\n Все равно выйти?" , this);
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            qDebug()<<"QYesNoDlg accepted, reject";
+            reject();
+        }
+        else
+        {
+            qDebug()<<"OnApplyPressedSlot SaveDataToBD and return";
+            return;
+        }
     }
+    qDebug()<<"OnApplyPressedSlot accept()";
+    showWait(true);
     SaveDataToBD();
+    showWait(false);
     accept();
 }

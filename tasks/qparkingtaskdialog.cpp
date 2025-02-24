@@ -7,7 +7,6 @@
 #include "common.h"
 #include "BDPatterns.h"
 #include "service_widgets/qyesnodlg.h"
-#include <QMessageBox>
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
@@ -28,6 +27,7 @@ QParkingTaskDialog::QParkingTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSB
 
     m_pPlateLineText = new QLineText("Гос. номер");
     pVMainLayout->addWidget(m_pPlateLineText);
+    connect(m_pPlateLineText, &QLineText::textChanged, this, &QParkingTaskDialog::OnNumberTextInput);
 
     m_pPayButton = new QPushButton("Оплата");
     connect(m_pPayButton,SIGNAL(pressed()),this,SLOT(OnPayButtonPressed()));
@@ -42,6 +42,7 @@ QParkingTaskDialog::QParkingTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSB
 
     m_pLineTextComment = new QLineText("Комментарий");
     pVMainLayout->addWidget(m_pLineTextComment);
+    connect(m_pLineTextComment, &QLineText::textChanged, this, &QParkingTaskDialog::OnCommentTextInput);
 
     m_pLoadAutoFotoDlg = new QLoadDocsDlg;
     m_pLoadAutoFotoButton = new QPushButton("Фото автомобиля");
@@ -78,8 +79,6 @@ QParkingTaskDialog::QParkingTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSB
 bool QParkingTaskDialog::isReady()
 {
     bool retVal = true;
-
-
 
     if(m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.size()<4)
     {
@@ -121,6 +120,16 @@ bool QParkingTaskDialog::isReady()
     else m_pPayButton->setStyleSheet("QPushButton {color: black;}");
 
     return retVal;
+}
+
+void QParkingTaskDialog::OnNumberTextInput(const QString &)
+{
+    isReady();
+}
+
+void QParkingTaskDialog::OnCommentTextInput(const QString &)
+{
+    isReady();
 }
 
 void QParkingTaskDialog::OnPayButtonPressed()
@@ -263,9 +272,8 @@ void QParkingTaskDialog::LoadDataFromBD(QUuid uuidSourseRecord)
     m_uuidSourseRecord=uuidSourseRecord;
 
     QString strExec = QString("select \"Дата Время\",\"Тип\",Комментарий, Расширение, Поставщик, Заказчик from \"Задачи\"  where id='%1'").arg(uuidSourseRecord.toString());
-
-
     QList<QStringList> resTasks = execMainBDQuery(strExec);
+
     for(int iTasksCounter = 0 ; iTasksCounter < resTasks.size() ; iTasksCounter++)
     {
         m_pTopLabel->setText(QString("<b>Закрытая территория. %1</b>").arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTasksCounter).at(0).toInt()).toString("dd.MM.yyyy hh:mm")));
@@ -278,8 +286,10 @@ void QParkingTaskDialog::LoadDataFromBD(QUuid uuidSourseRecord)
         /*Загрузка расширения задачи*/
         m_uuidSourseExtention = QUuid::fromString(resTasks.at(iTasksCounter).at(3));
 
+
         QString strExtenExec = QString("select \"Оплата парковки\" , \"Госномер\" from \"Расширение задачи Парковка\" where id='%1'").arg(m_uuidSourseExtention.toString());
         QList<QStringList> resExtTasks = execMainBDQuery(strExtenExec);
+
         for(int iExtTasksCounter = 0 ; iExtTasksCounter < resExtTasks.size() ; iExtTasksCounter++)
         {
             /*Госномер*/
@@ -290,8 +300,11 @@ void QParkingTaskDialog::LoadDataFromBD(QUuid uuidSourseRecord)
         }
 
         /*Загрузка картинок задачи*/
+
         QString strPicExec=QString("select \"Документы\".\"Изображение\" from \"Документы\", \"Задача-Документы задач\", Задачи where Документы.id = \"Задача-Документы задач\".Документ and Задачи.id = \"Задача-Документы задач\".Задача and Задачи.id ='%1'").arg(uuidSourseRecord.toString());
+
         QList<QStringList> resPicTasks = execMainBDQuery(strPicExec);
+
         for(int iPicTasksCounter = 0 ; iPicTasksCounter < resPicTasks.size() ; iPicTasksCounter++)
         {
             QString tmpStr = resPicTasks.at(iPicTasksCounter).at(0);
@@ -299,6 +312,7 @@ void QParkingTaskDialog::LoadDataFromBD(QUuid uuidSourseRecord)
             m_pLoadAutoFotoDlg->m_pPicturesWidget->AddImage(tmpImg);
         }
     }
+    isReady();
 }
 
 
@@ -308,12 +322,13 @@ void QParkingTaskDialog::OnApplyPressedSlot()
 
     if((m_pSelProviderCarshWidget->m_uuidCarsh==QUuid()) or (m_pSelProviderCarshWidget->m_uuidProvider==QUuid()))
     {
-        QMessageBox::information(this , "КаршСервис" , "Укажите поставщика и заказчика");
-
-        return;
+        QYesNoDlg dlg("Не указан поставщик или заказчик.\n Задача не сохранится.\n Все равно выйти?");
+        if(dlg.exec() == QDialog::Accepted) reject();
+        else return;
     }
-
+    this->showWait(true);
     SaveDataToBD();
+    this->showWait(false);
     accept();
 }
 
