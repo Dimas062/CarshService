@@ -12,6 +12,7 @@ class QEmploeeTasksDlg : public QCSBaseDialog
 public:
     QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid = QUuid(), QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
 
+    void checkNotReadyButton();
 protected:
     QCSBaseListWidget * m_pTasksListWidget;
     QPushButton * m_pReadyButton;

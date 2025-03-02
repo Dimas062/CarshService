@@ -112,8 +112,13 @@ QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget 
     connect(m_pTasksListWidget, SIGNAL(OnTapHoldGesture()), this, SLOT(OnTapHoldGesture()));
     connect(m_pTasksListWidget, SIGNAL(OnTapGesture()), this, SLOT(OnTapGesture()));
     //UpdateTasks();вместо обновления вызовем по умолчанию отметку невыполненых задач
-    m_pNotReadyButton->toggle();
+
     this->setLayout(pVMainLayout);
+}
+
+void QEmploeeTasksDlg::checkNotReadyButton()
+{
+    m_pNotReadyButton->toggle();
 }
 
 void QEmploeeTasksDlg::UpdateTasks()
@@ -131,8 +136,6 @@ void QEmploeeTasksDlg::UpdateTasks()
         QListWidgetItem * pItem = new QListWidgetItem();
 
         QString strNumber = " ";
-
-
 
         if(QUuid::fromString(resTasks.at(iTaskCounter).at(3)) == QUuid::fromString("8078b7ce-e423-49ae-9ce6-17758b852b33")) //Тип Штрафстоянка
         {

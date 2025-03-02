@@ -13,7 +13,7 @@ public:
     explicit QLoadDocLineWidget(QString strLabel, bool noMarker = false , bool noView = false , QWidget *parent = nullptr);
     bool CheckColorData();
     void SetViewDone(bool);
-    void getImgStr(QString & imgStr);
+    bool getImgStr(QString & imgStr);
     void SetImage(QString imgStr);
 
 

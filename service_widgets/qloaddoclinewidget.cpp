@@ -20,6 +20,7 @@ extern int iButtonHeight;
 
 QLoadDocLineWidget::QLoadDocLineWidget(QString strLabel, bool noMarker , bool noView, QWidget *parent): QWidget{parent}
 {
+    m_strImg = QString("");
     m_bNoMarker = noMarker;
 
     m_pImagePickerAndroid = new imagePickerAndroid();
@@ -194,9 +195,11 @@ void QLoadDocLineWidget::OnOpenPressed()
 #endif
 }
 
-void QLoadDocLineWidget::getImgStr(QString & imgStr)
+bool QLoadDocLineWidget::getImgStr(QString & imgStr)
 {
     imgStr = m_strImg;
+    if(imgStr.length()> 3) return true;
+    return false;
 }
 
 void QLoadDocLineWidget::SetImage(QString imgStr)

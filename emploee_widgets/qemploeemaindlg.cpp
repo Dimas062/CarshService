@@ -179,6 +179,9 @@ void QEmploeeMainDlg::OnFinPressed()
 void QEmploeeMainDlg::OnCurrentTaskPressed()
 {
     QEmploeeTasksDlg dlg(uuidCurrentUser);
+    showWait(true);
+    dlg.checkNotReadyButton();
+    showWait(false);
     dlg.exec();
     currentWorkdayColor = defaultBackColor;
     UpdateCountersIcons();

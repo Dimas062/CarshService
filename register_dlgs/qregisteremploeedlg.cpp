@@ -105,18 +105,25 @@ void QRegisterEmploeeDlg::OnApplyPressed()
             uuidSert = QUuid::createUuid();
 
         QString imgTempStr;
+        QString strExec;
 
-        m_pLoadPassportWidget->getImgStr(imgTempStr);
-        QString strExec = QString("insert into \"Документы\" (id,\"Изображение\",\"Тип\") values ('%1','%2','79e23c72-712b-4751-8a2b-4db82a270be3')").arg(uuidPassport.toString()).arg(imgTempStr);
-        execMainBDQueryUpdate(strExec);
+        if(m_pLoadPassportWidget->getImgStr(imgTempStr))
+        {
+            strExec = QString("insert into \"Документы\" (id,\"Изображение\",\"Тип\") values ('%1','%2','79e23c72-712b-4751-8a2b-4db82a270be3')").arg(uuidPassport.toString()).arg(imgTempStr);
+            execMainBDQueryUpdate(strExec);
+        }
 
-        m_pLoadDriverCardWidget->getImgStr(imgTempStr);
-        strExec = QString("insert into \"Документы\" (id,\"Изображение\",\"Тип\") values ('%1','%2','0f3d1416-cbf7-481e-8c1c-1e5b819e75f5')").arg(uuidDriverCard.toString()).arg(imgTempStr);
-        execMainBDQueryUpdate(strExec);
+        if(m_pLoadDriverCardWidget->getImgStr(imgTempStr))
+        {
+            strExec = QString("insert into \"Документы\" (id,\"Изображение\",\"Тип\") values ('%1','%2','0f3d1416-cbf7-481e-8c1c-1e5b819e75f5')").arg(uuidDriverCard.toString()).arg(imgTempStr);
+            execMainBDQueryUpdate(strExec);
+        }
 
-        m_pLoadSertWidget->getImgStr(imgTempStr);
-        strExec = QString("insert into \"Документы\" (id,\"Изображение\",\"Тип\") values ('%1','%2','2e73791e-402d-4f7c-b777-bc3cc51e415b')").arg(uuidSert.toString()).arg(imgTempStr);
-        execMainBDQueryUpdate(strExec);
+        if(m_pLoadSertWidget->getImgStr(imgTempStr))
+        {
+            strExec = QString("insert into \"Документы\" (id,\"Изображение\",\"Тип\") values ('%1','%2','2e73791e-402d-4f7c-b777-bc3cc51e415b')").arg(uuidSert.toString()).arg(imgTempStr);
+            execMainBDQueryUpdate(strExec);
+        }
 
 
 

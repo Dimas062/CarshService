@@ -397,11 +397,11 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
         /*Акт, протокол*/
         QString tmpStr;
-        m_pLoadActWidget->getImgStr(tmpStr);
-        CreateTaskDocRecord(uuidTask , tmpStr , QUuid("0078e19e-dfab-4a81-a5a2-569e0e683c2f"));
+        if(m_pLoadActWidget->getImgStr(tmpStr))
+            CreateTaskDocRecord(uuidTask , tmpStr , QUuid("0078e19e-dfab-4a81-a5a2-569e0e683c2f"));
 
-        m_pLoadProtocolWidget->getImgStr(tmpStr);
-        CreateTaskDocRecord(uuidTask , tmpStr , QUuid("14ae95dc-4b0a-4528-9892-732ec08c7fe6"));
+        if(m_pLoadProtocolWidget->getImgStr(tmpStr))
+            CreateTaskDocRecord(uuidTask , tmpStr , QUuid("14ae95dc-4b0a-4528-9892-732ec08c7fe6"));
 
 
         /*Фото/документы (4 шт)*/
@@ -497,11 +497,11 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
         /*Акт, протокол*/
         QString tmpStr;
-        m_pLoadActWidget->getImgStr(tmpStr);
-        CreateTaskDocRecord(m_uuidSourseRecord , tmpStr , QUuid("0078e19e-dfab-4a81-a5a2-569e0e683c2f"));
+        if(m_pLoadActWidget->getImgStr(tmpStr))
+            CreateTaskDocRecord(m_uuidSourseRecord , tmpStr , QUuid("0078e19e-dfab-4a81-a5a2-569e0e683c2f"));
 
-        m_pLoadProtocolWidget->getImgStr(tmpStr);
-        CreateTaskDocRecord(m_uuidSourseRecord , tmpStr , QUuid("14ae95dc-4b0a-4528-9892-732ec08c7fe6"));
+        if(m_pLoadProtocolWidget->getImgStr(tmpStr))
+            CreateTaskDocRecord(m_uuidSourseRecord , tmpStr , QUuid("14ae95dc-4b0a-4528-9892-732ec08c7fe6"));
 
     }
 
