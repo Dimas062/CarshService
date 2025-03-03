@@ -4,8 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets concurrent
 
 CONFIG += c++17
 
-
-VERSION = 0.1.7
+VERSION = 0.1.8
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -51,7 +50,6 @@ SOURCES += \
     service_widgets/qcsbasedlgscrollwidget.cpp \
     service_widgets/qcsbaselistitemdelegate.cpp \
     service_widgets/qcsbaselistwidget.cpp \
-    service_widgets/qcsmultiselectdlg.cpp \
     service_widgets/qcspaybasedialog.cpp \
     service_widgets/qcsscrollarea.cpp \
     service_widgets/qcsselectdialog.cpp \
@@ -128,7 +126,6 @@ HEADERS += \
     service_widgets/qcsbasedlgscrollwidget.h \
     service_widgets/qcsbaselistitemdelegate.h \
     service_widgets/qcsbaselistwidget.h \
-    service_widgets/qcsmultiselectdlg.h \
     service_widgets/qcspaybasedialog.h \
     service_widgets/qcsscrollarea.h \
     service_widgets/qcsselectdialog.h \

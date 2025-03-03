@@ -357,7 +357,6 @@ void QPenaltyParkingDialog::SaveDataToBD()
         QUuid uuidPay = CreatePayRecord(m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
 
 
-
         for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
         {
             CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
@@ -464,26 +463,6 @@ void QPenaltyParkingDialog::SaveDataToBD()
                 execMainBDQueryUpdate(strExec);
             }
 
-        /*Получим id оплаты*/
-        strExec = QString("select \"Оплата парковки\" from \"Расширение задачи ШС\" where id ='%1'").arg(m_uuidSourseExtention.toString());
-
-        QList<QStringList> strPayResult = execMainBDQuery(strExec);
-
-        if(strPayResult.size()<1) return;
-
-        QUuid uuidPay = QUuid::fromString(strPayResult.at(0).at(0));
-
-
-        UpdatePayRecord(uuidPay , m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
-
-        /*Удалим чеки*/
-        RemovePayDocs(uuidPay);
-
-        /*Загрузим новые чеки*/
-        for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
-        {
-            CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
-        }
 
         /*Фото/документы*/
         /*Сначала удалим все старые (включая акт-протокол)*/
@@ -502,6 +481,45 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
         if(m_pLoadProtocolWidget->getImgStr(tmpStr))
             CreateTaskDocRecord(m_uuidSourseRecord , tmpStr , QUuid("14ae95dc-4b0a-4528-9892-732ec08c7fe6"));
+
+
+
+        /*Получим id оплаты*/
+        strExec = QString("select \"Оплата парковки\" from \"Расширение задачи ШС\" where id ='%1'").arg(m_uuidSourseExtention.toString());
+
+        QList<QStringList> strPayResult = execMainBDQuery(strExec);
+
+        if(strPayResult.size()<1 || ( (strPayResult.size() > 0) && (QUuid() == QUuid::fromString(strPayResult.at(0).at(0)))))
+        {
+            /*Оплата*/
+            QUuid uuidPay = CreatePayRecord(m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
+
+            strExec = QString("update \"Расширение задачи ШС\" set \"Оплата парковки\"='%1' where id='%2'").arg(uuidPay.toString()).arg(m_uuidSourseExtention.toString());
+            execMainBDQueryUpdate(strExec);
+            qDebug()<<strExec;
+            for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
+            {
+                CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
+            }
+        }
+        else
+        {
+
+            QUuid uuidPay = QUuid::fromString(strPayResult.at(0).at(0));
+            qDebug()<<uuidPay.toString();
+
+            UpdatePayRecord(uuidPay , m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
+
+            /*Удалим чеки*/
+            RemovePayDocs(uuidPay);
+
+            /*Загрузим новые чеки*/
+            for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
+            {
+                CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
+            }
+        }
+
 
     }
 

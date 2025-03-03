@@ -19,6 +19,7 @@
 #include <QRgb>
 #include <QGroupBox>
 #include "common.h"
+#include "BDPatterns.h"
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
@@ -254,7 +255,11 @@ void QEmploeeMainDlg::OnInputTasksPressed()
             QString strNewTaskExtensionUuid = QUuid::createUuid().toString();
             QString strExec= QString("insert into Задачи (id , \"Дата Время\" , Тип , Расширение, Исполнитель, Заказчик) values ('%1' , '%2' ,'8078b7ce-e423-49ae-9ce6-17758b852b33' ,'%3' ,'%4' ,'%5')").arg(strNewTaskUuid).arg(QDateTime::currentSecsSinceEpoch()).arg(strNewTaskExtensionUuid).arg(uuidCurrentUser.toString()).arg(dlg.m_strApplyedZakazchikUuid);
             execMainBDQueryUpdate(strExec);
-            strExec= QString("insert into \"Расширение задачи ШС\" (id , Госномер , Штрафстоянка) values ('%1' , '%2' , '%3')").arg(strNewTaskExtensionUuid).arg(dlg.m_strApplyedNumber).arg(dlg.m_strApplyedPenParkUuid);
+
+
+            QUuid uuidPay = CreatePayRecord(0 , PayTypes::Undefined);
+
+            strExec= QString("insert into \"Расширение задачи ШС\" (id , Госномер , Штрафстоянка , \"Оплата парковки\") values ('%1' , '%2' , '%3' , '%4')").arg(strNewTaskExtensionUuid).arg(dlg.m_strApplyedNumber).arg(dlg.m_strApplyedPenParkUuid).arg(uuidPay.toString());
             execMainBDQueryUpdate(strExec);
 
             //Обновим заявку, установив текущего пользователя взявшим
