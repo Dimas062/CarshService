@@ -22,10 +22,10 @@ QLoadDocLineWidget::QLoadDocLineWidget(QString strLabel, bool noMarker , bool no
 {
     m_strImg = QString("");
     m_bNoMarker = noMarker;
-
+ #ifdef Q_OS_ANDROID
     m_pImagePickerAndroid = new imagePickerAndroid();
     connect(m_pImagePickerAndroid, SIGNAL(imageRecivedSignal(QString)), this, SLOT(imageRecivedSlot(QString)));
-
+#endif
     m_StrLabelText = strLabel;
 
     QHBoxLayout * pHBoxLayout = new QHBoxLayout;
@@ -164,13 +164,13 @@ void QLoadDocLineWidget::OnOpenPressed()
     const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
     dialog.setDirectory(picturesLocations.isEmpty() ? QDir::currentPath() : picturesLocations.last());
 
-    QStringList mimeTypeFilters;
-    const QByteArrayList supportedMimeTypes = acceptMode == QFileDialog::AcceptOpen
-                                                  ? QImageReader::supportedMimeTypes() : QImageWriter::supportedMimeTypes();
-    foreach (const QByteArray &mimeTypeName, supportedMimeTypes)
-        mimeTypeFilters.append(mimeTypeName);
-    mimeTypeFilters.sort();
-    dialog.setMimeTypeFilters(mimeTypeFilters);
+    // QStringList mimeTypeFilters;
+    // const QByteArrayList supportedMimeTypes = acceptMode == QFileDialog::AcceptOpen
+    //                                               ? QImageReader::supportedMimeTypes() : QImageWriter::supportedMimeTypes();
+    // foreach (const QByteArray &mimeTypeName, supportedMimeTypes)
+    //     mimeTypeFilters.append(mimeTypeName);
+    // mimeTypeFilters.sort();
+    // dialog.setMimeTypeFilters(mimeTypeFilters);
     dialog.selectMimeTypeFilter("image/jpeg");
 
     dialog.setFileMode(QFileDialog::ExistingFiles);
@@ -182,13 +182,14 @@ void QLoadDocLineWidget::OnOpenPressed()
     //dialog.setOption(QFileDialog::DontUseNativeDialog, true);
 
     QStringList fileNames;
-   if (dialog.exec())
+   if (dialog.exec() == QDialog::Accepted)
    {
         fileNames = dialog.selectedFiles();
         //fileNames = dialog.getOpenFileNames();
 
         for (int i = 0; i < fileNames.size(); ++i)
         {
+
             imageRecivedSlot(fileNames.at(i));
         }
    }
@@ -256,8 +257,11 @@ void QLoadDocLineWidget::imageRecivedSlot(QString str)
         {
             SetViewDone(true);
         }
+        //qDebug()<<"QLoadDocLineWidget::imageRecivedSlot emit imageRecivedSigna 1";
         emit imageRecivedSignal(m_strFileName);
+        //qDebug()<<"QLoadDocLineWidget::imageRecivedSlot emit imageRecivedSigna 2";
         m_strImg = PictureFileToBase64(m_strFileName);
+        //qDebug()<<"QLoadDocLineWidget::imageRecivedSlot after PictureFileToBase64";
 
     }
 }

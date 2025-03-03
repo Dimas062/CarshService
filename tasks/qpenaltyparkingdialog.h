@@ -67,7 +67,7 @@ public slots:
     void OnReasonButtonPressed();
     void OnParkingButtonPressed();
     void OnRemovePressedSlot();
-    void OnReturnToZoneButtonPressed();
+    void OnReturnToZoneButtonRealised();
     void OnLoadAutoFotoButtonPressed();
     void OnCarshChanged();
     void OnProviderChanged();

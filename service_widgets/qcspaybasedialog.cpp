@@ -111,6 +111,7 @@ PayTypes QCSPayBaseDialog::GetSelectedPayType()
 
 void QCSPayBaseDialog::OnFotoGetet(QString strFotoPath)
 {
+    qDebug()<<"QCSPayBaseDialog::OnFotoGetet";
     if(m_bOneCheck) m_pPicturesWidget->m_Pictures.clear();
     m_pPicturesWidget->AddPicturePath(strFotoPath);
 }

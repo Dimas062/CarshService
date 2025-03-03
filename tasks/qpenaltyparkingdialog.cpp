@@ -76,7 +76,7 @@ QPenaltyParkingDialog::QPenaltyParkingDialog(QWidget *parent, Qt::WindowFlags f 
     pVMainLayout->addWidget(m_pReasonButton, 0 , Qt::AlignHCenter);
 
     m_pReturnToZoneButton = new QPushButton("Возврат в зону");
-    connect(m_pReturnToZoneButton,SIGNAL(released()),this,SLOT(OnReturnToZoneButtonPressed()));
+    connect(m_pReturnToZoneButton,SIGNAL(released()),this,SLOT(OnReturnToZoneButtonRealised()));
     m_pReturnToZoneButton->setMaximumHeight(iButtonHeight);
     m_pReturnToZoneButton->setMinimumHeight(iButtonHeight);
     m_pReturnToZoneButton->setCheckable(true);
@@ -183,20 +183,20 @@ void QPenaltyParkingDialog::OnReasonButtonPressed()
     isReady();
 }
 
-void QPenaltyParkingDialog::OnReturnToZoneButtonPressed()
+void QPenaltyParkingDialog::OnReturnToZoneButtonRealised()
 {
     if(m_pReturnToZoneButton->isChecked())
     {
-        QYesNoDlg dlg("Отменить возврат в зону?");
-        if(dlg.exec()==QDialog::Accepted)
+        QYesNoDlg dlg("Установить возврат в зону?");
+        if(dlg.exec()==QDialog::Rejected)
         {
             m_pReturnToZoneButton->setChecked(false);
         }
     }
     else
     {
-        QYesNoDlg dlg("Установить возврат в зону?");
-        if(dlg.exec()==QDialog::Accepted)
+        QYesNoDlg dlg("Отменить возврат в зону?");
+        if(dlg.exec()==QDialog::Rejected)
         {
             m_pReturnToZoneButton->setChecked(true);
         }
@@ -330,14 +330,17 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
     /*Устанавливаем оплату или нет в зависимости от завершённости задачи*/
     QString strSumm;
+    QString strSummRetZone;
 
     if(bIsReady)
     {
         strSumm = " (select Цена from \"Типы задач\" where id='8078b7ce-e423-49ae-9ce6-17758b852b33') ";
+        strSummRetZone = " (select Цена from \"Типы задач\" where id='fe81daf9-a838-4bac-84aa-595e038d3a12') ";
     }
     else
     {
         strSumm = "0";
+        strSummRetZone = "0";
     }
 
     QUuid uuidReturnToZone = QUuid();
@@ -382,7 +385,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
             strExec = QString("update \"Расширение задачи ШС\" set \"Возврат в зону\"='%1' where id='%2'").arg(uuidReturnToZone.toString()).arg(uuidExtention.toString());
             execMainBDQueryUpdate(strExec);
 
-            strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\", Расширение , Исполнитель , \"Время выполнения\") values ('%1','%2','fe81daf9-a838-4bac-84aa-595e038d3a12','%3','%4','%5')").arg(uuidReturnToZone.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidExtensionReturnToZone.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime);
+            strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\", Расширение , Исполнитель , \"Время выполнения\" , Поставщик , Заказчик , Цена) values ('%1','%2','fe81daf9-a838-4bac-84aa-595e038d3a12','%3','%4','%5' , '%6' , '%7' , %8 )").arg(uuidReturnToZone.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidExtensionReturnToZone.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(strSummRetZone);
             execMainBDQueryUpdate(strExec);
 
             strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id , \"Госномер\",\"Количество\") values ('%1','%2','%3')").arg(uuidExtensionReturnToZone.toString()).arg(m_pPlateLineText->getText()).arg(1);
@@ -444,7 +447,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
             strExec = QString("update \"Расширение задачи ШС\" set \"Возврат в зону\"='%1' where id='%2'").arg(uuidReturnToZone.toString()).arg(m_uuidSourseExtention.toString());
             execMainBDQueryUpdate(strExec);
 
-            strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\", Расширение , Исполнитель , \"Время выполнения\") values ('%1','%2','fe81daf9-a838-4bac-84aa-595e038d3a12','%3','%4','%5')").arg(uuidReturnToZone.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidExtensionReturnToZone.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime);
+            strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\", Расширение , Исполнитель , \"Время выполнения\", Поставщик , Заказчик , Цена) values ('%1','%2','fe81daf9-a838-4bac-84aa-595e038d3a12','%3','%4','%5', '%6' , '%7' , %8)").arg(uuidReturnToZone.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidExtensionReturnToZone.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(strSummRetZone);
             execMainBDQueryUpdate(strExec);
 
             strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id , \"Госномер\",\"Количество\") values ('%1','%2','%3')").arg(uuidExtensionReturnToZone.toString()).arg(m_pPlateLineText->getText()).arg(1);
@@ -452,17 +455,32 @@ void QPenaltyParkingDialog::SaveDataToBD()
         }
 
         if((!m_pReturnToZoneButton->isChecked())&&(m_uuidReturnToZoneSource!=QUuid())) //Снято, но до этого было - удаляем (еслти не было и нет, то ничего не делаем)
-            {
-                strExec = QString("update \"Расширение задачи ШС\" set \"Возврат в зону\"='%1' where id='%2'").arg(QUuid().toString()).arg(m_uuidSourseExtention.toString());
-                execMainBDQueryUpdate(strExec);
+        {
+            strExec = QString("update \"Расширение задачи ШС\" set \"Возврат в зону\"='%1' where id='%2'").arg(QUuid().toString()).arg(m_uuidSourseExtention.toString());
+            execMainBDQueryUpdate(strExec);
 
-                strExec = QString("delete from \"Задачи\" where id='%1'").arg(m_uuidReturnToZoneSource.toString());
-                execMainBDQueryUpdate(strExec);
+            strExec = QString("delete from \"Задачи\" where id='%1'").arg(m_uuidReturnToZoneSource.toString());
+            execMainBDQueryUpdate(strExec);
 
-                strExec = QString("delete from \"Расширение задачи Возврат в зону\" where id='%1'").arg(m_uuidReturnToZoneExtensionSource.toString());
-                execMainBDQueryUpdate(strExec);
-            }
+            strExec = QString("delete from \"Расширение задачи Возврат в зону\" where id='%1'").arg(m_uuidReturnToZoneExtensionSource.toString());
+            execMainBDQueryUpdate(strExec);
+         }
 
+        //было и осталось, но изменился статус готовности (реди тайм) или может заказчик/поставщик
+        if((m_pReturnToZoneButton->isChecked())&&(m_uuidReturnToZoneSource!=QUuid()))
+        {
+             strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidReturnToZoneSource.toString());
+             execMainBDQueryUpdate(strExec);
+
+             strExec = QString("update \"Задачи\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidReturnToZoneSource.toString());
+             execMainBDQueryUpdate(strExec);
+
+             strExec = QString("update \"Задачи\" set  \"Время выполнения\"='%1' where id='%2'").arg(iReadyTime).arg(m_uuidReturnToZoneSource.toString());
+             execMainBDQueryUpdate(strExec);
+
+             strExec = QString("update \"Задачи\" set  Цена= %1 where id='%2'").arg(strSummRetZone).arg(m_uuidReturnToZoneSource.toString());
+             execMainBDQueryUpdate(strExec);
+        }
 
         /*Фото/документы*/
         /*Сначала удалим все старые (включая акт-протокол)*/

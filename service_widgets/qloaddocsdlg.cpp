@@ -30,6 +30,7 @@ QLoadDocsDlg::QLoadDocsDlg(QWidget *parent, Qt::WindowFlags f):QCSBaseDialog(par
 
 void QLoadDocsDlg::OnFotoGetet(QString strFotoPath)
 {
+    qDebug()<<"QLoadDocsDlg::OnFotoGetet";
     m_pPicturesWidget->AddPicturePath(strFotoPath);
 }
 
