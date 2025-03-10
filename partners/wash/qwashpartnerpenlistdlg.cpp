@@ -80,5 +80,9 @@ void QWashPartnerPenListDlg::OnTapGesture()
         QUuid taskId = item->data(Qt::UserRole).toUuid();
         QWashPartnerPenDlg dlg(taskId);
         dlg.exec();
+        showWait(true);
+        UpdatePens();
+        showWait(false);
     }
+
 }

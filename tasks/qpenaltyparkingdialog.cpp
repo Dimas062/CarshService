@@ -321,7 +321,7 @@ bool QPenaltyParkingDialog::isReady()
 
 void QPenaltyParkingDialog::SaveDataToBD()
 {
-
+    debug_TimeStamp("QPenaltyParkingDialog::SaveDataToBD start");
     qint64 iReadyTime=0;
 
     bool bIsReady = isReady();
@@ -347,6 +347,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
     if(m_uuidSourseRecord == QUuid()) //Новая задача
     {
+        debug_TimeStamp("1");
         /*Сама задача*/
         QUuid uuidTask = QUuid::createUuid();
         m_uuidSourseRecord = uuidTask;
@@ -354,7 +355,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
         m_uuidSourseExtention = uuidExtention;
         QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель , \"Время выполнения\" , Цена , Поставщик , Заказчик) values ('%1','%2','8078b7ce-e423-49ae-9ce6-17758b852b33','%3','%4','%5','%6',%7,'%8','%9')").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(strSumm).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
         execMainBDQueryUpdate(strExec);
-
+        debug_TimeStamp("2");
         /*Расширение (оплата парковки, госномер)*/
         /*Оплата*/
         QUuid uuidPay = CreatePayRecord(m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
@@ -362,22 +363,31 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
         for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
         {
+            debug_TimeStamp(" 2.1");
             CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
+            debug_TimeStamp(" 3.1");
         }
 
+        debug_TimeStamp("3");
         strExec = QString("insert into \"Расширение задачи ШС\" (id,\"Оплата парковки\",\"Госномер\") values ('%1','%2','%3')") .arg(uuidExtention.toString()).arg(uuidPay.toString()).arg(m_pPlateLineText->getText());
         execMainBDQueryUpdate(strExec);
+
+        debug_TimeStamp("4");
 
         strExec = QString("update \"Расширение задачи ШС\" set \"Отдел ГАИ\"='%1' where id='%2'").arg(m_strGaiId).arg(uuidExtention.toString());
         execMainBDQueryUpdate(strExec);
 
+        debug_TimeStamp("5");
+
         strExec = QString("update \"Расширение задачи ШС\" set \"Причина задержания\"='%1' where id='%2'").arg(m_strReasonId).arg(uuidExtention.toString());
         execMainBDQueryUpdate(strExec);
+
+        debug_TimeStamp("6");
 
         strExec = QString("update \"Расширение задачи ШС\" set \"Штрафстоянка\"='%1' where id='%2'").arg(m_strPinaltiParkingId).arg(uuidExtention.toString());
         execMainBDQueryUpdate(strExec);
 
-
+        debug_TimeStamp("7");
         if(m_pReturnToZoneButton->isChecked())
         {
             uuidReturnToZone = QUuid::createUuid();
@@ -385,32 +395,50 @@ void QPenaltyParkingDialog::SaveDataToBD()
             strExec = QString("update \"Расширение задачи ШС\" set \"Возврат в зону\"='%1' where id='%2'").arg(uuidReturnToZone.toString()).arg(uuidExtention.toString());
             execMainBDQueryUpdate(strExec);
 
+            debug_TimeStamp("8");
+
             strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\", Расширение , Исполнитель , \"Время выполнения\" , Поставщик , Заказчик , Цена) values ('%1','%2','fe81daf9-a838-4bac-84aa-595e038d3a12','%3','%4','%5' , '%6' , '%7' , %8 )").arg(uuidReturnToZone.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidExtensionReturnToZone.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(strSummRetZone);
             execMainBDQueryUpdate(strExec);
 
+            debug_TimeStamp("9");
+
             strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id , \"Госномер\",\"Количество\") values ('%1','%2','%3')").arg(uuidExtensionReturnToZone.toString()).arg(m_pPlateLineText->getText()).arg(1);
             execMainBDQueryUpdate(strExec);
+
+            debug_TimeStamp("10");
         }
         else
         {
+
+            debug_TimeStamp("11");
             strExec = QString("update \"Расширение задачи ШС\" set \"Возврат в зону\"='%1' where id='%2'").arg(uuidReturnToZone.toString()).arg(uuidExtention.toString());
             execMainBDQueryUpdate(strExec);
+
+            debug_TimeStamp("12");
         }
+
+        debug_TimeStamp("13");
 
         /*Акт, протокол*/
         QString tmpStr;
         if(m_pLoadActWidget->getImgStr(tmpStr))
             CreateTaskDocRecord(uuidTask , tmpStr , QUuid("0078e19e-dfab-4a81-a5a2-569e0e683c2f"));
 
+        debug_TimeStamp("14");
+
         if(m_pLoadProtocolWidget->getImgStr(tmpStr))
             CreateTaskDocRecord(uuidTask , tmpStr , QUuid("14ae95dc-4b0a-4528-9892-732ec08c7fe6"));
+
+        debug_TimeStamp("15");
 
 
         /*Фото/документы (4 шт)*/
         /*Перебрать и записать картинки*/
         for (int iPicCounter = 0; iPicCounter < m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
         {
+            debug_TimeStamp(" 15.1");
             CreateTaskDocRecord(uuidTask , ImageToBase64(m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.at(iPicCounter)));
+            debug_TimeStamp(" 15.2");
         }
     }
     else//Апдейтим загруженную задачу
@@ -648,16 +676,13 @@ void QPenaltyParkingDialog::OnApplyPressedSlot()
 {
     if((m_pSelProviderCarshWidget->m_uuidCarsh==QUuid()) or (m_pSelProviderCarshWidget->m_uuidProvider==QUuid()))
     {
-        qDebug()<<"before QYesNoDlg";
         QYesNoDlg dlg("Не указан поставщик или заказчик.\n Задача не сохранится.\n Все равно выйти?" , this);
         if(dlg.exec() == QDialog::Accepted)
         {
-            qDebug()<<"QYesNoDlg accepted, reject";
             reject();
         }
         else
         {
-            qDebug()<<"OnApplyPressedSlot SaveDataToBD and return";
             return;
         }
     }

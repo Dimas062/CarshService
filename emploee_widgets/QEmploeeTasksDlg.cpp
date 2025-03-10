@@ -164,7 +164,11 @@ void QEmploeeTasksDlg::UpdateTasks()
             if(resNumber.size()>0) strNumber = resNumber.at(0).at(0);
         }
 
-        QString strTask = QString("%1 - %2 (%3) (%4)").arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTaskCounter).at(1).toInt()).toString("dd.MM.yyyy hh:mm")).arg(resTasks.at(iTaskCounter).at(2)).arg(resTasks.at(iTaskCounter).at(5)).arg(strNumber);
+        QString strTask = QString("%1 - %2 (%3) (%4)")
+                              .arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTaskCounter).at(1).toInt()).toString("dd.MM.yyyy hh:mm"))
+                              .arg(resTasks.at(iTaskCounter).at(2))
+                              .arg(resTasks.at(iTaskCounter).at(5))
+                              .arg(strNumber);
         pItem->setText(strTask);
         if(resTasks.at(iTaskCounter).at(4).toInt() != 0) pItem->setIcon(QIcon(":/icons/done_icon.png"));
         pItem->setFlags(pItem->flags() & ~Qt::ItemIsSelectable);
@@ -195,7 +199,9 @@ void QEmploeeTasksDlg::OnReadyButtonTogled(bool bChecked)
     }
     else
         strFilter = "";
+    showWait(true);
     UpdateTasks();
+    showWait(false);
 }
 
 void QEmploeeTasksDlg::OnNotReadyButtonTogled(bool bChecked)
@@ -207,7 +213,9 @@ void QEmploeeTasksDlg::OnNotReadyButtonTogled(bool bChecked)
     }
     else
         strFilter = "";
+    showWait(true);
     UpdateTasks();
+    showWait(false);
 }
 
 void QEmploeeTasksDlg::OnToCalendatButtonTogled(bool bChecked)
@@ -229,7 +237,9 @@ void QEmploeeTasksDlg::OnToCalendatButtonTogled(bool bChecked)
         }
     }
     else strDateFilter="";//CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+    showWait(true);
     UpdateTasks();
+    showWait(false);
 }
 
 void QEmploeeTasksDlg::OnTapGesture()
@@ -288,5 +298,7 @@ void QEmploeeTasksDlg::OnTapGesture()
         }
     }
     qApp->inputMethod()->hide();
+    showWait(true);
     UpdateTasks();
+    showWait(false);
 }

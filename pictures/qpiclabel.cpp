@@ -22,6 +22,7 @@ QPicLabel::~QPicLabel()
 
 void QPicLabel::mousePressEvent(QMouseEvent* event)
 {
+    if(m_pCurrentImage == NULL) return;
     if(event->type() == QEvent::MouseButtonPress)
     {
         const qreal iw = m_pCurrentImage->width();
@@ -65,7 +66,7 @@ void QPicLabel::SetCurrentImage(QImage * img)
 
 void QPicLabel::paintEvent(QPaintEvent*)
 {
-    if(!m_pCurrentImage) return;
+    if(m_pCurrentImage == NULL) return;
 
     QPainter p(this);
 

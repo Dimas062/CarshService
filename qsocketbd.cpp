@@ -1,7 +1,7 @@
 #include "qsocketbd.h"
 #include <QByteArray>
 #include <QSplashScreen>
-
+#include <common.h>
 
 QSocketBD::QSocketBD(QObject *parent)
     : QObject{parent}
@@ -20,7 +20,9 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
 #ifdef Q_OS_WINDOWS
     QByteArray data = QString(query).toUtf8();
 #else
+    //debug_TimeStamp(" toLocal8Bit 1");
     QByteArray data = QString(query).toLocal8Bit();
+    //debug_TimeStamp(" toLocal8Bit 2");
 #endif
 
     //pServSocket->writeData(data);

@@ -95,8 +95,9 @@ void QEmplSalaryDlg::OnToCalendarButtonClicked()
     if(dlg.exec()==QDialog::Accepted)
     {
         m_currentDate = dlg.m_SelectedDate;
-
+        showWait(true);
         UpdateSalarys();
+        showWait(false);
     }
 }
 

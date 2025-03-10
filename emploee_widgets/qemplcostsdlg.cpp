@@ -81,5 +81,7 @@ void QEmplCostsDlg::OnTapGesture()
         showWait(false);
     }
     qApp->inputMethod()->hide();
+    showWait(true);
     UpdateCosts();
+    showWait(false);
 }

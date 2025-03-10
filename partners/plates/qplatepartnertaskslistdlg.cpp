@@ -100,7 +100,9 @@ void QPlatePartnerTasksListDlg::OnTapGesture()
         dlg.exec();
         showWait(false);
     }
+    showWait(true);
     UpdateTasks();
+    showWait(false);
 }
 
 void QPlatePartnerTasksListDlg::OnToCalendatButtonTogled(bool bChecked)
@@ -122,5 +124,7 @@ void QPlatePartnerTasksListDlg::OnToCalendatButtonTogled(bool bChecked)
         }
     }
     else strDateFilter=CreateDateBDPeriodFromNow("\"Задачи партнера Номера\".Дата Время" , 2);
+    showWait(true);
     UpdateTasks();
+    showWait(false);
 }

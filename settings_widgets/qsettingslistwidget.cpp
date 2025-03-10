@@ -130,7 +130,7 @@ bool QSettingsListWidget::gestureEvent(QGestureEvent *event)
     return true;
 }
 
-void QSettingsListWidget::addWidget(QWidget * w)
+void QSettingsListWidget::addWidget(QWidget * )
 {
     // QListWidgetItem* item = new QListWidgetItem(this);
     // addItem(item);

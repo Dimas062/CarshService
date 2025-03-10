@@ -102,6 +102,8 @@ void QRegisterPartnerWashDlg::OnApplyPressed()
 {
     if(isReady())
     {
+        showWait(true);
+
         QUuid newParnerId = QUuid::createUuid();
 
         QUuid idUl = m_ULdlg.SaveOrCreateToBD(QUuid());
@@ -111,6 +113,8 @@ void QRegisterPartnerWashDlg::OnApplyPressed()
         QString strInsExec = QString("insert into Партнеры (id , Тип , ЮЛ , Поставщик , Логин, Пароль) values ('%1' , '932a4dc1-238b-478d-8911-3de46dd8da65' , '%2' , '%3' , '%4', '%5' )").arg(newParnerId.toString()).arg(idUl.toString()).arg(m_strPostavId).arg(m_pLoginLineText->getText()).arg(m_pPasswordLineText->getText());
 
         execMainBDQueryUpdate(strInsExec);
+
+        showWait(false);
 
         accept();
     }

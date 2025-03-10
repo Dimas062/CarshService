@@ -136,13 +136,13 @@ void QEmploeeMainDlg::UpdateCountersIcons()
 {
     showWait(true);
     QString strTaskCounts = QString("select \
-                                    (select count(id) from Задачи where Тип='057b3b6f-2848-479b-a546-3f16cb531ffe' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
-                                    (select count(id) from Задачи where Тип='25695573-f5fe-43fd-93dc-76ee09e461fa' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
-                                    (select count(id) from Задачи where Тип='2ae68dd5-6f2e-406b-95b2-aa41a89d19c2' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
-                                    (select count(id) from Задачи where Тип='78850df8-814b-41c8-8977-945c085f3021' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
-                                    (select count(id) from Задачи where Тип='8078b7ce-e423-49ae-9ce6-17758b852b33' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
-                                    (select count(id) from Задачи where Тип='99b4e860-5a7b-42a4-9136-f96252ef4192' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
-                                    (select count(id) from Задачи where Тип='fe81daf9-a838-4bac-84aa-595e038d3a12' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
+                                    (select count(id) from Задачи where Тип='057b3b6f-2848-479b-a546-3f16cb531ffe' and Задачи.Удалено<> 'true' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
+                                    (select count(id) from Задачи where Тип='25695573-f5fe-43fd-93dc-76ee09e461fa' and Задачи.Удалено<> 'true' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
+                                    (select count(id) from Задачи where Тип='2ae68dd5-6f2e-406b-95b2-aa41a89d19c2' and Задачи.Удалено<> 'true' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
+                                    (select count(id) from Задачи where Тип='78850df8-814b-41c8-8977-945c085f3021' and Задачи.Удалено<> 'true' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
+                                    (select count(id) from Задачи where Тип='8078b7ce-e423-49ae-9ce6-17758b852b33' and Задачи.Удалено<> 'true' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
+                                    (select count(id) from Задачи where Тип='99b4e860-5a7b-42a4-9136-f96252ef4192' and Задачи.Удалено<> 'true' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
+                                    (select count(id) from Задачи where Тип='fe81daf9-a838-4bac-84aa-595e038d3a12' and Задачи.Удалено<> 'true' and \"Время выполнения\"=0 and Исполнитель = '%1'),\
                                     (select count(id) from ЗадачиЗаказчикаШС where ПереведенаВЗадачу IS NULL and ЗадачиЗаказчикаШС.Заказчик in (select Заказчик from ИсполнителиЗаказчики where ИсполнительПартнер = '%1'))\
                                     ").arg(uuidCurrentUser.toString());
 
@@ -155,101 +155,119 @@ void QEmploeeMainDlg::UpdateCountersIcons()
     m_pDocsButton->setIcon(IconByNumber(resTaskCounts.at(0).at(1).toInt()));
     m_pSmenaButton->setIcon(IconByNumber(resTaskCounts.at(0).at(3).toInt()));
     m_pReturnToZoneButton->setIcon(IconByNumber(resTaskCounts.at(0).at(6).toInt()));
-    m_pFinButton->setIcon(IconByNumber(resTaskCounts.at(0).at(6).toInt()));
     m_pInputTasksButton->setIcon(IconByNumber(resTaskCounts.at(0).at(7).toInt()));
     showWait(false);
-
 }
 
 void QEmploeeMainDlg::OnCostPressed()
 {
+    showWait(true);
     QCostsDialog dlg;
     dlg.exec();
+    showWait(false);
     UpdateCountersIcons();
 
 }
 
 void QEmploeeMainDlg::OnFinPressed()
 {
+    showWait(true);
     QEmplSalaryDlg dlg;
     dlg.exec();
+    showWait(false);
     UpdateCountersIcons();
+
 }
 
 
 void QEmploeeMainDlg::OnCurrentTaskPressed()
 {
-    QEmploeeTasksDlg dlg(uuidCurrentUser);
     showWait(true);
+    QEmploeeTasksDlg dlg(uuidCurrentUser);
     dlg.checkNotReadyButton();
-    showWait(false);
     dlg.exec();
     currentWorkdayColor = defaultBackColor;
+    showWait(false);
     UpdateCountersIcons();
 }
 
 void QEmploeeMainDlg::OnNumberPlateTaskPressed()
 {
+    showWait(true);
     QPlateTaskDialog dlg;
     dlg.exec();
     currentWorkdayColor = defaultBackColor;
+    showWait(false);
     UpdateCountersIcons();
 }
 
 void QEmploeeMainDlg::OnParkingTaskPressed()
 {
+    showWait(true);
     QParkingTaskDialog dlg;
     dlg.exec();
     currentWorkdayColor = defaultBackColor;
+    showWait(false);
     UpdateCountersIcons();
 }
 
 void QEmploeeMainDlg::OnPenaltyParkingTaskPressed()
 {
+    showWait(true);
     QPenaltyParkingDialog dlg;
     dlg.exec();
     currentWorkdayColor = defaultBackColor;
+    showWait(false);
     UpdateCountersIcons();
 }
 
 void QEmploeeMainDlg::OnCostsPressed()
 {
+    showWait(true);
     QEmplCostsDlg dlg(uuidCurrentUser);
     dlg.exec();
+    showWait(false);
     UpdateCountersIcons();
 }
 
 void QEmploeeMainDlg::OnSmenaTaskPressed()
 {
+    showWait(true);
     QSmenaDlg dlg;
     dlg.exec();
+    showWait(false);
     UpdateCountersIcons();
 }
 
 void QEmploeeMainDlg::OnDocsTaskPressed()
 {
+    showWait(true);
     QDocsTaskDlg dlg;
     dlg.exec();
+    showWait(false);
     UpdateCountersIcons();
 }
 
 
 void QEmploeeMainDlg::OnReturnToZoneTaskPressed()
 {
+    showWait(true);
     QRetToZoneDialog dlg;
     dlg.exec();
+    showWait(false);
     UpdateCountersIcons();
 }
 
 void QEmploeeMainDlg::OnInputTasksPressed()
 {
+    showWait(true);
     QEmploeeInputTasksDlg dlg(uuidCurrentUser);
     if(dlg.exec() == QDialog::Accepted)
     {
         //Штрафстоянки
         if(QUuid::fromString(dlg.m_strApplyedTaskTypeUuid) == QUuid::fromString("8078b7ce-e423-49ae-9ce6-17758b852b33"))
         {
-            showWait(true);
+
             //Создадим новую задачу
             QString strNewTaskUuid = QUuid::createUuid().toString();
             QString strNewTaskExtensionUuid = QUuid::createUuid().toString();
@@ -270,9 +288,9 @@ void QEmploeeMainDlg::OnInputTasksPressed()
             QPenaltyParkingDialog dlg;
             dlg.LoadDataFromBD(QUuid::fromString(strNewTaskUuid));
             dlg.exec();
-            currentWorkdayColor = defaultBackColor;
-            showWait(false);
+            currentWorkdayColor = defaultBackColor; 
         }
-        UpdateCountersIcons();
     }
+    showWait(false);
+    UpdateCountersIcons();
 }

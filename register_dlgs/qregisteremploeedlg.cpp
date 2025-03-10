@@ -90,6 +90,7 @@ void QRegisterEmploeeDlg::OnApplyPressed()
     if(bIsAllOk)
     {
         /*Сначала создаём документы, что бы потом одним запросом добавить пользователя*/
+        showWait(true);
 
         /*Паспорт*/
         QUuid uuidPassport;
@@ -159,7 +160,7 @@ void QRegisterEmploeeDlg::OnApplyPressed()
         QUuid uuidPhone = QUuid::createUuid();
         strExec = QString("insert into \"Пользователь-Телефоны\" (id , \"Пользователь\" , \"Номер\" ) values ('%1' , '%2' , '%3')").arg(uuidPhone.toString()).arg(uuidNewUser.toString()).arg(m_pPhoneLineText->getText());
         execMainBDQueryUpdate(strExec);
-
+        showWait(false);
         accept();
     }
 }

@@ -105,7 +105,7 @@ QString PictureFileToBase64(QString strPath)
     QBuffer buffer;
     buffer.setData(imageData);
     QImageReader imageReader(&buffer);
-    qDebug() <<"imageData size="<< imageData.size()<< " width"<< imageReader.size().width() << "height" << imageReader.size().height() << "format"<<imageReader.format() << imageReader.subType();
+    //qDebug() <<"imageData size="<< imageData.size()<< " width"<< imageReader.size().width() << "height" << imageReader.size().height() << "format"<<imageReader.format() << imageReader.subType();
     // ^^Qt auto detects the "heic" format
     QImage resizeImage = imageReader.read();
     QByteArray outBa;
@@ -154,7 +154,7 @@ QImage Base64ToImage(QString & base64Str)
 QString CreateDateBDPeriodFromNow(QString strBdDateField , int iDays)
 {
     qint64 iCurrentTime = QDateTime::currentSecsSinceEpoch();
-    QString retVal = QString("and %1>%2 and %1<=%3").arg(strBdDateField).arg(iCurrentTime-iDays*86400).arg(iCurrentTime);
+    QString retVal = QString("and %1>'%2' and %1<='%3'").arg(strBdDateField).arg(iCurrentTime-iDays*86400).arg(iCurrentTime);
     return retVal;
 }
 

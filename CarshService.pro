@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets concurrent
 
 CONFIG += c++17
 
-VERSION = 0.1.8
+VERSION = 0.1.16
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -44,6 +44,10 @@ SOURCES += \
     qsocketbdnetclient.cpp \
     register_dlgs/qregisterpartnerstickdlg.cpp \
     register_dlgs/qregisterpartnerwashdlg.cpp \
+    service_widgets/ios/CameraWrapper.mm \
+    service_widgets/ios/PHPickerWrapper.mm \
+    service_widgets/ios/QtCameraPicker.mm \
+    service_widgets/ios/QtPHPicker.mm \
     service_widgets/qclicablelabel.cpp \
     service_widgets/qcolumntext.cpp \
     service_widgets/qcsbasedialog.cpp \
@@ -54,6 +58,7 @@ SOURCES += \
     service_widgets/qcsscrollarea.cpp \
     service_widgets/qcsselectdialog.cpp \
     service_widgets/qcsselectdlgbuttonswidget.cpp \
+    service_widgets/qfinddlg.cpp \
     service_widgets/qlinetext.cpp \
     service_widgets/qloaddoclinewidget.cpp \
     qregisterdlg.cpp \
@@ -120,6 +125,10 @@ HEADERS += \
     qsocketbdnetclient.h \
     register_dlgs/qregisterpartnerstickdlg.h \
     register_dlgs/qregisterpartnerwashdlg.h \
+    service_widgets/ios/CameraWrapper.h \
+    service_widgets/ios/PHPickerWrapper.h \
+    service_widgets/ios/QtCameraPicker.h \
+    service_widgets/ios/QtPHPicker.h \
     service_widgets/qclicablelabel.h \
     service_widgets/qcolumntext.h \
     service_widgets/qcsbasedialog.h \
@@ -130,6 +139,7 @@ HEADERS += \
     service_widgets/qcsscrollarea.h \
     service_widgets/qcsselectdialog.h \
     service_widgets/qcsselectdlgbuttonswidget.h \
+    service_widgets/qfinddlg.h \
     service_widgets/qlinetext.h \
     service_widgets/qloaddoclinewidget.h \
     qregisterdlg.h \
@@ -173,8 +183,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
  ios {
      #QTPLUGIN += qiosnsphotolibrarysupport
-
-
+     QMAKE_OBJCFLAGS += -fobjc-arc
+     # убрать вместе с выбором просто файлов видимо -framework Foundation
+     #LIBS += -framework PhotosUI -framework UIKit -framework MobileCoreServices
+    LIBS += -framework PhotosUI
      QMAKE_TARGET_BUNDLE_PREFIX = "ru.dimas062"
      QMAKE_BUNDLE = "CarshService"
      TARGET = "CarshService"

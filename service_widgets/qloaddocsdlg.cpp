@@ -12,7 +12,7 @@ QLoadDocsDlg::QLoadDocsDlg(QWidget *parent, Qt::WindowFlags f):QCSBaseDialog(par
     QVBoxLayout * pVMainLayout = new QVBoxLayout;
 
 
-    m_pLoadPhotoWidget = new QLoadDocLineWidget("Фото автомобия" , true , true);
+    m_pLoadPhotoWidget = new QLoadDocLineWidget("Фото автомобия" , true , true, nullptr , false);
 
     connect(m_pLoadPhotoWidget,SIGNAL(imageRecivedSignal(QString)),this,SLOT(OnFotoGetet(QString)));
     pVMainLayout->addWidget(m_pLoadPhotoWidget);
@@ -30,7 +30,6 @@ QLoadDocsDlg::QLoadDocsDlg(QWidget *parent, Qt::WindowFlags f):QCSBaseDialog(par
 
 void QLoadDocsDlg::OnFotoGetet(QString strFotoPath)
 {
-    qDebug()<<"QLoadDocsDlg::OnFotoGetet";
     m_pPicturesWidget->AddPicturePath(strFotoPath);
 }
 

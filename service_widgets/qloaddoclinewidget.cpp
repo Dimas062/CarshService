@@ -14,14 +14,17 @@
 #include <QImageCapture>
 #include <QPermission>
 #include <QThread>
+#include "ios/QtPHPicker.h"
+#include "ios/QtCameraPicker.h"
 
 extern QRect screenGeometry;
 extern int iButtonHeight;
 
-QLoadDocLineWidget::QLoadDocLineWidget(QString strLabel, bool noMarker , bool noView, QWidget *parent): QWidget{parent}
+QLoadDocLineWidget::QLoadDocLineWidget(QString strLabel, bool noMarker , bool noView, QWidget *parent , bool bSingleSelect): QWidget{parent}
 {
     m_strImg = QString("");
     m_bNoMarker = noMarker;
+    m_bSingleSelect = bSingleSelect;
  #ifdef Q_OS_ANDROID
     m_pImagePickerAndroid = new imagePickerAndroid();
     connect(m_pImagePickerAndroid, SIGNAL(imageRecivedSignal(QString)), this, SLOT(imageRecivedSlot(QString)));
@@ -44,19 +47,21 @@ QLoadDocLineWidget::QLoadDocLineWidget(QString strLabel, bool noMarker , bool no
         pHBoxLayout->addWidget(pViewButton);
     }
 
-    QPushButton * pOpenButton = new QPushButton(QIcon(":/icons/folder_open2.png"), "" , this);
-    connect(pOpenButton,SIGNAL(pressed()),this,SLOT(OnOpenPressed()));
-    pOpenButton->setIconSize(QSize(iButtonHeight*0.75,iButtonHeight*0.75));
-    pOpenButton->setMaximumHeight(iButtonHeight);
-    pOpenButton->setMinimumHeight(iButtonHeight);
-    pHBoxLayout->addWidget(pOpenButton);
+    m_pOpenButton = new QPushButton(QIcon(":/icons/folder_open2.png"), "" , this);
+    connect(m_pOpenButton,SIGNAL(pressed()),this,SLOT(OnOpenPressed()));
+    m_pOpenButton->setIconSize(QSize(iButtonHeight*0.75,iButtonHeight*0.75));
+    m_pOpenButton->setMaximumHeight(iButtonHeight);
+    m_pOpenButton->setMinimumHeight(iButtonHeight);
+    pHBoxLayout->addWidget(m_pOpenButton);
 
-    QPushButton * pPhotoButton = new QPushButton(QIcon(":/icons/photo_icon.png"), "" , this);
-    connect(pPhotoButton,SIGNAL(pressed()),this,SLOT(OnPhotoPressed()));
-    pPhotoButton->setMaximumHeight(iButtonHeight);
-    pPhotoButton->setMinimumHeight(iButtonHeight);
-    pPhotoButton->setIconSize(QSize(iButtonHeight*0.75,iButtonHeight*0.75));
-    pHBoxLayout->addWidget(pPhotoButton);
+    m_pPhotoButton = new QPushButton(QIcon(":/icons/photo_icon.png"), "" , this);
+    connect(m_pPhotoButton,SIGNAL(pressed()),this,SLOT(OnPhotoPressed()));
+    m_pPhotoButton->setMaximumHeight(iButtonHeight);
+    m_pPhotoButton->setMinimumHeight(iButtonHeight);
+    m_pPhotoButton->setIconSize(QSize(iButtonHeight*0.75,iButtonHeight*0.75));
+    pHBoxLayout->addWidget(m_pPhotoButton);
+
+    //m_pOpenDlg = new QFileDialog();
 
     this->setLayout(pHBoxLayout);
 }
@@ -120,23 +125,37 @@ void QLoadDocLineWidget::OnPhotoPressed()
 #ifdef Q_OS_IOS
 
     checkCameraPermission();
-    checkAuthorizationStatus();
-    QCamera * camera = new QCamera(QCameraDevice::BackFace);
-    if(camera)
-    {
-        QMediaCaptureSession captureSession;
-        captureSession.setCamera(camera);
-        QImageCapture * pImageCapture = new QImageCapture;
-        captureSession.setImageCapture(pImageCapture);
 
-        camera->start();
+    m_pOpenButton->setEnabled(false);
+    m_pPhotoButton->setEnabled(false);
 
-        pImageCapture->captureToFile();
-    }
+    QtCameraPicker *pCameraDlg = QtCameraPicker::instance();
+
+    QObject::disconnect(pCameraDlg, &QtCameraPicker::imageCaptured, nullptr, nullptr);
+    QObject::disconnect(pCameraDlg, &QtCameraPicker::captureCancelled, nullptr, nullptr);
+
+    connect(pCameraDlg, &QtCameraPicker::captureCancelled, this, [this]() {
+        m_pOpenButton->setEnabled(true);
+        m_pPhotoButton->setEnabled(true);
+    });
+
+    connect(pCameraDlg, &QtCameraPicker::imageCaptured, this, [this](const QString &path) {
+        if (!path.isEmpty()) {
+
+            imageRecivedSlot(path);
+
+        } else {
+            qDebug() << "Выбор отменен";
+        }
+        m_pOpenButton->setEnabled(true);
+        m_pPhotoButton->setEnabled(true);
+    });
+
+    pCameraDlg->openCamera();
+
+
 
 #endif
-
-
 }
 
 
@@ -147,52 +166,31 @@ void QLoadDocLineWidget::OnOpenPressed()
     m_pImagePickerAndroid->getImage();
 #endif
 
-#if defined Q_OS_IOS || defined Q_OS_WINDOWS
+#if defined Q_OS_IOS
 
-    // QStringList files = QFileDialog::getOpenFileNames(
-    //     this,
-    //     "Select one or more files to open",
-    //     "/home",
-    //     "Images (*.png *.xpm *.jpg)");
+    m_pOpenButton->setEnabled(false);
+    m_pPhotoButton->setEnabled(false);
 
+    QtPHPicker *pOpenDlg = QtPHPicker::instance();
 
-    // return;
+    QObject::disconnect(pOpenDlg, &QtPHPicker::filesSelected, nullptr, nullptr);
 
-    QFileDialog dialog;
-
-    QFileDialog::AcceptMode acceptMode = QFileDialog::AcceptOpen;
-    const QStringList picturesLocations = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
-    dialog.setDirectory(picturesLocations.isEmpty() ? QDir::currentPath() : picturesLocations.last());
-
-    // QStringList mimeTypeFilters;
-    // const QByteArrayList supportedMimeTypes = acceptMode == QFileDialog::AcceptOpen
-    //                                               ? QImageReader::supportedMimeTypes() : QImageWriter::supportedMimeTypes();
-    // foreach (const QByteArray &mimeTypeName, supportedMimeTypes)
-    //     mimeTypeFilters.append(mimeTypeName);
-    // mimeTypeFilters.sort();
-    // dialog.setMimeTypeFilters(mimeTypeFilters);
-    dialog.selectMimeTypeFilter("image/jpeg");
-
-    dialog.setFileMode(QFileDialog::ExistingFiles);
-    //dialog.setViewMode()
-
-    if (acceptMode == QFileDialog::AcceptSave)
-        dialog.setDefaultSuffix("jpg");
-
-    //dialog.setOption(QFileDialog::DontUseNativeDialog, true);
-
-    QStringList fileNames;
-   if (dialog.exec() == QDialog::Accepted)
-   {
-        fileNames = dialog.selectedFiles();
-        //fileNames = dialog.getOpenFileNames();
-
-        for (int i = 0; i < fileNames.size(); ++i)
-        {
-
-            imageRecivedSlot(fileNames.at(i));
+    connect(pOpenDlg, &QtPHPicker::filesSelected, this, [this](const QStringList &paths) {
+        if (!paths.isEmpty()) {
+            //int i =0;
+            for (const QString &path : paths) {
+                //qDebug() << "File received:" << path<<" i="<<i++;
+                imageRecivedSlot(path);
+            }
+        } else {
+            qDebug() << "Выбор отменен";
         }
-   }
+        m_pOpenButton->setEnabled(true);
+        m_pPhotoButton->setEnabled(true);
+    });
+
+    pOpenDlg->openPicker(!m_bSingleSelect);
+
 #endif
 }
 
@@ -257,11 +255,9 @@ void QLoadDocLineWidget::imageRecivedSlot(QString str)
         {
             SetViewDone(true);
         }
-        //qDebug()<<"QLoadDocLineWidget::imageRecivedSlot emit imageRecivedSigna 1";
-        emit imageRecivedSignal(m_strFileName);
-        //qDebug()<<"QLoadDocLineWidget::imageRecivedSlot emit imageRecivedSigna 2";
-        m_strImg = PictureFileToBase64(m_strFileName);
-        //qDebug()<<"QLoadDocLineWidget::imageRecivedSlot after PictureFileToBase64";
 
+        emit imageRecivedSignal(m_strFileName);
+
+        m_strImg = PictureFileToBase64(m_strFileName);
     }
 }

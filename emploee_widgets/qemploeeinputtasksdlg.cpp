@@ -8,6 +8,8 @@
 #include <QPushButton>
 #include <QScroller>
 #include <QVBoxLayout>
+#include "service_widgets/qcalendardataselectdlg.h"
+#include "service_widgets/qfinddlg.h"
 
 extern QRect screenGeometry;
 extern int iButtonHeight;
@@ -19,6 +21,7 @@ QEmploeeInputTasksDlg::QEmploeeInputTasksDlg(QUuid userUuid, QWidget *parent, Qt
     int iButtonHeight = (int)((screenGeometry.height()*0.7)/10)-10;
 
     m_userUuid = userUuid;
+    m_strFindFilter = "";
 
     QVBoxLayout * pVMainLayout = new QVBoxLayout;
 
@@ -42,12 +45,34 @@ QEmploeeInputTasksDlg::QEmploeeInputTasksDlg(QUuid userUuid, QWidget *parent, Qt
 
     pVMainLayout->addWidget(pFioLabel);
 
+    QHBoxLayout * pHFiltersLayout = new QHBoxLayout;
+
+    m_pToCalendarButton = new QPushButton("");
+    m_pToCalendarButton->setIcon(QIcon(":/icons/to_calendar_icon_256.png"));
+    m_pToCalendarButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    m_pToCalendarButton->setCheckable(true);
+    connect(m_pToCalendarButton,SIGNAL(toggled(bool)),this,SLOT(OnToCalendatButtonTogled(bool)));
+    m_pToCalendarButton->setFixedHeight(iButtonHeight);
+    m_pToCalendarButton->setFixedWidth(iButtonHeight);
+    pHFiltersLayout->addWidget(m_pToCalendarButton);
+
+    m_pFindButton = new QPushButton("");
+    m_pFindButton->setIcon(QIcon(":/icons/search_icon.png"));
+    m_pFindButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    m_pFindButton->setCheckable(true);
+    connect(m_pFindButton,SIGNAL(toggled(bool)),this,SLOT(OnFindButtonTogled(bool)));
+    m_pFindButton->setFixedHeight(iButtonHeight);
+    m_pFindButton->setFixedWidth(iButtonHeight);
+    pHFiltersLayout->addWidget(m_pFindButton);
+
+    pVMainLayout->addLayout(pHFiltersLayout);
+
     m_pTasksListWidget = new QCSBaseListWidget();
 #ifdef Q_OS_ANDRIOD
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 110 - iButtonHeight*2);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 110 - iButtonHeight*2);
 #endif
     m_pTasksListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pTasksListWidget));
 
@@ -70,8 +95,50 @@ QEmploeeInputTasksDlg::QEmploeeInputTasksDlg(QUuid userUuid, QWidget *parent, Qt
     pVMainLayout->addWidget(pApplyButton);
     connect(pApplyButton,SIGNAL(released()),this,SLOT(OnApplyTaskPressed()));
 
+    m_strDateFilter=QString("ЗадачиЗаказчикаШС.ДатаВремяПомещения > '%1'").arg(QDateTime::currentSecsSinceEpoch() - 2*24*60*60);
+
     UpdateTasks();
     this->setLayout(pVMainLayout);
+}
+
+void QEmploeeInputTasksDlg::OnToCalendatButtonTogled(bool bChecked)
+{
+    if(bChecked)
+    {
+        QCalendarDataSelectDlg calendarDlg(QDateTime::currentDateTime().date());
+        if(calendarDlg.exec()==QDialog::Accepted)
+        {
+            qint64 timeFrom = QDateTime(calendarDlg.m_SelectedDate, QTime(0,0,0)).toSecsSinceEpoch();
+            qint64 timeTo = timeFrom + 86400;
+            m_strDateFilter = QString(" ЗадачиЗаказчикаШС.ДатаВремяПомещения>'%1' and ЗадачиЗаказчикаШС.ДатаВремяПомещения<'%2' ").arg(timeFrom).arg(timeTo);
+
+        }
+        else
+        {
+            m_strDateFilter=CreateDateBDPeriodFromNow("ЗадачиЗаказчикаШС.ДатаВремяПомещения" , 2);
+            m_pToCalendarButton->setChecked(false);
+        }
+    }
+    else m_strDateFilter=QString("ЗадачиЗаказчикаШС.ДатаВремяПомещения > '%1'").arg(QDateTime::currentSecsSinceEpoch() - 2*24*60*60);
+    showWait(true);
+    UpdateTasks();
+    showWait(false);
+}
+
+void QEmploeeInputTasksDlg::OnFindButtonTogled(bool bChecked)
+{
+    if(bChecked)
+    {
+        QFindDlg dlg;
+        if(dlg.exec()==QDialog::Accepted)
+        {
+            m_strFindFilter = QString(" and ((ЗадачиЗаказчикаШС.Госномер like '%%1%') or (Штрафстоянки.Название like '%%1%'))").arg(dlg.GetText());
+        }
+    }
+    else m_strFindFilter="";
+    showWait(true);
+    UpdateTasks();
+    showWait(false);
 }
 
 void QEmploeeInputTasksDlg::UpdateTasks()
@@ -79,7 +146,7 @@ void QEmploeeInputTasksDlg::UpdateTasks()
     //штрафстоянки ситидрайв
     m_pTasksListWidget->clear();
 
-    QString strExec= QString("SELECT ЗадачиЗаказчикаШС.id, Штрафстоянки.Название, ЗадачиЗаказчикаШС.Госномер , ЗадачиЗаказчикаШС.ДатаВремяПомещения, Заказчики.Название , ЗадачиЗаказчикаШС.Штрафстоянка , ЗадачиЗаказчикаШС.Заказчик FROM ЗадачиЗаказчикаШС, Штрафстоянки, Заказчики where Заказчики.id=ЗадачиЗаказчикаШС.Заказчик and Штрафстоянки.id = ЗадачиЗаказчикаШС.Штрафстоянка and ЗадачиЗаказчикаШС.ПереведенаВЗадачу IS NULL and ЗадачиЗаказчикаШС.Заказчик in (select Заказчик from ИсполнителиЗаказчики where ИсполнительПартнер = '%1') and ЗадачиЗаказчикаШС.ДатаВремяПомещения > '%2'").arg(uuidCurrentUser.toString()).arg(QDateTime::currentSecsSinceEpoch() - 4*24*60*60);
+    QString strExec= QString("SELECT ЗадачиЗаказчикаШС.id, Штрафстоянки.Название, ЗадачиЗаказчикаШС.Госномер , ЗадачиЗаказчикаШС.ДатаВремяПомещения, Заказчики.Название , ЗадачиЗаказчикаШС.Штрафстоянка , ЗадачиЗаказчикаШС.Заказчик FROM ЗадачиЗаказчикаШС, Штрафстоянки, Заказчики where Заказчики.id=ЗадачиЗаказчикаШС.Заказчик and Штрафстоянки.id = ЗадачиЗаказчикаШС.Штрафстоянка and ЗадачиЗаказчикаШС.ПереведенаВЗадачу IS NULL and ЗадачиЗаказчикаШС.Заказчик in (select Заказчик from ИсполнителиЗаказчики where ИсполнительПартнер = '%1') and %2 %3").arg(uuidCurrentUser.toString()).arg(m_strDateFilter).arg(m_strFindFilter);
 
     QList<QStringList> resTasks = execMainBDQuery(strExec);
 

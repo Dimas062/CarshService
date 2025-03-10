@@ -100,7 +100,9 @@ void QStickPartnerTasksListDlg::OnTapGesture()
         dlg.exec();
         showWait(false);
     }
+    showWait(true);
     UpdateTasks();
+    showWait(false);
 }
 
 void QStickPartnerTasksListDlg::OnToCalendatButtonTogled(bool bChecked)

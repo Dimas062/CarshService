@@ -15,7 +15,7 @@ extern int iButtonHeight;
 
 
 
-QULDlg::QULDlg(QWidget *parent, Qt::WindowFlags f)
+QULDlg::QULDlg(QWidget *, Qt::WindowFlags)
 {
     QVBoxLayout * pVMainLayout = new QVBoxLayout;
 

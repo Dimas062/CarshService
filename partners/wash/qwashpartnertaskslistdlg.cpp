@@ -121,10 +121,11 @@ void QWashPartnerTasksListDlg::OnTapGesture()
 
         dlg.exec();
 
+        UpdateTasks();
+
         showWait(false);
 
     }
-    UpdateTasks();
 }
 
 void QWashPartnerTasksListDlg::OnToCalendatButtonTogled(bool bChecked)
@@ -146,5 +147,7 @@ void QWashPartnerTasksListDlg::OnToCalendatButtonTogled(bool bChecked)
         }
     }
     else m_strDateFilter=CreateDateBDPeriodFromNow("\"Задачи партнера Мойка\".Дата Время" , 2);
+    showWait(true);
     UpdateTasks();
+    showWait(false);
 }

@@ -22,10 +22,16 @@ protected:
     void UpdateTasks();
     QPushButton * m_pApplyTaskButton;
     QUuid m_userUuid;
+    QPushButton * m_pToCalendarButton;
+    QPushButton * m_pFindButton;
+    QString m_strDateFilter;
+    QString m_strFindFilter;
 
 public slots:
     void OnApplyTaskPressed();
     void FioClicked();
+    void OnToCalendatButtonTogled(bool);
+    void OnFindButtonTogled(bool);
 };
 
 #endif // QEMPLOEEINPUTTASKSDLG_H

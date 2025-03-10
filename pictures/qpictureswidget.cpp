@@ -24,12 +24,6 @@ QPicturesWidget::QPicturesWidget(QWidget *parent , bool bViewOnly, bool bDesktop
     QVBoxLayout * mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
 
-    // setStyleSheet("QPicturesWidget {"
-    //               "border-style: solid;"
-    //               "border-width: 1px;"
-    //               "border-color: black;"
-    //               "border-radius: 7px;"
-    //               "}");
 
     setStyleSheet("border: 1px solid black");
 
@@ -82,23 +76,28 @@ QPicturesWidget::QPicturesWidget(QWidget *parent , bool bViewOnly, bool bDesktop
 
 void QPicturesWidget::OnRemoveCurrFotoPressedSlot()
 {
+
     RemovePicture();
 }
 
 void QPicturesWidget::OnLeftButton()
 {
+
     m_currentPictureIt--;
     UpdatePictures();
 }
 
 void QPicturesWidget::OnRightButton()
 {
+
     m_currentPictureIt++;
     UpdatePictures();
 }
 
+
 bool QPicturesWidget::AddImage(QImage& img)
 {
+
     m_Pictures.push_back(img);
     m_currentPictureIt = m_Pictures.end()-1;
     UpdatePictures();
@@ -107,6 +106,7 @@ bool QPicturesWidget::AddImage(QImage& img)
 
 bool QPicturesWidget::AddPicturePath(QString path , bool bUpdatePicture)
 {
+
     QImageReader reader(path);
     QImage CurrentImage;
 
@@ -128,21 +128,28 @@ bool QPicturesWidget::AddPicturePath(QString path , bool bUpdatePicture)
 
 bool QPicturesWidget::RemovePicture()
 {
+
+    m_pCurrentPicLabel->SetCurrentImage(NULL); //Пока переставка картинок, никакой перерисовки(в перерисовке проверяется на 0), если картинка еще есть, то в апдейте она установится
     if(m_Pictures.empty()) return false;
     m_currentPictureIt = m_Pictures.erase(m_currentPictureIt);
     if(((!m_Pictures.empty())&&(m_currentPictureIt == m_Pictures.end()))) m_currentPictureIt--;
     UpdatePictures();
+
     return (true);
 }
 
 void QPicturesWidget::UpdatePictures()
 {
+
     if (m_currentPictureIt==m_Pictures.end())
     {
+
         m_pCurrentPicLabel->setEnabled(false);
         m_pLeftButton->setEnabled(false);
         m_pRightButton->setEnabled(false);
         m_pRemoveButton->setEnabled(false);
+
+
         return;
     }
     else
@@ -153,15 +160,15 @@ void QPicturesWidget::UpdatePictures()
         m_pRemoveButton->setEnabled(true);
     }
 
-
-
     m_pCurrentPicLabel->SetCurrentImage(&(*m_currentPictureIt));
+
 
     if(m_currentPictureIt == m_Pictures.begin()) m_pLeftButton->setEnabled(false);
     else m_pLeftButton->setEnabled(true);
 
     if(m_currentPictureIt == m_Pictures.end()-1) m_pRightButton->setEnabled(false);
     else m_pRightButton->setEnabled(true);
+
 }
 
 void QPicturesWidget::OnPictureClik()

@@ -183,8 +183,10 @@ void QPlatePartnerTask::OnPointPressedSlot()
 void QPlatePartnerTask::OnCarshChanged()
 {
     QString strExecColor = QString("select Цвет from Заказчики where id='%1'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
-
+    showWait(true);
     QList<QStringList> colorRes = execMainBDQuery(strExecColor);
+    showWait(false);
+
     if(colorRes.size()>0)
     {
         currentWorkdayColor = colorRes.at(0).at(0).toLongLong();
