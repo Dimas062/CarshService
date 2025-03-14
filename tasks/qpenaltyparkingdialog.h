@@ -12,7 +12,7 @@
 #include <QLabel>
 #include <QObject>
 #include <QPushButton>
-#include "service_widgets/qcsbutton.h"
+#include "service_widgets/QCSButton.h"
 
 class QPenaltyParkingDialog : public QCSBaseDialog
 {
