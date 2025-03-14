@@ -26,7 +26,7 @@ QCSPayBaseDialog::QCSPayBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bOn
     m_pTopLabel->setStyleSheet("font-size: 20px;");
     pVMainLayout->addWidget(m_pTopLabel);
 
-    m_pCashLineText = new QLineText("Сумма оплаты");
+    m_pCashLineText = new QLineText("Сумма оплаты" , nullptr , true);
     pVMainLayout->addWidget(m_pCashLineText);
 
     QHBoxLayout * pHPayMetodLayout = new QHBoxLayout();
@@ -50,7 +50,13 @@ QCSPayBaseDialog::QCSPayBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bOn
     pVMainLayout->addWidget(m_pLoadPhotoWidget);
 
     m_pPicturesWidget = new QPicturesWidget(this);
+#ifdef Q_OS_MOBILE
     m_pPicturesWidget->setMinimumHeight(screenGeometry.width());
+#endif
+#ifdef Q_OS_DESKTOP
+    m_pPicturesWidget->setFixedHeight(screenGeometry.height()*0.45);
+#endif
+
     pVMainLayout->addWidget(m_pPicturesWidget);
 
     pVMainLayout->addStretch();
@@ -68,12 +74,16 @@ void QCSPayBaseDialog::LoadFromBD(QUuid uuidPay)
 {
 
     QString strPays = QString("select \"Сумма\" , \"Тип оплаты\" from \"Платежи сотрудников\" where id='%1'").arg(uuidPay.toString());
-
+    qDebug()<<strPays;
     QList<QStringList> resPays = execMainBDQuery(strPays);
+    qDebug()<<resPays;
     for(int iPaysCounter = 0 ; iPaysCounter < resPays.size() ; iPaysCounter++)
     {
         /*Сумма*/
-        m_pCashLineText->setText(resPays.at(iPaysCounter).at(0));
+        if(resPays.at(iPaysCounter).at(0).length()>0)
+        {
+            m_pCashLineText->setText(resPays.at(iPaysCounter).at(0));
+        }
 
         /*Тип оплаты*/
         m_pCardPayButton->setChecked(true);
@@ -111,7 +121,7 @@ PayTypes QCSPayBaseDialog::GetSelectedPayType()
 
 void QCSPayBaseDialog::OnFotoGetet(QString strFotoPath)
 {
-    qDebug()<<"QCSPayBaseDialog::OnFotoGetet";
+
     if(m_bOneCheck) m_pPicturesWidget->m_Pictures.clear();
     m_pPicturesWidget->AddPicturePath(strFotoPath);
 }

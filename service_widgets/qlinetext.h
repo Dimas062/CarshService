@@ -10,9 +10,10 @@ class QLineText : public QWidget
 {
     Q_OBJECT
 public:
-    explicit QLineText(QString strLabel, QWidget *parent = nullptr);
+    explicit QLineText(QString strLabel, QWidget *parent = nullptr , bool bMoney= false);
 
     bool CheckColorLenght();
+    bool m_bIsMoney;
     void SetEnabled(bool);
     void SetToolTip(QString);
 

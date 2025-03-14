@@ -116,8 +116,6 @@ void QSmenaDlg::SaveDataToBD()
         QUuid uuidTask = QUuid::createUuid();
         QUuid uuidExtention = QUuid::createUuid();
 
-
-
         QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель, \"Время выполнения\" , Цена , Поставщик , Заказчик) values ('%1','%2','78850df8-814b-41c8-8977-945c085f3021','%3','%4','%5','%6',%7,'%8','%9')").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(strSumm).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
         execMainBDQueryUpdate(strExec);
 
@@ -127,21 +125,19 @@ void QSmenaDlg::SaveDataToBD()
     }
     else//Апдейтим загруженную задачу
     {
-
-        QString strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
-        execMainBDQueryUpdate(strExec);
-
-        strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidSourseRecord.toString());
+        QString strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
         strExec = QString("update \"Задачи\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
+        strExec = QString("update \"Расширение задачи Смена\" set \"Количество часов\" = '%1' where id='%2'").arg(m_strClockId).arg(m_uuidSourseExtention.toString());
+        execMainBDQueryUpdate(strExec);
+
         strExec = QString("update \"Задачи\" set Комментарий = '%1' , \"Время выполнения\"='%2' where id='%3'").arg(m_pLineTextComment->getText()).arg(iReadyTime).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
-        strExec = QString("update \"Расширение задачи Смена\" set \"Количество часов\" = '%1' where id='%2'").arg(m_strClockId).arg(m_uuidSourseExtention.toString());
-
+        strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
     }
 }

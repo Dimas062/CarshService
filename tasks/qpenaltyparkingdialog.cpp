@@ -321,7 +321,6 @@ bool QPenaltyParkingDialog::isReady()
 
 void QPenaltyParkingDialog::SaveDataToBD()
 {
-    debug_TimeStamp("QPenaltyParkingDialog::SaveDataToBD start");
     qint64 iReadyTime=0;
 
     bool bIsReady = isReady();
@@ -347,18 +346,18 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
     if(m_uuidSourseRecord == QUuid()) //Новая задача
     {
-        debug_TimeStamp("1");
         /*Сама задача*/
         QUuid uuidTask = QUuid::createUuid();
         m_uuidSourseRecord = uuidTask;
         QUuid uuidExtention = QUuid::createUuid();
         m_uuidSourseExtention = uuidExtention;
-        QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель , \"Время выполнения\" , Цена , Поставщик , Заказчик) values ('%1','%2','8078b7ce-e423-49ae-9ce6-17758b852b33','%3','%4','%5','%6',%7,'%8','%9')").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(strSumm).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
+        QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель , \"Время выполнения\" , Цена , Поставщик , Заказчик) values ('%1','%2','8078b7ce-e423-49ae-9ce6-17758b852b33','%3','%4','%5','%6',%7,'%8','%9')").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(0).arg(0).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
         execMainBDQueryUpdate(strExec);
-        debug_TimeStamp("2");
         /*Расширение (оплата парковки, госномер)*/
         /*Оплата*/
-        QUuid uuidPay = CreatePayRecord(m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
+        QString strSum = m_PayDlg.m_pCashLineText->getText();
+        strSum.replace(',','.');
+        QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType());
 
 
         for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
@@ -388,6 +387,29 @@ void QPenaltyParkingDialog::SaveDataToBD()
         execMainBDQueryUpdate(strExec);
 
         debug_TimeStamp("7");
+
+        /*Акт, протокол*/
+        QString tmpStr;
+        if(m_pLoadActWidget->getImgStr(tmpStr))
+            CreateTaskDocRecord(uuidTask , tmpStr , QUuid("0078e19e-dfab-4a81-a5a2-569e0e683c2f"));
+
+        debug_TimeStamp("14");
+
+        if(m_pLoadProtocolWidget->getImgStr(tmpStr))
+            CreateTaskDocRecord(uuidTask , tmpStr , QUuid("14ae95dc-4b0a-4528-9892-732ec08c7fe6"));
+
+        debug_TimeStamp("15");
+
+
+        /*Фото/документы (4 шт)*/
+        /*Перебрать и записать картинки*/
+        for (int iPicCounter = 0; iPicCounter < m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
+        {
+            debug_TimeStamp(" 15.1");
+            CreateTaskDocRecord(uuidTask , ImageToBase64(m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.at(iPicCounter)));
+            debug_TimeStamp(" 15.2");
+        }
+
         if(m_pReturnToZoneButton->isChecked())
         {
             uuidReturnToZone = QUuid::createUuid();
@@ -417,43 +439,19 @@ void QPenaltyParkingDialog::SaveDataToBD()
             debug_TimeStamp("12");
         }
 
-        debug_TimeStamp("13");
+        //Отметку о готовности обновляем в самом конце, если все выгрузили
+        strExec = QString("update \"Задачи\" set Комментарий = '%1' , \"Время выполнения\"='%2' where id='%3'").arg(m_pLineTextComment->getText()).arg(iReadyTime).arg(uuidTask.toString());
+        execMainBDQueryUpdate(strExec);
 
-        /*Акт, протокол*/
-        QString tmpStr;
-        if(m_pLoadActWidget->getImgStr(tmpStr))
-            CreateTaskDocRecord(uuidTask , tmpStr , QUuid("0078e19e-dfab-4a81-a5a2-569e0e683c2f"));
-
-        debug_TimeStamp("14");
-
-        if(m_pLoadProtocolWidget->getImgStr(tmpStr))
-            CreateTaskDocRecord(uuidTask , tmpStr , QUuid("14ae95dc-4b0a-4528-9892-732ec08c7fe6"));
-
-        debug_TimeStamp("15");
-
-
-        /*Фото/документы (4 шт)*/
-        /*Перебрать и записать картинки*/
-        for (int iPicCounter = 0; iPicCounter < m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
-        {
-            debug_TimeStamp(" 15.1");
-            CreateTaskDocRecord(uuidTask , ImageToBase64(m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.at(iPicCounter)));
-            debug_TimeStamp(" 15.2");
-        }
+        strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(uuidTask.toString());
+        execMainBDQueryUpdate(strExec);
     }
     else//Апдейтим загруженную задачу
     {
-
-        QString strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
-        execMainBDQueryUpdate(strExec);
-
-        strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidSourseRecord.toString());
+        QString strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
         strExec = QString("update \"Задачи\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidSourseRecord.toString());
-        execMainBDQueryUpdate(strExec);
-
-        strExec = QString("update \"Задачи\" set Комментарий = '%1' , \"Время выполнения\"='%2' where id='%3'").arg(m_pLineTextComment->getText()).arg(iReadyTime).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
         strExec = QString("update \"Расширение задачи ШС\" set \"Госномер\" = '%1' where id='%2'").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
@@ -538,7 +536,9 @@ void QPenaltyParkingDialog::SaveDataToBD()
         if(strPayResult.size()<1 || ( (strPayResult.size() > 0) && (QUuid() == QUuid::fromString(strPayResult.at(0).at(0)))))
         {
             /*Оплата*/
-            QUuid uuidPay = CreatePayRecord(m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
+            QString strSum = m_PayDlg.m_pCashLineText->getText();
+            strSum.replace(',','.');
+            QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType());
 
             strExec = QString("update \"Расширение задачи ШС\" set \"Оплата парковки\"='%1' where id='%2'").arg(uuidPay.toString()).arg(m_uuidSourseExtention.toString());
             execMainBDQueryUpdate(strExec);
@@ -552,9 +552,11 @@ void QPenaltyParkingDialog::SaveDataToBD()
         {
 
             QUuid uuidPay = QUuid::fromString(strPayResult.at(0).at(0));
-            qDebug()<<uuidPay.toString();
 
-            UpdatePayRecord(uuidPay , m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
+
+            QString strSum = m_PayDlg.m_pCashLineText->getText();
+            strSum.replace(',','.');
+            UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType());
 
             /*Удалим чеки*/
             RemovePayDocs(uuidPay);
@@ -566,7 +568,11 @@ void QPenaltyParkingDialog::SaveDataToBD()
             }
         }
 
+        strExec = QString("update \"Задачи\" set Комментарий = '%1' , \"Время выполнения\"='%2' where id='%3'").arg(m_pLineTextComment->getText()).arg(iReadyTime).arg(m_uuidSourseRecord.toString());
+        execMainBDQueryUpdate(strExec);
 
+        strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
+        execMainBDQueryUpdate(strExec);
     }
 
 }

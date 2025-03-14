@@ -6,27 +6,94 @@ static inline qint32 ArrayToInt(QByteArray source);
 
 QSocketBDNetClient::QSocketBDNetClient(QObject *parent) : QObject(parent)
 {
+    // m_thread.setObjectName("CarshServiceNetClient");
+    // moveToThread(&m_thread);
+    // m_thread.start();
+
+    mHeartbeatTimer = new QTimer(); // Вместо shared_ptr
+    mHeartbeatTimer->setSingleShot(false);
+    mHeartbeatTimer->moveToThread(&m_thread);
+
     m_thread.setObjectName("CarshServiceNetClient");
     moveToThread(&m_thread);
+
+    connect(&m_thread, &QThread::finished,
+            this, &QSocketBDNetClient::cleanup);
+
     m_thread.start();
+}
+
+QSocketBDNetClient::~QSocketBDNetClient()
+{
+    QMetaObject::invokeMethod(this, &QSocketBDNetClient::cleanup,
+                              Qt::BlockingQueuedConnection);
+
+    m_thread.quit();
+    m_thread.wait(1000);
+}
+
+void QSocketBDNetClient::cleanup()
+{
+    if(mHeartbeatTimer && mHeartbeatTimer->isActive()) {
+        mHeartbeatTimer->stop();
+    }
+
+    if(socket) {
+        socket->disconnectFromHost();
+        if(socket->state() == QAbstractSocket::ConnectedState) {
+            socket->waitForDisconnected(1000);
+        }
+        socket->deleteLater();
+        socket = nullptr;
+    }
+
+    delete m_buffer;
+    m_buffer = nullptr;
+
+    delete m_size;
+    m_size = nullptr;
 }
 
 bool QSocketBDNetClient::connectToHost()
 {
-    socket = new QTcpSocket(this);
-    connect(socket, SIGNAL(readyRead()), SLOT(readyRead()));
-    m_buffer = new QByteArray();
-    m_size= new qint32(0);
-    mHeartbeatTimer = std::make_shared<QTimer>(this);
-    connect(mHeartbeatTimer.get() , &QTimer::timeout , this , &QSocketBDNetClient::OnProcessingHeartbeatTimer);
-    socket->connectToHost("188.243.205.147", 3333);
-    if(socket->waitForConnected())
-    {
-        mHeartbeatTimer->start(m_iHeartbeatTime);
-        return true;
-    }
+    // socket = new QTcpSocket(this);
+    // connect(socket, SIGNAL(readyRead()), SLOT(readyRead()));
+    // m_buffer = new QByteArray();
+    // m_size= new qint32(0);
+    // mHeartbeatTimer = std::make_shared<QTimer>(this);
+    // connect(mHeartbeatTimer.get() , &QTimer::timeout , this , &QSocketBDNetClient::OnProcessingHeartbeatTimer);
+    // socket->connectToHost("188.243.205.147", 3333);
+    // if(socket->waitForConnected())
+    // {
+    //     mHeartbeatTimer->start(m_iHeartbeatTime);
+    //     return true;
+    // }
 
-    return false;
+    // return false;
+    // Перенести создание объектов в поток
+    QMetaObject::invokeMethod(this, [this]() {
+        // Создаем объекты внутри потока
+        socket = new QTcpSocket();
+        m_buffer = new QByteArray();
+        m_size = new qint32(0);
+
+        connect(socket, &QTcpSocket::readyRead,
+                this, &QSocketBDNetClient::readyRead);
+
+        mHeartbeatTimer = new QTimer(this);
+        connect(mHeartbeatTimer, &QTimer::timeout,
+                this, &QSocketBDNetClient::OnProcessingHeartbeatTimer);
+
+        socket->connectToHost("188.243.205.147", 3333);
+
+        // Асинхронное ожидание подключения
+        connect(socket, &QTcpSocket::connected, [this]() {
+            mHeartbeatTimer->start(m_iHeartbeatTime);
+            //emit connected();
+        });
+    }, Qt::QueuedConnection);
+
+    return true;
 }
 void QSocketBDNetClient::OnProcessingHeartbeatTimer()
 {
@@ -48,27 +115,41 @@ void QSocketBDNetClient::OnProcessingHeartbeatTimer()
 
 bool QSocketBDNetClient::writeData(QByteArray data)
 {
+    // if(socket->state() != QAbstractSocket::ConnectedState)//Попытка переподключиться
+    // {
+    //     socket->connectToHost("188.243.205.147", 3333);
 
-    if(socket->state() != QAbstractSocket::ConnectedState)//Попытка переподключиться
-    {
+    //     socket->waitForConnected();
+    // }
 
-        socket->connectToHost("188.243.205.147", 3333);
+    // qDebug()<<"QSocketBDNetClient::writeData 2";
 
-        socket->waitForConnected();
+    // if(socket->state() == QAbstractSocket::ConnectedState)
+    // {
 
-    }
+    //     socket->write(IntToArray(data.size())); //write size of data
 
-    if(socket->state() == QAbstractSocket::ConnectedState)
-    {
+    //     socket->write(data); //write the data itself
 
-        socket->write(IntToArray(data.size())); //write size of data
+    //     return socket->waitForBytesWritten();
 
-        socket->write(data); //write the data itself
-        return socket->waitForBytesWritten();
+    // }
+    // else
+    //     return false;
 
-    }
-    else
-        return false;
+    // Асинхронный вызов без блокировки
+    QMetaObject::invokeMethod(this, [this, data]() {
+        if(!socket || socket->state() != QAbstractSocket::ConnectedState) {
+            qDebug() << "Socket not connected";
+            return;
+        }
+
+        socket->write(IntToArray(data.size()));
+        socket->write(data);
+    }, Qt::QueuedConnection);
+
+    return true;
+
 }
 
 

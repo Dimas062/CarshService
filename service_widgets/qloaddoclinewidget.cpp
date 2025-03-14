@@ -7,11 +7,13 @@
 #include <QStandardPaths>
 #include <QFileDialog>
 #include <QImageWriter>
+#ifdef Q_OS_MOBILE
 #include <QMediaDevices>
 #include <QCameraDevice>
 #include <QCamera>
 #include <QMediaCaptureSession>
 #include <QImageCapture>
+#endif
 #include <QPermission>
 #include <QThread>
 #include "ios/QtPHPicker.h"
@@ -60,6 +62,10 @@ QLoadDocLineWidget::QLoadDocLineWidget(QString strLabel, bool noMarker , bool no
     m_pPhotoButton->setMinimumHeight(iButtonHeight);
     m_pPhotoButton->setIconSize(QSize(iButtonHeight*0.75,iButtonHeight*0.75));
     pHBoxLayout->addWidget(m_pPhotoButton);
+
+#ifdef Q_OS_DESKTOP
+    m_pPhotoButton->setEnabled(false);
+#endif
 
     //m_pOpenDlg = new QFileDialog();
 
@@ -192,6 +198,24 @@ void QLoadDocLineWidget::OnOpenPressed()
     pOpenDlg->openPicker(!m_bSingleSelect);
 
 #endif
+
+#ifdef Q_OS_DESKTOP
+    QString filePath = QFileDialog::getOpenFileName(
+        this,                        // Родительский виджет
+        tr("Выберите файл с изображением"),     // Заголовок окна
+        QDir::homePath(),            // Стартовая директория
+        tr("Images")                 // Фильтры форматов
+            + " (*.png *.jpg *.jpeg *.bmp *.gif *.tiff);;"
+            + tr("All Files") + " (*)"
+        );
+
+    if (!filePath.isEmpty()) {
+        // Обработка выбранного файла
+        imageRecivedSlot(filePath);
+    }
+#endif
+
+
 }
 
 bool QLoadDocLineWidget::getImgStr(QString & imgStr)

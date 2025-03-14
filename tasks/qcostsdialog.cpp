@@ -161,11 +161,19 @@ void QCostsDialog::SaveDataToBD()
         QUuid uuidTask = QUuid::createUuid();
 
         /*Оплата*/
-        QUuid uuidPay = CreatePayRecord(m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
+        QString strSum = m_PayDlg.m_pCashLineText->getText();
+        strSum.replace(',','.');
+        QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType());
 
         QString strExec = QString("insert into Расходы (id,Оплата,Статья,Товар,Количество,\"Дата Время\",Сотрудник) values ('%1','%2','%3','%4','%5','%6','%7')").arg(uuidTask.toString()).arg(uuidPay.toString()).arg(m_strArticleId).arg(m_strItemId).arg(m_pLineTextCount->getText()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidCurrentUser.toString());
 
         execMainBDQueryUpdate(strExec);
+
+        /*Загрузим новые чеки*/
+        for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
+        {
+            CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
+        }
 
     }
     else //Апдейт покупки
@@ -175,7 +183,9 @@ void QCostsDialog::SaveDataToBD()
         QList<QStringList> strPayResult = execMainBDQuery(strExec);
         QUuid uuidPay = QUuid::fromString(strPayResult.at(0).at(0));
 
-        UpdatePayRecord(uuidPay , m_PayDlg.m_pCashLineText->getText().toDouble() , m_PayDlg.GetSelectedPayType());
+        QString strSum = m_PayDlg.m_pCashLineText->getText();
+        strSum.replace(',','.');
+        UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType());
 
         /*Удалим чеки*/
         RemovePayDocs(uuidPay);

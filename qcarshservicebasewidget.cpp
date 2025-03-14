@@ -187,6 +187,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
         if(resUsers.at(iUserCounter).at(2) == "f")
         {
             m_pStatusLabel->setText("<font color=\"red\">Ваша учётная запись не подтверждена или заблокирована</font>");
+            Logging(QString("Попытка залогиниться с заблокированной учеткой логин:") +  strLoginStr + " пароль:"+strPassStr);
             return;
         }
         else m_pStatusLabel->setText(" ");
@@ -196,6 +197,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
         if(QUuid(resUsers.at(iUserCounter).at(1)) == QUuid("80d4f275-0b41-40d5-b3d7-07f63a500a22")) //Каршсервис
         {
             CurrentUserType = CarshService;
+            Logging(QString("Залогинился каршсервис логин:") +  strLoginStr + " пароль:"+strPassStr);
             QCarshServiceMainDlg dlg(NULL , /*Qt::Popup*/Qt::WindowFlags());
 
             m_bChildBackRealeseProcessed = false;
@@ -207,6 +209,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
         if(QUuid(resUsers.at(iUserCounter).at(1)) == QUuid("80066f83-c025-410b-b439-f3e9b2299461")) //Сотрудник
         {
             CurrentUserType = Emploee;
+            Logging(QString("Залогинился сотрудник логин:") +  strLoginStr + " пароль:"+strPassStr);
             QEmploeeMainDlg dlg(NULL , /*Qt::Popup*/Qt::WindowFlags());
 
             m_bChildBackRealeseProcessed = false;
@@ -233,6 +236,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
         if(QUuid(resParners.at(iPartnerCounter).at(2)) == QUuid("9c671ee9-2749-4717-a343-b18825855c29")) //Номера
         {
             CurrentUserType = PartnerPlate;
+            Logging(QString("Залогинился партнер Номера логин:") +  strLoginStr + " пароль:"+strPassStr);
             QPlatePartnerMainDlg dlg;
 
             m_bChildBackRealeseProcessed = false;
@@ -244,6 +248,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
         if(QUuid(resParners.at(iPartnerCounter).at(2)) == QUuid("082cf73c-6f6f-4167-ae89-b87c347091b2")) //Оклейка
         {
             CurrentUserType = PartnerStick;
+            Logging(QString("Залогинился партнер Оклейка логин:") +  strLoginStr + " пароль:"+strPassStr);
             QStickPartnerMainDlg dlg;
 
             m_bChildBackRealeseProcessed = false;
@@ -255,6 +260,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
         if(QUuid(resParners.at(iPartnerCounter).at(2)) == QUuid("932a4dc1-238b-478d-8911-3de46dd8da65")) //Мойка
         {
             CurrentUserType = PartnerWasher;
+            Logging(QString("Залогинился партнер Мойка логин:") +  strLoginStr + " пароль:"+strPassStr);
             QWashPartnerMainDlg dlg;
 
             m_bChildBackRealeseProcessed = false;
@@ -265,7 +271,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
     }
 
 
-
+    Logging(QString("Неудачный логин логин:") +  strLoginStr + " пароль:"+strPassStr);
     m_pStatusLabel->setText("<font color=\"red\">Пользователь с заданным логином и паролем не найден</font>");
     return;
 

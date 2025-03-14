@@ -125,7 +125,9 @@ void QEmplSalaryDlg::UpdateSalarys()
         salaryItem.str = QString("%1: %2 %5 (%3) %4 р.").arg(salaryItem.tm.toString("dd.MM.yyyy ")).arg(resSalarys.at(iSalaryCounter).at(2)).arg(resSalarys.at(iSalaryCounter).at(3)).arg(resSalarys.at(iSalaryCounter).at(4)).arg(resSalarys.at(iSalaryCounter).at(5));
         salaryItem.id = resSalarys.at(iSalaryCounter).at(0);
         salaryItem.bIsRed = false;
-        dblSalarySum = dblSalarySum + resSalarys.at(iSalaryCounter).at(4).toDouble();
+        QString strSalarySum = resSalarys.at(iSalaryCounter).at(4);
+        strSalarySum.replace('.',',');
+        dblSalarySum = dblSalarySum + strSalarySum.toDouble();
         SalaryItems.push_back(salaryItem);
     }
 

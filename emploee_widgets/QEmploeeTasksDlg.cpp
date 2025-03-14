@@ -14,16 +14,28 @@
 #include <tasks/qplatetaskdialog.h>
 #include "tasks/qrettozonedialog.h"
 #include "tasks/qsmenadlg.h"
-#include "tasks/qdocstaskdlg.h"
+#include "../CarshService/tasks/qdocstaskdlg.h"
 #include <QSplashScreen>
 
 extern QRect screenGeometry;
 extern int iButtonHeight;
-extern UserTypes CurrentUserType;
 
+#ifdef Q_OS_MOBILE
+    extern UserTypes CurrentUserType;
+#endif
+
+#ifdef Q_OS_DESKTOP
+    UserTypes CurrentUserType;
+    QUuid uuidCurrentPartner;
+    QColor currentWorkdayColor;
+#endif
 
 QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f , false)
 {
+#ifdef Q_OS_DESKTOP //На десктопе предполагаем, что всегда эти диалоги смотрит каршсервис
+    CurrentUserType =UserTypes::CarshService;
+#endif
+
     int iButtonHeight = (int)((screenGeometry.height()*0.7)/10)-10;
 
     m_userUuid = userUuid;

@@ -171,7 +171,7 @@ void QPlateTaskDialog::SaveDataToBD()
             strSumm = "0";
         }
 
-        QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель , \"Время выполнения\", Поставщик , Заказчик , Цена) values ('%1','%2','99b4e860-5a7b-42a4-9136-f96252ef4192','%3','%4','%5','%6','%7','%8',%9)").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(strSumm);
+        QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель , \"Время выполнения\", Поставщик , Заказчик , Цена) values ('%1','%2','99b4e860-5a7b-42a4-9136-f96252ef4192','%3','%4','%5','%6','%7','%8',%9)").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(0).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(0);
         execMainBDQueryUpdate(strExec);
 
         /*Расширение (номер, количество рамок)*/
@@ -193,6 +193,12 @@ void QPlateTaskDialog::SaveDataToBD()
             strExec = QString("insert into \"Задача-Документы задач\" (id,\"Задача\",\"Документ\") values ('%1','%2','%3')").arg(uuidDocTask.toString()).arg(uuidTask.toString()).arg(uuidDocument.toString());
             execMainBDQueryUpdate(strExec);
         }
+
+        strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(uuidTask.toString());
+        execMainBDQueryUpdate(strExec);
+
+        strExec = QString("update \"Задачи\" set  \"Время выполнения\"='%1' where id='%2'").arg(iReadyTime).arg(uuidTask.toString());
+        execMainBDQueryUpdate(strExec);
     }
     else //Апдейтим загруженную задачу
     {
@@ -208,20 +214,13 @@ void QPlateTaskDialog::SaveDataToBD()
             strSumm = "0";
         }
 
-
-        QString strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
-        execMainBDQueryUpdate(strExec);
-
-        strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidSourseRecord.toString());
+        QString strExec = QString("update \"Задачи\" set Поставщик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
         strExec = QString("update \"Задачи\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
         strExec = QString("update \"Задачи\" set Комментарий = '%1'  where id='%2'").arg(m_pLineTextComment->getText()).arg(m_uuidSourseRecord.toString());
-        execMainBDQueryUpdate(strExec);
-
-        strExec = QString("update \"Задачи\" set  \"Время выполнения\"='%1' where id='%2'").arg(iReadyTime).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
         /*Расширение (номер, количество рамок)*/
@@ -243,6 +242,12 @@ void QPlateTaskDialog::SaveDataToBD()
         {
             CreateTaskDocRecord(m_uuidSourseRecord , ImageToBase64(m_pLoadAutoFotoDlg->m_pPicturesWidget->m_Pictures.at(iPicCounter)));
         }
+
+        strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
+        execMainBDQueryUpdate(strExec);
+
+        strExec = QString("update \"Задачи\" set  \"Время выполнения\"='%1' where id='%2'").arg(iReadyTime).arg(m_uuidSourseRecord.toString());
+        execMainBDQueryUpdate(strExec);
     }
 }
 

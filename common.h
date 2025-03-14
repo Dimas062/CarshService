@@ -1,5 +1,14 @@
 #ifndef COMMON_H
 #define COMMON_H
+
+#include <QtGlobal>
+
+#if defined Q_OS_BLACKBERRY || defined Q_OS_ANDROID || defined Q_OS_IOS || defined Q_OS_WP
+#define Q_OS_MOBILE
+#else
+#define Q_OS_DESKTOP
+#endif
+
 #include <QTime>
 #include <QString>
 #include <QList>
@@ -7,6 +16,7 @@
 #include <QLabel>
 #include <QImage>
 #include <QIcon>
+#include <QSqlQuery>
 
 const int _24H = 24*60*60*1000;
 const int _12H = 12*60*60*1000;
@@ -50,6 +60,19 @@ struct VSMobileSettings
     bool isConnected;//Удалось подключиться
 };
 
+QString bool_to_str(bool b);
+
+bool executeQueryWithReconnect(QSqlQuery &query, const QString &queryString);
+
+QString GenNextShcetActNumber();
+
+
+QString rublesForNumber(long long number);
+
+QString GenNextShcetActNumber();
+
+void Logging(QString str , int iWarning = 1);
+
 bool IsUUidInVector(QVector<QUuid> , QUuid);
 
 QIcon IconByNumber(int iNumb);
@@ -67,6 +90,8 @@ QImage Base64ToImage(QString & base64Str);
 QString ImageToBase64(const QImage & img);
 
 QString ListToString(QList<QString> list);
+
+QString ListListToString(QList<QStringList> list);
 
 QList<QStringList> execMainBDQuery(QString query);
 

@@ -25,18 +25,22 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
     //debug_TimeStamp(" toLocal8Bit 2");
 #endif
 
+
     //pServSocket->writeData(data);
     QTimer timer;
     timer.setSingleShot(true);
     QEventLoop loop;
 
 
-
     connect((&(QSocketBDNetClient::getInstance())), SIGNAL(dataReceived()), &loop, SLOT(quit()));
 
     connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
 
+
+
     QMetaObject::invokeMethod(&QSocketBDNetClient::getInstance() , "writeData" , Q_ARG(QByteArray , data));
+
+
 
     timer.start(12000);
 
@@ -56,6 +60,8 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
 #else
     QString ResultData = QString::fromLocal8Bit(QSocketBDNetClient::getInstance().m_LastData);
 #endif
+
+    qDebug()<<"execMainBDQuery 6";
 
     /*Нулевой результат*/
     if(ResultData == "##**NULLRESULT**##")

@@ -1,12 +1,15 @@
 #include "qlinetext.h"
 #include <QHBoxLayout>
+#include <QDoubleValidator>
 
 
 extern QRect screenGeometry;
 
 
-QLineText::QLineText(QString strLabel,QWidget *parent): QWidget{parent}
+QLineText::QLineText(QString strLabel,QWidget *parent, bool bMoney): QWidget{parent}
 {
+    m_bIsMoney = bMoney;
+
     QHBoxLayout * pHBoxLayout = new QHBoxLayout;
     this->setLayout(pHBoxLayout);
     m_pLabel = new QLabel(strLabel);
@@ -15,6 +18,13 @@ QLineText::QLineText(QString strLabel,QWidget *parent): QWidget{parent}
     connect(m_pLineEdit, &QLineEdit::textChanged, this, &QLineText::OnTextLineEditChanged);
 
     m_pLineEdit->setFixedWidth(screenGeometry.width()*0.6);
+    if(m_bIsMoney)
+    {
+        QDoubleValidator *validator = new QDoubleValidator(0, 9999999.99, 2, m_pLineEdit);
+        validator->setNotation(QDoubleValidator::StandardNotation);
+        m_pLineEdit->setValidator(validator);
+    }
+
 
     pHBoxLayout->addStretch();
     pHBoxLayout->addWidget(m_pLineEdit);
@@ -59,6 +69,7 @@ bool QLineText::CheckColorLenght()
 
 void QLineText::setText(QString text)
 {
+    if(m_bIsMoney) text.replace(',','.');
     m_pLineEdit->setText(text);
 }
 
