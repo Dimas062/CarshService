@@ -14,6 +14,9 @@
 #include <QMediaCaptureSession>
 #include <QImageCapture>
 #endif
+#ifdef Q_OS_DESKTOP
+#include <QMessageBox>
+#endif
 #include <QPermission>
 #include <QThread>
 #include "ios/QtPHPicker.h"
@@ -64,7 +67,7 @@ QLoadDocLineWidget::QLoadDocLineWidget(QString strLabel, bool noMarker , bool no
     pHBoxLayout->addWidget(m_pPhotoButton);
 
 #ifdef Q_OS_DESKTOP
-    m_pPhotoButton->setEnabled(false);
+    m_pPhotoButton->setIcon(QIcon(":/icons/save_icon.png"));
 #endif
 
     //m_pOpenDlg = new QFileDialog();
@@ -161,6 +164,43 @@ void QLoadDocLineWidget::OnPhotoPressed()
 
 
 
+#endif
+
+#ifdef Q_OS_DESKTOP
+    QImage CurrentImage = Base64ToImage(m_strImg);
+
+    if (CurrentImage.isNull()) {
+        QMessageBox::warning(this, "Ошибка", "Нет изображения для сохранения");
+        return;
+    }
+
+    // Выбор файла для сохранения
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    "Сохранить изображение",
+                                                    QDir::homePath(),
+                                                    "Изображения (*.png *.jpg *.bmp)");
+
+    if (fileName.isEmpty()) {
+        return; // Пользователь отменил операцию
+    }
+
+    // Определяем формат по расширению файла
+    QString format = "PNG";
+    if (fileName.endsWith(".jpg", Qt::CaseInsensitive) ||
+        fileName.endsWith(".jpeg", Qt::CaseInsensitive)) {
+        format = "JPG";
+    } else if (fileName.endsWith(".bmp", Qt::CaseInsensitive)) {
+        format = "BMP";
+    }
+
+    // Сохраняем изображение
+    if (CurrentImage.save(fileName, format.toLatin1().constData())) {
+        QMessageBox::information(this, "Успех",
+                                 "Изображение успешно сохранено в:\n" + fileName);
+    } else {
+        QMessageBox::critical(this, "Ошибка",
+                              "Не удалось сохранить изображение!\nПроверьте права доступа");
+    }
 #endif
 }
 

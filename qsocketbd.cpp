@@ -42,7 +42,7 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
 
 
 
-    timer.start(12000);
+    timer.start(60000);
 
     loop.exec(); //blocks untill either theSignalToWaitFor or timeout was fired
 
@@ -60,8 +60,6 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
 #else
     QString ResultData = QString::fromLocal8Bit(QSocketBDNetClient::getInstance().m_LastData);
 #endif
-
-    qDebug()<<"execMainBDQuery 6";
 
     /*Нулевой результат*/
     if(ResultData == "##**NULLRESULT**##")

@@ -94,23 +94,23 @@ bool QParkingTaskDialog::isReady()
 
     bool bPayDone = true;
 
-    if(m_PayDlg.m_pCashLineText->getText().length()<2)
-    {
-        retVal = false;
-        bPayDone = false;
-    }
+    // if(m_PayDlg.m_pCashLineText->getText().length()<2)
+    // {
+    //     retVal = false;
+    //     bPayDone = false;
+    // }
 
-    if(m_PayDlg.m_pPicturesWidget->m_Pictures.size()<1)
-    {
-        retVal = false;
-        bPayDone = false;
-    }
+    // if(m_PayDlg.m_pPicturesWidget->m_Pictures.size()<1)
+    // {
+    //     retVal = false;
+    //     bPayDone = false;
+    // }
 
-    if(m_PayDlg.GetSelectedPayType()==Undefined)
-    {
-        retVal = false;
-        bPayDone = false;
-    }
+    // if(m_PayDlg.GetSelectedPayType()==Undefined)
+    // {
+    //     retVal = false;
+    //     bPayDone = false;
+    // }
 
 
     if(!m_pPlateLineText->CheckColorLenght()) retVal = false;

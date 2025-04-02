@@ -150,6 +150,12 @@ void QEmploeeMainDlg::UpdateCountersIcons()
     QList<QStringList> resTaskCounts = execMainBDQuery(strTaskCounts);
     if(resTaskCounts.size()<1)
     {
+        QString errStr = "Ошибка запроса " + strTaskCounts + " \n результат:" + ListListToString(resTaskCounts);
+        Logging(errStr,2);
+        return;
+    }
+    if(resTaskCounts.size()>0)
+    {
         if(resTaskCounts.at(0).size()<8)
         {
             QString errStr = "Ошибка запроса " + strTaskCounts + " \n результат:" + ListListToString(resTaskCounts);
@@ -157,6 +163,7 @@ void QEmploeeMainDlg::UpdateCountersIcons()
             return;
         }
     }
+
 
     m_pNumberPlateButton->setIcon(IconByNumber(resTaskCounts.at(0).at(5).toInt()));
     m_pParkingButton->setIcon(IconByNumber(resTaskCounts.at(0).at(0).toInt()));

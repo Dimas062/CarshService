@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 15.0.1, 2025-03-13T21:37:07. -->
+<!-- Written by QtCreator 15.0.1, 2025-03-16T13:20:05. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -420,7 +420,7 @@
      <value type="int" key="type">0</value>
     </valuemap>
     <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph dwarf,4096 -F 250</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Запуск  на iPod touch (Дмитрий)</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Запуск CarshService на iPod touch (Дмитрий)</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.IosRunConfiguration:</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/dimas/CarshService/CarshService/CarshService.pro</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>

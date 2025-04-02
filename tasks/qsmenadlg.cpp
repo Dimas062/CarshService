@@ -69,7 +69,7 @@ bool QSmenaDlg::isReady()
 
     if(!m_pLineTextComment->CheckColorLenght()) retVal = false;
 
-    if(m_strClockId.length()<33)
+    if(m_strClockId.length()<30)
     {
         m_pClockButton->setStyleSheet("QPushButton {color: red;}");
         retVal = false;
@@ -103,7 +103,7 @@ void QSmenaDlg::SaveDataToBD()
 
     if(bIsReady)
     {
-        strSumm = " (select Цена from \"Типы задач\" where id='78850df8-814b-41c8-8977-945c085f3021') ";
+        strSumm = QString(" (select Цена*%1 from \"Типы задач\" where id='78850df8-814b-41c8-8977-945c085f3021') ").arg(m_strClockText);
     }
     else
     {
@@ -118,6 +118,8 @@ void QSmenaDlg::SaveDataToBD()
 
         QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель, \"Время выполнения\" , Цена , Поставщик , Заказчик) values ('%1','%2','78850df8-814b-41c8-8977-945c085f3021','%3','%4','%5','%6',%7,'%8','%9')").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(strSumm).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
         execMainBDQueryUpdate(strExec);
+
+        qDebug()<<strExec;
 
 
         strExec = QString("insert into \"Расширение задачи Смена\" (id,\"Количество часов\") values ('%1','%2')").arg(uuidExtention.toString()).arg(m_strClockId);
@@ -139,6 +141,7 @@ void QSmenaDlg::SaveDataToBD()
 
         strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
+        qDebug()<<strExec;
     }
 }
 
@@ -162,16 +165,18 @@ void QSmenaDlg::LoadDataFromBD(QUuid uuidSourseRecord)
         /*Загрузка расширения задачи*/
         m_uuidSourseExtention = QUuid::fromString(resTasks.at(iTasksCounter).at(3));
 
-        QString strExtenExec = QString("select \"Количество часов\" from \"Расширение задачи Смена\" where id='%1'").arg(m_uuidSourseExtention.toString());
-
+        QString strExtenExec = QString("select \"Расширение задачи Смена\".\"Количество часов\" , \"Количество часов в смене\".Количество from \"Расширение задачи Смена\",\"Количество часов в смене\" where \"Расширение задачи Смена\".\"Количество часов\"=\"Количество часов в смене\".id  and \"Расширение задачи Смена\".id='%1'").arg(m_uuidSourseExtention.toString());
+        qDebug()<<strExtenExec;
         QList<QStringList> resExtTasks = execMainBDQuery(strExtenExec);
         for(int iExtTasksCounter = 0 ; iExtTasksCounter < resExtTasks.size() ; iExtTasksCounter++)
         {
             /*Часы*/
             m_strClockId = (resExtTasks.at(iTasksCounter).at(0));
-
+            m_strClockText = (resExtTasks.at(iTasksCounter).at(1));
         }
     }
+
+    isReady();
 }
 
 void QSmenaDlg::OnClockPressed()
