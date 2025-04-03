@@ -33,8 +33,8 @@ int iWindowedVideoHeigth = 0;
 int iButtonHeight;
 
 QUuid uuidCurrentUser;
-QUuid uuidCurrentPartner;
-UserTypes CurrentUserType;
+extern QUuid uuidCurrentPartner;
+extern UserTypes CurrentUserType;
 
 extern VSMobileSettings settings;
 

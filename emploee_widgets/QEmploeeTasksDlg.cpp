@@ -24,11 +24,11 @@ extern int iButtonHeight;
     extern UserTypes CurrentUserType;
 #endif
 
-#ifdef Q_OS_DESKTOP
+//#ifdef Q_OS_DESKTOP
     UserTypes CurrentUserType;
     QUuid uuidCurrentPartner;
     QColor currentWorkdayColor;
-#endif
+//#endif
 
 QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f , false)
 {

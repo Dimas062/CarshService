@@ -30,14 +30,9 @@ QRetToZoneDialog::QRetToZoneDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
     pVMainLayout->addWidget(m_pPlateLineText);
     connect(m_pPlateLineText, &QLineText::textChanged, this, &QRetToZoneDialog::OnNumberTextInput);
 
-    // m_pPicturesWidget = new QPicturesWidget(this);
-    // m_pPicturesWidget->setMinimumHeight(screenGeometry.width()*0.5);
-    // pVMainLayout->addWidget(m_pPicturesWidget);
-
     m_pLineTextComment = new QLineText("Комментарий");
     pVMainLayout->addWidget(m_pLineTextComment);
     connect(m_pLineTextComment, &QLineText::textChanged, this, &QRetToZoneDialog::OnCommentTextInput);
-
 
     m_pLoadAutoFotoDlg = new QLoadDocsDlg;
     m_pLoadAutoFotoButton = new QPushButton("Фото автомобиля");

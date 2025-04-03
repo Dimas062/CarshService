@@ -44,10 +44,6 @@ SOURCES += \
     qsocketbdnetclient.cpp \
     register_dlgs/qregisterpartnerstickdlg.cpp \
     register_dlgs/qregisterpartnerwashdlg.cpp \
-    service_widgets/ios/CameraWrapper.mm \
-    service_widgets/ios/PHPickerWrapper.mm \
-    service_widgets/ios/QtCameraPicker.mm \
-    service_widgets/ios/QtPHPicker.mm \
     service_widgets/qclicablelabel.cpp \
     service_widgets/qcolumntext.cpp \
     service_widgets/qcsbasedialog.cpp \
@@ -92,6 +88,14 @@ SOURCES += \
     tasks/qrettozonedialog.cpp \
     tasks/qsmenadlg.cpp
 
+ios {
+SOURCES += \
+    service_widgets/ios/CameraWrapper.mm \
+    service_widgets/ios/PHPickerWrapper.mm \
+    service_widgets/ios/QtCameraPicker.mm \
+    service_widgets/ios/QtPHPicker.mm \
+}
+
 HEADERS += \
     BDPatterns.h \
     carsh_service_widgets/qcarshcarddlg.h \
@@ -125,10 +129,6 @@ HEADERS += \
     qsocketbdnetclient.h \
     register_dlgs/qregisterpartnerstickdlg.h \
     register_dlgs/qregisterpartnerwashdlg.h \
-    service_widgets/ios/CameraWrapper.h \
-    service_widgets/ios/PHPickerWrapper.h \
-    service_widgets/ios/QtCameraPicker.h \
-    service_widgets/ios/QtPHPicker.h \
     service_widgets/qclicablelabel.h \
     service_widgets/qcolumntext.h \
     service_widgets/qcsbasedialog.h \
@@ -173,7 +173,13 @@ HEADERS += \
     tasks/qrettozonedialog.h \
     tasks/qsmenadlg.h
 
-
+ios {
+    HEADERS += \
+    service_widgets/ios/CameraWrapper.h \
+    service_widgets/ios/PHPickerWrapper.h \
+    service_widgets/ios/QtCameraPicker.h \
+    service_widgets/ios/QtPHPicker.h \
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

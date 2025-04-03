@@ -24,11 +24,16 @@
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
 extern int iButtonHeight;
-QUuid uuidCurrentWorkday;
-QColor currentWorkdayColor;
+
+//#ifdef Q_OS_DESKTOP
+extern UserTypes CurrentUserType;
+extern QUuid uuidCurrentPartner;
+extern QColor currentWorkdayColor;
+// #else
+// QUuid uuidCurrentWorkday;
+// QColor currentWorkdayColor;
+// #endif
 QColor defaultBackColor;
-
-
 
 QEmploeeMainDlg::QEmploeeMainDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f)
 {
