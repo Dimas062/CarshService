@@ -74,9 +74,9 @@ void QCSPayBaseDialog::LoadFromBD(QUuid uuidPay)
 {
 
     QString strPays = QString("select \"Сумма\" , \"Тип оплаты\" from \"Платежи сотрудников\" where id='%1'").arg(uuidPay.toString());
-    qDebug()<<strPays;
+
     QList<QStringList> resPays = execMainBDQuery(strPays);
-    qDebug()<<resPays;
+
     for(int iPaysCounter = 0 ; iPaysCounter < resPays.size() ; iPaysCounter++)
     {
         /*Сумма*/

@@ -399,15 +399,12 @@ void QPenaltyParkingDialog::SaveDataToBD()
             QUuid uuidExtensionReturnToZone = QUuid::createUuid();
             strExec = QString("update \"Расширение задачи ШС\" set \"Возврат в зону\"='%1' where id='%2'").arg(uuidReturnToZone.toString()).arg(uuidExtention.toString());
             execMainBDQueryUpdate(strExec);
-            qDebug()<<strExec;
 
             strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\", Расширение , Исполнитель , \"Время выполнения\" , Поставщик , Заказчик , Цена , Комментарий) values ('%1','%2','fe81daf9-a838-4bac-84aa-595e038d3a12','%3','%4','%5' , '%6' , '%7' , %8 , '%9')").arg(uuidReturnToZone.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidExtensionReturnToZone.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(strSummRetZone).arg(m_strPinaltiParkingText);
             execMainBDQueryUpdate(strExec);
-            qDebug()<<strExec;
 
             strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id , \"Госномер\",\"Количество\") values ('%1','%2','%3')").arg(uuidExtensionReturnToZone.toString()).arg(m_pPlateLineText->getText()).arg(1);
             execMainBDQueryUpdate(strExec);
-            qDebug()<<strExec;
 
             foreach(QUuid uuidPic , vPenPicsUuids)
             {
@@ -482,7 +479,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
             strExec = QString("update \"Расширение задачи ШС\" set \"Оплата парковки\"='%1' where id='%2'").arg(uuidPay.toString()).arg(m_uuidSourseExtention.toString());
             execMainBDQueryUpdate(strExec);
-            qDebug()<<strExec;
+
             for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
             {
                 CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
@@ -536,7 +533,6 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
         if((!m_pReturnToZoneButton->isChecked())&&(m_uuidReturnToZoneSource!=QUuid())) //Снято, но до этого было - удаляем (еслти не было и нет, то ничего не делаем)
         {
-            qDebug()<<"QPenaltyParkingDialog update 2";
             strExec = QString("update \"Расширение задачи ШС\" set \"Возврат в зону\"='%1' where id='%2'").arg(QUuid().toString()).arg(m_uuidSourseExtention.toString());
             execMainBDQueryUpdate(strExec);
 
@@ -620,9 +616,6 @@ void QPenaltyParkingDialog::LoadDataFromBD(QUuid uuidSourseRecord)
 
             m_uuidReturnToZoneSource = QUuid(resExtTasks.at(iTasksCounter).at(5));
 
-            qDebug()<<"QPenaltyParkingDialog m_uuidReturnToZoneSource = "<<m_uuidReturnToZoneSource;
-
-
             m_strGaiText = StrFromUuid(m_strGaiId , "\"Отделы ГИБДД\"");
             m_strPinaltiParkingText = StrFromUuid(m_strPinaltiParkingId , "\"Штрафстоянки\"");
             m_strReasonText = StrFromUuid(m_strReasonId , "\"Причины задержания\"");
@@ -696,7 +689,7 @@ void QPenaltyParkingDialog::OnApplyPressedSlot()
             return;
         }
     }
-    qDebug()<<"OnApplyPressedSlot accept()";
+
     showWait(true);
     SaveDataToBD();
     showWait(false);

@@ -119,9 +119,6 @@ void QSmenaDlg::SaveDataToBD()
         QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель, \"Время выполнения\" , Цена , Поставщик , Заказчик) values ('%1','%2','78850df8-814b-41c8-8977-945c085f3021','%3','%4','%5','%6',%7,'%8','%9')").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(strSumm).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString());
         execMainBDQueryUpdate(strExec);
 
-        qDebug()<<strExec;
-
-
         strExec = QString("insert into \"Расширение задачи Смена\" (id,\"Количество часов\") values ('%1','%2')").arg(uuidExtention.toString()).arg(m_strClockId);
         execMainBDQueryUpdate(strExec);
     }
@@ -141,7 +138,6 @@ void QSmenaDlg::SaveDataToBD()
 
         strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
-        qDebug()<<strExec;
     }
 }
 
@@ -166,7 +162,6 @@ void QSmenaDlg::LoadDataFromBD(QUuid uuidSourseRecord)
         m_uuidSourseExtention = QUuid::fromString(resTasks.at(iTasksCounter).at(3));
 
         QString strExtenExec = QString("select \"Расширение задачи Смена\".\"Количество часов\" , \"Количество часов в смене\".Количество from \"Расширение задачи Смена\",\"Количество часов в смене\" where \"Расширение задачи Смена\".\"Количество часов\"=\"Количество часов в смене\".id  and \"Расширение задачи Смена\".id='%1'").arg(m_uuidSourseExtention.toString());
-        qDebug()<<strExtenExec;
         QList<QStringList> resExtTasks = execMainBDQuery(strExtenExec);
         for(int iExtTasksCounter = 0 ; iExtTasksCounter < resExtTasks.size() ; iExtTasksCounter++)
         {
