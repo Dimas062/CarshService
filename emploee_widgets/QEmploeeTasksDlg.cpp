@@ -141,6 +141,8 @@ void QEmploeeTasksDlg::UpdateTasks()
 
     QList<QStringList> resTasks = execMainBDQuery(strExec);
 
+    qDebug()<<strExec;
+
 
     for(int iTaskCounter = 0 ; iTaskCounter < resTasks.size() ; iTaskCounter++)
     {
@@ -237,6 +239,7 @@ void QEmploeeTasksDlg::OnToCalendatButtonTogled(bool bChecked)
         QCalendarDataSelectDlg calendarDlg(QDateTime::currentDateTime().date());
         if(calendarDlg.exec()==QDialog::Accepted)
         {
+            qDebug()<<"OnToCalendatButtonTogled from date";
             qint64 timeFrom = QDateTime(calendarDlg.m_SelectedDate, QTime(0,0,0)).toSecsSinceEpoch();
             qint64 timeTo = timeFrom + 86400;
             strDateFilter = QString(" and Задачи.\"Дата Время\">%1 and Задачи.\"Дата Время\"<%2 ").arg(timeFrom).arg(timeTo);
@@ -244,11 +247,16 @@ void QEmploeeTasksDlg::OnToCalendatButtonTogled(bool bChecked)
         }
         else
         {
+            qDebug()<<"OnToCalendatButtonTogled from now 2 days";
             strDateFilter=CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);;
             m_pToCalendarButton->setChecked(false);
         }
     }
-    else strDateFilter="";//CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+    else
+    {
+        strDateFilter="";//CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+        qDebug()<<"OnToCalendatButtonTogled no date filter";
+    }
     showWait(true);
     UpdateTasks();
     showWait(false);

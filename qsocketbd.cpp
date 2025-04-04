@@ -48,13 +48,9 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
 
     QList<QStringList> retVal;
 
-    if(timer.isActive())
-        qDebug("dataReceived");
-    else
-    {
+    if(!timer.isActive())
         qDebug("timeout get data");
-        return retVal;
-    }
+
 #ifdef Q_OS_WINDOWS
     QString ResultData = QString::fromUtf8(QSocketBDNetClient::getInstance().m_LastData);
 #else
