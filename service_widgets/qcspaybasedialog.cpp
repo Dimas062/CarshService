@@ -136,7 +136,6 @@ void QCSPayBaseDialog::OnCardPayPressedSlot()
     m_pBusinessPayButton->setChecked(false);
 }
 
-
 void QCSPayBaseDialog::OnBusinessPayPressedSlot()
 {
     m_pCardPayButton->setChecked(false);
