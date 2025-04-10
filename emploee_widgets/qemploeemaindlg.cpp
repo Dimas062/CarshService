@@ -296,7 +296,7 @@ void QEmploeeMainDlg::OnInputTasksPressed()
             execMainBDQueryUpdate(strExec);
 
 
-            QUuid uuidPay = CreatePayRecord(0 , PayTypes::Undefined);
+            QUuid uuidPay = CreatePayRecord(0 , PayTypes::Undefined , QDateTime::currentSecsSinceEpoch());
 
             strExec= QString("insert into \"Расширение задачи ШС\" (id , Госномер , Штрафстоянка , \"Оплата парковки\") values ('%1' , '%2' , '%3' , '%4')").arg(strNewTaskExtensionUuid).arg(dlg.m_strApplyedNumber).arg(dlg.m_strApplyedPenParkUuid).arg(uuidPay.toString());
             execMainBDQueryUpdate(strExec);

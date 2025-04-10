@@ -21,7 +21,6 @@ QRetToZoneDialog::QRetToZoneDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
 
     QVBoxLayout * pVMainLayout = new QVBoxLayout;
 
-
     pVMainLayout->addSpacing(5);
     m_pTopLabel = new QLabel(QString("<b>Возврат в зону. %1</b>").arg(QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm")));
     pVMainLayout->addWidget(m_pTopLabel);
@@ -245,6 +244,7 @@ void QRetToZoneDialog::LoadDataFromBD(QUuid uuidSourseRecord)
             m_pLoadAutoFotoDlg->m_pPicturesWidget->AddImage(tmpImg);
         }
     }
+    isReady();
 }
 
 

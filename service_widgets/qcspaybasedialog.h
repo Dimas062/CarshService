@@ -22,6 +22,7 @@ public:
 
     QPushButton * m_pCardPayButton;
     QPushButton * m_pBusinessPayButton;
+    QPushButton * m_pCalendarButton;
 
     PayTypes GetSelectedPayType();
     QString getSumString() {return m_pCashLineText->getText();}
@@ -29,17 +30,23 @@ public:
     void LoadFromBD(QUuid uuidPay);
 
     bool m_bOneCheck;
-
+    qint64 m_iPayDate;
 protected:
     QLoadDocLineWidget * m_pLoadPhotoWidget;
 
     QLabel * m_pTopLabel;
+
+    QLabel * m_pDateLabel;
+
+    void UpdateDateLabel(){m_pDateLabel->setText(QString("Дата чека: %1").arg(QDateTime::fromSecsSinceEpoch(m_iPayDate).toString("dd.MM.yyyy")));}
+
 
 public slots:
     void OnFotoGetet(QString);
     void OnApplyPressedSlot();
     void OnCardPayPressedSlot();
     void OnBusinessPayPressedSlot();
+    void OnCalendarPressedSlot();
 };
 
 #endif // QCSPAYBASEDIALOG_H

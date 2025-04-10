@@ -16,6 +16,7 @@
 #include "tasks/qsmenadlg.h"
 #include "../CarshService/tasks/qdocstaskdlg.h"
 #include <QSplashScreen>
+#include "service_widgets/qfinddlg.h"
 
 extern QRect screenGeometry;
 extern int iButtonHeight;
@@ -98,6 +99,15 @@ QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget 
     m_pToCalendarButton->setFixedWidth(iButtonHeight);
     pHFiltersLayout->addWidget(m_pToCalendarButton);
 
+    m_pFindButton = new QPushButton("");
+    m_pFindButton->setIcon(QIcon(":/icons/search_icon.png"));
+    m_pFindButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    m_pFindButton->setCheckable(true);
+    connect(m_pFindButton,SIGNAL(toggled(bool)),this,SLOT(OnFindButtonTogled(bool)));
+    m_pFindButton->setFixedHeight(iButtonHeight);
+    m_pFindButton->setFixedWidth(iButtonHeight);
+    pHFiltersLayout->addWidget(m_pFindButton);
+
     pVMainLayout->addLayout(pHFiltersLayout);
 
     m_pTasksListWidget = new QCSBaseListWidget();
@@ -133,11 +143,31 @@ void QEmploeeTasksDlg::checkNotReadyButton()
     m_pNotReadyButton->toggle();
 }
 
+void QEmploeeTasksDlg::OnFindButtonTogled(bool bChecked)
+{
+    if(bChecked)
+    {
+        QFindDlg dlg;
+        if(dlg.exec()==QDialog::Accepted)
+        {
+            m_strFindFilter = "";
+            if(dlg.GetText().length()>0)
+            {
+                m_strFindFilter=QString(" and Задачи.\"Расширение\" in ((select id from \"Расширение задачи Возврат в зону\" where Госномер ilike '%%1%')  union  (select id from \"Расширение задачи Номера\" where Госномер ilike '%%1%') union  (select id from \"Расширение задачи Парковка\" where Госномер ilike '%%1%') union  (select id from \"Расширение задачи ШС\" where Госномер ilike '%%1%'))").arg(dlg.GetText());
+            }
+        }
+    }
+    else m_strFindFilter="";
+    showWait(true);
+    UpdateTasks();
+    showWait(false);
+}
+
 void QEmploeeTasksDlg::UpdateTasks()
 {
     m_pTasksListWidget->clear();
 
-    QString strExec= QString("SELECT Задачи.id, Задачи.\"Дата Время\", \"Типы задач\".\"Тип\" , \"Типы задач\".id , Задачи.\"Время выполнения\" , Заказчики.Название FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' %2 %3 %4 order by Задачи.\"Дата Время\" desc").arg(m_userUuid.toString()).arg(strFilter).arg(strDateFilter).arg(strTaskTypesFilter);
+    QString strExec= QString("SELECT Задачи.id, Задачи.\"Дата Время\", \"Типы задач\".\"Тип\" , \"Типы задач\".id , Задачи.\"Время выполнения\" , Заказчики.Название FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' %2 %3 %4 %5 order by Задачи.\"Дата Время\" desc").arg(m_userUuid.toString()).arg(strFilter).arg(strDateFilter).arg(strTaskTypesFilter).arg(m_strFindFilter);
 
     QList<QStringList> resTasks = execMainBDQuery(strExec);
 

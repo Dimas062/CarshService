@@ -185,7 +185,7 @@ void QDocsTaskDlg::SaveDataToBD()
         {
             QString strSum = m_PayDlg.m_pCashLineText->getText();
             strSum.replace(',','.');
-            QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+            QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType() , m_PayDlg.m_iPayDate);
 
             strExec = QString("update \"Расширение задачи Документы\" set \"Оплата\"='%1' where id='%2'").arg(uuidPay.toString()).arg(uuidExtention.toString());
             execMainBDQueryUpdate(strExec);
@@ -228,7 +228,7 @@ void QDocsTaskDlg::SaveDataToBD()
             {
                 QString strSum = m_PayDlg.m_pCashLineText->getText();
                 strSum.replace(',','.');
-                QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+                QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType() , m_PayDlg.m_iPayDate);
 
                 strExec = QString("update \"Расширение задачи Документы\" set \"Оплата\"='%1' where id='%2'").arg(uuidPay.toString()).arg(m_uuidSourseExtention.toString());
                 execMainBDQueryUpdate(strExec);
@@ -245,7 +245,7 @@ void QDocsTaskDlg::SaveDataToBD()
 
                 QString strSum = m_PayDlg.m_pCashLineText->getText();
                 strSum.replace(',','.');
-                UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+                UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType() , m_PayDlg.m_iPayDate);
 
                 /*Удалим чеки*/
                 RemovePayDocs(uuidPay);

@@ -201,7 +201,7 @@ void QParkingTaskDialog::SaveDataToBD()
         /*Оплата*/
         QString strSum = m_PayDlg.m_pCashLineText->getText();
         strSum.replace(',','.');
-        QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+        QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType(), m_PayDlg.m_iPayDate);
 
 
 
@@ -245,7 +245,7 @@ void QParkingTaskDialog::SaveDataToBD()
 
         QString strSum = m_PayDlg.m_pCashLineText->getText();
         strSum.replace(',','.');
-        UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+        UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType(), m_PayDlg.m_iPayDate);
 
         /*Удалим чеки*/
         RemovePayDocs(uuidPay);

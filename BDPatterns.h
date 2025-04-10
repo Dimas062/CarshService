@@ -12,9 +12,9 @@
  \"Платежи сотрудников\".id in (select \"Расширение задачи Парковка\".\"Оплата парковки\" from \"Расширение задачи Парковка\" where \"Расширение задачи Парковка\".id = Задачи.Расширение))"
 
 
-QUuid CreatePayRecord(double dblSum , PayTypes iPayType);
+QUuid CreatePayRecord(double dblSum , PayTypes iPayType, qint64 iDate);
 
-void UpdatePayRecord(QUuid uuidPay , double dblSum , PayTypes iPayType);
+void UpdatePayRecord(QUuid uuidPay , double dblSum , PayTypes iPayType , qint64 iDate);
 
 QUuid CreatePayDocRecord(QUuid uuidPay , QString strImg);
 

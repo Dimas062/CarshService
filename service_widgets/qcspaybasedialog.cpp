@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QImage>
 #include "common.h"
+#include "service_widgets/qcalendardataselectdlg.h"
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
@@ -22,9 +23,28 @@ QCSPayBaseDialog::QCSPayBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bOn
     m_bOneCheck = bOneCheck;
 
     pVMainLayout->addSpacing(5);
-    m_pTopLabel = new QLabel(QString("<b>Оплата</b>\nДата выполнения: %1").arg(QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm")));
+    m_pTopLabel = new QLabel(QString("<b>Оплата</b>"));
     m_pTopLabel->setStyleSheet("font-size: 20px;");
     pVMainLayout->addWidget(m_pTopLabel);
+
+    QHBoxLayout * pDateLayout = new QHBoxLayout;
+
+    m_pDateLabel =  new QLabel("");
+    m_pDateLabel->setStyleSheet("font-size: 20px;");
+    pDateLayout->addWidget(m_pDateLabel);
+
+    m_pCalendarButton = new QPushButton("");
+    m_pCalendarButton->setIcon(QIcon(":/icons/to_calendar_icon_256.png"));
+    m_pCalendarButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    connect(m_pCalendarButton,SIGNAL(pressed()),this,SLOT(OnCalendarPressedSlot()));
+    m_pCalendarButton->setFixedHeight(iButtonHeight);
+    m_pCalendarButton->setFixedWidth(iButtonHeight);
+    pDateLayout->addWidget(m_pCalendarButton);
+
+    pVMainLayout->addLayout(pDateLayout);
+
+    m_iPayDate=QDateTime::currentSecsSinceEpoch();
+    UpdateDateLabel();
 
     m_pCashLineText = new QLineText("Сумма оплаты" , nullptr , true);
     pVMainLayout->addWidget(m_pCashLineText);
@@ -73,7 +93,7 @@ QCSPayBaseDialog::QCSPayBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bOn
 void QCSPayBaseDialog::LoadFromBD(QUuid uuidPay)
 {
 
-    QString strPays = QString("select \"Сумма\" , \"Тип оплаты\" from \"Платежи сотрудников\" where id='%1'").arg(uuidPay.toString());
+    QString strPays = QString("select \"Сумма\" , \"Тип оплаты\" , \"ДатаВремя\" from \"Платежи сотрудников\" where id='%1'").arg(uuidPay.toString());
 
     QList<QStringList> resPays = execMainBDQuery(strPays);
 
@@ -84,6 +104,10 @@ void QCSPayBaseDialog::LoadFromBD(QUuid uuidPay)
         {
             m_pCashLineText->setText(resPays.at(iPaysCounter).at(0));
         }
+
+        /*Дата платежа*/
+        m_iPayDate = resPays.at(iPaysCounter).at(2).toInt();
+        UpdateDateLabel();
 
         /*Тип оплаты*/
         m_pCardPayButton->setChecked(true);
@@ -124,6 +148,16 @@ void QCSPayBaseDialog::OnFotoGetet(QString strFotoPath)
 
     if(m_bOneCheck) m_pPicturesWidget->m_Pictures.clear();
     m_pPicturesWidget->AddPicturePath(strFotoPath);
+}
+
+void QCSPayBaseDialog::OnCalendarPressedSlot()
+{
+    QCalendarDataSelectDlg calendarDlg(QDateTime::fromSecsSinceEpoch(m_iPayDate).date());
+    if(calendarDlg.exec()==QDialog::Accepted)
+    {
+        m_iPayDate= QDateTime(calendarDlg.m_SelectedDate, QTime(0,0,0)).toSecsSinceEpoch();
+        UpdateDateLabel();
+    }
 }
 
 void QCSPayBaseDialog::OnApplyPressedSlot()

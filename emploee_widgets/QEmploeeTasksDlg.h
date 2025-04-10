@@ -19,11 +19,13 @@ protected:
     QPushButton * m_pNotReadyButton;
     QPushButton * m_pToCalendarButton;
     QPushButton * m_pTaskTypesButton;
+    QPushButton * m_pFindButton;
     void UpdateTasks();
     QUuid m_userUuid;
     QString strFilter;
     QString strDateFilter;
     QString strTaskTypesFilter;
+    QString m_strFindFilter;
 
 public slots:
     void OnTapHoldGesture();
@@ -31,6 +33,7 @@ public slots:
     void OnReadyButtonTogled(bool);
     void OnNotReadyButtonTogled(bool);
     void OnToCalendatButtonTogled(bool);
+    void OnFindButtonTogled(bool);
     void FioClicked();
 };
 

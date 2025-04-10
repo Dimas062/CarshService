@@ -250,6 +250,7 @@ bool QPenaltyParkingDialog::isReady()
     }
     else m_pLoadAutoFotoButton->setStyleSheet("QPushButton {color: black;}");
 
+
     if(!m_pLoadActWidget->CheckColorData())
     {
         retVal = false;
@@ -310,10 +311,12 @@ bool QPenaltyParkingDialog::isReady()
     }
     else m_pGibddButton->setStyleSheet("QPushButton {color: black;}");
 
+
     if(m_strReasonText.length()>1) m_pReasonButton->setText(QString("Причина: %1").arg(m_strReasonText));
     if(m_strGaiText.length()>1) m_pGibddButton->setText(QString("Отдел ГАИ: %1").arg(m_strGaiText));
     if(m_strPinaltiParkingText.length()>1) m_pParkingButton->setText(QString("ШС: %1").arg(m_strPinaltiParkingText));
     if(m_PayDlg.getSumString().length()>1) m_pPayButton->setText(QString("Оплата: %1 р.").arg(m_PayDlg.getSumString()));
+
 
     return retVal;
 }
@@ -341,6 +344,8 @@ void QPenaltyParkingDialog::SaveDataToBD()
         strSummRetZone = "0";
     }
 
+    qDebug()<<"SaveDataToBD strSumm="<<strSumm<<" strSummRetZone="<<strSummRetZone;
+
     QUuid uuidReturnToZone = QUuid();
 
     if(m_uuidSourseRecord == QUuid()) //Новая задача
@@ -356,7 +361,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
         /*Оплата*/
         QString strSum = m_PayDlg.m_pCashLineText->getText();
         strSum.replace(',','.');
-        QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+        QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType(), m_PayDlg.m_iPayDate);
 
 
         for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
@@ -475,7 +480,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
             /*Оплата*/
             QString strSum = m_PayDlg.m_pCashLineText->getText();
             strSum.replace(',','.');
-            QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+            QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType(), m_PayDlg.m_iPayDate);
 
             strExec = QString("update \"Расширение задачи ШС\" set \"Оплата парковки\"='%1' where id='%2'").arg(uuidPay.toString()).arg(m_uuidSourseExtention.toString());
             execMainBDQueryUpdate(strExec);
@@ -493,7 +498,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
             QString strSum = m_PayDlg.m_pCashLineText->getText();
             strSum.replace(',','.');
-            UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+            UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType(), m_PayDlg.m_iPayDate);
 
             /*Удалим чеки*/
             RemovePayDocs(uuidPay);
@@ -507,9 +512,11 @@ void QPenaltyParkingDialog::SaveDataToBD()
 
         strExec = QString("update \"Задачи\" set Комментарий = '%1' , \"Время выполнения\"='%2' where id='%3'").arg(m_pLineTextComment->getText()).arg(iReadyTime).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
+        qDebug()<<strExec;
 
         strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
+        qDebug()<<strExec;
 
         //Возврат в зону
         if((m_pReturnToZoneButton->isChecked())&&(m_uuidReturnToZoneSource==QUuid())) //Если не было, но появилось, то создаём (если было и сейчас выбрано, то ничего не делае)

@@ -163,7 +163,7 @@ void QCostsDialog::SaveDataToBD()
         /*Оплата*/
         QString strSum = m_PayDlg.m_pCashLineText->getText();
         strSum.replace(',','.');
-        QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+        QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType() , m_PayDlg.m_iPayDate);
 
         QString strExec = QString("insert into Расходы (id,Оплата,Статья,Товар,Количество,\"Дата Время\",Сотрудник) values ('%1','%2','%3','%4','%5','%6','%7')").arg(uuidTask.toString()).arg(uuidPay.toString()).arg(m_strArticleId).arg(m_strItemId).arg(m_pLineTextCount->getText()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidCurrentUser.toString());
 
@@ -185,7 +185,7 @@ void QCostsDialog::SaveDataToBD()
 
         QString strSum = m_PayDlg.m_pCashLineText->getText();
         strSum.replace(',','.');
-        UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType());
+        UpdatePayRecord(uuidPay , strSum.toDouble() , m_PayDlg.GetSelectedPayType() , m_PayDlg.m_iPayDate);
 
         /*Удалим чеки*/
         RemovePayDocs(uuidPay);
