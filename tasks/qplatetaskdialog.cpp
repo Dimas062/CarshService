@@ -33,20 +33,35 @@ QPlateTaskDialog::QPlateTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
 
     m_pOnePlateButton = new QPushButton("1 рамка");
     m_pOnePlateButton->setCheckable(true);
-    connect(m_pOnePlateButton,SIGNAL(pressed()),this,SLOT(OnOnePlatePressedSlot()));
+    connect(m_pOnePlateButton,SIGNAL(toggled(bool)),this,SLOT(OnOnePlatePressedSlot(bool)));
     pHPlateCountLayout->addWidget(m_pOnePlateButton);
 
     m_pTwoPlateButton = new QPushButton("2 рамки");
     m_pTwoPlateButton->setCheckable(true);
-    connect(m_pTwoPlateButton,SIGNAL(pressed()),this,SLOT(OnTwoPlatePressedSlot()));
+    connect(m_pTwoPlateButton,SIGNAL(toggled(bool)),this,SLOT(OnTwoPlatePressedSlot(bool)));
     pHPlateCountLayout->addWidget(m_pTwoPlateButton);
 
     m_pZeroPlateButton = new QPushButton("0 рамок");
     m_pZeroPlateButton->setCheckable(true);
-    connect(m_pZeroPlateButton,SIGNAL(pressed()),this,SLOT(OnZeroPlatePressedSlot()));
+    connect(m_pZeroPlateButton,SIGNAL(toggled(bool)),this,SLOT(OnZeroPlatePressedSlot(bool)));
     pHPlateCountLayout->addWidget(m_pZeroPlateButton);
 
     pVMainLayout->addLayout(pHPlateCountLayout);
+
+    QHBoxLayout * pHGRZCountLayout = new QHBoxLayout();
+
+    m_pOneGRZButton = new QPushButton("1 пластина");
+    m_pOneGRZButton->setCheckable(true);
+    connect(m_pOneGRZButton,SIGNAL(toggled(bool)),this,SLOT(OnOneGRZPressedSlot(bool)));
+    pHGRZCountLayout->addWidget(m_pOneGRZButton);
+
+    m_pTwoGRZButton = new QPushButton("2 пластины");
+    m_pTwoGRZButton->setCheckable(true);
+    connect(m_pTwoGRZButton,SIGNAL(toggled(bool)),this,SLOT(OnTwoGRZPressedSlot(bool)));
+    pHGRZCountLayout->addWidget(m_pTwoGRZButton);
+
+    pVMainLayout->addLayout(pHGRZCountLayout);
+
 
     m_pLineTextComment = new QLineText("Комментарий");
     pVMainLayout->addWidget(m_pLineTextComment);
@@ -116,6 +131,26 @@ bool QPlateTaskDialog::isReady()
         retVal = false;
     }
 
+    bool bIsGRZChecked = false;
+    qDebug()<<"bIsGRZChecked="<<bIsGRZChecked;
+    if(m_pOneGRZButton->isChecked()) bIsGRZChecked=true;
+    qDebug()<<"bIsGRZChecked="<<bIsGRZChecked;
+    if(m_pTwoGRZButton->isChecked()) bIsGRZChecked=true;
+    qDebug()<<"bIsGRZChecked="<<bIsGRZChecked;
+    if(bIsGRZChecked == false)
+    {
+        qDebug()<<"set buttons red";
+        m_pOneGRZButton->setStyleSheet("QPushButton {color: red;}");
+        m_pTwoGRZButton->setStyleSheet("QPushButton {color: red;}");
+        retVal = false;
+    }
+    else
+    {
+        qDebug()<<"set buttons black";
+        m_pOneGRZButton->setStyleSheet("QPushButton {color: black;}");
+        m_pTwoGRZButton->setStyleSheet("QPushButton {color: black;}");
+    }
+
     return retVal;
 }
 
@@ -174,11 +209,15 @@ void QPlateTaskDialog::SaveDataToBD()
         QString strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\",Комментарий, Расширение , Исполнитель , \"Время выполнения\", Поставщик , Заказчик , Цена) values ('%1','%2','99b4e860-5a7b-42a4-9136-f96252ef4192','%3','%4','%5','%6','%7','%8',%9)").arg(uuidTask.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(m_pLineTextComment->getText()).arg(uuidExtention.toString()).arg(uuidCurrentUser.toString()).arg(0).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(0);
         execMainBDQueryUpdate(strExec);
 
-        /*Расширение (номер, количество рамок)*/
+        /*Расширение (номер, количество рамок, количество планок)*/
+        int iGRZCount = 0;
+        if (m_pOneGRZButton->isChecked()) iGRZCount = 1;
+        if (m_pTwoGRZButton->isChecked()) iGRZCount = 2;
+
         int iPlateCount = 0;
         if (m_pOnePlateButton->isChecked()) iPlateCount = 1;
         if (m_pTwoPlateButton->isChecked()) iPlateCount = 2;
-        strExec = QString("insert into \"Расширение задачи Номера\" (id ,  \"Количество рамок\" , \"Госномер\") values ('%1' , '%2' , '%3')").arg(uuidExtention.toString()).arg(iPlateCount).arg(m_pPlateLineText->getText());
+        strExec = QString("insert into \"Расширение задачи Номера\" (id ,  \"Количество рамок\" , \"Госномер\" , \"Количество пластин\") values ('%1' , '%2' , '%3' , '%4')").arg(uuidExtention.toString()).arg(iPlateCount).arg(m_pPlateLineText->getText()).arg(iGRZCount);
         execMainBDQueryUpdate(strExec);
 
         /*Фото/документы*/
@@ -223,7 +262,7 @@ void QPlateTaskDialog::SaveDataToBD()
         strExec = QString("update \"Задачи\" set Комментарий = '%1'  where id='%2'").arg(m_pLineTextComment->getText()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
-        /*Расширение (номер, количество рамок)*/
+        /*Расширение (номер, количество рамок, планок)*/
         int iPlateCount = 0;
         if (m_pOnePlateButton->isChecked()) iPlateCount = 1;
         if (m_pTwoPlateButton->isChecked()) iPlateCount = 2;
@@ -233,6 +272,13 @@ void QPlateTaskDialog::SaveDataToBD()
 
         strExec = QString("update \"Расширение задачи Номера\" set  \"Госномер\"='%1' where id='%2'").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
+
+        int iGRZCount = 0;
+        if (m_pOneGRZButton->isChecked()) iGRZCount = 1;
+        if (m_pTwoGRZButton->isChecked()) iGRZCount = 2;
+        strExec = QString("update \"Расширение задачи Номера\" set \"Количество пластин\"='%1' where id='%2'").arg(iGRZCount).arg(m_uuidSourseExtention.toString());
+        execMainBDQueryUpdate(strExec);
+
 
         /*Фото/документы*/
         RemoveTaskDocs(m_uuidSourseRecord);
@@ -269,7 +315,7 @@ void QPlateTaskDialog::LoadDataFromBD(QUuid uuidSourseRecord)
 
         /*Загрузка расширения задачи*/
         m_uuidSourseExtention = QUuid::fromString(resTasks.at(iTasksCounter).at(3));
-        QString strExtenExec = QString("select \"Количество рамок\" , \"Госномер\" from \"Расширение задачи Номера\" where id='%1'").arg(m_uuidSourseExtention.toString());
+        QString strExtenExec = QString("select \"Количество рамок\" , \"Госномер\" , \"Количество пластин\" from \"Расширение задачи Номера\" where id='%1'").arg(m_uuidSourseExtention.toString());
         QList<QStringList> resExtTasks = execMainBDQuery(strExtenExec);
         for(int iExtTasksCounter = 0 ; iExtTasksCounter < resExtTasks.size() ; iExtTasksCounter++)
         {
@@ -278,20 +324,38 @@ void QPlateTaskDialog::LoadDataFromBD(QUuid uuidSourseRecord)
             if(iPlateCount == 0)
             {
                 m_pZeroPlateButton->setChecked(true);
-                OnZeroPlatePressedSlot();
+                OnZeroPlatePressedSlot(true);
             }
             if(iPlateCount == 1)
             {
                 m_pOnePlateButton->setChecked(true);
-                OnOnePlatePressedSlot();
+                OnOnePlatePressedSlot(true);
             }
             if(iPlateCount == 2)
             {
                 m_pTwoPlateButton->setChecked(true);
-                OnTwoPlatePressedSlot();
+                OnTwoPlatePressedSlot(true);
             }
 
             m_pPlateLineText->setText(resExtTasks.at(iTasksCounter).at(1));
+
+            int iGRZCount = resExtTasks.at(iTasksCounter).at(2).toInt();
+
+            if(iGRZCount == 0)
+            {
+                m_pOneGRZButton->setChecked(false);
+                m_pTwoGRZButton->setChecked(false);
+            }
+            if(iGRZCount == 1)
+            {
+                m_pOneGRZButton->setChecked(true);
+                OnOneGRZPressedSlot(true);
+            }
+            if(iGRZCount == 2)
+            {
+                m_pTwoGRZButton->setChecked(true);
+                OnTwoGRZPressedSlot(true);
+            }
         }
 
         /*Загрузка картинок задачи*/
@@ -324,20 +388,46 @@ void QPlateTaskDialog::OnApplyPressedSlot()
     accept();
 }
 
-void QPlateTaskDialog::OnOnePlatePressedSlot()
+void QPlateTaskDialog::OnOnePlatePressedSlot(bool checked)
 {
-    m_pTwoPlateButton->setChecked(false);
-    m_pZeroPlateButton->setChecked(false);
+    if(checked)
+    {
+        m_pTwoPlateButton->setChecked(false);
+        m_pZeroPlateButton->setChecked(false);
+    }
+    isReady();
 }
-void QPlateTaskDialog::OnTwoPlatePressedSlot()
+void QPlateTaskDialog::OnTwoPlatePressedSlot(bool checked)
 {
-    m_pZeroPlateButton->setChecked(false);
-    m_pOnePlateButton->setChecked(false);
+    if(checked)
+    {
+        m_pZeroPlateButton->setChecked(false);
+        m_pOnePlateButton->setChecked(false);
+    }
+    isReady();
 }
-void QPlateTaskDialog::OnZeroPlatePressedSlot()
+void QPlateTaskDialog::OnZeroPlatePressedSlot(bool checked)
 {
-    m_pOnePlateButton->setChecked(false);
-    m_pTwoPlateButton->setChecked(false);
+    if(checked)
+    {
+        m_pOnePlateButton->setChecked(false);
+        m_pTwoPlateButton->setChecked(false);
+    }
+    isReady();
+}
+
+void QPlateTaskDialog::OnOneGRZPressedSlot(bool checked)
+{
+    if(checked)
+        m_pTwoGRZButton->setChecked(false);
+    isReady();
+}
+
+void QPlateTaskDialog::OnTwoGRZPressedSlot(bool checked)
+{
+    if(checked)
+        m_pOneGRZButton->setChecked(false);
+    isReady();
 }
 
 void QPlateTaskDialog::OnRemovePressedSlot()

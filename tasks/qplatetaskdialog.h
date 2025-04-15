@@ -33,15 +33,19 @@ protected:
     QPushButton * m_pTwoPlateButton;
     QPushButton * m_pZeroPlateButton;
 
+    QPushButton * m_pOneGRZButton;
+    QPushButton * m_pTwoGRZButton;
 
     QUuid m_uuidSourseRecord;
     QUuid m_uuidSourseExtention;
 
 
 public slots:
-    void OnOnePlatePressedSlot();
-    void OnTwoPlatePressedSlot();
-    void OnZeroPlatePressedSlot();
+    void OnOnePlatePressedSlot(bool);
+    void OnTwoPlatePressedSlot(bool);
+    void OnZeroPlatePressedSlot(bool);
+    void OnOneGRZPressedSlot(bool);
+    void OnTwoGRZPressedSlot(bool);
     void OnApplyPressedSlot();
     void OnRemovePressedSlot();
     void OnCarshChanged();
