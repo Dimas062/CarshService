@@ -15,13 +15,14 @@ class QCSPayBaseDialog : public QCSBaseDialog
 {
     Q_OBJECT
 public:
-    QCSPayBaseDialog(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() , bool bOneCheck = false);
+    QCSPayBaseDialog(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() , bool bOneCheck = false , bool bNoPayButton=false);
 
     QLineText * m_pCashLineText;
     QPicturesWidget * m_pPicturesWidget;
 
     QPushButton * m_pCardPayButton;
     QPushButton * m_pBusinessPayButton;
+    QPushButton * m_pNoPayButton;
     QPushButton * m_pCalendarButton;
 
     PayTypes GetSelectedPayType();
@@ -46,6 +47,7 @@ public slots:
     void OnApplyPressedSlot();
     void OnCardPayPressedSlot();
     void OnBusinessPayPressedSlot();
+    void OnNoPayPayPressedSlot();
     void OnCalendarPressedSlot();
 };
 

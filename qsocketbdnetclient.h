@@ -26,20 +26,26 @@ public:
 signals:
     void dataReceived();
 
-    // void connected();
-    // void disconnected();
-    // void errorOccurred(const QString& error);
+    void connected();
+    void disconnected();
+    void errorOccurred(const QString& error);
 
 private slots:
     void readyRead();
     void OnProcessingHeartbeatTimer();
 
 private:
+    QTimer* mReconnectTimer;
+    const int mReconnectInterval = 5000; // 5 секунд между попытками
+    bool mIsReconnecting = false;
+
+    QList<QByteArray> m_pendingData; //Данные, которые копятся в случае потери связи, которые нужно будет отправить при восстановлении связи
+    QMutex m_bufferMutex;
+
     QTcpSocket *socket;
     QByteArray *m_buffer; //We need a buffer to store data until block has completely received
     qint32 *m_size;
     QThread m_thread;
-    //std::shared_ptr<QTimer> mHeartbeatTimer;
     QTimer * mHeartbeatTimer;
     const int m_iHeartbeatTime = 25000;//msecs
 

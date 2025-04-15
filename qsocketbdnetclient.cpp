@@ -6,10 +6,6 @@ static inline qint32 ArrayToInt(QByteArray source);
 
 QSocketBDNetClient::QSocketBDNetClient(QObject *parent) : QObject(parent)
 {
-    // m_thread.setObjectName("CarshServiceNetClient");
-    // moveToThread(&m_thread);
-    // m_thread.start();
-
     mHeartbeatTimer = new QTimer(); // Вместо shared_ptr
     mHeartbeatTimer->setSingleShot(false);
     mHeartbeatTimer->moveToThread(&m_thread);
@@ -34,6 +30,13 @@ QSocketBDNetClient::~QSocketBDNetClient()
 
 void QSocketBDNetClient::cleanup()
 {
+    QMutexLocker locker(&m_bufferMutex);
+    m_pendingData.clear();
+
+    if (mReconnectTimer && mReconnectTimer->isActive()) {
+        mReconnectTimer->stop();
+    }
+
     if(mHeartbeatTimer && mHeartbeatTimer->isActive()) {
         mHeartbeatTimer->stop();
     }
@@ -56,29 +59,57 @@ void QSocketBDNetClient::cleanup()
 
 bool QSocketBDNetClient::connectToHost()
 {
-    // socket = new QTcpSocket(this);
-    // connect(socket, SIGNAL(readyRead()), SLOT(readyRead()));
-    // m_buffer = new QByteArray();
-    // m_size= new qint32(0);
-    // mHeartbeatTimer = std::make_shared<QTimer>(this);
-    // connect(mHeartbeatTimer.get() , &QTimer::timeout , this , &QSocketBDNetClient::OnProcessingHeartbeatTimer);
-    // socket->connectToHost("188.243.205.147", 3333);
-    // if(socket->waitForConnected())
-    // {
-    //     mHeartbeatTimer->start(m_iHeartbeatTime);
-    //     return true;
-    // }
 
-    // return false;
     // Перенести создание объектов в поток
     QMetaObject::invokeMethod(this, [this]() {
+
+        if (socket) {
+                socket->deleteLater();
+                socket = nullptr;
+            }
+
+
         // Создаем объекты внутри потока
         socket = new QTcpSocket();
         m_buffer = new QByteArray();
         m_size = new qint32(0);
 
-        connect(socket, &QTcpSocket::readyRead,
-                this, &QSocketBDNetClient::readyRead);
+
+        // Подключаем обработчики событий сокета
+        connect(socket, &QTcpSocket::readyRead, this, &QSocketBDNetClient::readyRead);
+        connect(socket, &QTcpSocket::disconnected, this, [this]() {
+            qDebug() << "Disconnected, attempting to reconnect...";
+            emit disconnected();
+            if (mReconnectTimer) {
+                QMetaObject::invokeMethod(mReconnectTimer, "start", Qt::QueuedConnection);
+            }
+        });
+
+        connect(socket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::errorOccurred),
+                [this](QAbstractSocket::SocketError error) {
+                    qDebug() << "Socket error:" << socket->errorString();
+                    emit errorOccurred(socket->errorString());
+                    // Сброс флага переподключения при ошибке
+                    mIsReconnecting = false; // Сброс флага при ошибке
+                    if (mReconnectTimer && !mReconnectTimer->isActive()) {
+                        mReconnectTimer->start(); // Перезапуск таймера
+                    }
+                });
+
+        if (!mReconnectTimer) {
+            mReconnectTimer = new QTimer();
+            mReconnectTimer->setInterval(mReconnectInterval);
+            mReconnectTimer->setSingleShot(true); // Однократный запуск
+            mReconnectTimer->moveToThread(&m_thread);
+
+            connect(mReconnectTimer, &QTimer::timeout, this, [this]() {
+                if (!mIsReconnecting && socket && socket->state() == QAbstractSocket::UnconnectedState) {
+                    qDebug() << "Reconnecting via timer...";
+                    mIsReconnecting = true;
+                    socket->connectToHost("188.243.205.147", 3333);
+                }
+            });
+        }
 
         mHeartbeatTimer = new QTimer(this);
         connect(mHeartbeatTimer, &QTimer::timeout,
@@ -88,8 +119,19 @@ bool QSocketBDNetClient::connectToHost()
 
         // Асинхронное ожидание подключения
         connect(socket, &QTcpSocket::connected, [this]() {
+            mIsReconnecting = false;
             mHeartbeatTimer->start(m_iHeartbeatTime);
-            //emit connected();
+            mReconnectTimer->stop();
+            emit connected();
+
+            // Отправка данных из буфера
+            QMutexLocker locker(&m_bufferMutex);
+            while (!m_pendingData.isEmpty()) {
+                QByteArray data = m_pendingData.takeFirst();
+                socket->write(IntToArray(data.size()));
+                socket->write(data);
+                qDebug() << "Buffered data sent successfully";
+            }
         });
     }, Qt::QueuedConnection);
 
@@ -115,37 +157,30 @@ void QSocketBDNetClient::OnProcessingHeartbeatTimer()
 
 bool QSocketBDNetClient::writeData(QByteArray data)
 {
-    // if(socket->state() != QAbstractSocket::ConnectedState)//Попытка переподключиться
-    // {
-    //     socket->connectToHost("188.243.205.147", 3333);
 
-    //     socket->waitForConnected();
-    // }
-
-    // qDebug()<<"QSocketBDNetClient::writeData 2";
-
-    // if(socket->state() == QAbstractSocket::ConnectedState)
-    // {
-
-    //     socket->write(IntToArray(data.size())); //write size of data
-
-    //     socket->write(data); //write the data itself
-
-    //     return socket->waitForBytesWritten();
-
-    // }
-    // else
-    //     return false;
-
-    // Асинхронный вызов без блокировки
     QMetaObject::invokeMethod(this, [this, data]() {
-        if(!socket || socket->state() != QAbstractSocket::ConnectedState) {
-            qDebug() << "Socket not connected";
-            return;
-        }
+        QMutexLocker lock(&m_bufferMutex);
 
-        socket->write(IntToArray(data.size()));
-        socket->write(data);
+        if (socket && socket->state() == QAbstractSocket::ConnectedState) {
+            // Отправка данных, если соединение активно
+            socket->write(IntToArray(data.size()));
+            socket->write(data);
+        } else {
+            // Буферизация данных
+            m_pendingData.append(data);
+            qDebug() << "Data buffered. Buffer size:" << m_pendingData.size();
+
+            // Немедленная попытка переподключения, если оно еще не начато
+            if (!mIsReconnecting){// && mReconnectTimer && !mReconnectTimer->isActive()) {
+                qDebug() << "Immediate reconnect attempt";
+                mIsReconnecting = true;
+                socket->connectToHost("188.243.205.147", 3333);
+            }
+            // Запуск таймера для последующих попыток
+            if (mReconnectTimer) {
+                mReconnectTimer->start();
+            }
+        }
     }, Qt::QueuedConnection);
 
     return true;

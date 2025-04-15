@@ -17,6 +17,7 @@
 #include "../CarshService/tasks/qdocstaskdlg.h"
 #include <QSplashScreen>
 #include "service_widgets/qfinddlg.h"
+#include "service_widgets/qcsselectdialog.h"
 
 extern QRect screenGeometry;
 extern int iButtonHeight;
@@ -89,6 +90,15 @@ QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget 
     m_pNotReadyButton->setFixedHeight(iButtonHeight);
     m_pNotReadyButton->setFixedWidth(iButtonHeight);
     pHFiltersLayout->addWidget(m_pNotReadyButton);
+
+    m_pTaskTypesButton = new QPushButton("");
+    m_pTaskTypesButton->setIcon(QIcon(":/icons/list.png"));
+    m_pTaskTypesButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    m_pTaskTypesButton->setCheckable(true);
+    connect(m_pTaskTypesButton,SIGNAL(toggled(bool)),this,SLOT(OnTaskTypeButtonTogled(bool)));
+    m_pTaskTypesButton->setFixedHeight(iButtonHeight);
+    m_pTaskTypesButton->setFixedWidth(iButtonHeight);
+    pHFiltersLayout->addWidget(m_pTaskTypesButton);
 
     m_pToCalendarButton = new QPushButton("");
     m_pToCalendarButton->setIcon(QIcon(":/icons/to_calendar_icon_256.png"));
@@ -163,11 +173,33 @@ void QEmploeeTasksDlg::OnFindButtonTogled(bool bChecked)
     showWait(false);
 }
 
+void QEmploeeTasksDlg::OnTaskTypeButtonTogled(bool bChecked)
+{
+    if(bChecked)
+    {
+        QCSSelectDialog selDlg("Типы задач" , "Тип" , false , true);
+        if(selDlg.exec()==QDialog::Accepted)
+        {
+            strTaskTypesFilter =  QString(" and Задачи.Тип='%1' ").arg(selDlg.getCurId());
+        }
+    }
+    else strTaskTypesFilter="";
+    showWait(true);
+    UpdateTasks();
+    showWait(false);
+}
+
 void QEmploeeTasksDlg::UpdateTasks()
 {
     m_pTasksListWidget->clear();
 
-    QString strExec= QString("SELECT Задачи.id, Задачи.\"Дата Время\", \"Типы задач\".\"Тип\" , \"Типы задач\".id , Задачи.\"Время выполнения\" , Заказчики.Название FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' %2 %3 %4 %5 order by Задачи.\"Дата Время\" desc").arg(m_userUuid.toString()).arg(strFilter).arg(strDateFilter).arg(strTaskTypesFilter).arg(m_strFindFilter);
+    QString strCurrentUpdateDateFilter(strDateFilter);
+
+    if(m_strFindFilter.length()>2 && m_pFindButton->isChecked())
+        strCurrentUpdateDateFilter="";
+
+
+    QString strExec= QString("SELECT Задачи.id, Задачи.\"Дата Время\", \"Типы задач\".\"Тип\" , \"Типы задач\".id , Задачи.\"Время выполнения\" , Заказчики.Название FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' %2 %3 %4 %5 order by Задачи.\"Дата Время\" desc").arg(m_userUuid.toString()).arg(strFilter).arg(strCurrentUpdateDateFilter).arg(strTaskTypesFilter).arg(m_strFindFilter);
 
     QList<QStringList> resTasks = execMainBDQuery(strExec);
 
@@ -235,11 +267,21 @@ void QEmploeeTasksDlg::OnReadyButtonTogled(bool bChecked)
 {
     if(bChecked)
     {
+        m_pNotReadyButton->blockSignals(true);
         m_pNotReadyButton->setChecked(false);
+        m_pNotReadyButton->blockSignals(false);
         strFilter= " and Задачи.\"Время выполнения\">0 ";
+        if(strDateFilter.length() < 4) //Если пытатся показать выполеннные задачи без выбранного времени, то принудительно ставим 2 последних суток
+            strDateFilter=CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
     }
     else
+    {
+        if(m_pReadyButton->isChecked() || ((!m_pReadyButton->isChecked())&&(!m_pNotReadyButton->isChecked())))
+            strDateFilter=CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+        else
+            strDateFilter="";
         strFilter = "";
+    }
     showWait(true);
     UpdateTasks();
     showWait(false);
@@ -249,11 +291,20 @@ void QEmploeeTasksDlg::OnNotReadyButtonTogled(bool bChecked)
 {
     if(bChecked)
     {
+        m_pReadyButton->blockSignals(true);
         m_pReadyButton->setChecked(false);
+        m_pReadyButton->blockSignals(false);
         strFilter= " and Задачи.\"Время выполнения\"=0 ";
+        if(!m_pToCalendarButton->isChecked()) strDateFilter="";
     }
     else
+    {
         strFilter = "";
+        if(m_pReadyButton->isChecked() || ((!m_pReadyButton->isChecked())&&(!m_pNotReadyButton->isChecked())))
+            strDateFilter=CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+        else
+            strDateFilter="";
+    }
     showWait(true);
     UpdateTasks();
     showWait(false);
@@ -273,13 +324,24 @@ void QEmploeeTasksDlg::OnToCalendatButtonTogled(bool bChecked)
         }
         else
         {
-            strDateFilter=CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);;
+            if(m_pReadyButton->isChecked() || ((!m_pReadyButton->isChecked())&&(!m_pNotReadyButton->isChecked())))
+                strDateFilter=CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+            else
+                strDateFilter="";
             m_pToCalendarButton->setChecked(false);
         }
     }
     else
     {
-        strDateFilter="";//CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+        if(m_pReadyButton->isChecked())
+            strDateFilter=CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+        else
+        {
+            if(m_pReadyButton->isChecked() || ((!m_pReadyButton->isChecked())&&(!m_pNotReadyButton->isChecked())))
+                strDateFilter=CreateDateBDPeriodFromNow("Задачи.\"Дата Время\"" , 2);
+            else
+                strDateFilter="";
+        }
     }
     showWait(true);
     UpdateTasks();

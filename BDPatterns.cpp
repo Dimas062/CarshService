@@ -9,6 +9,7 @@ QUuid CreatePayRecord(double dblSum , PayTypes iPayType , qint64 iDate)
 
     if(iPayType == Card) uuidPayType=QString("1368c945-6d5b-4a32-af29-007896fc5aba");
     if(iPayType == Business) uuidPayType=QString("c1a98e3d-c6a9-4991-9c2c-2e8771ccf37f");
+    if(iPayType == NoPay) uuidPayType=QString("1ea5529b-440e-4e73-8c3c-052cf695c352");
     if(iPayType == Undefined) uuidPayType=QString("1be45f61-dd36-4209-9866-7b8c2987da34");
 
     QString strExec = QString("insert into \"Платежи сотрудников\" (id,\"Сумма\",\"Тип оплаты\",\"ДатаВремя\") values ('%1','%2','%3','%4')").arg(uuidPay.toString()).arg(dblSum).arg(uuidPayType).arg(iDate);
@@ -24,6 +25,7 @@ void UpdatePayRecord(QUuid uuidPay , double dblSum , PayTypes iPayType , qint64 
 
     if(iPayType == Card) uuidPayType=QString("1368c945-6d5b-4a32-af29-007896fc5aba");
     if(iPayType == Business) uuidPayType=QString("c1a98e3d-c6a9-4991-9c2c-2e8771ccf37f");
+    if(iPayType == NoPay) uuidPayType=QString("1ea5529b-440e-4e73-8c3c-052cf695c352");
     if(iPayType == Undefined) uuidPayType=QString("1be45f61-dd36-4209-9866-7b8c2987da34");
 
     QString strExec = QString("update \"Платежи сотрудников\" set \"Сумма\" = '%1' ,\"Тип оплаты\"='%2' ,\"ДатаВремя\"='%3'  where id='%4'").arg(dblSum).arg(uuidPayType).arg(iDate).arg(uuidPay.toString());

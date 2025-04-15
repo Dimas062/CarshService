@@ -14,7 +14,7 @@ extern int iButtonHeight;
 extern UserTypes CurrentUserType;
 extern QColor currentWorkdayColor;
 
-QParkingTaskDialog::QParkingTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f)
+QParkingTaskDialog::QParkingTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f),m_PayDlg(nullptr, Qt::WindowFlags(), false , true)
 {
     m_uuidSourseRecord = QUuid();
 
@@ -94,23 +94,26 @@ bool QParkingTaskDialog::isReady()
 
     bool bPayDone = true;
 
-    // if(m_PayDlg.m_pCashLineText->getText().length()<2)
-    // {
-    //     retVal = false;
-    //     bPayDone = false;
-    // }
+    if(m_PayDlg.GetSelectedPayType()!=NoPay)
+    {
+        if(m_PayDlg.m_pCashLineText->getText().length()<2)
+        {
+            retVal = false;
+            bPayDone = false;
+        }
 
-    // if(m_PayDlg.m_pPicturesWidget->m_Pictures.size()<1)
-    // {
-    //     retVal = false;
-    //     bPayDone = false;
-    // }
+        if(m_PayDlg.m_pPicturesWidget->m_Pictures.size()<1)
+        {
+            retVal = false;
+            bPayDone = false;
+        }
 
-    // if(m_PayDlg.GetSelectedPayType()==Undefined)
-    // {
-    //     retVal = false;
-    //     bPayDone = false;
-    // }
+        if(m_PayDlg.GetSelectedPayType()==Undefined)
+        {
+            retVal = false;
+            bPayDone = false;
+        }
+    }
 
 
     if(!m_pPlateLineText->CheckColorLenght()) retVal = false;

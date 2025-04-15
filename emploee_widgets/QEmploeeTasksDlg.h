@@ -34,6 +34,7 @@ public slots:
     void OnNotReadyButtonTogled(bool);
     void OnToCalendatButtonTogled(bool);
     void OnFindButtonTogled(bool);
+    void OnTaskTypeButtonTogled(bool);
     void FioClicked();
 };
 

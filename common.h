@@ -47,6 +47,7 @@ enum     UserTypes {    Emploee,         //Сотрудник
 enum PayTypes {
     Card,
     Business,
+    NoPay,
     Undefined = -1
 };
 

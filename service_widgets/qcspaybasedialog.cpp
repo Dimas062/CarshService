@@ -13,7 +13,7 @@ extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
 extern int iButtonHeight;
 
-QCSPayBaseDialog::QCSPayBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bOneCheck):QCSBaseDialog(parent , f)
+QCSPayBaseDialog::QCSPayBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bOneCheck , bool bNoPayButton):QCSBaseDialog(parent , f)
 {
     // int iUnderButtonSpace = 15;
 
@@ -61,6 +61,12 @@ QCSPayBaseDialog::QCSPayBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bOn
     connect(m_pBusinessPayButton,SIGNAL(pressed()),this,SLOT(OnBusinessPayPressedSlot()));
     pHPayMetodLayout->addWidget(m_pBusinessPayButton);
 
+    m_pNoPayButton = new QPushButton("Без оплаты");
+    m_pNoPayButton->setCheckable(true);
+    connect(m_pNoPayButton,SIGNAL(pressed()),this,SLOT(OnNoPayPayPressedSlot()));
+    pHPayMetodLayout->addWidget(m_pNoPayButton);
+    if(bNoPayButton == false) m_pNoPayButton->setVisible(false);
+
     pVMainLayout->addLayout(pHPayMetodLayout);
 
 
@@ -102,7 +108,8 @@ void QCSPayBaseDialog::LoadFromBD(QUuid uuidPay)
         /*Сумма*/
         if(resPays.at(iPaysCounter).at(0).length()>0)
         {
-            m_pCashLineText->setText(resPays.at(iPaysCounter).at(0));
+            if(resPays.at(iPaysCounter).at(0).toDouble()>0)
+                m_pCashLineText->setText(resPays.at(iPaysCounter).at(0));
         }
 
         /*Дата платежа*/
@@ -113,15 +120,26 @@ void QCSPayBaseDialog::LoadFromBD(QUuid uuidPay)
         m_pCardPayButton->setChecked(true);
         if(resPays.at(iPaysCounter).at(1) == "1368c945-6d5b-4a32-af29-007896fc5aba")
         {
+
             m_pCardPayButton->setChecked(true);
             m_pBusinessPayButton->setChecked(false);
+            m_pNoPayButton->setChecked(false);
         }
 
         if(resPays.at(iPaysCounter).at(1) == "c1a98e3d-c6a9-4991-9c2c-2e8771ccf37f")
         {
-            m_pCardPayButton->setChecked(false);
             m_pBusinessPayButton->setChecked(true);
+            m_pCardPayButton->setChecked(false);
+            m_pNoPayButton->setChecked(false);
         }
+
+        if(resPays.at(iPaysCounter).at(1) == "1ea5529b-440e-4e73-8c3c-052cf695c352")
+        {
+            m_pBusinessPayButton->setChecked(false);
+            m_pCardPayButton->setChecked(false);
+            m_pNoPayButton->setChecked(true);
+        }
+
         /*Фото чека*/
         m_pPicturesWidget->m_Pictures.clear();
         QString strChekPhotoExec = QString("select Изображение from Документы where id in (select Документ from \"Платеж сотрудника - Документы\" where Платеж = '%1')").arg(uuidPay.toString());
@@ -140,6 +158,7 @@ PayTypes QCSPayBaseDialog::GetSelectedPayType()
 {
     if(m_pBusinessPayButton->isChecked()) return Business;
     if(m_pCardPayButton->isChecked()) return Card;
+    if(m_pNoPayButton->isChecked()) return NoPay;
     return Undefined;
 }
 
@@ -165,13 +184,21 @@ void QCSPayBaseDialog::OnApplyPressedSlot()
     accept();
 }
 
+void QCSPayBaseDialog::OnNoPayPayPressedSlot()
+{
+    m_pBusinessPayButton->setChecked(false);
+    m_pCardPayButton->setChecked(false);
+}
+
 void QCSPayBaseDialog::OnCardPayPressedSlot()
 {
     m_pBusinessPayButton->setChecked(false);
+    m_pNoPayButton->setChecked(false);
 }
 
 void QCSPayBaseDialog::OnBusinessPayPressedSlot()
 {
     m_pCardPayButton->setChecked(false);
+    m_pNoPayButton->setChecked(false);
 }
 
