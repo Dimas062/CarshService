@@ -1,6 +1,7 @@
 #include "qnotecalendarwidget.h"
 #include <QPainter>
 #include <QMap>
+#include <QIcon>
 #include <QTextCharFormat>
 
 QNoteCalendarWidget::QNoteCalendarWidget(QWidget *parent):QCalendarWidget(parent)

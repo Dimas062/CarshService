@@ -21,8 +21,8 @@ public:
     //bAutoChecable - отображать кнопку Внести/выбрать или при выборе кнопки сразу закрвать с accept
     //uuidEmpl - в шапке выведет информацию о пользователе
     //bMultiSelect - можгно ли выбрать несколько кнопок или они будут как радиобаттоны
-    //strСondition - дополнительные условия в запросе выбора значений столбца strColName из таблицы strTableName
-    QCSSelectDialog(QString strTableName , QString strColName = "Название", bool bChecable = true , bool bAutoChecable = false , QUuid uuidEmpl = QUuid(), QString strСondition =  " " , bool bMultiSelect = false , QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
+    //strCondition - дополнительные условия в запросе выбора значений столбца strColName из таблицы strTableName
+    QCSSelectDialog(QString strTableName , QString strColName = "Название", bool bChecable = true , bool bAutoChecable = false , QUuid uuidEmpl = QUuid(), QString strCondition =  " " , bool bMultiSelect = false , QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
     QCSSelectDlgButtonsWidget selectWidget;
     QLabel * m_pTopLabel;
     QUuid m_userUUid;

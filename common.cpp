@@ -175,7 +175,8 @@ QString nameForNumber(long long number, bool flag=false) {
 QString rublesForNumber(long long number)
 {
     QString rVal = nameForNumber(number) + Ending(number % 100 , rubles);
-    rVal.removeFirst();
+    //rVal.removeFirst();
+    rVal.remove(0, 1);
     rVal.front() = rVal.front().toUpper();
 
     return rVal;

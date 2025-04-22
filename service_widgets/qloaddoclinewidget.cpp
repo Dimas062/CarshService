@@ -17,10 +17,13 @@
 #ifdef Q_OS_DESKTOP
 #include <QMessageBox>
 #endif
+#ifdef Q_OS_IOS
 #include <QPermission>
-#include <QThread>
 #include "ios/QtPHPicker.h"
 #include "ios/QtCameraPicker.h"
+#endif
+#include <QThread>
+
 
 extern QRect screenGeometry;
 extern int iButtonHeight;

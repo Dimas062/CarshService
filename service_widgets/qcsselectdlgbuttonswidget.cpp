@@ -7,7 +7,7 @@
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
 
-QCSSelectDlgButtonsWidget::QCSSelectDlgButtonsWidget(QString strTableName, QString strColName , bool bChekable , QString strСondition , bool bMultiSelect,  QWidget *parent)
+QCSSelectDlgButtonsWidget::QCSSelectDlgButtonsWidget(QString strTableName, QString strColName , bool bChekable , QString strCondition , bool bMultiSelect,  QWidget *parent)
     : QWidget{parent}
 {
     m_strId = "Undefined";
@@ -18,7 +18,7 @@ QCSSelectDlgButtonsWidget::QCSSelectDlgButtonsWidget(QString strTableName, QStri
 
     m_bChekable = bChekable;
 
-    QString strExec = QString("select id , \"%1\" from \"%2\" %3").arg(strColName).arg(strTableName).arg(strСondition);
+    QString strExec = QString("select id , \"%1\" from \"%2\" %3").arg(strColName).arg(strTableName).arg(strCondition);
 
     QList<QStringList> resData = execMainBDQuery(strExec);
     for(int iResCounter = 0 ; iResCounter < resData.size() ; iResCounter++)

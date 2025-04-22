@@ -132,21 +132,19 @@ bool QPlateTaskDialog::isReady()
     }
 
     bool bIsGRZChecked = false;
-    qDebug()<<"bIsGRZChecked="<<bIsGRZChecked;
+
     if(m_pOneGRZButton->isChecked()) bIsGRZChecked=true;
-    qDebug()<<"bIsGRZChecked="<<bIsGRZChecked;
+
     if(m_pTwoGRZButton->isChecked()) bIsGRZChecked=true;
-    qDebug()<<"bIsGRZChecked="<<bIsGRZChecked;
+
     if(bIsGRZChecked == false)
     {
-        qDebug()<<"set buttons red";
         m_pOneGRZButton->setStyleSheet("QPushButton {color: red;}");
         m_pTwoGRZButton->setStyleSheet("QPushButton {color: red;}");
         retVal = false;
     }
     else
     {
-        qDebug()<<"set buttons black";
         m_pOneGRZButton->setStyleSheet("QPushButton {color: black;}");
         m_pTwoGRZButton->setStyleSheet("QPushButton {color: black;}");
     }

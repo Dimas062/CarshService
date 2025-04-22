@@ -9,6 +9,7 @@
 #include "service_widgets/qyesnodlg.h"
 #include "service_widgets/qcsselectdialog.h"
 #include "emploee_widgets/QSelectTaskEmploeer.h"
+#include <QDebug>
 
 
 extern QRect screenGeometry;

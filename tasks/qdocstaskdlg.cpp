@@ -5,7 +5,7 @@
 #include "BDPatterns.h"
 
 
-#define need_pay QUuid::fromString(m_strDocId) == QUuid::fromString("d7e6ca81-d6fe-405e-8a39-961ceb9bd1f6")
+#define need_pay QUuid::fromString(m_strDocId) == QUuid(QString("d7e6ca81-d6fe-405e-8a39-961ceb9bd1f6"))
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
