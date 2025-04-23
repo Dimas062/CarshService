@@ -7,6 +7,7 @@
 #include "common.h"
 #include "BDPatterns.h"
 #include "service_widgets/qyesnodlg.h"
+#include "service_widgets/qcsselectdialog.h"
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
@@ -16,6 +17,7 @@ extern QColor currentWorkdayColor;
 
 QRetToZoneDialog::QRetToZoneDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f)
 {
+    int iButtonWidth = screenGeometry.width()*0.6;
 
     m_uuidSourseRecord = QUuid();
 
@@ -39,6 +41,13 @@ QRetToZoneDialog::QRetToZoneDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
     m_pLoadAutoFotoButton->setMaximumHeight(iButtonHeight);
     m_pLoadAutoFotoButton->setMinimumHeight(iButtonHeight);
     pVMainLayout->addWidget(m_pLoadAutoFotoButton);
+
+    m_pParkingButton = new QPushButton("Штрафстоянка");
+    connect(m_pParkingButton,SIGNAL(released()),this,SLOT(OnParkingButtonPressed()));
+    m_pParkingButton->setMaximumHeight(iButtonHeight);
+    m_pParkingButton->setMinimumHeight(iButtonHeight);
+    m_pParkingButton->setFixedWidth(iButtonWidth);
+    pVMainLayout->addWidget(m_pParkingButton, 0 , Qt::AlignHCenter);
 
     pVMainLayout->addStretch();
 
@@ -83,6 +92,8 @@ bool QRetToZoneDialog::isReady()
         retVal = false;
     }
 
+    if(m_strPinaltiParkingText.length()>1) m_pParkingButton->setText(QString("ШС: %1").arg(m_strPinaltiParkingText));
+
     return retVal;
 }
 
@@ -105,6 +116,18 @@ void QRetToZoneDialog::OnProviderChanged()
 void QRetToZoneDialog::OnLoadAutoFotoButtonPressed()
 {
     m_pLoadAutoFotoDlg->exec();
+    isReady();
+}
+
+void QRetToZoneDialog::OnParkingButtonPressed()
+{
+    QCSSelectDialog PinaltiParkingSelDlg("Штрафстоянки");
+    PinaltiParkingSelDlg.selectWidget.SelectId(m_strPinaltiParkingId);
+    if(PinaltiParkingSelDlg.exec()==QDialog::Accepted)
+    {
+        m_strPinaltiParkingId = PinaltiParkingSelDlg.getCurId();
+        m_strPinaltiParkingText = PinaltiParkingSelDlg.getCurText();
+    }
     isReady();
 }
 
@@ -155,9 +178,8 @@ void QRetToZoneDialog::SaveDataToBD()
         execMainBDQueryUpdate(strExec);
 
 
-        strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id,\"Госномер\") values ('%1','%2')").arg(uuidExtention.toString()).arg(m_pPlateLineText->getText());
+        strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id,\"Госномер\",ШС) values ('%1','%2','%3')").arg(uuidExtention.toString()).arg(m_pPlateLineText->getText()).arg(m_strPinaltiParkingId);
         execMainBDQueryUpdate(strExec);
-
 
         /*Фото/документы (4 шт)*/
         /*Перебрать и записать картинки*/
@@ -183,6 +205,9 @@ void QRetToZoneDialog::SaveDataToBD()
         execMainBDQueryUpdate(strExec);
 
         strExec = QString("update \"Расширение задачи Возврат в зону\" set Госномер = '%1' where id='%2')").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
+        execMainBDQueryUpdate(strExec);
+
+        strExec = QString("update \"Расширение задачи Возврат в зону\" set \"ШС\"='%1' where id='%2'").arg(m_strPinaltiParkingId).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
 
 
@@ -226,12 +251,16 @@ void QRetToZoneDialog::LoadDataFromBD(QUuid uuidSourseRecord)
         /*Загрузка расширения задачи*/
         m_uuidSourseExtention = QUuid::fromString(resTasks.at(iTasksCounter).at(3));
 
-        QString strExtenExec = QString("select \"Госномер\" from \"Расширение задачи Возврат в зону\" where id='%1'").arg(m_uuidSourseExtention.toString());
+        QString strExtenExec = QString("select \"Госномер\", ШС from \"Расширение задачи Возврат в зону\" where id='%1'").arg(m_uuidSourseExtention.toString());
         QList<QStringList> resExtTasks = execMainBDQuery(strExtenExec);
         for(int iExtTasksCounter = 0 ; iExtTasksCounter < resExtTasks.size() ; iExtTasksCounter++)
         {
             /*Госномер*/
             m_pPlateLineText->setText(resExtTasks.at(iTasksCounter).at(0));
+
+            /*Штрафстоянка откуда перегнали*/
+            m_strPinaltiParkingId = (resExtTasks.at(iTasksCounter).at(1));
+            m_strPinaltiParkingText = StrFromUuid(m_strPinaltiParkingId , "\"Штрафстоянки\"");
         }
 
         /*Загрузка картинок задачи*/

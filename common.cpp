@@ -31,6 +31,10 @@ extern QJniObject* pActivity;
 QSocketBD * serverBD;
 //#endif
 
+// Задаем максимально допустимые размеры изображений в системе
+const int maxImgWidth = 2560;
+const int maxImgHeight = 2560;
+
 extern VSMobileSettings settings;//Сейчас шарится между двух потоков (интерекшнклиент и главный)
 extern QUuid uuidCurrentUser;
 
@@ -216,12 +220,33 @@ void debug_TimeStamp(QString pred)
     qDebug()<<" TimeStamp="<<QTime::currentTime().toString("hh:mm:ss.zzz ")<<pred;
 }
 
+
+
+void ResizeImage(QImage* image) {
+    // Проверка на валидность указателя и изображения
+    if (!image || image->isNull()) {
+        return;
+    }
+
+    // Проверяем, нужно ли масштабировать
+    if (image->width() > maxImgWidth || image->height() > maxImgHeight) {
+        // Масштабируем с сохранением пропорций и сглаживанием
+        *image = image->scaled(
+            QSize(maxImgWidth, maxImgHeight),
+            Qt::KeepAspectRatio,
+            Qt::SmoothTransformation
+            );
+    }
+}
+
 QByteArray fromHEICToJPEG(const QByteArray &imageData) {
     QBuffer buffer;
     buffer.setData(imageData);
     QImageReader imageReader(&buffer);
+    imageReader.setAutoTransform(true);
     // ^^Qt auto detects the "heic" format
     QImage resizeImage = imageReader.read();
+    ResizeImage(&resizeImage);
     QByteArray outBa;
     QBuffer outBuffer(&outBa);
     outBuffer.open(QIODevice::WriteOnly);
@@ -231,21 +256,6 @@ QByteArray fromHEICToJPEG(const QByteArray &imageData) {
 
 QString PictureFileToBase64(QString strPath)
 {
-
-    // // QUrl url(strPath);
-    // // strPath = url.toLocalFile();
-
-    // //strPath = "file:"+strPath.replace("?","%3F");
-
-    // QImageReader reader(strPath);
-    // QImage img;
-    // if(!reader.read(&img))
-    // {
-
-    //     return QString();
-    // }
-    // else     qDebug() <<" width"<< reader.size().width() << "height" << reader.size().height() << "format"<<reader.format() << reader.subType();
-
 
     QFile CurrentFile(strPath);
     if(!CurrentFile.open(QIODevice::ReadOnly))
@@ -258,33 +268,39 @@ QString PictureFileToBase64(QString strPath)
     QBuffer buffer;
     buffer.setData(imageData);
     QImageReader imageReader(&buffer);
-    //qDebug() <<"imageData size="<< imageData.size()<< " width"<< imageReader.size().width() << "height" << imageReader.size().height() << "format"<<imageReader.format() << imageReader.subType();
+
+    imageReader.setAutoTransform(true);
     // ^^Qt auto detects the "heic" format
     QImage resizeImage = imageReader.read();
+
+    ResizeImage(&resizeImage);
+
     QByteArray outBa;
     QBuffer outBuffer(&outBa);
+
     outBuffer.open(QIODevice::WriteOnly);
     resizeImage.save(&outBuffer, "JPEG");
 
-
    return outBuffer.data().toBase64();
 
-
-
-
-
-    // QBuffer buffer;
-    // buffer.open(QIODevice::WriteOnly);
-
-    // QImage qp(strPath);
-
-    // qp.save(&buffer, "JPG");
-
-    // return buffer.data().toBase64();
 }
 
 QString ImageToBase64(const QImage & img)
 {
+    // Проверяем, нужно ли масштабировать
+    if (img.width() > maxImgWidth || img.height() > maxImgHeight)
+    {
+        QImage resizeImage(img);
+        ResizeImage(&resizeImage);
+
+        QBuffer buffer;
+        buffer.open(QIODevice::WriteOnly);
+
+        resizeImage.save(&buffer, "JPG");
+
+        return buffer.data().toBase64();
+    }
+
     QBuffer buffer;
     buffer.open(QIODevice::WriteOnly);
 

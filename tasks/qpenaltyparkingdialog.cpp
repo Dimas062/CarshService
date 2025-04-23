@@ -409,7 +409,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
             strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\", Расширение , Исполнитель , \"Время выполнения\" , Поставщик , Заказчик , Цена , Комментарий) values ('%1','%2','fe81daf9-a838-4bac-84aa-595e038d3a12','%3','%4','%5' , '%6' , '%7' , %8 , '%9')").arg(uuidReturnToZone.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidExtensionReturnToZone.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(strSummRetZone).arg(m_strPinaltiParkingText);
             execMainBDQueryUpdate(strExec);
 
-            strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id , \"Госномер\",\"Количество\") values ('%1','%2','%3')").arg(uuidExtensionReturnToZone.toString()).arg(m_pPlateLineText->getText()).arg(1);
+            strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id , \"Госномер\",\"Количество\" , ШС) values ('%1','%2','%3','%4')").arg(uuidExtensionReturnToZone.toString()).arg(m_pPlateLineText->getText()).arg(1).arg(m_strPinaltiParkingId);
             execMainBDQueryUpdate(strExec);
 
             foreach(QUuid uuidPic , vPenPicsUuids)
@@ -530,7 +530,7 @@ void QPenaltyParkingDialog::SaveDataToBD()
             strExec = QString("insert into \"Задачи\" (id,\"Дата Время\",\"Тип\", Расширение , Исполнитель , \"Время выполнения\", Поставщик , Заказчик , Цена) values ('%1','%2','fe81daf9-a838-4bac-84aa-595e038d3a12','%3','%4','%5', '%6' , '%7' , %8)").arg(uuidReturnToZone.toString()).arg(QDateTime::currentSecsSinceEpoch()).arg(uuidExtensionReturnToZone.toString()).arg(uuidCurrentUser.toString()).arg(iReadyTime).arg(m_pSelProviderCarshWidget->m_uuidProvider.toString()).arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(strSummRetZone);
             execMainBDQueryUpdate(strExec);
 
-            strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id , \"Госномер\",\"Количество\") values ('%1','%2','%3')").arg(uuidExtensionReturnToZone.toString()).arg(m_pPlateLineText->getText()).arg(1);
+            strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id , \"Госномер\",\"Количество\", ШС) values ('%1','%2','%3','%4')").arg(uuidExtensionReturnToZone.toString()).arg(m_pPlateLineText->getText()).arg(1).arg(m_strPinaltiParkingId);
             execMainBDQueryUpdate(strExec);
 
             foreach(QUuid uuidPic , vPenPicsUuids)
@@ -569,6 +569,9 @@ void QPenaltyParkingDialog::SaveDataToBD()
             execMainBDQueryUpdate(strExec);
 
             strExec = QString("update \"Расширение задачи Возврат в зону\" set \"Госномер\"='%1' where id='%2' ").arg(m_pPlateLineText->getText()).arg(m_uuidReturnToZoneExtensionSource.toString());
+            execMainBDQueryUpdate(strExec);
+
+            strExec = QString("update \"Расширение задачи Возврат в зону\" set \"ШС\"='%1' where id='%2' ").arg(m_strPinaltiParkingId).arg(m_uuidReturnToZoneExtensionSource.toString());
             execMainBDQueryUpdate(strExec);
 
 

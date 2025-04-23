@@ -8,8 +8,7 @@
 
 #include <QFileInfo>
 #include <QUuid>
-// #include <QImageReader>
-// #include <QBuffer>
+
 
 extern QRect screenGeometry;
 extern int iButtonHeight;

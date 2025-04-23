@@ -108,6 +108,7 @@ bool QPicturesWidget::AddPicturePath(QString path , bool bUpdatePicture)
 {
 
     QImageReader reader(path);
+    reader.setAutoTransform(true);
     QImage CurrentImage;
 
     reader.setAutoTransform(true);

@@ -33,17 +33,21 @@ protected:
     QPushButton * m_pLoadAutoFotoButton;
     QLineText * m_pLineTextComment;
     QSelProviderCarshWidget * m_pSelProviderCarshWidget;
-
+    QPushButton * m_pParkingButton;
 
 
     bool isReady();
     QUuid m_uuidSourseRecord;
     QUuid m_uuidSourseExtention;
 
+    QString m_strPinaltiParkingId;
+    QString m_strPinaltiParkingText;
+
 public slots:
     void OnApplyPressedSlot();
     void OnRemovePressedSlot();
     void OnCarshChanged();
+    void OnParkingButtonPressed();
     void OnProviderChanged();
     void OnLoadAutoFotoButtonPressed();
     void OnNumberTextInput(const QString &text);

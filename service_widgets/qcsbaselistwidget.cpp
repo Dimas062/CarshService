@@ -58,7 +58,8 @@ bool QCSBaseListWidget::gestureEvent(QGestureEvent *event)
 
 bool QCSBaseListWidget::event(QEvent *event)
 {
-#if QT_VERSION <= 0x050603
+
+#if defined Q_OS_IOS || defined Q_OS_ANDROID
     static QMap<QPointer<QTapGesture>, bool> tapGestures;
     if (event->type() != QEvent::Gesture)
         return QListWidget::event(event);

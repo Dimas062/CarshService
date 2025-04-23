@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets concurrent
 
 CONFIG += c++17
 
-VERSION = 0.1.30
+VERSION = 0.1.31
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -197,7 +197,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
      QMAKE_BUNDLE = "CarshService"
      TARGET = "CarshService"
 
-     QMAKE_IOS_DEPLOYMENT_TARGET =14.0
+     QMAKE_IOS_DEPLOYMENT_TARGET =13.0
      QMAKE_ASSET_CATALOGS += ios/Assets.xcassets
 
      QMAKE_INFO_PLIST = ios/Info.plist
