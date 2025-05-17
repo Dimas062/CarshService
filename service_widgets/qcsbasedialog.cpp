@@ -50,7 +50,7 @@ QCSBaseDialog::QCSBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bScrollab
 
     m_bScrollable = bScrollable;
     m_bBackProcessed = true;
-    //connect(this , SIGNAL(OnMouseButtonPressedSignal()) , this , SLOT(OnMouseButtonPressedSlot()));
+    connect(this , SIGNAL(OnMouseButtonPressedSignal()) , this , SLOT(OnMouseButtonPressedSlot()));
 
 
     QRect geometry(QPoint(0, 0), QSize(screenGeometry.width() , screenGeometry.height() ));
