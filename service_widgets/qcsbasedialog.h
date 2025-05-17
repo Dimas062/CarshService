@@ -29,28 +29,29 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
 
 protected:
-    void paintEvent(QPaintEvent *event) override
-    {
-        QDialog::paintEvent(event); // Вызываем базовую реализацию
+     void paintEvent(QPaintEvent *event) override
+     {
+         QDialog::paintEvent(event); // Вызываем базовую реализацию
 
-        if(m_bWaiting)
-            if (!m_iconWait.isNull()) {
-                QPainter painter(this);
+         if(m_bWaiting)
+             if (m_bWaiting && !m_iconWait.isNull() && isVisible()) {
+                 QPainter painter(this);
 
-                // Вычисляем позицию для отрисовки иконки по центру
-                int x = (width() - m_iconWait.width()) / 2;
-                int y = (height() - m_iconWait.height()) / 2;
+                 // Вычисляем позицию для отрисовки иконки по центру
+                 int x = (width() - m_iconWait.width()) / 2;
+                 int y = (height() - m_iconWait.height()) / 2;
 
-                // Рисуем иконку
-                painter.drawPixmap(x, y, m_iconWait);
-            }
-    }
+                 // Рисуем иконку
+                 painter.drawPixmap(x, y, m_iconWait);
+             }
+     }
 
 signals:
-    void OnMouseButtonPressedSignal();
+   void OnMouseButtonPressedSignal();
 
 public slots:
-    void OnMouseButtonPressedSlot();
+   void OnMouseButtonPressedSlot();
+   void OnBackPressed();
 };
 
 #endif // QCSBASEDIALOG_H

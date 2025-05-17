@@ -61,7 +61,7 @@ QCSWashTypeDlg::QCSWashTypeDlg(QString strType ,  QWidget *parent, Qt::WindowFla
 
 QString QCSWashTypeDlg::getText()
 {
-    QString retVal(m_strType + " не задано");
+    QString retVal(m_strType);
 
     if(m_pDayButton->isChecked())
     {

@@ -62,7 +62,7 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
 
     //screenGeometry.adjust(0 , 0, 0 , -iGetNaviPanelHegith);
 
-#if defined Q_OS_IOS || defined Q_OS_WINDOWS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS || defined Q_OS_MACOS
 
     int iUnderButtonSpace = 4;
 
@@ -143,10 +143,24 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
     pSettingsModeButton->setMinimumHeight(iButtonHeight*2);
     pVMainLayout->addWidget(pSettingsModeButton);
 
+
+//    pVMainLayout->addSpacing(iUnderButtonSpace);
+//    QPushButton * pTestModeButton = new QPushButton("Тест");
+//    connect(pTestModeButton,SIGNAL(pressed()),this,SLOT(OnTestModePressed()));
+//    pTestModeButton->setMaximumHeight(iButtonHeight*2);
+//    pTestModeButton->setMinimumHeight(iButtonHeight*2);
+//    pVMainLayout->addWidget(pTestModeButton);
+
     qApp->inputMethod()->hide();
 
     connect(this , SIGNAL(OnMouseButtonPressedSignal()) , this , SLOT(OnMouseButtonPressedSlot()));
     m_bChildBackRealeseProcessed = true;
+}
+
+void QCarshServiceBaseWidget::OnTestModePressed()
+{
+    QCSBaseDialog dlg;
+    dlg.exec();
 }
 
 

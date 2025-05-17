@@ -61,6 +61,8 @@ struct VSMobileSettings
     bool isConnected;//Удалось подключиться
 };
 
+QString wrapText(const QString& text, int maxLineLength);
+
 QString bool_to_str(bool b);
 
 bool executeQueryWithReconnect(QSqlQuery &query, const QString &queryString);

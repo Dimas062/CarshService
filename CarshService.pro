@@ -1,10 +1,10 @@
-QT +=core gui sql network core-private gui-private core5compat multimedia# multimediawidgets #quick
+QT +=core gui sql network core-private gui-private core5compat #multimedia# multimediawidgets #quick
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets concurrent
 
 CONFIG += c++17
 
-VERSION = 0.1.32
+VERSION = 0.1.34
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -188,19 +188,27 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
  ios {
+     QMAKE_TEAM_ID = 3DS8WFFMU5
+
+    # CONFIG += add_ios_ffmpeg_libraries
+
+    # QMAKE_IOS_SDK = iphonesimulator
+
      #QTPLUGIN += qiosnsphotolibrarysupport
      QMAKE_OBJCFLAGS += -fobjc-arc
      # убрать вместе с выбором просто файлов видимо -framework Foundation
      #LIBS += -framework PhotosUI -framework UIKit -framework MobileCoreServices
     LIBS += -framework PhotosUI
+    LIBS += -framework VideoToolbox -framework CoreMedia -framework CoreVideo
      QMAKE_TARGET_BUNDLE_PREFIX = "ru.dimas062"
      QMAKE_BUNDLE = "CarshService"
      TARGET = "CarshService"
 
-     QMAKE_IOS_DEPLOYMENT_TARGET =13.0
+     QMAKE_IOS_DEPLOYMENT_TARGET =16.0
      QMAKE_ASSET_CATALOGS += ios/Assets.xcassets
 
      QMAKE_INFO_PLIST = ios/Info.plist
+
  }
 
 android {

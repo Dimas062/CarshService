@@ -39,6 +39,7 @@ public slots:
     void OnSettingsModePressed();
     void OnLoginPressed();
     void OnRegisterPressed();
+    void OnTestModePressed();
    // void OnServerConnectStatusChanged(QString);
 };
 

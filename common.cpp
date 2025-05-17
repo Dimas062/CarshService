@@ -4,6 +4,8 @@
 #include <QFile>
 #include <QGuiApplication>
 #include <QString>
+#include <QStringList>
+#include <QRegularExpression>
 #ifdef Q_OS_ANDROID
 #include <QJniEnvironment>
 #include <QJniObject>
@@ -55,6 +57,38 @@ bool reconnectToDatabase(QSqlDatabase &db) {
         qDebug() << "Failed to reconnect to the database:" << db.lastError().text();
         return false;
     }
+}
+
+QString wrapText(const QString& text, int maxLineLength) {
+    if (text.isEmpty() || maxLineLength <= 0) {
+        return QString();
+    }
+
+    // Разделяем текст на слова, игнорируя множественные пробелы
+    QStringList words = text.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
+
+    if (words.isEmpty()) {
+        return QString();
+    }
+
+    QStringList lines;
+    QString currentLine = words.first();
+
+    for (int i = 1; i < words.size(); ++i) {
+        const QString& word = words.at(i);
+        QString potentialLine = currentLine + " " + word;
+
+        // Проверяем, не превысит ли новая строка максимальную длину
+        if (potentialLine.length() <= maxLineLength) {
+            currentLine = potentialLine;
+        } else {
+            lines.append(currentLine);
+            currentLine = word;
+        }
+    }
+
+    lines.append(currentLine); // Добавляем последнюю строку
+    return lines.join("\n");   // Объединяем строки через перенос
 }
 
 bool executeQueryWithReconnect(QSqlQuery & query ,const QString &queryString) {

@@ -56,57 +56,108 @@ bool QCSBaseListWidget::gestureEvent(QGestureEvent *event)
     return true;
 }
 
-bool QCSBaseListWidget::event(QEvent *event)
-{
+// bool QCSBaseListWidget::event(QEvent *event)
+// {
 
+// #if defined Q_OS_IOS || defined Q_OS_ANDROID
+//     static QMap<QPointer<QTapGesture>, bool> tapGestures;
+//     if (event->type() != QEvent::Gesture)
+//         return QListWidget::event(event);
+
+//     auto g_event = static_cast<QGestureEvent *>(event);
+
+
+//     if (auto g = qobject_cast<QTapGesture *>(g_event->gesture(Qt::TapGesture))) {
+//         // A TapAndHold was triggered during that tap... let's ignore it
+
+//         bool bSend = true;
+//         if (tapGestures.value(g))
+//         {
+//             g_event->ignore(g); // Or handle as you like
+//             bSend = false;
+//         }
+
+//         if (g->state() == Qt::GestureFinished || g->state() == Qt::GestureCanceled)
+//             tapGestures.remove(g);
+//         else if (!tapGestures.contains(g))
+//             tapGestures.insert(g, false);
+
+//         if(bSend) gestureEvent(static_cast<QGestureEvent*>(event));
+
+//         g_event->accept(g);
+
+//         return true;
+//     }
+
+//     if (auto g = qobject_cast<QTapAndHoldGesture *>(g_event->gesture(Qt::TapAndHoldGesture))) {
+//         // Probably not needed if the gesture handle doesn't conflict with another component
+//         if (g->state() == Qt::GestureFinished)
+//             g->setGestureCancelPolicy(QGesture::CancelAllInContext);
+
+//         // Mark all QTapGesture in progress to be ignored
+
+
+//         for (auto it = tapGestures.begin(); it != tapGestures.end(); ++it)
+//             it.value() = true;
+
+//         gestureEvent(static_cast<QGestureEvent*>(event));
+
+//         g_event->accept(g);
+
+//         return true;
+//     }
+// #endif
+//     return QListWidget::event(event);
+// }
+
+bool QCSBaseListWidget::event(QEvent *event) {
 #if defined Q_OS_IOS || defined Q_OS_ANDROID
-    static QMap<QPointer<QTapGesture>, bool> tapGestures;
-    if (event->type() != QEvent::Gesture)
+    static QHash<QGesture*, bool> tapGestures;
+
+    if (event->type() != QEvent::Gesture) {
         return QListWidget::event(event);
+    }
 
-    auto g_event = static_cast<QGestureEvent *>(event);
+    auto g_event = static_cast<QGestureEvent*>(event);
 
-
-    if (auto g = qobject_cast<QTapGesture *>(g_event->gesture(Qt::TapGesture))) {
-        // A TapAndHold was triggered during that tap... let's ignore it
-
+    // Обработка QTapGesture
+    if (auto g = qobject_cast<QTapGesture*>(g_event->gesture(Qt::TapGesture))) {
         bool bSend = true;
-        if (tapGestures.value(g))
-        {
-            g_event->ignore(g); // Or handle as you like
+        if (tapGestures.value(g)) {
+            g_event->ignore(g);
             bSend = false;
         }
 
-        if (g->state() == Qt::GestureFinished || g->state() == Qt::GestureCanceled)
+        if (g->state() == Qt::GestureFinished || g->state() == Qt::GestureCanceled) {
             tapGestures.remove(g);
-        else if (!tapGestures.contains(g))
+        } else if (!tapGestures.contains(g)) {
             tapGestures.insert(g, false);
+        }
 
-        if(bSend) gestureEvent(static_cast<QGestureEvent*>(event));
+        if (bSend) {
+            gestureEvent(g_event);
+        }
 
         g_event->accept(g);
-
         return true;
     }
 
-    if (auto g = qobject_cast<QTapAndHoldGesture *>(g_event->gesture(Qt::TapAndHoldGesture))) {
-        // Probably not needed if the gesture handle doesn't conflict with another component
-        if (g->state() == Qt::GestureFinished)
+    // Обработка QTapAndHoldGesture
+    if (auto g = qobject_cast<QTapAndHoldGesture*>(g_event->gesture(Qt::TapAndHoldGesture))) {
+        if (g->state() == Qt::GestureFinished) {
             g->setGestureCancelPolicy(QGesture::CancelAllInContext);
+        }
 
-        // Mark all QTapGesture in progress to be ignored
-
-
-        for (auto it = tapGestures.begin(); it != tapGestures.end(); ++it)
+        for (auto it = tapGestures.begin(); it != tapGestures.end(); ++it) {
             it.value() = true;
+        }
 
-        gestureEvent(static_cast<QGestureEvent*>(event));
-
+        gestureEvent(g_event);
         g_event->accept(g);
-
         return true;
     }
 #endif
+
     return QListWidget::event(event);
 }
 

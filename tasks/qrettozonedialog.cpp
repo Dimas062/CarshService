@@ -17,6 +17,9 @@ extern QColor currentWorkdayColor;
 
 QRetToZoneDialog::QRetToZoneDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f)
 {
+
+    m_strPinaltiParkingId = "00000000-0000-0000-0000-000000000000";
+    m_strPinaltiParkingText = "";
     int iButtonWidth = screenGeometry.width()*0.6;
 
     m_uuidSourseRecord = QUuid();
@@ -180,6 +183,7 @@ void QRetToZoneDialog::SaveDataToBD()
 
         strExec = QString("insert into \"Расширение задачи Возврат в зону\" (id,\"Госномер\",ШС) values ('%1','%2','%3')").arg(uuidExtention.toString()).arg(m_pPlateLineText->getText()).arg(m_strPinaltiParkingId);
         execMainBDQueryUpdate(strExec);
+        qDebug()<<strExec;
 
         /*Фото/документы (4 шт)*/
         /*Перебрать и записать картинки*/
@@ -204,8 +208,9 @@ void QRetToZoneDialog::SaveDataToBD()
         strExec = QString("update \"Задачи\" set Заказчик = '%1'  where id='%2'").arg(m_pSelProviderCarshWidget->m_uuidCarsh.toString()).arg(m_uuidSourseRecord.toString());
         execMainBDQueryUpdate(strExec);
 
-        strExec = QString("update \"Расширение задачи Возврат в зону\" set Госномер = '%1' where id='%2')").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
+        strExec = QString("update \"Расширение задачи Возврат в зону\" set Госномер = '%1' where id='%2'").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
+
 
         strExec = QString("update \"Расширение задачи Возврат в зону\" set \"ШС\"='%1' where id='%2'").arg(m_strPinaltiParkingId).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);

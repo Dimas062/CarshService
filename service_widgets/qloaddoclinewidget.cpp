@@ -8,11 +8,11 @@
 #include <QFileDialog>
 #include <QImageWriter>
 #ifdef Q_OS_MOBILE
-#include <QMediaDevices>
-#include <QCameraDevice>
-#include <QCamera>
-#include <QMediaCaptureSession>
-#include <QImageCapture>
+// #include <QMediaDevices>
+// #include <QCameraDevice>
+// #include <QCamera>
+// #include <QMediaCaptureSession>
+// #include <QImageCapture>
 #endif
 #ifdef Q_OS_DESKTOP
 #include <QMessageBox>

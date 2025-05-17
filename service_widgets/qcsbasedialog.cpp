@@ -9,38 +9,38 @@
 extern QRect screenGeometry;
 extern QColor currentWorkdayColor;
 
-void hideAllWidgetsInLayout(QLayout *layout)
-{
-    if (!layout) {
-        return;
-    }
+ void hideAllWidgetsInLayout(QLayout *layout)
+ {
+     if (!layout) {
+         return;
+     }
 
-    for (int i = 0; i < layout->count(); ++i) {
-        QLayoutItem *item = layout->itemAt(i);
-        if (item->widget()) {
-            item->widget()->hide(); // Скрываем виджет
-        } else if (item->layout()) {
-            hideAllWidgetsInLayout(item->layout()); // Рекурсивно скрываем элементы вложенного лейаута
-        }
-    }
+     for (int i = 0; i < layout->count(); ++i) {
+         QLayoutItem *item = layout->itemAt(i);
+         if (item->widget()) {
+             item->widget()->hide(); // Скрываем виджет
+         } else if (item->layout()) {
+             hideAllWidgetsInLayout(item->layout()); // Рекурсивно скрываем элементы вложенного лейаута
+         }
+     }
 
-}
+ }
 
-void showAllWidgetsInLayout(QLayout *layout)
-{
-    if (!layout) {
-        return;
-    }
+ void showAllWidgetsInLayout(QLayout *layout)
+ {
+     if (!layout) {
+         return;
+     }
 
-    for (int i = 0; i < layout->count(); ++i) {
-        QLayoutItem *item = layout->itemAt(i);
-        if (item->widget()) {
-            item->widget()->show(); // Скрываем виджет
-        } else if (item->layout()) {
-            showAllWidgetsInLayout(item->layout()); // Рекурсивно скрываем элементы вложенного лейаута
-        }
-    }
-}
+     for (int i = 0; i < layout->count(); ++i) {
+         QLayoutItem *item = layout->itemAt(i);
+         if (item->widget()) {
+             item->widget()->show(); // Скрываем виджет
+         } else if (item->layout()) {
+             showAllWidgetsInLayout(item->layout()); // Рекурсивно скрываем элементы вложенного лейаута
+         }
+     }
+ }
 
 QCSBaseDialog::QCSBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bScrollable):QDialog(parent , f)
 {
@@ -50,7 +50,7 @@ QCSBaseDialog::QCSBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bScrollab
 
     m_bScrollable = bScrollable;
     m_bBackProcessed = true;
-    connect(this , SIGNAL(OnMouseButtonPressedSignal()) , this , SLOT(OnMouseButtonPressedSlot()));
+    //connect(this , SIGNAL(OnMouseButtonPressedSignal()) , this , SLOT(OnMouseButtonPressedSlot()));
 
 
     QRect geometry(QPoint(0, 0), QSize(screenGeometry.width() , screenGeometry.height() ));
@@ -61,31 +61,31 @@ QCSBaseDialog::QCSBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bScrollab
     // setMaximumSize ( geometry.size() ) ;
     // setSizePolicy ( QSizePolicy :: Fixed , QSizePolicy :: Fixed ) ;
 
-    if(m_bScrollable)
-    {
-        m_pScrollWidget = NULL;
+     if(m_bScrollable)
+     {
+         m_pScrollWidget = NULL;
 
-        m_pScrollArea = new QCSScrollArea();
-        m_pScrollArea->setAlignment(Qt::AlignHCenter);
+         m_pScrollArea = new QCSScrollArea();
+         m_pScrollArea->setAlignment(Qt::AlignHCenter);
 
-        m_pScrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+         m_pScrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
 
-        m_pScrollArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+         m_pScrollArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
 
 
-       // pScrollArea->setWidget(m_pSettingsListWidget);
-        //pTestLabel->grabGesture(Qt::TapGesture);
+        // pScrollArea->setWidget(m_pSettingsListWidget);
+         //pTestLabel->grabGesture(Qt::TapGesture);
 
-       // QScroller::grabGesture(m_pScrollArea, QScroller::LeftMouseButtonGesture);
-       // GrabGesture();
+        // QScroller::grabGesture(m_pScrollArea, QScroller::LeftMouseButtonGesture);
+        // GrabGesture();
 
-        //pCSMainLayout->addWidget(m_pScrollArea);
-    }
+         //pCSMainLayout->addWidget(m_pScrollArea);
+     }
 
     QDialog::setLayout(pCSMainLayout);
 
     //макось оказалась ... - закрытие диалога обычной кнопкой, системной кнопки назад нет
-#if defined Q_OS_IOS || defined Q_OS_WINDOWS
+#if defined Q_OS_IOS || defined Q_OS_WINDOWS || defined Q_OS_MACOS
     QHBoxLayout * pHBackButtonLayout = new QHBoxLayout(this);
 
     QPushButton * pBackButton = new QPushButton("<< Назад");
@@ -97,7 +97,7 @@ QCSBaseDialog::QCSBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bScrollab
     pHBackButtonLayout->addWidget(pBackButton);
     pHBackButtonLayout->addStretch();
 
-    connect(pBackButton,SIGNAL(pressed()),this,SLOT(reject()));
+    connect(pBackButton,SIGNAL(pressed()),this,SLOT(OnBackPressed()));
 
     pCSMainLayout->addLayout(pHBackButtonLayout);
 #endif
@@ -105,18 +105,18 @@ QCSBaseDialog::QCSBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bScrollab
 
 void QCSBaseDialog::showWait(bool bWait)
 {
-    m_bWaiting = bWait;
-    if(bWait)
-    {
-        hideAllWidgetsInLayout(pCSMainLayout);
-        QDialog::repaint();
-    }
-    else
-    {
-        showAllWidgetsInLayout(pCSMainLayout);
-    }
-
-
+     if (!isVisible()) return; // Не выполнять, если диалог закрыт
+     qDebug()<<"QCSBaseDialog::showWait";
+     m_bWaiting = bWait;
+     if(bWait)
+     {
+         hideAllWidgetsInLayout(pCSMainLayout);
+         QDialog::repaint();
+     }
+     else
+     {
+         showAllWidgetsInLayout(pCSMainLayout);
+     }
 }
 
 void QCSBaseDialog::setLayout(QLayout *layout)
@@ -128,68 +128,74 @@ void QCSBaseDialog::setLayout(QLayout *layout)
         m_pScrollArea->setWidget(m_pScrollWidget);
         QScroller::grabGesture(m_pScrollArea->viewport(), QScroller::TouchGesture);
         pCSMainLayout->addWidget(m_pScrollArea);
-
-
-        //QVBoxLayout * pVMainLayout = new QVBoxLayout(this);
-        //QDialog::setLayout(pVMainLayout);
-
     }
-    else /*QDialog::setLayout(layout)*/ pCSMainLayout->addLayout(layout);
+    else  pCSMainLayout->addLayout(layout);
 }
 
 
-void QCSBaseDialog::OnMouseButtonPressedSlot()
+ void QCSBaseDialog::OnMouseButtonPressedSlot()
+ {
+     qDebug()<<"QCSBaseDialog::OnMouseButtonPressedSlot()";
+     qApp->inputMethod()->hide();
+ }
+
+ bool QCSBaseDialog::eventFilter(QObject *obj, QEvent *event)
+ {
+
+     if (event->type() == QEvent::MouseButtonPress)
+     {
+         return true;
+     }
+     else
+     {
+         // standard event processing
+         return QObject::eventFilter(obj, event);
+     }
+ }
+
+void QCSBaseDialog::OnBackPressed()
 {
-    qApp->inputMethod()->hide();
+    qDebug()<<"QCSBaseDialog::OnBackPressed()";
+
+    reject();
 }
 
-bool QCSBaseDialog::eventFilter(QObject *obj, QEvent *event)
-{
+ bool QCSBaseDialog::event(QEvent *event)
+ {
 
-    if (event->type() == QEvent::MouseButtonPress)
-    {
-        return true;
-    }
-    else
-    {
-        // standard event processing
-        return QObject::eventFilter(obj, event);
-    }
-}
+     if (event->type() == QEvent::KeyPress || event->type() == QEvent::KeyRelease) {
+         if(((QKeyEvent *)event)->key() == Qt::Key_Back)
+         {
+             if(event->type()==QEvent::KeyPress)
+             {
+                 m_bBackProcessed = false;
+                 reject();
 
-bool QCSBaseDialog::event(QEvent *event)
-{
-    if(((QKeyEvent *)event)->key() == Qt::Key_Back)
-    {
-        if(event->type()==QEvent::KeyPress)
-        {
-            m_bBackProcessed = false;
-            reject();
+                 return true;
+             }
+             if(event->type()==QEvent::KeyRelease)
+             {
+                 m_bBackProcessed = true;
+                 return true;
+             }
+         }
+     }
 
-            return true;
-        }
-        if(event->type()==QEvent::KeyRelease)
-        {
-            m_bBackProcessed = true;
-            return true;
-        }
-    }
+     if(event->type()==QEvent::/*KeyRelease*/KeyPress)
+         if(((QKeyEvent *)event)->key() == Qt::Key_Return)
+         {
+             event->accept();
+             return true;
+         }
 
-    if(event->type()==QEvent::/*KeyRelease*/KeyPress)
-        if(((QKeyEvent *)event)->key() == Qt::Key_Return)
-        {
-            event->accept();
-            return true;
-        }
+     if(event->type()==QEvent::MouseButtonPress)
+     {
+         emit OnMouseButtonPressedSignal();
+         event->accept();
+         return true;
+     }
 
-    if(event->type()==QEvent::MouseButtonPress)
-    {
-        emit OnMouseButtonPressedSignal();
-        event->accept();
-        return true;
-    }
+     return QDialog::event(event);
 
-    return QDialog::event(event);
-
-}
+ }
 

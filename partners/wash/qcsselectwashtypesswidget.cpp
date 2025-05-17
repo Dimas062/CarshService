@@ -8,6 +8,8 @@
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
 
+
+
 QCSSelectWashTypessWidget::QCSSelectWashTypessWidget(QWidget *parent)
     : QWidget{parent}
 {
@@ -22,7 +24,30 @@ QCSSelectWashTypessWidget::QCSSelectWashTypessWidget(QWidget *parent)
     {
         QCSWashTypeDlg * pTypeDlg = new QCSWashTypeDlg(resData.at(iResCounter).at(1));
 
-        QPushButton * pButton = new QPushButton(pTypeDlg->getText());
+
+
+
+        //QPushButton * pButton = createQPushButtonWithWordWrap(nullptr , pTypeDlg->getText());
+            /*= new QPushButton();
+        pButton->setMaximumWidth(screenGeometry.width() - 50);
+
+
+        QFontMetrics metrics(pButton->font());
+        QString strWrappedButtonText = metrics.elidedText(
+            pTypeDlg->getText(),
+            Qt::ElideRight,
+            Qt::TextWordWrap,
+            //pButton->width() // Ширина кнопки
+            200
+            );
+
+        pButton->setText(strWrappedButtonText);*/
+
+        QPushButton * pButton = new QPushButton(wrapText(pTypeDlg->getText() , 30));
+        // pButton->setMaximumWidth(screenGeometry.width() - 50);
+        // pButton->setFixedHeight(40);
+
+
         connect(pButton,SIGNAL(toggled(bool)),this,SLOT(OnButtonPress(bool)));
         pButton->setMinimumWidth(screenGeometry.width()*0.6);
         pButton->setProperty("id",QVariant(QString(resData.at(iResCounter).at(0))));
@@ -50,7 +75,7 @@ void QCSSelectWashTypessWidget::OnButtonPress(bool toggled)
             if(sWashDlg.m_pButton == pButton)
             {
                 sWashDlg.m_pWashTypeDlg->exec();
-                sWashDlg.m_pButton->setText(sWashDlg.m_pWashTypeDlg->getText());
+                sWashDlg.m_pButton->setText(wrapText(sWashDlg.m_pWashTypeDlg->getText(), 30));
             }
         }
     }
@@ -122,6 +147,6 @@ void QCSSelectWashTypessWidget::SetData(QVector<WashTypeDatas> datas)
 
     /*Обновим надписи на всех кнопках*/
     foreach (sWashButtonsDlgs sWashDlg, m_vButtonsDlgs) {
-        sWashDlg.m_pButton->setText(sWashDlg.m_pWashTypeDlg->getText());
+        sWashDlg.m_pButton->setText(wrapText(sWashDlg.m_pWashTypeDlg->getText() , 30));
     }
 }
