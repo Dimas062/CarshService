@@ -190,7 +190,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
     }
 
     /*Поиск пользователя с заданным логином/паролем*/
-    QString strUserExec = QString("select id , \"Роль\" , \"Подтвержден\" from Пользователи where Логин='%1' and Пароль='%2'").arg(strLoginStr).arg(strPassStr);
+    QString strUserExec = QString("select id , \"Роль\" , \"Подтвержден\" from Пользователи where Логин='%1' and Пароль='%2' and Удалено=false").arg(strLoginStr).arg(strPassStr);
     QList<QStringList> resUsers = execMainBDQuery(strUserExec);
 
 
@@ -234,7 +234,7 @@ void QCarshServiceBaseWidget::OnLoginPressed()
     }
 
     /*Поиск партнера с заданным логином/паролем*/
-    QString strPartnerExec = QString("select id , \"Подтвержден\" , Тип from Партнеры where Логин='%1' and Пароль='%2'").arg(strLoginStr).arg(strPassStr);
+    QString strPartnerExec = QString("select id , \"Подтвержден\" , Тип from Партнеры where Логин='%1' and Пароль='%2'  and Удалено=false").arg(strLoginStr).arg(strPassStr);
     QList<QStringList> resParners = execMainBDQuery(strPartnerExec);
     for(int iPartnerCounter = 0 ; iPartnerCounter < resParners.size() ; iPartnerCounter++)
     {
