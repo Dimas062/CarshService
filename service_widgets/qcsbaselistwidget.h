@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QGestureEvent>
 
+
 class QCSBaseListWidget : public QListWidget
 {
     Q_OBJECT

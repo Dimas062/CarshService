@@ -87,14 +87,14 @@ QPlateTaskDialog::QPlateTaskDialog(QWidget *parent, Qt::WindowFlags f ):QCSBaseD
     pVMainLayout->addWidget(pApplyButton);
     connect(pApplyButton,SIGNAL(released()),this,SLOT(OnApplyPressedSlot()));
 
-    if(CurrentUserType == CarshService)
-    {
+    // if(CurrentUserType == CarshService)
+    // {
         QPushButton * pRemoveButton = new QPushButton("Удалить");
         pRemoveButton->setIcon(QIcon(":/icons/remove_icon.png"));
         pRemoveButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
         pVMainLayout->addWidget(pRemoveButton);
         connect(pRemoveButton,SIGNAL(released()),this,SLOT(OnRemovePressedSlot()));
-    }
+    // }
 
     this->setLayout(pVMainLayout);
 }

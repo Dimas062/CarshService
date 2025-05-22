@@ -20,10 +20,10 @@ QWashPartnerPenListDlg::QWashPartnerPenListDlg(QUuid task , QWidget *parent, Qt:
 
     m_pPenListWidget = new QCSBaseListWidget();
 #ifdef Q_OS_ANDRIOD
-    m_pPenListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pPenListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
-    m_pPenListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pPenListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
 #endif
     m_pPenListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pPenListWidget));
 

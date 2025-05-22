@@ -10,6 +10,8 @@ class QCSBaseListItemDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
+    using QStyledItemDelegate::QStyledItemDelegate;
+
     explicit QCSBaseListItemDelegate(QObject *parent = nullptr);
 
 

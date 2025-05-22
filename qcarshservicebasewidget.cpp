@@ -110,6 +110,7 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
     pVMainLayout->addWidget(pLoginLabel);
 
     m_pLoginLineEdit = new QLineEdit;
+    m_pLoginLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
     pVMainLayout->addWidget(m_pLoginLineEdit);
 
     QLabel * pPasswordLabel = new QLabel("Пароль");
@@ -117,6 +118,7 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
 
 
     m_pPasswordLineEdit = new QLineEdit;
+    m_pPasswordLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
     pVMainLayout->addWidget(m_pPasswordLineEdit);
 
     pVMainLayout->addStretch();

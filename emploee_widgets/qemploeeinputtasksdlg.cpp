@@ -69,10 +69,10 @@ QEmploeeInputTasksDlg::QEmploeeInputTasksDlg(QUuid userUuid, QWidget *parent, Qt
 
     m_pTasksListWidget = new QCSBaseListWidget();
 #ifdef Q_OS_ANDRIOD
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 110 - iButtonHeight*2);
+    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight*2);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 110 - iButtonHeight*2);
+    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight*2);
 #endif
     m_pTasksListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pTasksListWidget));
 
@@ -158,7 +158,7 @@ void QEmploeeInputTasksDlg::UpdateTasks()
 
         QString strNumber = " ";
 
-        QString strTask = QString("Штрафстоянка %1 %2 %3 (%4)").arg(resTasks.at(iTaskCounter).at(1)).arg(resTasks.at(iTaskCounter).at(2)).arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTaskCounter).at(3).toInt()).toString("dd.MM.yyyy hh:mm")).arg(resTasks.at(iTaskCounter).at(4));
+        QString strTask = QString("Штрафстоянка %1 <b>%2</b> %3 (%4)").arg(resTasks.at(iTaskCounter).at(1)).arg(resTasks.at(iTaskCounter).at(2)).arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTaskCounter).at(3).toInt()).toString("dd.MM.yyyy hh:mm")).arg(resTasks.at(iTaskCounter).at(4));
         pItem->setText(strTask);
         //if(resTasks.at(iTaskCounter).at(4).toInt() != 0) pItem->setIcon(QIcon(":/icons/done_icon.png"));
         //pItem->setFlags(pItem->flags() & ~Qt::ItemIsSelectable);

@@ -8,6 +8,7 @@ QFindDlg::QFindDlg()
     QVBoxLayout * pVMainLayout = new QVBoxLayout;
 
     m_pTextLineEdit = new QLineEdit();
+    m_pTextLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
 
     pVMainLayout->addWidget(m_pTextLineEdit);
 

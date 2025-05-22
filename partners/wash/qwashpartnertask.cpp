@@ -165,7 +165,7 @@ void QWashPartnerTask::SaveDataToBD()
                 if(data.iNigth>0)
                 {
                     QUuid uuidTaskType = QUuid::createUuid();
-                    QString strExecTypes = QString("insert into \"Задача Мойка - Типы\" (id, Задача, Тип , Ночь, Количество) values ('%1' , '%2' , '%3' , '%4' , '%5')").arg(uuidTaskType.toString()).arg(uuidTask.toString()).arg(data.id.toString()).arg("true").arg(data.iDay);
+                    QString strExecTypes = QString("insert into \"Задача Мойка - Типы\" (id, Задача, Тип , Ночь, Количество) values ('%1' , '%2' , '%3' , '%4' , '%5')").arg(uuidTaskType.toString()).arg(uuidTask.toString()).arg(data.id.toString()).arg("true").arg(data.iNigth);
                     execMainBDQueryUpdate(strExecTypes);
                 }
             }

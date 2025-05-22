@@ -18,14 +18,10 @@ QSelectTaskEmploeer::QSelectTaskEmploeer(QWidget *parent, Qt::WindowFlags f, QSt
     QVBoxLayout * pVMainLayout = new QVBoxLayout;
 
     m_pEmploeeListWidget = new QCSBaseListWidget();
-#ifdef Q_OS_ANDRIOD
-    m_pEmploeeListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
-#endif
-#if defined Q_OS_IOS || defined Q_OS_WINDOWS
-    m_pEmploeeListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
-#endif
-    m_pEmploeeListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pEmploeeListWidget));
 
+
+    m_pEmploeeListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
+    m_pEmploeeListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pEmploeeListWidget));
     QScrollerProperties sp;
     sp.setScrollMetric( QScrollerProperties::DragStartDistance, 0.001 );
     sp.setScrollMetric( QScrollerProperties::ScrollingCurve, QEasingCurve::Linear );

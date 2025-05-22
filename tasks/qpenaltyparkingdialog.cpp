@@ -113,14 +113,14 @@ QPenaltyParkingDialog::QPenaltyParkingDialog(QWidget *parent, Qt::WindowFlags f 
     pVMainLayout->addWidget(pHandOverButton, 0 , Qt::AlignHCenter);
     connect(pHandOverButton,SIGNAL(released()),this,SLOT(OnHandOverPressedSlot()));
 
-    if(CurrentUserType == CarshService)
-    {
+    // if(CurrentUserType == CarshService)
+    // {
         QPushButton * pRemoveButton = new QPushButton("Удалить");
         pRemoveButton->setIcon(QIcon(":/icons/remove_icon.png"));
         pRemoveButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
         pVMainLayout->addWidget(pRemoveButton, 0 , Qt::AlignHCenter);
         connect(pRemoveButton,SIGNAL(released()),this,SLOT(OnRemovePressedSlot()));
-    }
+    // }
 
     this->setLayout(pVMainLayout);
 }

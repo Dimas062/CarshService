@@ -62,14 +62,16 @@ QDocsTaskDlg::QDocsTaskDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
     pVMainLayout->addWidget(pApplyButton, 0 , Qt::AlignHCenter);
     connect(pApplyButton,SIGNAL(released()),this,SLOT(OnApplyPressedSlot()));
 
-    if(CurrentUserType == CarshService)
-    {
+
+
+    // if(CurrentUserType == CarshService)
+    // {
         QPushButton * pRemoveButton = new QPushButton("Удалить");
         pRemoveButton->setIcon(QIcon(":/icons/remove_icon.png"));
         pRemoveButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
         pVMainLayout->addWidget(pRemoveButton, 0 , Qt::AlignHCenter);
         connect(pRemoveButton,SIGNAL(released()),this,SLOT(OnRemovePressedSlot()));
-    }
+    // }
 
     this->setLayout(pVMainLayout);
 }
@@ -105,11 +107,11 @@ bool QDocsTaskDlg::isReady()
             bPayDone = false;
         }
 
-        if(m_PayDlg.m_pPicturesWidget->m_Pictures.size()<1)
-        {
-            retVal = false;
-            bPayDone = false;
-        }
+        // if(m_PayDlg.m_pPicturesWidget->m_Pictures.size()<1)
+        // {
+        //     retVal = false;
+        //     bPayDone = false;
+        // } - оплата нужна, но чек гаишники не дают, поэтому не требуется
 
         if(m_PayDlg.GetSelectedPayType()==Undefined)
         {
@@ -128,10 +130,10 @@ bool QDocsTaskDlg::isReady()
     }
     else m_pDocTypeButton->setStyleSheet("QPushButton {color: black;}");
 
-    if(!(m_pLineTextComment->CheckColorLenght()))
-    {
-        retVal = false;
-    }
+    // if(!(m_pLineTextComment->CheckColorLenght()))
+    // {
+    //     retVal = false;
+    // } - комментарий тоже не обязательно
 
     if(!(m_pDocsCountText->CheckColorLenght()))
     {

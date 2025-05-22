@@ -122,10 +122,10 @@ QEmploeeTasksDlg::QEmploeeTasksDlg(QUuid userUuid, QUuid taskTypeUuid , QWidget 
 
     m_pTasksListWidget = new QCSBaseListWidget();
 #ifdef Q_OS_ANDRIOD
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
 #endif
     m_pTasksListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pTasksListWidget));
 
@@ -237,7 +237,7 @@ void QEmploeeTasksDlg::UpdateTasks()
             if(resNumber.size()>0) strNumber = resNumber.at(0).at(0);
         }
 
-        QString strTask = QString("%1 - %2 (%3) (%4)")
+        QString strTask = QString("%1 - %2 (%3) <b>%4</b> ")
                               .arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTaskCounter).at(1).toInt()).toString("dd.MM.yyyy hh:mm"))
                               .arg(resTasks.at(iTaskCounter).at(2))
                               .arg(resTasks.at(iTaskCounter).at(5))

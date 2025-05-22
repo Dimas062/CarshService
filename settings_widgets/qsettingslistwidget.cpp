@@ -66,6 +66,7 @@ QSettingsListWidget::QSettingsListWidget(QWidget *parent): QWidget(parent)
     QLabel * pLoginLabel = new QLabel("Логин:");
 
     m_pLoginLineEdit = new QLineEdit();
+    m_pLoginLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
 
     pHLoginLoyout->addWidget(pLoginLabel);
     pHLoginLoyout->addWidget(m_pLoginLineEdit);
@@ -88,6 +89,7 @@ QSettingsListWidget::QSettingsListWidget(QWidget *parent): QWidget(parent)
     QLabel * pPasswordLabel = new QLabel("Пароль:");
 
     m_pPasswordLineEdit = new QLineEdit();
+    m_pPasswordLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
 
     pHPasswordLoyout->addWidget(pPasswordLabel);
     pHPasswordLoyout->addWidget(m_pPasswordLineEdit);

@@ -22,10 +22,10 @@ QEmplCostsDlg::QEmplCostsDlg(QUuid userUuid, QWidget *parent, Qt::WindowFlags f 
 
     m_pCostsListWidget = new QCSBaseListWidget();
 #ifdef Q_OS_ANDRIOD
-    m_pCostsListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pCostsListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
-    m_pCostsListWidget->setFixedHeight(screenGeometry.height() - 100 - iButtonHeight);
+    m_pCostsListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
 #endif
     m_pCostsListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pCostsListWidget));
 
