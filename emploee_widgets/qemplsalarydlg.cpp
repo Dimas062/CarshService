@@ -40,7 +40,7 @@ QEmplSalaryDlg::QEmplSalaryDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialo
 
     m_pSalarysListWidget = new QCSBaseListWidget();
 #ifdef Q_OS_ANDRIOD
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
+    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 270 - iButtonHeight);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
     m_pSalarysListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);

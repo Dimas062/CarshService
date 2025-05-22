@@ -36,7 +36,7 @@ QStickPartnerTasksListDlg::QStickPartnerTasksListDlg(QWidget *parent, Qt::Window
 
     m_pTasksListWidget = new QCSBaseListWidget();
 #ifdef Q_OS_ANDRIOD
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
+    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 270 - iButtonHeight);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
     m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
