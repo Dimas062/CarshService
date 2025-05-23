@@ -63,15 +63,12 @@ QDocsTaskDlg::QDocsTaskDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
     connect(pApplyButton,SIGNAL(released()),this,SLOT(OnApplyPressedSlot()));
 
 
+    QPushButton * pRemoveButton = new QPushButton("Удалить");
+    pRemoveButton->setIcon(QIcon(":/icons/remove_icon.png"));
+    pRemoveButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    pVMainLayout->addWidget(pRemoveButton, 0 , Qt::AlignHCenter);
+    connect(pRemoveButton,SIGNAL(released()),this,SLOT(OnRemovePressedSlot()));
 
-    // if(CurrentUserType == CarshService)
-    // {
-        QPushButton * pRemoveButton = new QPushButton("Удалить");
-        pRemoveButton->setIcon(QIcon(":/icons/remove_icon.png"));
-        pRemoveButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
-        pVMainLayout->addWidget(pRemoveButton, 0 , Qt::AlignHCenter);
-        connect(pRemoveButton,SIGNAL(released()),this,SLOT(OnRemovePressedSlot()));
-    // }
 
     this->setLayout(pVMainLayout);
 }

@@ -22,6 +22,7 @@ public:
     void LoadDataFromBD(QUuid);
 
     QCSButton * m_pPayButton;
+    QCSButton * m_pGRZsButton;
     QLineText * m_pLineTextComment;
     QPushButton * m_pDocTypeButton;
     QLineText * m_pDocsCountText;
