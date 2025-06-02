@@ -66,7 +66,7 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
 
     int iUnderButtonSpace = 4;
 
-    iButtonHeight = (int)((screenGeometry.height()*0.7)/10)-iUnderButtonSpace;
+    iButtonHeight = (int)((screenGeometry.height()*0.7)/12)-iUnderButtonSpace;
 #endif
 
 #ifdef Q_OS_ANDROID
@@ -109,16 +109,13 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
     QLabel * pLoginLabel = new QLabel("Логин");
     pVMainLayout->addWidget(pLoginLabel);
 
-    m_pLoginLineEdit = new QLineEdit;
-    m_pLoginLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
+    m_pLoginLineEdit = new QCSLineEdit;
     pVMainLayout->addWidget(m_pLoginLineEdit);
 
     QLabel * pPasswordLabel = new QLabel("Пароль");
     pVMainLayout->addWidget(pPasswordLabel);
 
-
-    m_pPasswordLineEdit = new QLineEdit;
-    m_pPasswordLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
+    m_pPasswordLineEdit = new QCSLineEdit;
     pVMainLayout->addWidget(m_pPasswordLineEdit);
 
     pVMainLayout->addStretch();

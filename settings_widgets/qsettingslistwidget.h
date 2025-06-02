@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QGestureEvent>
-#include <QLineEdit>
+#include "service_widgets/qcslineedit.h"
 
 class QSettingsListWidget : public QWidget
 {
@@ -17,9 +17,9 @@ public:
 
     void addWidget(QWidget *);
 
-    QLineEdit * m_pAdressLineEdit;
-    QLineEdit * m_pLoginLineEdit;
-    QLineEdit * m_pPasswordLineEdit;
+    QCSLineEdit * m_pAdressLineEdit;
+    QCSLineEdit * m_pLoginLineEdit;
+    QCSLineEdit * m_pPasswordLineEdit;
 
 signals:
     void OnTapHoldGesture();

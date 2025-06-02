@@ -3,14 +3,13 @@
 
 #include "service_widgets/qcsbasedialog.h"
 #include "service_widgets/qcspaybasedialog.h"
-
 #include "service_widgets/qlinetext.h"
-
 #include "service_widgets/qselprovidercarshwidget.h"
 #include <QLabel>
 #include <QObject>
 #include <QPushButton>
 #include "service_widgets/QCSButton.h"
+#include <QStringList>
 
 class QDocsTaskDlg : public QCSBaseDialog
 {
@@ -39,9 +38,11 @@ public:
 
 protected:
     QLabel * m_pTopLabel;
+    QStringList m_strListGRZs;//Список ГРЗ для СТСок
 
 public slots:
     void OnPayButtonPressed();
+    void OnGRZsButtonPressed();
     void OnApplyPressedSlot();
     void OnDocButtonPressed();
     void OnRemovePressedSlot();

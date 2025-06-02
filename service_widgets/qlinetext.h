@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QString>
 #include <QLabel>
-#include <QLineEdit>
+#include "service_widgets/qcslineedit.h"
 
 class QLineText : public QWidget
 {
@@ -24,7 +24,9 @@ public:
 
 protected:
     QLabel * m_pLabel;
-    QLineEdit * m_pLineEdit;
+    QCSLineEdit * m_pLineEdit;
+
+
 public slots:
     void OnTextLineEditChanged(const QString &text);
 signals:

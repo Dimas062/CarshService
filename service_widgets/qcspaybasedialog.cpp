@@ -77,7 +77,7 @@ QCSPayBaseDialog::QCSPayBaseDialog(QWidget *parent, Qt::WindowFlags f , bool bOn
 
     m_pPicturesWidget = new QPicturesWidget(this);
 #ifdef Q_OS_MOBILE
-    m_pPicturesWidget->setMinimumHeight(screenGeometry.width());
+    m_pPicturesWidget->setMinimumHeight(screenGeometry.width()*0.55);
 #endif
 #ifdef Q_OS_DESKTOP
     m_pPicturesWidget->setFixedHeight(screenGeometry.height()*0.45);

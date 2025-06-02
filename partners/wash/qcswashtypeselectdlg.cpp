@@ -42,11 +42,13 @@ QCSWashTypeSelectDlg::QCSWashTypeSelectDlg(QWidget *parent, Qt::WindowFlags f ):
 
 
 
-        QPushButton * pApplyButton = new QPushButton("Внести/выбрать");
-        pApplyButton->setIcon(QIcon(":/icons/done_icon.png"));
-        pApplyButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
-        pVMainLayout->addWidget(pApplyButton);
-        connect(pApplyButton,SIGNAL(released()),this,SLOT(OnApplyPressedSlot()));
+    QPushButton * pApplyButton = new QPushButton("Внести/выбрать");
+    pApplyButton->setIcon(QIcon(":/icons/done_icon.png"));
+    pApplyButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    pVMainLayout->addWidget(pApplyButton);
+    connect(pApplyButton,SIGNAL(released()),this,SLOT(OnApplyPressedSlot()));
+
+    setMinimumHeight(screenGeometry.height());
 
 }
 

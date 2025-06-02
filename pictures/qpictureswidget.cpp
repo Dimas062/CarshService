@@ -38,7 +38,7 @@ QPicturesWidget::QPicturesWidget(QWidget *parent , bool bViewOnly, bool bDesktop
     m_pCurrentPicLabel->setAlignment(Qt::AlignCenter);
 
     const QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
-    m_pCurrentPicLabel->setMinimumHeight(0.4*screenGeometry.height());
+    m_pCurrentPicLabel->setMinimumHeight(0.33*screenGeometry.height());
 
     connect(m_pCurrentPicLabel,SIGNAL(clicked()), this , SLOT(OnPictureClik()));
     mainLayout->addWidget(m_pCurrentPicLabel);

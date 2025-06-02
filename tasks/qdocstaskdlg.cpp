@@ -1,11 +1,12 @@
 #include "qdocstaskdlg.h"
 #include "service_widgets/qyesnodlg.h"
 #include "service_widgets/qcsselectdialog.h"
+#include "service_widgets/qstringlistdlg.h"
 #include "common.h"
 #include "BDPatterns.h"
 
 
-#define need_pay QUuid::fromString(m_strDocId) == QUuid(QString("d7e6ca81-d6fe-405e-8a39-961ceb9bd1f6"))
+#define IS_STS QUuid::fromString(m_strDocId) == QUuid(QString("d7e6ca81-d6fe-405e-8a39-961ceb9bd1f6"))
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
@@ -38,6 +39,16 @@ QDocsTaskDlg::QDocsTaskDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(pa
     m_pPayButton->setFixedWidth(iButtonWidth);
     m_pPayButton->setEnabled(false);
     pVMainLayout->addWidget(m_pPayButton , 0 , Qt::AlignHCenter);
+
+    m_pGRZsButton = new QCSButton("Номера");
+    m_pGRZsButton->grabGesture(Qt::TapGesture);
+    connect(m_pGRZsButton,SIGNAL(released()),this,SLOT(OnGRZsButtonPressed()));
+    m_pGRZsButton->setMaximumHeight(iButtonHeight);
+    m_pGRZsButton->setMinimumHeight(iButtonHeight);
+    m_pGRZsButton->setFixedWidth(iButtonWidth);
+    m_pGRZsButton->setEnabled(false);
+    pVMainLayout->addWidget(m_pGRZsButton , 0 , Qt::AlignHCenter);
+
 
     m_pDocTypeButton = new QPushButton("Тип документа");
     connect(m_pDocTypeButton,SIGNAL(released()),this,SLOT(OnDocButtonPressed()));
@@ -94,8 +105,9 @@ bool QDocsTaskDlg::isReady()
         retVal = false;
     }
 
-    if(need_pay)
+    if(IS_STS)
     {
+        //Оплата
         bool bPayDone = true;
 
         if(m_PayDlg.m_pCashLineText->getText().length()<2)
@@ -118,6 +130,17 @@ bool QDocsTaskDlg::isReady()
 
         if(!bPayDone) m_pPayButton->setStyleSheet("QPushButton {color: red;}");
         else m_pPayButton->setStyleSheet("QPushButton {color: black;}");
+
+        //Номера
+        int iSTSCount = m_pDocsCountText->getText().toInt();
+        if(m_strListGRZs.length() != iSTSCount)
+        {
+            m_pGRZsButton->setStyleSheet("QPushButton {color: red;}");
+            retVal = false;
+        }
+        else
+            m_pGRZsButton->setStyleSheet("QPushButton {color: black;}");
+
     }
 
     if(m_strDocId.length()<33)
@@ -178,10 +201,11 @@ void QDocsTaskDlg::SaveDataToBD()
         strExec = QString("update \"Расширение задачи Документы\" set \"Документ\"='%1' where id='%2'").arg(m_strDocId).arg(uuidExtention.toString());
         execMainBDQueryUpdate(strExec);
 
-        /*Оплата*/
 
-        if(need_pay)
+
+        if(IS_STS)
         {
+            /*Оплата*/
             QString strSum = m_PayDlg.m_pCashLineText->getText();
             strSum.replace(',','.');
             QUuid uuidPay = CreatePayRecord(strSum.toDouble() , m_PayDlg.GetSelectedPayType() , m_PayDlg.m_iPayDate);
@@ -192,6 +216,13 @@ void QDocsTaskDlg::SaveDataToBD()
             for (int iPicCounter = 0; iPicCounter <  m_PayDlg.m_pPicturesWidget->m_Pictures.size(); ++iPicCounter)
             {
                 CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
+            }
+
+            /*Номера*/
+            foreach (QString strNum, m_strListGRZs) {
+                QUuid newNumGuid = QUuid::createUuid();
+                strExec = QString("insert into \"Номера-ЗадачаДокументыСТС\" (id, Задача, Номер) values ('%1','%2','%3')").arg(newNumGuid.toString()).arg(uuidTask.toString()).arg(strNum);
+                execMainBDQueryUpdate(strExec);
             }
         }
 
@@ -221,8 +252,9 @@ void QDocsTaskDlg::SaveDataToBD()
 
         QList<QStringList> strPayResult = execMainBDQuery(strExec);
 
-        if(need_pay)
+        if(IS_STS)
         {
+            //Добовляем/обновляем оплату
             if(strPayResult.size()<1) //Если оплаты нет, то создадим новую
             {
                 QString strSum = m_PayDlg.m_pCashLineText->getText();
@@ -237,7 +269,7 @@ void QDocsTaskDlg::SaveDataToBD()
                     CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
                 }
             }
-            else
+            else//Если оплата есть, то обновим ту, что есть
             {
 
                 QUuid uuidPay = QUuid::fromString(strPayResult.at(0).at(0));
@@ -255,10 +287,23 @@ void QDocsTaskDlg::SaveDataToBD()
                     CreatePayDocRecord(uuidPay , ImageToBase64(m_PayDlg.m_pPicturesWidget->m_Pictures.at(iPicCounter)));
                 }
             }
+            //Добовляем/обновляем номера СТСок
+            //Удаляем старые
+            strExec = QString("delete from \"Номера-ЗадачаДокументыСТС\" where Задача='%1'").arg(m_uuidSourseRecord.toString());
+            execMainBDQueryUpdate(strExec);
+
+            //Добовляем текущие
+            foreach (QString strNum, m_strListGRZs) {
+                QUuid newNumGuid = QUuid::createUuid();
+                strExec = QString("insert into \"Номера-ЗадачаДокументыСТС\" (id, Задача, Номер) values ('%1','%2','%3')").arg(newNumGuid.toString()).arg(m_uuidSourseRecord.toString()).arg(strNum);
+                execMainBDQueryUpdate(strExec);
+            }
+
         }
-        else
+        else //Если не СТС, то удаляем оплаты и госномера
         {
-            if(strPayResult.size()>1) //Если оплата есть, то удаляем
+            //Если оплата есть, то удаляем
+            if(strPayResult.size()>1)
             {
                 QUuid uuidPay = QUuid::fromString(strPayResult.at(0).at(0));
 
@@ -273,6 +318,10 @@ void QDocsTaskDlg::SaveDataToBD()
                 strExec = QString("update \"Расширение задачи Документы\" set \"Оплата\"='null' where id='%1'").arg(uuidPay.toString());
                 execMainBDQueryUpdate(strExec);
             }
+
+            //Удаляем номера СТСок
+            strExec = QString("delete from \"Номера-ЗадачаДокументыСТС\" where Задача='%1'").arg(m_uuidSourseRecord.toString());
+            execMainBDQueryUpdate(strExec);
         }
 
         strExec = QString("update \"Задачи\" set Цена = %1  where id='%2'").arg(strSumm).arg(m_uuidSourseRecord.toString());
@@ -314,11 +363,24 @@ void QDocsTaskDlg::LoadDataFromBD(QUuid uuidSourseRecord)
 
             m_strDocId = (resExtTasks.at(iTasksCounter).at(1));
 
-            if(need_pay)
+            if(IS_STS)
+            {
                 m_pPayButton->setEnabled(true);
+                m_pGRZsButton->setEnabled(true);
+            }
             else
+            {
                 m_pPayButton->setEnabled(false);
+                m_pGRZsButton->setEnabled(false);
+            }
 
+        }
+
+        //Номера СТСок
+        QString strGRZsExec = QString("select Номер from \"Номера-ЗадачаДокументыСТС\" where Задача = '%1'").arg(m_uuidSourseRecord.toString());
+        QList<QStringList> resGRZs = execMainBDQuery(strGRZsExec);
+        foreach (QStringList list, resGRZs) {
+            m_strListGRZs<<list[0];
         }
     }
     isReady();
@@ -329,6 +391,16 @@ void QDocsTaskDlg::LoadDataFromBD(QUuid uuidSourseRecord)
 void QDocsTaskDlg::OnPayButtonPressed()
 {
     m_PayDlg.exec();
+    isReady();
+}
+
+void QDocsTaskDlg::OnGRZsButtonPressed()
+{
+    QStringListDlg dlg(m_strListGRZs , "Номера");
+    if(dlg.exec() == QDialog::Accepted)
+    {
+        m_strListGRZs = dlg.m_strList;
+    }
     isReady();
 }
 
@@ -356,9 +428,16 @@ void QDocsTaskDlg::OnDocButtonPressed()
         m_strDocText = DocSelDlg.getCurText();
 
         /*Если документ СТС, то оплата*/
-        if(need_pay)
+        if(IS_STS)
+        {
             m_pPayButton->setEnabled(true);
-        else m_pPayButton->setEnabled(false);
+            m_pGRZsButton->setEnabled(true);
+        }
+        else
+        {
+            m_pGRZsButton->setEnabled(false);
+            m_pPayButton->setEnabled(false);
+        }
 
         isReady();
     }

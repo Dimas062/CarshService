@@ -63,6 +63,8 @@ struct VSMobileSettings
 
 QString wrapText(const QString& text, int maxLineLength);
 
+QStringList extractCarNumbers(const QString &text);
+
 QString bool_to_str(bool b);
 
 bool executeQueryWithReconnect(QSqlQuery &query, const QString &queryString);

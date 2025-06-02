@@ -47,6 +47,9 @@ QCSSelectWashTypessWidget::QCSSelectWashTypessWidget(QWidget *parent)
         // pButton->setMaximumWidth(screenGeometry.width() - 50);
         // pButton->setFixedHeight(40);
 
+        pButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+        pButton->setMinimumHeight(40); // Минимальная высота для многострочного текста
+
 
         connect(pButton,SIGNAL(toggled(bool)),this,SLOT(OnButtonPress(bool)));
         pButton->setMinimumWidth(screenGeometry.width()*0.6);
@@ -76,6 +79,7 @@ void QCSSelectWashTypessWidget::OnButtonPress(bool toggled)
             {
                 sWashDlg.m_pWashTypeDlg->exec();
                 sWashDlg.m_pButton->setText(wrapText(sWashDlg.m_pWashTypeDlg->getText(), 30));
+                sWashDlg.m_pButton->update();
             }
         }
     }
@@ -147,6 +151,13 @@ void QCSSelectWashTypessWidget::SetData(QVector<WashTypeDatas> datas)
 
     /*Обновим надписи на всех кнопках*/
     foreach (sWashButtonsDlgs sWashDlg, m_vButtonsDlgs) {
-        sWashDlg.m_pButton->setText(wrapText(sWashDlg.m_pWashTypeDlg->getText() , 30));
+        sWashDlg.m_pButton->setText(wrapText(sWashDlg.m_pWashTypeDlg->getText() +" test" , 30));
     }
+
+    if (layout()) {
+        layout()->invalidate();
+        layout()->activate();
+    }
+    updateGeometry();
+    adjustSize();
 }

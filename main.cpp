@@ -134,9 +134,9 @@ int main(int argc, char *argv[])
 
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
     sStandartStoragePath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+
 #endif
  //   checkPermission();
-
 
 #ifdef Q_OS_ANDROID
     /*Активация "джавы"*/

@@ -80,5 +80,7 @@
         <file>icons/9.png</file>
         <file>icons/6.png</file>
         <file>icons/7.png</file>
+        <file>icons/add_plus_insert_more_icon.png</file>
+        <file>icons/minus_orange_icon.png</file>
     </qresource>
 </RCC>

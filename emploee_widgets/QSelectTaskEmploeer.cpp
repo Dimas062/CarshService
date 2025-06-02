@@ -21,10 +21,10 @@ QSelectTaskEmploeer::QSelectTaskEmploeer(QWidget *parent, Qt::WindowFlags f, QSt
 
 
 #ifdef Q_OS_ANDRIOD
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 270 - iButtonHeight*2);
+    m_pEmploeeListWidget->setFixedHeight(screenGeometry.height() - 270 - iButtonHeight*2);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
-    m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight*2);
+    m_pEmploeeListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight*2);
 #endif
     m_pEmploeeListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pEmploeeListWidget));
     QScrollerProperties sp;

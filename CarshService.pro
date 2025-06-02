@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets concurrent
 
 CONFIG += c++17
 
-VERSION = 0.1.42
+VERSION = 0.1.44
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -50,11 +50,13 @@ SOURCES += \
     service_widgets/qcsbasedlgscrollwidget.cpp \
     service_widgets/qcsbaselistitemdelegate.cpp \
     service_widgets/qcsbaselistwidget.cpp \
+    service_widgets/qcslineedit.cpp \
     service_widgets/qcspaybasedialog.cpp \
     service_widgets/qcsscrollarea.cpp \
     service_widgets/qcsselectdialog.cpp \
     service_widgets/qcsselectdlgbuttonswidget.cpp \
     service_widgets/qfinddlg.cpp \
+    service_widgets/qinputtextdlg.cpp \
     service_widgets/qlinetext.cpp \
     service_widgets/qloaddoclinewidget.cpp \
     qregisterdlg.cpp \
@@ -69,6 +71,7 @@ SOURCES += \
     service_widgets/qparnerpointdlg.cpp \
     service_widgets/qpointlistdlg.cpp \
     service_widgets/qselprovidercarshwidget.cpp \
+    service_widgets/qstringlistdlg.cpp \
     service_widgets/qtimeselectdlg.cpp \
     qcarshservicebasewidget.cpp \
     pictures/imagepickerandroid.cpp \
@@ -135,11 +138,13 @@ HEADERS += \
     service_widgets/qcsbasedlgscrollwidget.h \
     service_widgets/qcsbaselistitemdelegate.h \
     service_widgets/qcsbaselistwidget.h \
+    service_widgets/qcslineedit.h \
     service_widgets/qcspaybasedialog.h \
     service_widgets/qcsscrollarea.h \
     service_widgets/qcsselectdialog.h \
     service_widgets/qcsselectdlgbuttonswidget.h \
     service_widgets/qfinddlg.h \
+    service_widgets/qinputtextdlg.h \
     service_widgets/qlinetext.h \
     service_widgets/qloaddoclinewidget.h \
     qregisterdlg.h \
@@ -154,6 +159,7 @@ HEADERS += \
     service_widgets/qparnerpointdlg.h \
     service_widgets/qpointlistdlg.h \
     service_widgets/qselprovidercarshwidget.h \
+    service_widgets/qstringlistdlg.h \
     service_widgets/qtimeselectdlg.h \
     qcarshservicebasewidget.h \
     pictures/imagepickerandroid.h \

@@ -14,8 +14,7 @@ QLineText::QLineText(QString strLabel,QWidget *parent, bool bMoney): QWidget{par
     this->setLayout(pHBoxLayout);
     m_pLabel = new QLabel(strLabel);
     pHBoxLayout->addWidget(m_pLabel);
-    m_pLineEdit = new QLineEdit;
-    m_pLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
+    m_pLineEdit = new QCSLineEdit;
     connect(m_pLineEdit, &QLineEdit::textChanged, this, &QLineText::OnTextLineEditChanged);
 
     m_pLineEdit->setFixedWidth(screenGeometry.width()*0.6);

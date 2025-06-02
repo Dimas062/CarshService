@@ -342,6 +342,12 @@ void QWashPartnerTask::OnPointPressedSlot()
 void QWashPartnerTask::OnSubtaskPressedSlot()
 {
     m_WashTypeSelectDlg.selectWidget.SetData(m_vWashDatas);
+
+    m_WashTypeSelectDlg.updateGeometry();
+    if (m_WashTypeSelectDlg.layout()) {
+        m_WashTypeSelectDlg.layout()->activate();
+    }
+
     if(m_WashTypeSelectDlg.exec()==QDialog::Accepted)
     {
         m_vWashDatas = m_WashTypeSelectDlg.selectWidget.GetData();

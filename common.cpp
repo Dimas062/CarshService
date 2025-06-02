@@ -91,6 +91,70 @@ QString wrapText(const QString& text, int maxLineLength) {
     return lines.join("\n");   // Объединяем строки через перенос
 }
 
+QStringList extractCarNumbers(const QString &text) {
+    QStringList result;
+    if (text.isEmpty())
+        return result;
+
+    // Приводим текст к верхнему регистру
+    QString upperText = text.toUpper();
+    QString cleaned;
+
+    // Оставляем только цифры и кириллические буквы (А-Я)
+    for (const QChar &c : upperText) {
+        ushort unicode = c.unicode();
+        if (c.isDigit() || (unicode >= 1040 && unicode <= 1071)) {
+            cleaned.append(c);
+        }
+    }
+
+    // Минимальная длина для номера
+    const int PLATE_LENGTH = 9;
+    if (cleaned.length() < PLATE_LENGTH)
+        return result;
+
+    // Проверяем все возможные подстроки длиной 9 символов
+    for (int i = 0; i <= cleaned.length() - PLATE_LENGTH; ++i) {
+        QStringView candidate = QStringView(cleaned).mid(i, PLATE_LENGTH);
+
+        // Проверка шаблона: XDDDXXDDD
+        if (!candidate[0].isLetter()) continue;
+
+        bool valid = true;
+        // Проверка трех цифр (позиции 1-3)
+        for (int j = 1; j <= 3; j++) {
+            if (!candidate[j].isDigit()) {
+                valid = false;
+                break;
+            }
+        }
+        if (!valid) continue;
+
+        // Проверка двух букв (позиции 4-5)
+        for (int j = 4; j <= 5; j++) {
+            if (!candidate[j].isLetter()) {
+                valid = false;
+                break;
+            }
+        }
+        if (!valid) continue;
+
+        // Проверка трех цифр (позиции 6-8)
+        for (int j = 6; j <= 8; j++) {
+            if (!candidate[j].isDigit()) {
+                valid = false;
+                break;
+            }
+        }
+        if (!valid) continue;
+
+        // Добавляем найденный номер
+        result.append(candidate.toString());
+    }
+
+    return result;
+}
+
 bool executeQueryWithReconnect(QSqlQuery & query ,const QString &queryString) {
     if (!query.exec(queryString)) {
         QSqlError error = query.lastError();

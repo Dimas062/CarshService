@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
+#include "service_widgets/qcslineedit.h"
 #ifdef Q_OS_ANDROID
 #include <QJniObject>
 #endif
@@ -22,8 +23,9 @@ public:
 protected:
     void showEvent( QShowEvent* event );
 
-    QLineEdit * m_pLoginLineEdit;
-    QLineEdit * m_pPasswordLineEdit;
+   // QLineEdit * m_pLoginLineEdit;
+    QCSLineEdit * m_pLoginLineEdit;
+    QCSLineEdit * m_pPasswordLineEdit;
 
     QLabel * m_pStatusLabel;
 
