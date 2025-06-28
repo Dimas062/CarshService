@@ -151,7 +151,7 @@ void QCSSelectWashTypessWidget::SetData(QVector<WashTypeDatas> datas)
 
     /*Обновим надписи на всех кнопках*/
     foreach (sWashButtonsDlgs sWashDlg, m_vButtonsDlgs) {
-        sWashDlg.m_pButton->setText(wrapText(sWashDlg.m_pWashTypeDlg->getText() +" test" , 30));
+        sWashDlg.m_pButton->setText(wrapText(sWashDlg.m_pWashTypeDlg->getText() , 30));
     }
 
     if (layout()) {
