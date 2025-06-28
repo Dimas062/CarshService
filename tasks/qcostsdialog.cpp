@@ -130,6 +130,7 @@ void QCostsDialog::OnArticleButtonPressed()
     {
         m_strArticleId = ArticleSelDlg.getCurId();
         m_strArticleText = ArticleSelDlg.getCurText();
+        UpdateButtonsText();
         isReady();
     }
 }
@@ -137,11 +138,12 @@ void QCostsDialog::OnArticleButtonPressed()
 void QCostsDialog::OnItemButtonPressed()
 {
     QCSSelectDialog ItemSelDlg("Товары", "Товар");
-    ItemSelDlg.selectWidget.SelectId(m_strArticleId);
+    ItemSelDlg.selectWidget.SelectId(m_strItemId);
     if(ItemSelDlg.exec()==QDialog::Accepted)
     {
         m_strItemId = ItemSelDlg.getCurId();
         m_strItemText = ItemSelDlg.getCurText();
+        UpdateButtonsText();
         isReady();
     }
 }
@@ -207,12 +209,26 @@ void QCostsDialog::SaveDataToBD()
     }
 }
 
+void QCostsDialog::UpdateButtonsText()
+{
+    if(m_strArticleText.length() > 2)
+        m_pArticleButton->setText(QString("Статья расходов %1").arg(m_strArticleText));
+    else
+        m_pArticleButton->setText(QString("Статья расходов"));
+
+    if(m_strItemText.length() > 2)
+        m_pItemButton->setText(QString("Товар %1").arg(m_strItemText));
+    else
+        m_pItemButton->setText(QString("Товар"));
+
+}
+
 void QCostsDialog::LoadDataFromBD(QUuid uuidSourseRecord)
 {
     m_uuidSourseRecord=uuidSourseRecord;
 
-    QString strExec = QString("select Оплата,Статья,Товар,Количество,\"Дата Время\",Сотрудник from Расходы  where id='%1'").arg(uuidSourseRecord.toString());
-
+    QString strExec = QString("select Оплата,Расходы.Статья,Расходы.Товар,Количество,\"Дата Время\",Сотрудник , \"Статьи расходов\".\"Статья расходов\", Товары.Товар from Расходы,\"Статьи расходов\", Товары  where Расходы.id='%1' and Расходы.Статья=\"Статьи расходов\".id and Расходы.Товар=Товары.id").arg(uuidSourseRecord.toString());
+    qDebug()<<strExec;
     QList<QStringList> resTasks = execMainBDQuery(strExec);
     for(int iTasksCounter = 0 ; iTasksCounter < resTasks.size() ; iTasksCounter++)
     {
@@ -226,7 +242,13 @@ void QCostsDialog::LoadDataFromBD(QUuid uuidSourseRecord)
         m_strItemId = (resTasks.at(iTasksCounter).at(2));
 
         m_pLineTextCount->setText(resTasks.at(iTasksCounter).at(3));
+
+        m_strArticleText = resTasks.at(iTasksCounter).at(6);
+
+        m_strItemText = resTasks.at(iTasksCounter).at(7);
     }
+
+    UpdateButtonsText();
 
     isReady();
 }

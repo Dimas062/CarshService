@@ -27,6 +27,7 @@ protected:
     bool isReady();
     QUuid m_uuidSourseRecord;
     QLineText * m_pLineTextCount;
+    void UpdateButtonsText();
 
     QString m_strArticleId;
     QString m_strArticleText;
