@@ -19,7 +19,7 @@ QSelProviderCarshWidget::QSelProviderCarshWidget(QUuid uuidProvider , QUuid uuid
 
     pVMainLayout->addSpacing(5);
 
-    if(CurrentUserType == Emploee)
+    if(CurrentUserType == Emploee || CurrentUserType == CarshService)
     {
         m_pProviderButton = new QPushButton("Поставщик");
         m_pProviderButton->setFixedHeight((int)(iButtonHeight*1.5));

@@ -694,6 +694,7 @@ void QPenaltyParkingDialog::OnApplyPressedSlot()
         if(dlg.exec() == QDialog::Accepted)
         {
             reject();
+            return;
         }
         else
         {
