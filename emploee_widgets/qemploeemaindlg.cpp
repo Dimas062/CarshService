@@ -25,14 +25,10 @@ extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
 extern int iButtonHeight;
 
-//#ifdef Q_OS_DESKTOP
 extern UserTypes CurrentUserType;
 extern QUuid uuidCurrentPartner;
 extern QColor currentWorkdayColor;
-// #else
-// QUuid uuidCurrentWorkday;
-// QColor currentWorkdayColor;
-// #endif
+
 QColor defaultBackColor;
 
 QEmploeeMainDlg::QEmploeeMainDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f)
@@ -49,7 +45,6 @@ QEmploeeMainDlg::QEmploeeMainDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDia
     connect(m_pCostButton,SIGNAL(pressed()),this,SLOT(OnCostPressed()));
     m_pCostButton->setMaximumHeight(iButtonHeight*0.98);
     m_pCostButton->setMinimumHeight(iButtonHeight*0.98);
-    //m_pCostButton->setIcon(IconByNumber(resTaskCounts.at(0).at(0).toInt()));
     pVTaskButtonsLayout->addWidget(m_pCostButton);
 
     m_pNumberPlateButton = new QPushButton("Номер");
@@ -66,11 +61,11 @@ QEmploeeMainDlg::QEmploeeMainDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDia
     pVTaskButtonsLayout->addWidget(m_pParkingButton);
 
 
-    m_pPenaltyParkingButton = new QPushButton("Штраф.стоянка");
-    connect(m_pPenaltyParkingButton,SIGNAL(pressed()),this,SLOT(OnPenaltyParkingTaskPressed()));
-    m_pPenaltyParkingButton->setMaximumHeight(iButtonHeight*0.98);
-    m_pPenaltyParkingButton->setMinimumHeight(iButtonHeight*0.98);
-    pVTaskButtonsLayout->addWidget(m_pPenaltyParkingButton);
+    // m_pPenaltyParkingButton = new QPushButton("Штраф.стоянка");
+    // connect(m_pPenaltyParkingButton,SIGNAL(pressed()),this,SLOT(OnPenaltyParkingTaskPressed()));
+    // m_pPenaltyParkingButton->setMaximumHeight(iButtonHeight*0.98);
+    // m_pPenaltyParkingButton->setMinimumHeight(iButtonHeight*0.98);
+    // pVTaskButtonsLayout->addWidget(m_pPenaltyParkingButton);
 
 
     m_pDocsButton = new QPushButton("Документы");
@@ -172,7 +167,7 @@ void QEmploeeMainDlg::UpdateCountersIcons()
 
     m_pNumberPlateButton->setIcon(IconByNumber(resTaskCounts.at(0).at(5).toInt()));
     m_pParkingButton->setIcon(IconByNumber(resTaskCounts.at(0).at(0).toInt()));
-    m_pPenaltyParkingButton->setIcon(IconByNumber(resTaskCounts.at(0).at(4).toInt()));
+   // m_pPenaltyParkingButton->setIcon(IconByNumber(resTaskCounts.at(0).at(4).toInt()));
     m_pDocsButton->setIcon(IconByNumber(resTaskCounts.at(0).at(1).toInt()));
     m_pSmenaButton->setIcon(IconByNumber(resTaskCounts.at(0).at(3).toInt()));
     m_pReturnToZoneButton->setIcon(IconByNumber(resTaskCounts.at(0).at(6).toInt()));
