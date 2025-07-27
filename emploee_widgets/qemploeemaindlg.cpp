@@ -10,6 +10,7 @@
 #include "tasks/qdocstaskdlg.h"
 #include "emploee_widgets/qemplsalarydlg.h"
 #include "emploee_widgets/qemploeeinputtasksdlg.h"
+#include "emploee_widgets/qemploeedutydlg.h"
 #include "qemplcostsdlg.h"
 #include <QGuiApplication>
 #include <QHBoxLayout>
@@ -24,6 +25,7 @@
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
 extern int iButtonHeight;
+extern bool bIsDutyEmpl;
 
 extern UserTypes CurrentUserType;
 extern QUuid uuidCurrentPartner;
@@ -61,11 +63,11 @@ QEmploeeMainDlg::QEmploeeMainDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDia
     pVTaskButtonsLayout->addWidget(m_pParkingButton);
 
 
-    // m_pPenaltyParkingButton = new QPushButton("Штраф.стоянка");
-    // connect(m_pPenaltyParkingButton,SIGNAL(pressed()),this,SLOT(OnPenaltyParkingTaskPressed()));
-    // m_pPenaltyParkingButton->setMaximumHeight(iButtonHeight*0.98);
-    // m_pPenaltyParkingButton->setMinimumHeight(iButtonHeight*0.98);
-    // pVTaskButtonsLayout->addWidget(m_pPenaltyParkingButton);
+    m_pPenaltyParkingButton = new QPushButton("Штраф.стоянка");
+    connect(m_pPenaltyParkingButton,SIGNAL(pressed()),this,SLOT(OnPenaltyParkingTaskPressed()));
+    m_pPenaltyParkingButton->setMaximumHeight(iButtonHeight*0.98);
+    m_pPenaltyParkingButton->setMinimumHeight(iButtonHeight*0.98);
+    pVTaskButtonsLayout->addWidget(m_pPenaltyParkingButton);
 
 
     m_pDocsButton = new QPushButton("Документы");
@@ -121,6 +123,16 @@ QEmploeeMainDlg::QEmploeeMainDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDia
     m_pCostsButton->setMinimumHeight(iButtonHeight*0.98);
     pVReadyButtonsLayout->addWidget(m_pCostsButton);
 
+    if(bIsDutyEmpl)//Если этот сотрудник дежурный, то он назначает ответственных по зонам
+    {
+        m_pDutyButton = new QPushButton("Дежурство");
+        connect(m_pDutyButton,SIGNAL(pressed()),this,SLOT(OnDutyPressed()));
+        m_pDutyButton->setMaximumHeight(iButtonHeight*0.98);
+        m_pDutyButton->setMinimumHeight(iButtonHeight*0.98);
+        pVReadyButtonsLayout->addWidget(m_pDutyButton);
+        UpdateDutyButtonColor();
+    }
+
     pReadyButtonsGroupBox->setLayout(pVReadyButtonsLayout);
     pVMainLayout->addWidget(pReadyButtonsGroupBox);
 
@@ -129,7 +141,48 @@ QEmploeeMainDlg::QEmploeeMainDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDia
 
     UpdateCountersIcons();
 
+
     //WorkDayStatusCheck();
+}
+
+void QEmploeeMainDlg::UpdateDutyButtonColor()
+{
+    // Список идентификаторов секторов
+     QStringList sectorIds = {
+         "fe4119bc-f3a0-460a-b1bb-15bef24e8c96",  // Сектор 1
+         "8f4f0635-2f0b-4577-b895-62c8f98e4397",  // Сектор 2
+         "2dc91773-df67-4c58-b13c-d72577eed32d",  // Сектор 3
+         "3e4d61a4-af56-4547-976f-cb067a7c16af"   // Сектор 4
+     };
+
+
+     QString strQuery = QString(
+         "SELECT COUNT(*) FROM \"Дежурные\" "
+         "WHERE id IN ('%1') "
+         "AND \"Сотрудник\" IS NOT NULL"
+     ).arg(sectorIds.join("','"));
+
+     // Получаем результат
+     int assignedCount = 0;
+
+     QList<QStringList> resDuty = execMainBDQuery(strQuery);
+
+     for(int iEmplCounter = 0 ; iEmplCounter < resDuty.size() ; iEmplCounter++)
+     {
+         assignedCount = resDuty.at(iEmplCounter).at(0).toInt();
+     }
+
+
+     // Обновляем цвет кнопки в зависимости от результата
+     if (assignedCount == sectorIds.size()) {
+         // Все дежурные заданы - черный цвет (стиль по умолчанию)
+         m_pDutyButton->setStyleSheet("");
+         qDebug() << "All duty officers are assigned";
+     } else {
+         // Не все дежурные заданы - красный цвет
+         m_pDutyButton->setStyleSheet("color: red; font-weight: bold;");
+         qDebug() << "Missing duty officers:" << (sectorIds.size() - assignedCount);
+     }
 }
 
 void QEmploeeMainDlg::UpdateCountersIcons()
@@ -167,7 +220,7 @@ void QEmploeeMainDlg::UpdateCountersIcons()
 
     m_pNumberPlateButton->setIcon(IconByNumber(resTaskCounts.at(0).at(5).toInt()));
     m_pParkingButton->setIcon(IconByNumber(resTaskCounts.at(0).at(0).toInt()));
-   // m_pPenaltyParkingButton->setIcon(IconByNumber(resTaskCounts.at(0).at(4).toInt()));
+    m_pPenaltyParkingButton->setIcon(IconByNumber(resTaskCounts.at(0).at(4).toInt()));
     m_pDocsButton->setIcon(IconByNumber(resTaskCounts.at(0).at(1).toInt()));
     m_pSmenaButton->setIcon(IconByNumber(resTaskCounts.at(0).at(3).toInt()));
     m_pReturnToZoneButton->setIcon(IconByNumber(resTaskCounts.at(0).at(6).toInt()));
@@ -193,6 +246,15 @@ void QEmploeeMainDlg::OnFinPressed()
     showWait(false);
     UpdateCountersIcons();
 
+}
+
+void QEmploeeMainDlg::OnDutyPressed()
+{
+    showWait(true);
+    QEmploeeDutyDlg dlg;
+    dlg.exec();
+    showWait(false);
+    UpdateDutyButtonColor();
 }
 
 

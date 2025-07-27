@@ -27,7 +27,9 @@ protected:
     QPushButton * m_pCostsButton;
     QPushButton * m_pSmenaButton;
     QPushButton * m_pFinButton;
+    QPushButton * m_pDutyButton;
     void UpdateCountersIcons();
+    void UpdateDutyButtonColor();
 
 public slots:
     void OnCurrentTaskPressed();
@@ -42,6 +44,7 @@ public slots:
     void OnSmenaTaskPressed();
     void OnFinPressed();
     void OnInputTasksPressed();
+    void OnDutyPressed();
 
 };
 

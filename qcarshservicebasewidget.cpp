@@ -32,6 +32,8 @@ int iWindowedVideoWidth = 0;
 int iWindowedVideoHeigth = 0;
 int iButtonHeight;
 
+bool bIsDutyEmpl;
+
 QUuid uuidCurrentUser;
 extern QUuid uuidCurrentPartner;
 extern UserTypes CurrentUserType;
@@ -175,6 +177,8 @@ void QCarshServiceBaseWidget::OnLoginPressed()
     QString strLoginStr;
     QString strPassStr;
 
+    bIsDutyEmpl = false;//По-умолчанию пользователь не дежурный сотрудник
+
     currentWorkdayColor = defaultBackColor;
 
     if((m_pLoginLineEdit->text().length() == 0)&&(m_pPasswordLineEdit->text().length() == 0))
@@ -223,6 +227,16 @@ void QCarshServiceBaseWidget::OnLoginPressed()
         {
             CurrentUserType = Emploee;
             Logging(QString("Залогинился сотрудник логин:") +  strLoginStr + " пароль:"+strPassStr);
+
+            //Проверяем, не дежурный ли он
+            QString strDutyQuery = "SELECT Сотрудник FROM Дежурные where id ='f072babe-64bd-4dc3-943c-e3ea015a44f7'";
+            QList<QStringList> resDuty = execMainBDQuery(strDutyQuery);
+            if(resDuty.size() > 0)
+            {
+                if( QUuid::fromString(resDuty.at(0).at(0)) == QUuid::fromString(resUsers.at(iUserCounter).at(0)))
+                    bIsDutyEmpl = true;
+            }
+
             QEmploeeMainDlg dlg(NULL , /*Qt::Popup*/Qt::WindowFlags());
 
             m_bChildBackRealeseProcessed = false;

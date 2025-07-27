@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets concurrent
 
 CONFIG += c++17
 
-VERSION = 0.1.45
+VERSION = 0.1.48
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -19,6 +19,7 @@ SOURCES += \
     common.cpp \
     emploee_widgets/QEmploeeTasksDlg.cpp \
     emploee_widgets/qemplcostsdlg.cpp \
+    emploee_widgets/qemploeedutydlg.cpp \
     emploee_widgets/qemploeeinputtasksdlg.cpp \
     emploee_widgets/qemploeemaindlg.cpp \
     emploee_widgets/qemplsalarydlg.cpp \
@@ -108,6 +109,7 @@ HEADERS += \
     common.h \
     emploee_widgets/QEmploeeTasksDlg.h \
     emploee_widgets/qemplcostsdlg.h \
+    emploee_widgets/qemploeedutydlg.h \
     emploee_widgets/qemploeeinputtasksdlg.h \
     emploee_widgets/qemploeemaindlg.h \
     emploee_widgets/qemplsalarydlg.h \

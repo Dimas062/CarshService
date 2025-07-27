@@ -206,7 +206,7 @@ void QPenaltyParkingDialog::OnReturnToZoneButtonRealised()
 
 void QPenaltyParkingDialog::OnGibddButtonPressed()
 {
-    QCSSelectDialog GaiSelDlg("Отделы ГИБДД");
+    QCSSelectDialog GaiSelDlg("Отделы ГИБДД" , "Название" , true , false , QUuid() , " order by Порядок");
     GaiSelDlg.selectWidget.SelectId(m_strGaiId);
     if(GaiSelDlg.exec()==QDialog::Accepted)
     {
@@ -373,14 +373,23 @@ void QPenaltyParkingDialog::SaveDataToBD()
         strExec = QString("insert into \"Расширение задачи ШС\" (id,\"Оплата парковки\",\"Госномер\") values ('%1','%2','%3')") .arg(uuidExtention.toString()).arg(uuidPay.toString()).arg(m_pPlateLineText->getText());
         execMainBDQueryUpdate(strExec);
 
-        strExec = QString("update \"Расширение задачи ШС\" set \"Отдел ГАИ\"='%1' where id='%2'").arg(m_strGaiId).arg(uuidExtention.toString());
-        execMainBDQueryUpdate(strExec);
+        if(m_strGaiId.length()>20)
+        {
+            strExec = QString("update \"Расширение задачи ШС\" set \"Отдел ГАИ\"='%1' where id='%2'").arg(m_strGaiId).arg(uuidExtention.toString());
+            execMainBDQueryUpdate(strExec);
+        }
 
-        strExec = QString("update \"Расширение задачи ШС\" set \"Причина задержания\"='%1' where id='%2'").arg(m_strReasonId).arg(uuidExtention.toString());
-        execMainBDQueryUpdate(strExec);
+        if(m_strReasonId.length()>20)
+        {
+            strExec = QString("update \"Расширение задачи ШС\" set \"Причина задержания\"='%1' where id='%2'").arg(m_strReasonId).arg(uuidExtention.toString());
+            execMainBDQueryUpdate(strExec);
+        }
 
-        strExec = QString("update \"Расширение задачи ШС\" set \"Штрафстоянка\"='%1' where id='%2'").arg(m_strPinaltiParkingId).arg(uuidExtention.toString());
-        execMainBDQueryUpdate(strExec);
+        if(m_strPinaltiParkingId.length()>20)
+        {
+            strExec = QString("update \"Расширение задачи ШС\" set \"Штрафстоянка\"='%1' where id='%2'").arg(m_strPinaltiParkingId).arg(uuidExtention.toString());
+            execMainBDQueryUpdate(strExec);
+        }
 
         /*Акт, протокол*/
         QString tmpStr;
@@ -441,14 +450,23 @@ void QPenaltyParkingDialog::SaveDataToBD()
         strExec = QString("update \"Расширение задачи ШС\" set \"Госномер\" = '%1' where id='%2'").arg(m_pPlateLineText->getText()).arg(m_uuidSourseExtention.toString());
         execMainBDQueryUpdate(strExec);
 
-        strExec = QString("update \"Расширение задачи ШС\" set \"Отдел ГАИ\"='%1' where id='%2'").arg(m_strGaiId).arg(m_uuidSourseExtention.toString());
-        execMainBDQueryUpdate(strExec);
+        if(m_strGaiId.length() > 20)
+        {
+            strExec = QString("update \"Расширение задачи ШС\" set \"Отдел ГАИ\"='%1' where id='%2'").arg(m_strGaiId).arg(m_uuidSourseExtention.toString());
+            execMainBDQueryUpdate(strExec);
+        }
 
-        strExec = QString("update \"Расширение задачи ШС\" set \"Причина задержания\"='%1' where id='%2'").arg(m_strReasonId).arg(m_uuidSourseExtention.toString());
-        execMainBDQueryUpdate(strExec);
+        if(m_strReasonId.length() > 20)
+        {
+            strExec = QString("update \"Расширение задачи ШС\" set \"Причина задержания\"='%1' where id='%2'").arg(m_strReasonId).arg(m_uuidSourseExtention.toString());
+            execMainBDQueryUpdate(strExec);
+        }
 
-        strExec = QString("update \"Расширение задачи ШС\" set \"Штрафстоянка\"='%1' where id='%2'").arg(m_strPinaltiParkingId).arg(m_uuidSourseExtention.toString());
-        execMainBDQueryUpdate(strExec);
+        if(m_strPinaltiParkingId.length() > 20)
+        {
+            strExec = QString("update \"Расширение задачи ШС\" set \"Штрафстоянка\"='%1' where id='%2'").arg(m_strPinaltiParkingId).arg(m_uuidSourseExtention.toString());
+            execMainBDQueryUpdate(strExec);
+        }
 
         /*Фото/документы*/
         /*Сначала удалим все старые (включая акт-протокол)*/
