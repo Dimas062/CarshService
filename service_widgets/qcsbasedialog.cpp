@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 #include <QScroller>
 #include <QPushButton>
+#include <QDebug>
 
 extern QRect screenGeometry;
 extern QColor currentWorkdayColor;

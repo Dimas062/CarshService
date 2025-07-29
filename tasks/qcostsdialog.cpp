@@ -8,6 +8,7 @@
 #include "service_widgets/qyesnodlg.h"
 #include "service_widgets/qcsselectdialog.h"
 #include "BDPatterns.h"
+#include <QDebug>
 
 
 extern QRect screenGeometry;
