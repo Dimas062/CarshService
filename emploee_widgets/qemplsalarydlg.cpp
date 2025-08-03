@@ -43,7 +43,7 @@ QEmplSalaryDlg::QEmplSalaryDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialo
     m_pTasksListWidget->setFixedHeight(screenGeometry.height() - 270 - iButtonHeight);
 #endif
 #if defined Q_OS_IOS || defined Q_OS_WINDOWS
-    m_pSalarysListWidget->setFixedHeight(screenGeometry.height() - 170 - iButtonHeight);
+    m_pSalarysListWidget->setFixedHeight(screenGeometry.height() - 270 - iButtonHeight);
 #endif
     m_pSalarysListWidget->setItemDelegate(new QCSBaseListItemDelegate(m_pSalarysListWidget));
 
@@ -112,7 +112,7 @@ void QEmplSalaryDlg::UpdateSalarys()
 
     QVector<SalaryItemStruct> SalaryItems;
 
-    QString strQuery =  QString("SELECT Задачи.id, Задачи.\"Дата Время\", \"Типы задач\".\"Тип\" , Заказчики.Название , Задачи.Цена , %2 FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' and Задачи.\"Дата Время\">%3 and Задачи.\"Дата Время\"<%4 order by Задачи.\"Дата Время\" desc").arg(uuidCurrentUser.toString()).arg(NUMBER_BY_TASK).arg(timeFrom).arg(timeTo);
+    QString strQuery =  QString("SELECT Задачи.id, Задачи.\"Время выполнения\", \"Типы задач\".\"Тип\" , Заказчики.Название , Задачи.Цена , %2 FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' and Задачи.\"Время выполнения\">%3 and Задачи.\"Время выполнения\"<%4 order by Задачи.\"Время выполнения\" desc").arg(uuidCurrentUser.toString()).arg(NUMBER_BY_TASK).arg(timeFrom).arg(timeTo);
 
     QList<QStringList> resSalarys = execMainBDQuery(strQuery);
 
