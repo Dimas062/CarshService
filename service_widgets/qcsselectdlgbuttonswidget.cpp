@@ -7,7 +7,7 @@
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
 
-QCSSelectDlgButtonsWidget::QCSSelectDlgButtonsWidget(QString strTableName, QString strColName , bool bChekable , QString strCondition , bool bMultiSelect,  QWidget *parent)
+QCSSelectDlgButtonsWidget::QCSSelectDlgButtonsWidget(QString strTableName, QString strColName , bool bChekable , QString strCondition , bool bMultiSelect, bool bAllButton , QWidget *parent)
     : QWidget{parent}
 {
     m_strId = "Undefined";
@@ -27,6 +27,17 @@ QCSSelectDlgButtonsWidget::QCSSelectDlgButtonsWidget(QString strTableName, QStri
         connect(pButton,SIGNAL(toggled(bool)),this,SLOT(OnButtonPress(bool)));
         pButton->setMinimumWidth(screenGeometry.width()*0.6);
         pButton->setProperty("id",QVariant(QString(resData.at(iResCounter).at(0))));
+        pButton->setCheckable(true);
+        pVMainLayout->addWidget(pButton);
+        m_vpButtons.push_back(pButton);
+    }
+
+    if(bAllButton)
+    {
+        QPushButton * pButton = new QPushButton("Все");
+        connect(pButton,SIGNAL(toggled(bool)),this,SLOT(OnButtonPress(bool)));
+        pButton->setMinimumWidth(screenGeometry.width()*0.6);
+        pButton->setProperty("id",QVariant(QUuid()));
         pButton->setCheckable(true);
         pVMainLayout->addWidget(pButton);
         m_vpButtons.push_back(pButton);

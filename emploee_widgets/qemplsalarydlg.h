@@ -15,8 +15,10 @@ public:
     QEmplSalaryDlg( QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
     QCSBaseListWidget * m_pSalarysListWidget;
     QPushButton * m_pToCalendarButton;
+    QPushButton * m_pToTaskTypeFilterButton;
 
     QDate m_currentDate;
+    QString m_strCurrentTaskType;
 
     void UpdateSalarys();
 
@@ -27,6 +29,7 @@ public:
 
 public slots:
     void OnToCalendarButtonClicked();
+    void OnToTaskTypeFilterButtonClicked();
 };
 
 #endif // QEMPLSALARYDLG_H

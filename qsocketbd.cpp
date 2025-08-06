@@ -24,36 +24,35 @@ QList<QStringList> QSocketBD::execMainBDQuery(QString query)
     QByteArray data = QString(query).toLocal8Bit();
     //debug_TimeStamp(" toLocal8Bit 2");
 #endif
-
-
-    //pServSocket->writeData(data);
-    QTimer timer;
-    timer.setSingleShot(true);
-    QEventLoop loop;
-
-
-    connect((&(QSocketBDNetClient::getInstance())), SIGNAL(dataReceived()), &loop, SLOT(quit()));
-
-    connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
-
-
-
-    QMetaObject::invokeMethod(&QSocketBDNetClient::getInstance() , "writeData" , Q_ARG(QByteArray , data));
-
-
-
-    timer.start(60000);
-
-    loop.exec(); //blocks untill either theSignalToWaitFor or timeout was fired
-
-    QList<QStringList> retVal;
-
-    if(!timer.isActive())
-    {
-        qDebug("timeout get data");
-        return retVal;
-    }
-
+    
+        
+        //pServSocket->writeData(data);
+        QTimer timer;
+        timer.setSingleShot(true);
+        QEventLoop loop;
+        
+        
+        connect((&(QSocketBDNetClient::getInstance())), SIGNAL(dataReceived()), &loop, SLOT(quit()), Qt::QueuedConnection);
+        
+        connect(&timer, SIGNAL(timeout()), &loop, SLOT(quit()));
+        
+        
+        QMetaObject::invokeMethod(&QSocketBDNetClient::getInstance() , "writeData" , Q_ARG(QByteArray , data));
+        
+        
+        timer.start(60000);
+        
+        loop.exec(); //blocks untill either theSignalToWaitFor or timeout was fired
+        
+        QList<QStringList> retVal;
+        
+        if(!timer.isActive())
+        {
+            qDebug("timeout get data");
+            return retVal;
+        }
+    
+    QMutexLocker locker(&QSocketBDNetClient::getInstance().m_dataMutex);
 #ifdef Q_OS_WINDOWS
     QString ResultData = QString::fromUtf8(QSocketBDNetClient::getInstance().m_LastData);
 #else

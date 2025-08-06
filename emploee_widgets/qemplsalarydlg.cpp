@@ -12,7 +12,9 @@
 #include <QDateTime>
 #include <QBrush>
 #include "service_widgets/qmonthselectdlg.h"
+#include "service_widgets/qcsselectdialog.h"
 #include <QDate>
+#include <QUuid>
 
 
 extern QRect screenGeometry;
@@ -35,6 +37,15 @@ QEmplSalaryDlg::QEmplSalaryDlg(QWidget *parent, Qt::WindowFlags f ):QCSBaseDialo
     m_pToCalendarButton->setFixedHeight(iButtonHeight);
     m_pToCalendarButton->setFixedWidth(iButtonHeight);
     pHFiltersLayout->addWidget(m_pToCalendarButton);
+
+    m_pToTaskTypeFilterButton = new QPushButton("");
+    m_pToTaskTypeFilterButton->setIcon(QIcon(":/icons/filter_icon.png"));
+    m_pToTaskTypeFilterButton->setIconSize(QSize(iButtonHeight*0.75 , iButtonHeight*0.75));
+    connect(m_pToTaskTypeFilterButton,SIGNAL(clicked()),this,SLOT(OnToTaskTypeFilterButtonClicked()));
+    m_pToTaskTypeFilterButton->setFixedHeight(iButtonHeight);
+    m_pToTaskTypeFilterButton->setFixedWidth(iButtonHeight);
+    pHFiltersLayout->addWidget(m_pToTaskTypeFilterButton);
+
 
     pVMainLayout->addLayout(pHFiltersLayout);
 
@@ -101,6 +112,20 @@ void QEmplSalaryDlg::OnToCalendarButtonClicked()
     }
 }
 
+void QEmplSalaryDlg::OnToTaskTypeFilterButtonClicked()
+{
+    QCSSelectDialog dlg("Типы задач", "Тип" , false , true , QUuid() , "" , false , true);
+    if(m_strCurrentTaskType.length()>10)
+        dlg.SelectId(m_strCurrentTaskType);
+
+    if(dlg.exec()==QDialog::Accepted)
+        m_strCurrentTaskType = dlg.getCurId();
+    else
+        m_strCurrentTaskType = QString();
+
+    UpdateSalarys();
+}
+
 void QEmplSalaryDlg::UpdateSalarys()
 {
     QDate dateFrom = QDate(m_currentDate.year() ,m_currentDate.month() , 1 ) ;
@@ -112,11 +137,18 @@ void QEmplSalaryDlg::UpdateSalarys()
 
     QVector<SalaryItemStruct> SalaryItems;
 
-    QString strQuery =  QString("SELECT Задачи.id, Задачи.\"Время выполнения\", \"Типы задач\".\"Тип\" , Заказчики.Название , Задачи.Цена , %2 FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' and Задачи.\"Время выполнения\">%3 and Задачи.\"Время выполнения\"<%4 order by Задачи.\"Время выполнения\" desc").arg(uuidCurrentUser.toString()).arg(NUMBER_BY_TASK).arg(timeFrom).arg(timeTo);
+    QString strCondition;
+    if(m_strCurrentTaskType.length()>10 && (QUuid::fromString(m_strCurrentTaskType) != QUuid::fromString("00000000-0000-0000-0000-000000000000")))
+        strCondition = QString(" and \"Типы задач\".id = '%1'").arg(m_strCurrentTaskType);
+
+    QString strQuery =  QString("SELECT Задачи.id, Задачи.\"Время выполнения\", \"Типы задач\".\"Тип\" , Заказчики.Название , Задачи.Цена , %2 FROM \"Типы задач\", Задачи, Заказчики where Заказчики.id=Задачи.Заказчик and Задачи.Тип = \"Типы задач\".id and Задачи.Удалено<> 'true' and Задачи.Исполнитель='%1' and Задачи.\"Время выполнения\">%3 and Задачи.\"Время выполнения\"<%4 %5 order by Задачи.\"Время выполнения\" desc").arg(uuidCurrentUser.toString()).arg(NUMBER_BY_TASK).arg(timeFrom).arg(timeTo).arg(strCondition);
+
+    qDebug()<<strQuery;
 
     QList<QStringList> resSalarys = execMainBDQuery(strQuery);
 
     double dblSalarySum = 0;
+    int iSalaryCount = 0;
 
     for(int iSalaryCounter = 0 ; iSalaryCounter < resSalarys.size() ; iSalaryCounter++)
     {
@@ -129,6 +161,7 @@ void QEmplSalaryDlg::UpdateSalarys()
         strSalarySum.replace('.',',');
         dblSalarySum = dblSalarySum + strSalarySum.toDouble();
         SalaryItems.push_back(salaryItem);
+        iSalaryCount++;
     }
 
     strQuery =  QString("SELECT ДатаВремя, Значение , Комментарий FROM ПоощренияНаказания where Сотрудник='%1' and ДатаВремя>%2 and ДатаВремя<%3").arg(uuidCurrentUser.toString()).arg(timeFrom).arg(timeTo);
@@ -167,7 +200,7 @@ void QEmplSalaryDlg::UpdateSalarys()
         m_pSalarysListWidget->addItem(pItem);
     }
 
-    m_pLabelSalary->setText(QString("Начислено %1 руб.").arg(dblSalarySum));
+    m_pLabelSalary->setText(QString("Задач %1 Начислено %2 руб.").arg(iSalaryCount).arg(dblSalarySum));
     m_pPremSalary->setText(QString("Премии %1 руб.").arg(dblPremsSum));
     m_pPenSalary->setText(QString("Штраф %1 руб.").arg(dblPensSum));
     m_pSummSalary->setText(QString("Итого %1 руб.").arg(dblSalarySum + dblPensSum + dblPremsSum));

@@ -22,7 +22,7 @@ public:
         return instance;
     }
 
-
+    QMutex m_dataMutex;
 signals:
     void dataReceived();
 
@@ -50,6 +50,7 @@ private:
     const int m_iHeartbeatTime = 25000;//msecs
 
     void cleanup();
+
 };
 
 #endif // QSOCKETBDNETCLIENT_H

@@ -191,6 +191,11 @@ bool QSocketBDNetClient::writeData(QByteArray data)
 
 void QSocketBDNetClient::readyRead()
 {
+    if(!m_buffer || !m_size) {
+        qDebug() << "QSocketBDNetClient::readyRead() Buffer not initialized!";
+        return;
+    }
+    
     QByteArray *buffer = m_buffer;
     qint32 *s = m_size;
     qint32 size = *s;
@@ -207,10 +212,12 @@ void QSocketBDNetClient::readyRead()
             }
             if (size > 0 && buffer->size() >= size) // If data has received completely, then emit our SIGNAL with the data
             {
+                QMutexLocker locker(&m_dataMutex);
                 m_LastData = buffer->mid(0, size);
                 buffer->remove(0, size);
                 size = 0;
                 *s = size;
+
                 emit dataReceived();
             }
         }

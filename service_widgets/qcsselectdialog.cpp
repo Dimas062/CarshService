@@ -16,7 +16,7 @@ extern QUuid uuidCurrentUser;
 extern int iButtonHeight;
 extern UserTypes CurrentUserType;
 
-QCSSelectDialog::QCSSelectDialog(QString strTableName ,QString strColName ,  bool bChecable , bool bAutoChecable , QUuid uuidEmpl , QString strCondition , bool bMultiSelect ,QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f , false),selectWidget(strTableName , strColName , bChecable , strCondition , bMultiSelect)
+QCSSelectDialog::QCSSelectDialog(QString strTableName ,QString strColName ,  bool bChecable , bool bAutoChecable , QUuid uuidEmpl , QString strCondition , bool bMultiSelect , bool bAllButton ,QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f , false),selectWidget(strTableName , strColName , bChecable , strCondition , bMultiSelect , bAllButton)
 {
     m_bMultiSelect = bMultiSelect;
 

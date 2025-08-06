@@ -12,7 +12,7 @@ class QCSBaseDialog : public QDialog
     Q_OBJECT
 public:
     QCSBaseDialog(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags() , bool bScrollable = true);
-    bool event(QEvent *event);
+    bool event(QEvent *event) override;
     bool m_bBackProcessed;
     void setLayout(QLayout *layout);
     QCSBaseDlgScrollWidget * m_pScrollWidget;

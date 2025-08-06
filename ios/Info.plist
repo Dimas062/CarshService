@@ -5,6 +5,12 @@
     <key>CFBundleDisplayName</key>
     <string>${PRODUCT_NAME}</string>
 
+    <!-- Разрешение доступа к буферу обмена -->
+    <key>UIPasteboardOptionLocalOnly</key>
+    <true/>
+    <key>UIPasteboardOptionExpirationDate</key>
+    <date>2100-01-01T00:00:00Z</date>
+
     <key>CFBundleExecutable</key>
     <string>${EXECUTABLE_NAME}</string>
 

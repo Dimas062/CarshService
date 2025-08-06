@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets concurrent
 
 CONFIG += c++17
 
-VERSION = 0.1.49
+VERSION = 0.1.50
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

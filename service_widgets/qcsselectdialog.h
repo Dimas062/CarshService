@@ -22,7 +22,8 @@ public:
     //uuidEmpl - в шапке выведет информацию о пользователе
     //bMultiSelect - можгно ли выбрать несколько кнопок или они будут как радиобаттоны
     //strCondition - дополнительные условия в запросе выбора значений столбца strColName из таблицы strTableName
-    QCSSelectDialog(QString strTableName , QString strColName = "Название", bool bChecable = true , bool bAutoChecable = false , QUuid uuidEmpl = QUuid(), QString strCondition =  " " , bool bMultiSelect = false , QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
+    //bAllButton - кнопка "Все", возвращается пустой QUuid() и пустая строка getCurId
+    QCSSelectDialog(QString strTableName , QString strColName = "Название", bool bChecable = true , bool bAutoChecable = false , QUuid uuidEmpl = QUuid(), QString strCondition =  " " , bool bMultiSelect = false , bool bAllButton = false , QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
     QCSSelectDlgButtonsWidget selectWidget;
     QLabel * m_pTopLabel;
     QUuid m_userUUid;
