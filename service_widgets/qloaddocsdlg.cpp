@@ -1,6 +1,7 @@
 #include "qloaddocsdlg.h"
 #include <QVBoxLayout>
 #include <QPushButton>
+#include "common.h"
 
 extern QRect screenGeometry;
 extern QUuid uuidCurrentUser;
@@ -13,13 +14,13 @@ QLoadDocsDlg::QLoadDocsDlg(QWidget *parent, Qt::WindowFlags f):QCSBaseDialog(par
 
 
     m_pLoadPhotoWidget = new QLoadDocLineWidget("Фото:" , true , true, nullptr , false);
-
-    connect(m_pLoadPhotoWidget,SIGNAL(imageRecivedSignal(QString)),this,SLOT(OnFotoGetet(QString)));
+    connect(m_pLoadPhotoWidget,SIGNAL(imageRecivedSignal(QString)),this,SLOT(OnFotoGetet(QString)));    
     pVMainLayout->addWidget(m_pLoadPhotoWidget);
 
     m_pPicturesWidget = new QPicturesWidget(this);
     m_pPicturesWidget->setMinimumHeight(screenGeometry.width()*0.5);
     pVMainLayout->addWidget(m_pPicturesWidget);
+    connect(m_pPicturesWidget,SIGNAL(imageShowedSignal(QImage &)),this,SLOT(OnFotoShowed(QImage &)));
 
     QPushButton * pCloseButton = new QPushButton("Закрыть");
     connect(pCloseButton,SIGNAL(pressed()),this,SLOT(accept()));
@@ -31,5 +32,10 @@ QLoadDocsDlg::QLoadDocsDlg(QWidget *parent, Qt::WindowFlags f):QCSBaseDialog(par
 void QLoadDocsDlg::OnFotoGetet(QString strFotoPath)
 {
     m_pPicturesWidget->AddPicturePath(strFotoPath);
+}
+
+void QLoadDocsDlg::OnFotoShowed(QImage & img)
+{
+    m_pLoadPhotoWidget->SetImage(ImageToBase64(img));
 }
 

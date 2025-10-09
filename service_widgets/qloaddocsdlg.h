@@ -15,6 +15,7 @@ public:
 
 public slots:
     void OnFotoGetet(QString);
+    void OnFotoShowed(QImage &);
 };
 
 #endif // QLOADDOCSDLG_H
