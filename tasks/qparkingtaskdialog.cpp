@@ -331,12 +331,12 @@ void QParkingTaskDialog::OnApplyPressedSlot()
 {
     isReady();
 
-    if((m_pSelProviderCarshWidget->m_uuidCarsh==QUuid()) or (m_pSelProviderCarshWidget->m_uuidProvider==QUuid()))
-    {
-        QYesNoDlg dlg("Не указан поставщик или заказчик.\n Задача не сохранится.\n Все равно выйти?");
-        if(dlg.exec() == QDialog::Accepted) reject();
-        else return;
-    }
+    // if((m_pSelProviderCarshWidget->m_uuidCarsh==QUuid()) or (m_pSelProviderCarshWidget->m_uuidProvider==QUuid()))
+    // {
+    //     QYesNoDlg dlg("Не указан поставщик или заказчик.\n Задача не сохранится.\n Все равно выйти?");
+    //     if(dlg.exec() == QDialog::Accepted) reject();
+    //     else return;
+    // }
     this->showWait(true);
     SaveDataToBD();
     this->showWait(false);

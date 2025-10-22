@@ -12,6 +12,7 @@ public:
     static QtPHPicker* instance();
 
     Q_INVOKABLE void openPicker(bool allowMultiple);
+    Q_INVOKABLE void clearTempFiles();
 
 signals:
     void filesSelected(const QStringList &paths);

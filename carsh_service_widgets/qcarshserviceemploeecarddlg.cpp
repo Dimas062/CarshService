@@ -206,12 +206,12 @@ void QCarshServiceEmploeeCardDlg::OnRemovePressed()
     }
 }
 
-void QCarshServiceEmploeeCardDlg::OnTasksPressed()
-{
-    QCSSelectDialog selDlg("Типы задач" , "Тип" , false , true);
-    if(selDlg.exec()==QDialog::Accepted)
-    {
-        QEmploeeTasksDlg dlg(m_userUuid , QUuid(selDlg.getCurId()));
-        dlg.exec();
-    }
-}
+// void QCarshServiceEmploeeCardDlg::OnTasksPressed()
+// {
+//     QCSSelectDialog selDlg("Типы задач" , "Тип" , false , true);
+//     if(selDlg.exec()==QDialog::Accepted)
+//     {
+//         QEmploeeTasksDlg dlg(m_userUuid , QUuid(selDlg.getCurId()));
+//         dlg.exec();
+//     }
+// }

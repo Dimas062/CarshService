@@ -9,7 +9,7 @@
 #include "tasks/qcostsdialog.h"
 
 extern QRect screenGeometry;
-extern int iButtonHeight;
+//extern int iButtonHeight;
 extern UserTypes CurrentUserType;
 
 QEmplCostsDlg::QEmplCostsDlg(QUuid userUuid, QWidget *parent, Qt::WindowFlags f ):QCSBaseDialog(parent , f , false)

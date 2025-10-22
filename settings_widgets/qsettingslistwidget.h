@@ -17,13 +17,17 @@ public:
 
     void addWidget(QWidget *);
 
-    QCSLineEdit * m_pAdressLineEdit;
+    //QCSLineEdit * m_pAdressLineEdit;
     QCSLineEdit * m_pLoginLineEdit;
     QCSLineEdit * m_pPasswordLineEdit;
+
+public slots:
+    void OnClearTempPressed();
 
 signals:
     void OnTapHoldGesture();
     void OnTapGesture();
+
 };
 
 #endif // QSETTINGSLISTWIDGET_H

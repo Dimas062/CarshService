@@ -6,8 +6,16 @@
 #include <QLabel>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QPushButton>
+
+#ifdef Q_OS_IOS
+#include <QPermission>
+#include "service_widgets/ios/QtPHPicker.h"
+#endif
 
 extern QSqlDatabase ClientDb;
+
+extern int iButtonHeight;
 
 QSettingsListWidget::QSettingsListWidget(QWidget *parent): QWidget(parent)
 {
@@ -107,11 +115,22 @@ QSettingsListWidget::QSettingsListWidget(QWidget *parent): QWidget(parent)
 
     pMainLayout->addWidget(pConnectGroupBox);
 
+    QPushButton * pClearTempButton = new QPushButton("Очистка кеша");
+    connect(pClearTempButton,SIGNAL(pressed()),this,SLOT(OnClearTempPressed()));
+    pClearTempButton->setMaximumHeight(iButtonHeight);
+    pClearTempButton->setMinimumHeight(iButtonHeight);
+    pMainLayout->addWidget(pClearTempButton);
 
 
     this->setLayout(pMainLayout);
 }
 
+
+void QSettingsListWidget::OnClearTempPressed()
+{
+    QtPHPicker *pOpenDlg = QtPHPicker::instance();
+    pOpenDlg->clearTempFiles();
+}
 
 bool QSettingsListWidget::gestureEvent(QGestureEvent *event)
 {

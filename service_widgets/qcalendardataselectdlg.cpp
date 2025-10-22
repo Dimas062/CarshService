@@ -86,11 +86,11 @@ QCalendarDataSelectDlg::QCalendarDataSelectDlg(QDate startDate , QWidget *parent
     UpdateDateLabel();
 }
 
-void QCalendarDataSelectDlg::SetDatesPros(QMap<QDate, sDateProps> Props)
-{
+// void QCalendarDataSelectDlg::SetDatesPros(QMap<QDate, sDateProps> Props)
+// {
 
-    m_pCalendarWidget->m_Props = Props;
-}
+//     m_pCalendarWidget->m_Props = Props;
+// }
 
 void QCalendarDataSelectDlg::UpdateDateLabel()
 {

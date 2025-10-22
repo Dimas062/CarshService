@@ -20,7 +20,7 @@
 #include "service_widgets/qcsselectdialog.h"
 
 extern QRect screenGeometry;
-extern int iButtonHeight;
+//extern int iButtonHeight;
 
 #ifdef Q_OS_MOBILE
     extern UserTypes CurrentUserType;

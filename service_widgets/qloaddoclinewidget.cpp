@@ -99,25 +99,25 @@ void QLoadDocLineWidget::checkCameraPermission(void)
 }
 
 
-void QLoadDocLineWidget::checkAuthorizationStatus(void)
-{
-#if QT_CONFIG(permissions)
+// void QLoadDocLineWidget::checkAuthorizationStatus(void)
+// {
+// #if QT_CONFIG(permissions)
 
-    QCameraPermission cameraPermission;
-    Qt::PermissionStatus auth_status = Qt::PermissionStatus::Undetermined;
-    while(true)
-    {
-        QThread::msleep(1);
-        auth_status = qApp->checkPermission(cameraPermission);
+//     QCameraPermission cameraPermission;
+//     Qt::PermissionStatus auth_status = Qt::PermissionStatus::Undetermined;
+//     while(true)
+//     {
+//         QThread::msleep(1);
+//         auth_status = qApp->checkPermission(cameraPermission);
 
-        if(auth_status == Qt::PermissionStatus::Undetermined)
-            continue;
+//         if(auth_status == Qt::PermissionStatus::Undetermined)
+//             continue;
 
-        break;
-    }
+//         break;
+//     }
 
-#endif // if QT_CONFIG
-}
+// #endif // if QT_CONFIG
+// }
 
 #endif
 
@@ -228,7 +228,7 @@ void QLoadDocLineWidget::OnOpenPressed()
         if (!paths.isEmpty()) {
             //int i =0;
             for (const QString &path : paths) {
-                //qDebug() << "File received:" << path<<" i="<<i++;
+                qDebug() << "File received:" << path;
                 imageRecivedSlot(path);
             }
         } else {

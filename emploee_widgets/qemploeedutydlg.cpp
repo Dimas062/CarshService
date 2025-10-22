@@ -11,7 +11,7 @@
 
 
 extern QRect screenGeometry;
-extern int iButtonHeight;
+//extern int iButtonHeight;
 
 QEmploeeDutyDlg::QEmploeeDutyDlg()
 {

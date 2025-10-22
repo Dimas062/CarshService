@@ -156,8 +156,6 @@ void QEmploeeInputTasksDlg::UpdateTasks()
 
         QListWidgetItem * pItem = new QListWidgetItem();
 
-        QString strNumber = " ";
-
         QString strTask = QString("Штрафстоянка %1 <b>%2</b> %3 (%4)").arg(resTasks.at(iTaskCounter).at(1)).arg(resTasks.at(iTaskCounter).at(2)).arg(QDateTime::fromSecsSinceEpoch(resTasks.at(iTaskCounter).at(3).toInt()).toString("dd.MM.yyyy hh:mm")).arg(resTasks.at(iTaskCounter).at(4));
         pItem->setText(strTask);
         //if(resTasks.at(iTaskCounter).at(4).toInt() != 0) pItem->setIcon(QIcon(":/icons/done_icon.png"));

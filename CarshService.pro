@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets concurrent
 
 CONFIG += c++17
 
-VERSION = 0.1.50
+VERSION = 0.1.52
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -84,6 +84,7 @@ SOURCES += \
     service_widgets/quldlg.cpp \
     service_widgets/qyesnodlg.cpp \
     settings_widgets/qsettingslistwidget.cpp \
+    tasks/qclientagreementdlg.cpp \
     tasks/qcostsdialog.cpp \
     tasks/qdocstaskdlg.cpp \
     tasks/qparkingtaskdialog.cpp \
@@ -173,6 +174,7 @@ HEADERS += \
     service_widgets/quldlg.h \
     service_widgets/qyesnodlg.h \
     settings_widgets/qsettingslistwidget.h \
+    tasks/qclientagreementdlg.h \
     tasks/qcostsdialog.h \
     tasks/qdocstaskdlg.h \
     tasks/qparkingtaskdialog.h \

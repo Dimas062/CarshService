@@ -25,6 +25,7 @@
 #include "partners/sticks/qstickpartnermaindlg.h"
 #include "partners/wash/qwashpartnermaindlg.h"
 
+#include "tasks/qclientagreementdlg.h"
 
 QRect screenGeometry;
 int iAndroidStatusBarHeigth;
@@ -145,12 +146,14 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
     pVMainLayout->addWidget(pSettingsModeButton);
 
 
-//    pVMainLayout->addSpacing(iUnderButtonSpace);
-//    QPushButton * pTestModeButton = new QPushButton("Тест");
-//    connect(pTestModeButton,SIGNAL(pressed()),this,SLOT(OnTestModePressed()));
-//    pTestModeButton->setMaximumHeight(iButtonHeight*2);
-//    pTestModeButton->setMinimumHeight(iButtonHeight*2);
-//    pVMainLayout->addWidget(pTestModeButton);
+
+
+   pVMainLayout->addSpacing(iUnderButtonSpace);
+   QPushButton * pTestModeButton = new QPushButton("Тест");
+   connect(pTestModeButton,SIGNAL(pressed()),this,SLOT(OnTestModePressed()));
+   pTestModeButton->setMaximumHeight(iButtonHeight*2);
+   pTestModeButton->setMinimumHeight(iButtonHeight*2);
+   pVMainLayout->addWidget(pTestModeButton);
 
     qApp->inputMethod()->hide();
 
@@ -160,8 +163,10 @@ QCarshServiceBaseWidget::QCarshServiceBaseWidget(QWidget *parent)
 
 void QCarshServiceBaseWidget::OnTestModePressed()
 {
-    QCSBaseDialog dlg;
+    QClientAgreementDlg dlg(NULL , /*Qt::Popup*/Qt::WindowFlags());
+    m_bChildBackRealeseProcessed = false;
     dlg.exec();
+    m_bChildBackRealeseProcessed = dlg.m_bBackProcessed;
 }
 
 

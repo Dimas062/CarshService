@@ -179,6 +179,7 @@ void QEmplSalaryDlg::UpdateSalarys()
         double dblPenSumm = dblSalarySum * 0.1 * iPenBalls;
         salaryItem.str = QString("%1: %2 - %4 р. (%3 балла)").arg(salaryItem.tm.toString("dd.MM.yyyy ")).arg(resPens.at(iPenCounter).at(2)).arg(iPenBalls).arg(dblPenSumm);
         salaryItem.id = resSalarys.at(iPenCounter).at(0);
+        salaryItem.bIsRed = false;
 
         if(dblPenSumm < 0) dblPensSum = dblPensSum + dblPenSumm;
         if(dblPenSumm > 0) dblPremsSum = dblPremsSum + dblPenSumm;

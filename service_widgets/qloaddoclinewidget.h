@@ -30,7 +30,7 @@ protected:
 
 #ifdef Q_OS_IOS
     void checkCameraPermission();
-    void checkAuthorizationStatus();
+    //void checkAuthorizationStatus();
 #endif
 signals:
     void imageRecivedSignal(QString);

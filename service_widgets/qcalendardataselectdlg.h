@@ -21,7 +21,7 @@ public:
 
     bool m_bChildBackRealeseProcessed;
     bool m_bBackRelesaeProcessed;
-    void SetDatesPros(QMap<QDate, sDateProps>);
+    //void SetDatesPros(QMap<QDate, sDateProps>);
 
 
 protected:

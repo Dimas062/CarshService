@@ -10,7 +10,7 @@ class QCSSelectDlgButtonsWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit QCSSelectDlgButtonsWidget(QString strTableName , QString strColName , bool bChekable , QString strCondition = " ", bool bMultiselect = false ,  bool bAllButton = false, QWidget *parent = nullptr);
+    explicit QCSSelectDlgButtonsWidget(QString strTableName , QString strColName , bool bChekable , QString strCondition = " ", bool bMultiSelect = false ,  bool bAllButton = false, QWidget *parent = nullptr);
     bool m_bMultiSelect;
 
     QVector<QPushButton *> m_vpButtons;

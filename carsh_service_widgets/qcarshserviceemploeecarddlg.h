@@ -25,7 +25,7 @@ public slots:
     void OnPassportPressed();
     void OnSertPressed();
     void OnActivPressed();
-    void OnTasksPressed();
+   // void OnTasksPressed();
     void OnFotoPictureClik();
     void OnRemovePressed();
 
